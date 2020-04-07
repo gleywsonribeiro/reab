@@ -1,0 +1,102 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Misc</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="cadastro">
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:commandButton type="button" value="New" icon="pi pi-file" />
+
+                    <p:commandButton type="button" value="Open" icon="pi pi-folder-open" />
+
+                    <span class="ui-separator">
+                        <span class="ui-icon pi pi-ellipsis-v" />
+                    </span>
+
+                    <p:commandButton type="button" title="Save" icon="pi pi-save" />
+                    <p:commandButton type="button" title="Delete" icon="pi pi-trash" />
+                    <p:commandButton type="button" title="Print" icon="pi pi-print" />
+                </f:facet>
+
+                <f:facet name="right">
+                    <p:menuButton value="Options">
+                       <p:menuitem value="Homepage" url="http://www.primefaces.org" icon="pi pi-home" />
+                    </p:menuButton>
+                </f:facet>
+
+            </p:toolbar>
+            <p:messages id="msg" closable="true" autoUpdate="true"/>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Left colum -->
+
+                    <div class="card card-w-title">
+                        <h1>Cadastro de Pesquisa</h1>
+                        <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                            <h:panelGroup styleClass="md-inputfield">
+                                <p:inputText id="descricao" value="#{pesquisaController.pesquisa.descricao}" required="true" requiredMessage="Descrição é necessária"/>
+                                <label>Descrição</label>
+                                <p:message for="descricao"/>
+                            </h:panelGroup>
+                            
+                            <h:panelGroup styleClass="md-inputfield">
+                                <p:inputTextarea value="#{pesquisaController.pesquisa.resumo}"/>
+                                <label>Resumo</label>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                                <h1>Ativo</h1>
+                                <p:inputSwitch value="#{pesquisaController.pesquisa.ativo}"/>
+                            </h:panelGroup>
+                        </p:panelGrid>
+
+                        <p:commandButton id="btnSavePesquisa" value="Salvar" icon="ui-icon-disk" action="#{pesquisaController.salvar()}" update="@form" />
+
+                    </div>
+
+                </div>
+                <div class="ui-g-12 ui-lg-6">
+                    <h:form id="dados">
+                        <p:dataTable id="table" value="#{pesquisaController.pesquisas}" var="pesquisa" emptyMessage="Sem registros">
+                            <f:facet name="header">Pesquisas</f:facet>
+                            <p:column headerText="Código">
+                                <h:outputText value="#{pesquisa.id}"/>
+                            </p:column>
+                            <p:column headerText="Descrição">
+                                <h:outputText value="#{pesquisa.descricao}"/>
+                            </p:column>
+                            <p:column headerText="Ativo">
+                                <p:inputSwitch value="#{pesquisa.ativo}" disabled="true"/>
+                            </p:column>
+                            <p:column style="text-align: center" headerText="Editar">
+                                <p:commandButton icon="fa fa-edit" update="cadastro" process="@this">
+                                    <f:setPropertyActionListener target="#{pesquisaController.pesquisa}" value="#{pesquisa}"/>
+                                </p:commandButton>
+                            </p:column>
+                            <p:column style="text-align: center" headerText="Excluir">
+                                <p:commandButton  id="bt" icon="fa fa-trash" action="#{pesquisaController.remover()}" update="cadastro:dados:table" process="@this">
+                                    <f:setPropertyActionListener target="#{pesquisaController.pesquisa}" value="#{pesquisa}"/>
+                                    <p:confirm header="Alerta" message="Excluir a pesquisa remove todas as perguntas associadas a ela. Confirma a exclusão?" icon="fa fa-exclamation-triangle" />
+                                </p:commandButton>
+                               
+                            </p:column>
+                        </p:dataTable>
+
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+                        </p:confirmDialog>
+                    </h:form>
+                </div>
+            </div>
+
+        </h:form>    
+    </ui:define>
+
+</ui:composition>

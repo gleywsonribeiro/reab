@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>Primeiro acesso</title>
+        <h:outputScript name="js/ripple.js" library="ultima-layout" />
+        <h:outputScript name="js/layout.js" library="ultima-layout" />
+    </h:head>
+
+    <h:body style="background-color: #b7efff">
+
+        <h:form>
+            <p:growl />
+            <div class="card login-panel ui-fluid">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <p:graphicImage name="images/login/login-icon.png" library="ultima-layout"/>
+                    </div>
+                    <div class="ui-g-12">
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputText value="#{loginController.usuario.login}" disabled="true"/>
+                            <label>Usuário</label>
+                        </h:panelGroup>
+                    </div>
+                    <div class="ui-g-12">
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:password id="senha1" value="#{loginController.novaSenha}" match="senha2" inline="true"
+                                        validatorMessage="Senhas não conferem" required="true" requiredMessage="Informe a senha"
+                                        feedback="true" promptLabel="Entre com uma nova senha" weakLabel="Senha fraca"
+                                        goodLabel="Senha razoável" strongLabel="Senha forte"/>
+                            <label>Nova senha</label>
+                        </h:panelGroup>
+                    </div>
+                    <div class="ui-g-12">
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:password id="senha2" value="#{loginController.novaSenha}" required="true" requiredMessage="confirme senha"/>
+                            <label>Confirme senha</label>
+                        </h:panelGroup>
+                    </div>
+                    <div class="ui-g-12">
+                        <p:commandButton action="#{loginController.alteraSenha()}" value="Confirmar" icon="fa fa-key" ajax="false"/>
+                    </div>
+
+                </div>
+            </div>
+        </h:form>
+
+        <div class="login-footer"></div>
+
+        <h:outputStylesheet name="css/ripple.css" library="ultima-layout" />
+        <h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css" library="ultima-layout" />
+    </h:body>
+
+</html>

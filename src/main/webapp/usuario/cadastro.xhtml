@@ -1,0 +1,98 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Misc</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Left colum -->
+                    <div class="card card-w-title">
+
+                        <p:growl autoUpdate="true"/>
+                        <p:accordionPanel id="acordion" multiple="false" activeIndex="#{usuarioController.activeIndex}"
+                                          rendered="#{not loginController.usuario.user}">
+                            <p:tab title="Cadastro de Usuário">
+                                <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
+
+                                    <h:panelGroup styleClass="md-inputfield">
+                                        <p:inputText value="#{usuarioController.usuario.login}" required="true"/>
+                                        <label>Login</label>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup styleClass="md-inputfield">
+                                        <p:inputText value="#{usuarioController.usuario.nome}" required="true"/>
+                                        <label>Nome</label>
+                                    </h:panelGroup>
+                                </p:panelGrid>
+
+                                <p:selectOneRadio value="#{usuarioController.usuario.perfil}" layout="responsive" columns="3" required="true" requiredMessage="Escolha um perfil">
+                                    <f:selectItems value="#{usuarioController.perfis}" var="perfil" itemLabel="#{perfil.descricao}" itemValue="#{perfil}"/>
+                                </p:selectOneRadio>
+                                <p:separator/>
+                               
+                                <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                                    <p:commandButton value="Salvar" icon="fa fa-save" action="#{usuarioController.salvar()}" update="form:acordion"/>
+                                    <p:commandButton value="Novo" icon="fa fa-user-plus" immediate="true" action="#{usuarioController.limpar()}" update="form:acordion"/>
+                                </p:panelGrid>
+                            </p:tab>
+
+                            <p:tab title="Usuários">
+                                <p:dataTable value="#{usuarioController.usuarios}" var="usuario" reflow="true">
+                                    <p:column headerText="Login">
+                                        <h:outputText value="#{usuario.login}"/>
+                                    </p:column>
+                                    <p:column headerText="Nome">
+                                        <h:outputText value="#{usuario.nome}"/>
+                                    </p:column>
+                                    <p:column headerText="Perfil">
+                                        <h:outputText value="#{usuario.perfil}"/>
+                                    </p:column>
+                                    <p:column style="width: 50px; text-align: center">
+                                        <p:commandButton icon="ui-icon-trash" process="@this" action="#{usuarioController.remover()}" update="form:acordion">
+                                            <f:setPropertyActionListener value="#{usuario}" target="#{usuarioController.usuario}"/>
+                                            <p:confirm header="Alerta" message="Tem certeza que quer remover #{usuario.nome}?" icon="fa fa-exclamation-triangle" />
+                                        </p:commandButton>
+                                    </p:column>
+                                    <p:column style="width: 50px; text-align: center">
+                                        <p:commandButton icon="ui-icon-edit" update="form:acordion" action="#{usuarioController.editar()}" process="@this"> 
+                                            <f:setPropertyActionListener value="#{usuario}" target="#{usuarioController.usuario}"/>
+                                        </p:commandButton>
+                                    </p:column>
+                                    <p:column style="width: 50px; text-align: center">
+                                        <p:commandButton id="passwordReset" icon="fa fa-undo" action="#{usuarioController.resete()}" update="form:acordion" process="@this"> 
+                                            <f:setPropertyActionListener value="#{usuario}" target="#{usuarioController.usuario}"/>
+                                        </p:commandButton>
+                                        <p:tooltip value="Resetar senha" for="passwordReset"/>
+                                    </p:column>
+
+                                </p:dataTable>
+                            </p:tab>
+
+                        </p:accordionPanel>
+
+
+                    </div>
+
+                </div>
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Right colum -->
+
+                </div>
+            </div>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+            </p:confirmDialog>
+
+        </h:form>    
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,126 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Misc</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="cadastro">
+            <p:toolbar id="tb">
+                <f:facet name="left">
+                    <p:commandButton value="Listar" icon="fa fa-search" process="@this" action="pesquisas?faces-redirect=true"/>
+                    <p:commandButton value="Novo" icon="fa fa-file-o" process="@this" action="#{pesquisaController.novo()}" update="@all"/>
+                    <span class="ui-separator">
+                        <span class="ui-icon pi pi-ellipsis-v" />
+                    </span>
+                    <p:commandButton id="btnSavePesquisa" value="Salvar" icon="fa fa-save" action="#{pesquisaController.salvar()}" process="@this form_pesquisa" update="@form" />
+                </f:facet>
+            </p:toolbar>
+            <p:growl id="msg" autoUpdate="true"/>
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Left colum -->
+
+                    <div class="card card-w-title">
+                        <h1>Cadastro de Pesquisa</h1>
+                        <p:panelGrid id="form_pesquisa" columns="1" layout="grid" styleClass="ui-panelgrid-blank form-group">
+                            <h:panelGroup styleClass="md-inputfield">
+                                <p:inputText id="descricao" value="#{pesquisaController.pesquisa.descricao}" required="true" requiredMessage="Descrição é necessária"/>
+                                <label>Descrição</label>
+                                <p:message for="descricao"/>
+                            </h:panelGroup>
+
+                            <h:panelGroup styleClass="md-inputfield">
+                                <p:inputTextarea value="#{pesquisaController.pesquisa.resumo}"/>
+                                <label>Resumo</label>
+                            </h:panelGroup>
+                            <h:panelGroup>
+                                <h1>Ativo</h1>
+                                <p:inputSwitch value="#{pesquisaController.pesquisa.ativo}"/>
+                            </h:panelGroup>
+                        </p:panelGrid>
+
+                    </div>
+
+                    <div class="card card-w-title">
+                        <h2>Perguntas</h2>
+                        <p:spacer/>
+                        <h:panelGroup styleClass="md-inputfield">
+                            <p:inputText id="pergunta" value="#{pesquisaController.pergunta.descricao}" required="true" requiredMessage="Não pode ser em branco"/>
+                            <label>Descreva sua pergunta</label>
+                            <p:message for="pergunta"/>
+                        </h:panelGroup>
+
+                        <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
+
+                            <h:panelGroup styleClass="md-inputfield">
+                                <p:inputText id="opcao" value="#{pesquisaController.opcao.descricao}" required="true" requiredMessage="Não pode ser em branco"/>
+                                <label>Opção</label>
+                                <p:message for="opcao"/>
+                            </h:panelGroup>
+
+                            <p:commandButton id="addOp" icon="ui-icon-add" action="#{pesquisaController.inserirOpcao()}" update="@form"/>
+                        </p:panelGrid>
+
+                        <p:dataTable id="tbOps" rendered="#{pesquisaController.temOpcoes}" value="#{pesquisaController.pergunta.opcoes}" var="op" editable="true" editMode="cell">
+                            <p:column headerText="Opção">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{op.descricao}"/>
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{op.descricao}"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+<!--                            <p:column style="text-align: center">
+                                <p:commandButton icon="fa fa-trash" action="{pesquisaController.removerOpcao()}" update="@form" process="@this">
+                                    <f:setPropertyActionListener value="{op}" target="{pesquisaController.opcao}"/>
+                                </p:commandButton>
+                            </p:column>-->
+                        </p:dataTable>
+
+
+                        <p:commandButton id="inserir" value="adicionar" icon="ui-icon-add" styleClass="teal-btn"
+                                         action="#{pesquisaController.inserirPergunta()}" process="@this pergunta" update="@form"/>
+
+                        <p:dataTable value="#{pesquisaController.pesquisa.perguntas}" var="pergunta" style="margin-top: 5px" editable="true" editMode="cell">
+                            <f:facet name="header">
+                                <h:outputText value="Perguntas"/>
+                            </f:facet>
+
+                            <p:column headerText="Descrição">
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{pergunta.descricao}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{pergunta.descricao}"/>
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column style="text-align: center">
+                                <p:commandButton icon="fa fa-edit" process="@this" update="@form">
+                                    <f:setPropertyActionListener value="#{pergunta}" target="#{pesquisaController.pergunta}"/>
+                                </p:commandButton>
+                            </p:column>
+<!--                            <p:column style="text-align: center">
+                                <p:commandButton icon="fa fa-trash" >
+                                    <f:setPropertyActionListener value="{pergunta}" target="{pesquisaController.pergunta}"/>
+                                </p:commandButton>
+                            </p:column>-->
+                        </p:dataTable>
+                    </div>
+
+                </div>
+            </div>
+            <p:sticky target="tb" margin="75"/>
+
+        </h:form>    
+    </ui:define>
+
+</ui:composition>

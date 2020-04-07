@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Misc</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="formEdicao" rendered="#{not loginController.usuario.user}">
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-lg-12">
+                    <!-- Left colum -->
+                    <div class="card card-w-title">
+                        <p:messages autoUpdate="true" closable="true" />
+                        <h1>
+                            <h:outputText value="Pesquisas" />
+                        </h1>
+
+                        <p:selectOneMenu id="pesquisa" value="#{tabelaEntrevistaController.pesquisa}" style="margin-bottom:10px;"
+                                         converter="pesquisaConverter">
+                            <f:selectItem itemLabel="Selecione"/>
+                            <f:selectItems var="pesquisa" value="#{pesquisaController.pesquisas}" itemLabel="#{pesquisa.descricao}" itemValue="#{pesquisa}"/>
+                            <p:ajax event="change" listener="#{tabelaEntrevistaController.atualizaEntrevistasPorPesquisa()}" update="formEdicao:listaAvaliacao"/>
+                        </p:selectOneMenu>
+
+                        <p:dataTable id="listaAvaliacao" value="#{tabelaEntrevistaController.entrevistas}" var="entrevista" reflow="true" emptyMessage="Não há registros.">
+                            <p:column headerText="código">
+                                <h:outputText value="#{entrevista.id}"/>
+                            </p:column>
+                            <p:column headerText="Data/hora">
+                                <h:outputText value="#{entrevista.dataHora}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                                </h:outputText>
+                            </p:column>
+                            
+                            <p:column style="text-align: center">
+                                <p:commandButton icon="fa fa-trash" action="#{tabelaEntrevistaController.remover()}" update="formEdicao:listaAvaliacao">
+                                    <f:setPropertyActionListener target="#{tabelaEntrevistaController.entrevista}" value="#{entrevista}" />
+                                    <p:confirm header="Alerta" message="Você está prestes a apagar uma entrevista. Está certo disso?" icon="fa fa-exclamation-triangle" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Tenho certeza" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+                            <p:commandButton value="Melhor não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+                        </p:confirmDialog>
+                    </div>
+
+
+                </div>
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Right colum -->
+
+                </div>
+            </div>
+
+        </h:form>    
+    </ui:define>
+
+</ui:composition>
