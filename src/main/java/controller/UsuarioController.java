@@ -11,11 +11,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import model.Perfil;
-import model.Pesquisa;
 import model.Usuario;
-import model.dao.PesquisaDao;
 import model.dao.UsuarioDao;
-import util.Seguranca;
 import util.exception.DBException;
 import util.jsf.JsfUtil;
 
@@ -35,15 +32,12 @@ public class UsuarioController implements Serializable {
     private List<Usuario> usuarios;
     private UsuarioDao dao = new UsuarioDao();
 
-    private List<Pesquisa> pesquisas;
-    private PesquisaDao pesquisaDao = new PesquisaDao();
+
 
     @PostConstruct
     private void init() {
         usuario = new Usuario();
         usuarios = dao.findAll();
-        pesquisas = pesquisaDao.findAll();
-
     }
 
     public Usuario getUsuario() {
@@ -71,10 +65,6 @@ public class UsuarioController implements Serializable {
 
     public void setActiveIndex(Integer activeIndex) {
         this.activeIndex = activeIndex;
-    }
-
-    public List<Pesquisa> getPesquisas() {
-        return pesquisas;
     }
 
     public void salvar() {

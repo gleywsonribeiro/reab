@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -21,6 +23,8 @@ import javax.persistence.Id;
  */
 @Entity
 public class Usuario implements Serializable {
+
+   
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -35,6 +39,9 @@ public class Usuario implements Serializable {
 
     @Enumerated(EnumType.STRING)
     private Perfil perfil;
+    
+     @ManyToMany(mappedBy = "usuarios")
+    private List<Empresa> empresas;
 
     public Long getId() {
         return id;
@@ -75,6 +82,16 @@ public class Usuario implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public List<Empresa> getEmpresas() {
+        return empresas;
+    }
+
+    public void setEmpresas(List<Empresa> empresas) {
+        this.empresas = empresas;
+    }
+    
+    
     
     @Override
     public int hashCode() {

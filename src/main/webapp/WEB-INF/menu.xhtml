@@ -51,11 +51,7 @@
 
                     <pu:menu widgetVar="me">
                         <p:menuitem id="um_dashboard" value="Dashboard" icon="&#xE871;" outcome="/dashboard"/>
-                        <p:menuitem id="entrevista" value="Realizar Entrevista" icon="&#128203;" outcome="/entrevista/pesquisas"/>
-                        <p:submenu id="pesquisas" label="Gestão de Pesquisas" icon="&#128188;" rendered="#{not loginController.usuario.user}">
-                            <p:menuitem id="pesquisa" value="Pesquisas" icon="&#128200;" outcome="/pesquisa/pesquisas"/>
-                            <p:menuitem id="entrevistas" value="Entrevistas" icon="&#128202;" outcome="/entrevista/entrevistas"/>
-                        </p:submenu>
+                        <p:menuitem id="empresa" value="Empresas" icon="&#xE3AE;"/>
                         <p:submenu id="usuarios" label="Usuários" icon="&#128373;" rendered="#{not loginController.usuario.user}">
                             <p:menuitem value="Cadastro" icon="&#128209;" outcome="/usuario/cadastro"/>
                         </p:submenu>
