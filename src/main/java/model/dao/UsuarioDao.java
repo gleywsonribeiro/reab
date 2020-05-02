@@ -16,9 +16,8 @@ import util.Seguranca;
  *
  * @author Gleywson
  */
-public class UsuarioDao extends Dao<Usuario> implements Serializable {
+public class UsuarioDao extends Dao<Usuario> {
 
-    private static final long serialVersionUID = 1L;
     EntityManager em = HibernateUtil.getEntityManager();
 
     public UsuarioDao() {

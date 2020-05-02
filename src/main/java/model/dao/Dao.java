@@ -5,6 +5,7 @@
  */
 package model.dao;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import util.exception.DBException;
@@ -12,9 +13,11 @@ import util.exception.DBException;
 /**
  *
  * @author Gleywson
+ * @param <T>
  */
-public abstract class Dao<T> {
+public abstract class Dao<T> implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private final Class<T> entityClass;
 
     public Dao(Class<T> entityClass) {
@@ -84,7 +87,7 @@ public abstract class Dao<T> {
         return ((Long) q.getSingleResult()).intValue();
 
     }
-    
+
     public void createAll(List<T> list) {
         try {
             getEntityManager().getTransaction().begin();
