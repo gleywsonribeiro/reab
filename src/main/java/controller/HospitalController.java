@@ -7,6 +7,7 @@ package controller;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -71,8 +72,10 @@ public class HospitalController implements Serializable {
         }
     }
 
-    public boolean isTemDados() {
-        return hospitais.isEmpty();
+    public List<Hospital> completeHospital(String query) {
+        String queryLowerCase = query.toLowerCase();
+        List<Hospital> hospitaisFiltrados = getHospitais();
+        return hospitaisFiltrados.stream().filter(t -> t.getNome().toLowerCase().startsWith(queryLowerCase)).collect(Collectors.toList());
     }
 
     public void remover() {

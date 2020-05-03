@@ -1,0 +1,80 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Setor</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-lg-9">
+                    <!-- Left colum -->
+                    <div class="card card-w-title">
+
+                        <p:growl autoUpdate="true"/>
+                        <p:fieldset legend="Cadastro de Setor">
+                            <p:panelGrid id="cadastro" columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                                <h:panelGroup styleClass="md-inputfield">
+                                    <p:inputText value="#{setorController.setor.nome}" required="true"/>
+                                    <label>Nome</label>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="Hospital" for="hospital" />
+                                <p:autoComplete id="hospital" dropdown="true" value="#{setorController.setor.hospital}" var="hospital" itemValue="#{hospital}" itemLabel="#{hospital.nome}"
+                                                converter="hospitalConverter" forceSelection="true" completeMethod="#{hospitalController.completeHospital}" style="margin-bottom:10px;"/>
+
+                                <p:commandButton icon="ui-icon-add" value="Salvar" action="#{setorController.salvar()}" update="setores cadastro"/>
+
+                            </p:panelGrid>
+                        </p:fieldset>
+
+                    </div>
+                    <div class="card card-w-title">
+                        <p:dataTable id="setores" value="#{setorController.setores}" var="setor"
+                                     emptyMessage="Sem dados." reflow="true">
+                            <f:facet name="header">
+                                Setores
+                            </f:facet>
+                            <p:column headerText="Código">
+                                <h:outputText value="#{setor.id}"/>
+                            </p:column>
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{setor.nome}"/>
+                            </p:column>
+                            <p:column headerText="Hospital">
+                                <h:outputText value="#{setor.hospital.nome}"/>
+                            </p:column>
+                            <p:column style="text-align: center; width: 50px">
+                                <p:commandButton icon="ui-icon-edit" update="form:cadastro" process="@this">
+                                    <f:setPropertyActionListener value="#{setor}" target="#{setorController.setor}"/>
+                                </p:commandButton>
+                            </p:column>
+                            <p:column style="text-align: center; width: 50px">
+                                <p:commandButton icon="ui-icon-trash" action="#{setorController.remover()}" update="setores" process="@this">
+                                    <f:setPropertyActionListener value="#{setor}" target="#{setorController.setor}"/>
+                                    <p:confirm header="Alerta" message="Confirma a exclusão do setor #{setor.nome} ?" icon="fa fa-exclamation-triangle" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+
+                </div>
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Right colum -->
+
+                </div>
+            </div>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+            </p:confirmDialog>
+
+        </h:form>    
+    </ui:define>
+
+</ui:composition>

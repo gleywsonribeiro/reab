@@ -4,6 +4,8 @@
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <class>model.UsuarioPesquisa</class>
     <class>model.Hospital</class>
+    <class>model.Setor</class>
+    <class>model.Paciente</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!--Configuração local-->

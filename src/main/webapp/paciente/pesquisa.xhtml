@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
-    <ui:define name="title">Misc</ui:define>
+    <ui:define name="title">Hospital</ui:define>
 
     <ui:define name="content">
 
@@ -16,7 +16,7 @@
                     <div class="card card-w-title">
 
                         <p:growl autoUpdate="true"/>
-                        <p:fieldset legend="Cadastro de Hopital">
+                        <p:fieldset legend="Cadastro de Hospital">
                             <p:panelGrid id="cadastro" columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
                                 <h:panelGroup styleClass="md-inputfield">
                                     <p:inputText value="#{hospitalController.hospital.nome}" required="true"/>
@@ -56,6 +56,7 @@
                             <p:column style="text-align: center; width: 50px">
                                 <p:commandButton icon="ui-icon-trash" action="#{hospitalController.remover()}" update="hospitais" process="@this">
                                     <f:setPropertyActionListener value="#{hospital}" target="#{hospitalController.hospital}"/>
+                                    <p:confirm header="Alerta" message="Confirma a exclusão da Unidade #{hospital.nome} ?" icon="fa fa-exclamation-triangle" />
                                 </p:commandButton>
                             </p:column>
                         </p:dataTable>
