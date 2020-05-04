@@ -51,10 +51,13 @@
 
                     <pu:menu widgetVar="me">
                         <p:menuitem id="um_dashboard" value="Dashboard" icon="&#xE871;" outcome="/dashboard"/>
-                        <p:submenu label="Pacientes" icon="&#128229;">
-                            <p:menuitem id="paciene" value="Cadastro de Paciente" icon="&#127976;" outcome="/paciente/cadastro"/>
-                            <p:menuitem id="listaPaciente" value="Pesquisa de Pacientes" icon="&#128204;" outcome="/paciente/pesquisa"/>
+                        <p:submenu label="Pacientes" icon="&#128221;">
+                            <p:menuitem id="paciene" value="Cadastro de Paciente" icon="&#128694;" outcome="/paciente/cadastro"/>
+                            <p:menuitem id="listaPaciente" value="Pesquisa de Pacientes" icon="&#128270;"/>
                         </p:submenu>
+                        <p:menuitem id="atendimento" value="Gerar Atendimento" icon="&#128657;"/>
+                        <p:menuitem id="admssao" value="Admisão" icon="&#128716;"/>
+                        <p:menuitem id="avaliacao" value="Avaliação" icon="&#128186;" outcome="/avaliacao/avaliacao"/>
                         <p:submenu label="Tabelas" icon="&#128229;">
                             <p:menuitem id="hospital" value="Hospital" icon="&#127976;" outcome="/tabelas/hospital/cadastro"/>
                             <p:menuitem id="setor" value="Setor" icon="&#128204;" outcome="/tabelas/setor/cadastro"/>

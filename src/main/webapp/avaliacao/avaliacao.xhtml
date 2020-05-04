@@ -1,0 +1,70 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Hospital</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-lg-9">
+                    <!-- Left colum -->
+                    <div class="card card-w-title">
+                        <p:growl autoUpdate="true"/>
+                        <h1>Avaliação do paciente</h1>
+                        <p:accordionPanel id="acordion" multiple="false">
+                            <p:tab title="Hemodinâmicos">
+                                <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                                    <h:panelGroup styleClass="md-inputfield">
+                                        <p:inputText  />
+                                        <label>Pressão Arterial (mmhg)</label>
+                                    </h:panelGroup>
+                                    
+                                    <h:panelGroup styleClass="md-inputfield">
+                                        <p:inputText  />
+                                        <label>Frequência Cardíaca (bpm)</label>
+                                    </h:panelGroup>
+                                </p:panelGrid>
+
+                            </p:tab>
+
+                            <p:tab title="Respiratórios">
+                                <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                                    <h:panelGroup styleClass="md-inputfield">
+                                        <p:inputText  />
+                                        <label>Frequência Respiratória (rpm)</label>
+                                    </h:panelGroup>
+                                    
+                                    <h:panelGroup styleClass="md-inputfield">
+                                        <p:inputText  />
+                                        <label>Frequência Cardíaca (bpm)</label>
+                                    </h:panelGroup>
+                                </p:panelGrid>
+                            </p:tab>
+
+                            <p:tab title="Laboratoriais">
+                                Dados laboratoriais
+                            </p:tab>
+
+                            <p:tab title="Neurológicos">
+                                Dados Neurológicos
+                            </p:tab>
+
+                        </p:accordionPanel>
+                    </div>
+
+                </div>
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Right colum -->
+
+                </div>
+            </div>
+
+        </h:form>    
+    </ui:define>
+
+</ui:composition>

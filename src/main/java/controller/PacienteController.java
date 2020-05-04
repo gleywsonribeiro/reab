@@ -55,7 +55,7 @@ public class PacienteController implements Serializable {
             } else {
                 dao.edit(paciente);
             }
-          
+          JsfUtil.addMessage("Salvo com sucesso!");
         } catch (DBException e) {
             JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
         }
