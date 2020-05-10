@@ -16,14 +16,27 @@
                     <div class="card card-w-title">
                         <p:growl autoUpdate="true"/>
                         <h1>Avaliação do paciente</h1>
+                        <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+
+                            <p:outputLabel value="Paciente" for="paciente" />
+                            <p:autoComplete id="paciente" dropdown="true" value="#{avaliacaoController.paciente}" var="paciente"
+                                            itemValue="#{paciente}" itemLabel="#{paciente.nome}"
+                                            converter="pacienteConverter" forceSelection="true"
+                                            completeMethod="#{pacienteController.completePaciente}"
+                                            style="margin-bottom:10px;"/>
+
+                        </p:panelGrid>
+
                         <p:accordionPanel id="acordion" multiple="false">
                             <p:tab title="Hemodinâmicos">
                                 <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
                                     <h:panelGroup styleClass="md-inputfield">
-                                        <p:inputText  />
+                                        <p:inputText  >
+                                            <f:convertNumber locale="pt_Br" />
+                                        </p:inputText>
                                         <label>Pressão Arterial (mmhg)</label>
                                     </h:panelGroup>
-                                    
+
                                     <h:panelGroup styleClass="md-inputfield">
                                         <p:inputText  />
                                         <label>Frequência Cardíaca (bpm)</label>
@@ -38,7 +51,12 @@
                                         <p:inputText  />
                                         <label>Frequência Respiratória (rpm)</label>
                                     </h:panelGroup>
-                                    
+
+                                    <h:panelGroup>
+                                        <p:selectBooleanCheckbox/>
+                                        <p:outputLabel value="Suporte de ventilação mecânica"/>
+                                    </h:panelGroup>
+
                                     <h:panelGroup styleClass="md-inputfield">
                                         <p:inputText  />
                                         <label>Frequência Cardíaca (bpm)</label>
@@ -47,11 +65,31 @@
                             </p:tab>
 
                             <p:tab title="Laboratoriais">
-                                Dados laboratoriais
+                                <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                                    <h:panelGroup styleClass="md-inputfield">
+                                        <p:inputText  />
+                                        <label>Hemoglobina</label>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup styleClass="md-inputfield">
+                                        <p:inputText  />
+                                        <label>Lactato</label>
+                                    </h:panelGroup>
+                                </p:panelGrid>
                             </p:tab>
 
                             <p:tab title="Neurológicos">
-                                Dados Neurológicos
+                                <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                                    <h:panelGroup styleClass="md-inputfield">
+                                        <p:inputText  />
+                                        <label>Glasgow</label>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup styleClass="md-inputfield">
+                                        <p:inputText  />
+                                        <label>RASS</label>
+                                    </h:panelGroup>
+                                </p:panelGrid>
                             </p:tab>
 
                         </p:accordionPanel>

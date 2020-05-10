@@ -6,6 +6,7 @@
 package controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
@@ -32,6 +33,8 @@ public class PacienteController implements Serializable {
     private static final long serialVersionUID = 1L;
     PacienteDao dao = new PacienteDao();
     private Paciente paciente;
+    
+    private List<Paciente> pacientes = new ArrayList<>();
 
 
     @PostConstruct
@@ -61,11 +64,13 @@ public class PacienteController implements Serializable {
         }
     }
 
-//    public List<Hospital> completeHospital(String query) {
-//        String queryLowerCase = query.toLowerCase();
-//        List<Hospital> hospitaisFiltrados = getHospitais();
-//        return hospitaisFiltrados.stream().filter(t -> t.getNome().toLowerCase().startsWith(queryLowerCase)).collect(Collectors.toList());
-//    }
+    public List<Paciente> completePaciente(String query) {
+        String queryLowerCase = query.toLowerCase();
+        List<Paciente> pacientesFiltrados = getPacientes();
+        return pacientesFiltrados.stream().filter(t -> t.getNome().toLowerCase().contains(queryLowerCase)).collect(Collectors.toList());
+    }
+    
+    
 
 //    public void remover() {
 //        try {
@@ -76,5 +81,12 @@ public class PacienteController implements Serializable {
 //            JsfUtil.addErrorMessage("Erro ao remover " + hospital.getNome() + ": " + e.getMessage());
 //        }
 //    }
+
+    public List<Paciente> getPacientes() {
+        if (pacientes == null) {
+            pacientes = dao.findAll();
+        }
+        return pacientes;
+    }
 
 }
