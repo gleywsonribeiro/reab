@@ -66,7 +66,7 @@ public class PacienteController implements Serializable {
 
     public List<Paciente> completePaciente(String query) {
         String queryLowerCase = query.toLowerCase();
-        List<Paciente> pacientesFiltrados = getPacientes();
+        List<Paciente> pacientesFiltrados = dao.findAll();
         return pacientesFiltrados.stream().filter(t -> t.getNome().toLowerCase().contains(queryLowerCase)).collect(Collectors.toList());
     }
     

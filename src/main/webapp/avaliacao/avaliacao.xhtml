@@ -27,74 +27,108 @@
 
                         </p:panelGrid>
 
-                        <p:accordionPanel id="acordion" multiple="false">
-                            <p:tab title="Hemodinâmicos">
-                                <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
-                                    <h:panelGroup styleClass="md-inputfield">
-                                        <p:inputText  >
-                                            <f:convertNumber locale="pt_Br" />
-                                        </p:inputText>
-                                        <label>Pressão Arterial (mmhg)</label>
-                                    </h:panelGroup>
+                        <!--                        <p:accordionPanel id="acordion" multiple="false">
+                                                    <p:tab title="Hemodinâmicos">
+                                                        <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad" style="padding-top: 10px">
+                                                            <h:panelGroup styleClass="md-inputfield">
+                                                                <p:inputText  value="{avaliacaoController.pressaoArterial}">
+                                                                    <f:convertNumber locale="pt_Br" />
+                                                                </p:inputText>
+                                                                <label>Pressão Arterial Média (mmhg)</label>
+                                                            </h:panelGroup>
+                        
+                                                            <h:panelGroup styleClass="md-inputfield">
+                                                                <p:inputText value="{avaliacaoController.frequenciaCardiaca}" />
+                                                                <label>Frequência Cardíaca (bpm)</label>
+                                                            </h:panelGroup>
+                                                        </p:panelGrid>
+                        
+                                                    </p:tab>
+                        
+                                                    <p:tab title="Respiratórios">
+                                                        <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad" style="padding-top: 10px">
+                                                            <h:panelGroup styleClass="md-inputfield">
+                                                                <p:inputText value="{avaliacaoController.frequenciaRespiratoria}" />
+                                                                <label>Frequência Respiratória (rpm)</label>
+                                                            </h:panelGroup>
+                        
+                                                            <h:panelGroup>
+                                                                <p:selectBooleanCheckbox value="{avaliacaoController.suporteVentilacao}"/>
+                                                                <p:outputLabel value="Suporte de ventilação mecânica"/>
+                                                            </h:panelGroup>
+                        
+                                                            <h:panelGroup styleClass="md-inputfield">
+                                                                <p:inputText value="#{avaliacaoController.psv}"  />
+                                                                <label>PSV-PS</label>
+                                                            </h:panelGroup>
+                                                            <h:panelGroup styleClass="md-inputfield">
+                                                                <p:inputText value="{avaliacaoController.peep}"  />
+                                                                <label>PEEP</label>
+                                                            </h:panelGroup>
+                                                            <p:outputLabel for="fio2" value="Fio2(%):"/>
+                                                            <p:inputText id="fio2" value="{avaliacaoController.fio2}" readonly="true"/>
+                                                            <p:slider for="fio2" />
+                                                        </p:panelGrid>
+                                                    </p:tab>
+                        
+                                                    <p:tab title="Laboratoriais">
+                                                        <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad" style="padding-top: 10px">
+                                                            <h:panelGroup styleClass="md-inputfield">
+                                                                <p:inputText value="{avaliacaoController.hemoglobina}" />
+                                                                <label>Hemoglobina</label>
+                                                            </h:panelGroup>
+                        
+                                                            <h:panelGroup styleClass="md-inputfield">
+                                                                <p:inputText value="{avaliacaoController.lactato}" />
+                                                                <label>Lactato</label>
+                                                            </h:panelGroup>
+                                                            
+                                                            <h:panelGroup styleClass="md-inputfield">
+                                                                <p:inputText value="{avaliacaoController.plaquetas}" />
+                                                                <label>Plaquetas</label>
+                                                            </h:panelGroup>
+                                                        </p:panelGrid>
+                                                    </p:tab>
+                        
+                                                    <p:tab title="Neurológicos">
+                                                        <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad" style="padding-top: 10px">
+                                                            <h:panelGroup styleClass="md-inputfield">
+                                                                <p:inputText value="{avaliacaoController.glasgow}" />
+                                                                <label>Glasgow</label>
+                                                            </h:panelGroup>
+                        
+                                                            <h:panelGroup styleClass="md-inputfield">
+                                                                <p:inputText value="{avaliacaoController.rass}" />
+                                                                <label>RASS</label>
+                                                            </h:panelGroup>
+                                                        </p:panelGrid>
+                                                    </p:tab>
+                        
+                                                </p:accordionPanel>-->
 
-                                    <h:panelGroup styleClass="md-inputfield">
-                                        <p:inputText  />
-                                        <label>Frequência Cardíaca (bpm)</label>
-                                    </h:panelGroup>
-                                </p:panelGrid>
+                        <p:carousel value="#{carouselView.cars}" headerText="Carousel" numVisible="1" var="car" itemStyleClass="carItem" 
+                                    itemStyle="text-align:center" responsive="true">
+                            <p:panelGrid columns="2" style="width:100%" styleClass="ui-panelgrid-blank ui-car-display">
+                                <h:outputText value="Id:" />
+                                <h:outputText value="#{car.id}" />
 
-                            </p:tab>
+                                <h:outputText value="Year" />
+                                <h:outputText value="#{car.year}" />
 
-                            <p:tab title="Respiratórios">
-                                <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
-                                    <h:panelGroup styleClass="md-inputfield">
-                                        <p:inputText  />
-                                        <label>Frequência Respiratória (rpm)</label>
-                                    </h:panelGroup>
+                                <h:outputText value="Color:" />
+                                <h:outputText value="#{car.color}"/>
 
-                                    <h:panelGroup>
-                                        <p:selectBooleanCheckbox/>
-                                        <p:outputLabel value="Suporte de ventilação mecânica"/>
-                                    </h:panelGroup>
+                                <h:outputText value="Price" />
+                                <h:outputText value="R$ #{car.price}" />
+                            </p:panelGrid>
 
-                                    <h:panelGroup styleClass="md-inputfield">
-                                        <p:inputText  />
-                                        <label>Frequência Cardíaca (bpm)</label>
-                                    </h:panelGroup>
-                                </p:panelGrid>
-                            </p:tab>
-
-                            <p:tab title="Laboratoriais">
-                                <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
-                                    <h:panelGroup styleClass="md-inputfield">
-                                        <p:inputText  />
-                                        <label>Hemoglobina</label>
-                                    </h:panelGroup>
-
-                                    <h:panelGroup styleClass="md-inputfield">
-                                        <p:inputText  />
-                                        <label>Lactato</label>
-                                    </h:panelGroup>
-                                </p:panelGrid>
-                            </p:tab>
-
-                            <p:tab title="Neurológicos">
-                                <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
-                                    <h:panelGroup styleClass="md-inputfield">
-                                        <p:inputText  />
-                                        <label>Glasgow</label>
-                                    </h:panelGroup>
-
-                                    <h:panelGroup styleClass="md-inputfield">
-                                        <p:inputText  />
-                                        <label>RASS</label>
-                                    </h:panelGroup>
-                                </p:panelGrid>
-                            </p:tab>
-
-                        </p:accordionPanel>
+                            <f:facet name="footer">
+                                Carousel Footer
+                            </f:facet>
+                        </p:carousel>
+                        <p:commandButton value="Salvar" icon="fa fa-save" action="{avaliacaoController.salvar()}" styleClass="blue-grey-btn" style="margin-top:10px;" update="resultado"/>
                     </div>
-
+                    <h:outputText id="resultado" value="{avaliacaoController.resultado}" />
                 </div>
                 <div class="ui-g-12 ui-lg-6">
                     <!-- Right colum -->
