@@ -19,14 +19,19 @@
 
 
                         <h:panelGroup styleClass="md-inputfield">
-                            <p:inputText  value="#{avaliacaoController.pressaoArterial}">
+                            <p:inputText  value="#{avaliacaoController.frequenciaCardiaca}">
                                 <f:convertNumber locale="pt_Br" />
                             </p:inputText>
-                            <label>Pressão Arterial Média (mmhg)</label>
+                            <label>Frequência Respiratória (rpm)</label>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <p:selectBooleanCheckbox value="#{avaliacaoController.suporteVentilacao}"/>
+                            <p:outputLabel value="Suporte de ventilação mecânica"/>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarPressao()}" styleClass="blue-grey-btn" ajax="false"/>
+                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarFrequenciaRespiratoria()}" styleClass="blue-grey-btn" ajax="false"/>
                     </div>
+
                 </div>
                 <div class="ui-g-12 ui-lg-6">
                     <!-- Right colum -->

@@ -16,16 +16,13 @@
                     <div class="card card-w-title">
                         <p:growl autoUpdate="true"/>
                         <h1>Avaliação do paciente</h1>
-
-
+                        
                         <h:panelGroup styleClass="md-inputfield">
-                            <p:inputText  value="#{avaliacaoController.pressaoArterial}">
-                                <f:convertNumber locale="pt_Br" />
-                            </p:inputText>
-                            <label>Pressão Arterial Média (mmhg)</label>
+                            <p:inputText value="#{avaliacaoController.rass}" />
+                            <label>RASS</label>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarPressao()}" styleClass="blue-grey-btn" ajax="false"/>
+                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarRass()}" styleClass="blue-grey-btn" ajax="false"/>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">
