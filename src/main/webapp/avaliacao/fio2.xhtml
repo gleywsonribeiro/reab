@@ -16,11 +16,12 @@
                     <div class="card card-w-title">
                         <p:growl autoUpdate="true"/>
                         <h1>Avaliação do paciente</h1>
-                        <p:outputLabel for="fio2" value="Fio2(%):"/>
-                        <p:inputText id="fio2" value="#{avaliacaoController.fio2}" readonly="true"/>
-                        <p:slider for="fio2" />
-
-                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarFio2()}" styleClass="blue-grey-btn" ajax="false"/>
+                        <h:panelGroup style="margin:  30px 10px;">
+                            <h:outputText id="output" value="Fio2(%): #{avaliacaoController.fio2}" />
+                            <h:inputHidden id="txt2" value="#{avaliacaoController.fio2}" required="true" requiredMessage="Campo obrigatório"/>
+                            <p:slider for="txt2" display="output" style="width: 200px" displayTemplate="Fio2: {value} %"/>
+                        </h:panelGroup>
+                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarFio2()}"/>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">

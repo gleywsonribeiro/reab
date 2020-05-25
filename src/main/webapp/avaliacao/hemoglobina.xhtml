@@ -18,12 +18,12 @@
                         <h1>Avaliação do paciente</h1>
 
 
-                        <h:panelGroup styleClass="md-inputfield">
-                            <p:inputText value="#{avaliacaoController.hemoglobina}" />
+                        <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
+                            <p:inputText value="#{avaliacaoController.hemoglobina}" required="true" requiredMessage="Campo obrigatório"/>
                             <label>Hemoglobina</label>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarHemoglobina()}" styleClass="blue-grey-btn" ajax="false"/>
+                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarHemoglobina()}"/>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">

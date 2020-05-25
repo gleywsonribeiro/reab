@@ -196,7 +196,7 @@ public class AvaliacaoController implements Serializable {
     }
 
     public String validarPressao() {
-        if (pressaoArterial > 50 && pressaoArterial < 100) {
+        if (pressaoArterial >= 50 && pressaoArterial <= 100) {
             return "frequenciaCardiaca?faces-redirect=true";
         } else {
             return "reprovado?faces-redirect=true";
@@ -204,7 +204,7 @@ public class AvaliacaoController implements Serializable {
     }
 
     public String validarFrequenciaCardiaca() {
-        if (frequenciaCardiaca > 60 && frequenciaCardiaca < 100) {
+        if (frequenciaCardiaca >= 60 && frequenciaCardiaca <= 100) {
             return "frequenciaRespiratoria?faces-redirect=true";
         } else {
             return "reprovado?faces-redirect=true";
@@ -212,7 +212,7 @@ public class AvaliacaoController implements Serializable {
     }
 
     public String validarFrequenciaRespiratoria() {
-        if (FrequenciaRespiratoria > 12 && FrequenciaRespiratoria < 20) {
+        if (FrequenciaRespiratoria >= 12 && FrequenciaRespiratoria <= 20) {
             if (suporteVentilacao) {
                 return "psv-ps?faces-redirect=true";
             } else {
@@ -224,7 +224,7 @@ public class AvaliacaoController implements Serializable {
     }
 
     public String validarPsv() {
-        if (psv < 10) {
+        if (psv <= 10) {
             return "peep?faces-redirect=true";
         } else {
             return "reprovado?faces-redirect=true";
@@ -232,7 +232,7 @@ public class AvaliacaoController implements Serializable {
     }
 
     public String validarPeep() {
-        if (peep < 8) {
+        if (peep <= 8) {
             return "fio2";
         } else {
             return "reprovado?faces-redirect=true";
@@ -240,23 +240,27 @@ public class AvaliacaoController implements Serializable {
     }
 
     public String validarFio2() {
-        return (fio2 < 60) ? "hemoglobina?faces-redirect=true" : "reprovado?faces-redirect=true";
+        return (fio2 <= 60) ? "hemoglobina?faces-redirect=true" : "reprovado?faces-redirect=true";
     }
 
     public String validarHemoglobina() {
-        return (hemoglobina < 7) ? "lactato?faces-redirect=true" : "reprovado?faces-redirect=true";
+        return (hemoglobina <= 7) ? "lactato?faces-redirect=true" : "reprovado?faces-redirect=true";
     }
 
     public String validarLactato() {
-        return (lactato > 2) ? "plaqueta?faces-redirect=true" : "reprovado?faces-redirect=true";
+        return (lactato >= 2) ? "plaqueta?faces-redirect=true" : "reprovado?faces-redirect=true";
     }
 
     public String validarPlaquetas() {
-        return (plaquetas > 35) ? "glasgow?faces-redirect=true" : "reprovado?faces-redirect=true";
+        if(plaquetas <= 35) {
+            return "glasgow?faces-redirect=true";
+        } else {
+            return "reprovado?faces-redirect=true";
+        }
     }
 
     public String validarGlasgow() {
-        return (glasgow < 9) ? "rass?faces-redirect=true" : "reprovado?faces-redirect=true";
+        return (glasgow <= 9) ? "rass?faces-redirect=true" : "reprovado?faces-redirect=true";
     }
 
     public String validarRass() {

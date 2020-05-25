@@ -17,12 +17,12 @@
                         <p:growl autoUpdate="true"/>
                         <h1>Avaliação do paciente</h1>
                         
-                        <h:panelGroup styleClass="md-inputfield">
-                            <p:inputText value="#{avaliacaoController.rass}" />
+                        <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
+                            <p:inputText value="#{avaliacaoController.rass}" required="true" requiredMessage="Campo obrigatório"/>
                             <label>RASS</label>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarRass()}" styleClass="blue-grey-btn" ajax="false"/>
+                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarRass()}"/>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">

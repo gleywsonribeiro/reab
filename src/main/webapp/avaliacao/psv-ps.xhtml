@@ -18,12 +18,12 @@
                         <h1>Avaliação do paciente</h1>
 
 
-                        <h:panelGroup styleClass="md-inputfield">
-                            <p:inputText value="#{avaliacaoController.psv}"  />
+                        <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
+                            <p:inputText value="#{avaliacaoController.psv}"  required="true" requiredMessage="Campo obrigatório"/>
                             <label>PSV-PS</label>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarPsv()}" styleClass="blue-grey-btn" ajax="false"/>
+                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarPsv()}"/>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">

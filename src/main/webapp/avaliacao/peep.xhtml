@@ -18,12 +18,12 @@
                         <h1>Avaliação do paciente</h1>
 
 
-                        <h:panelGroup styleClass="md-inputfield">
-                            <p:inputText value="#{avaliacaoController.peep}"  />
+                        <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
+                            <p:inputText value="#{avaliacaoController.peep}"  required="true" requiredMessage="Campo obrigatório"/>
                             <label>PEEP</label>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarPeep()}" styleClass="blue-grey-btn" ajax="false"/>
+                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarPeep()}" />
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">

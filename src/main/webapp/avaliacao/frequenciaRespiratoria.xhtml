@@ -18,8 +18,8 @@
                         <h1>Avaliação do paciente</h1>
 
 
-                        <h:panelGroup styleClass="md-inputfield">
-                            <p:inputText  value="#{avaliacaoController.frequenciaCardiaca}">
+                        <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
+                            <p:inputText  value="#{avaliacaoController.frequenciaRespiratoria}" required="true" requiredMessage="Campo obrigatório">
                                 <f:convertNumber locale="pt_Br" />
                             </p:inputText>
                             <label>Frequência Respiratória (rpm)</label>
@@ -29,7 +29,7 @@
                             <p:outputLabel value="Suporte de ventilação mecânica"/>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarFrequenciaRespiratoria()}" styleClass="blue-grey-btn" ajax="false"/>
+                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarFrequenciaRespiratoria()}"/>
                     </div>
 
                 </div>
