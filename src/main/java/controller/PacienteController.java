@@ -31,7 +31,7 @@ import util.jsf.JsfUtil;
 public class PacienteController implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    PacienteDao dao = new PacienteDao();
+    private PacienteDao dao = new PacienteDao();
     private Paciente paciente;
     
     private List<Paciente> pacientes = new ArrayList<>();
@@ -40,6 +40,7 @@ public class PacienteController implements Serializable {
     @PostConstruct
     private void init() {
       paciente = new Paciente();
+      pacientes = dao.findAll();
     }
 
     public Paciente getPaciente() {
