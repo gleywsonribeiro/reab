@@ -20,7 +20,7 @@
                         <p:outputLabel value="Paciente" for="paciente" />
                         <p:autoComplete id="paciente" dropdown="true" value="#{triagemController.paciente}" var="paciente"
                                         itemValue="#{paciente}" itemLabel="#{paciente.nome}"
-                                         forceSelection="true"
+                                        converter="pacienteConverter" forceSelection="true"
                                         completeMethod="#{pacienteController.completePaciente}"
                                         style="margin-bottom:10px;"/>
 
