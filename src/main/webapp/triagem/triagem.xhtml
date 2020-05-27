@@ -15,15 +15,23 @@
                     <!-- Left colum -->
                     <div class="card card-w-title">
                         <p:growl autoUpdate="true"/>
-                        <h1>Avaliação do paciente</h1>
+                        <h1>Triagem do paciente</h1>
 
+                        <p:outputLabel value="Paciente" for="paciente" />
+                        <p:autoComplete id="paciente" dropdown="true" value="#{triagemController.paciente}" var="paciente"
+                                        itemValue="#{paciente}" itemLabel="#{paciente.nome}"
+                                         forceSelection="true"
+                                        completeMethod="#{pacienteController.completePaciente}"
+                                        style="margin-bottom:10px;"/>
 
                         <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
-                            <p:inputText value="#{avaliacaoController.hemoglobina}" required="true" requiredMessage="Campo obrigatório"/>
-                            <label>Hemoglobina</label>
+                            <p:inputText  value="#{triagemController.pressaoArterial}" required="true" requiredMessage="Campo obrigatório">
+                                <f:convertNumber locale="pt_Br" />
+                            </p:inputText>
+                            <label>Pressão Arterial Média (mmhg)</label>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarHemoglobina()}"/>
+                        <p:commandButton value="Próximo" action="#{triagemController.validarPressao()}"/>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">

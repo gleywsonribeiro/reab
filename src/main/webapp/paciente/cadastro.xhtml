@@ -12,8 +12,8 @@
         <h:form id="form">
             <p:toolbar id="tb">
                 <f:facet name="left">
-                    <p:commandButton value="Listar" icon="fa fa-search" process="@this" action="pesquisas?faces-redirect=true"/>
-                    <p:commandButton value="Novo" icon="fa fa-file-o" process="@this"/>
+                    <p:commandButton value="Listar" icon="fa fa-search" process="@this" action="pesquisa?faces-redirect=true"/>
+                    <p:commandButton value="Novo" icon="fa fa-file-o" process="@this" update="form" action="#{pacienteController.novo()}"/>
                     <span class="ui-separator">
                         <span class="ui-icon pi pi-ellipsis-v" />
                     </span>
@@ -40,7 +40,7 @@
                                 </h:panelGroup>
 
                                 <p:outputLabel for="button" value="Data de Nascimento" />
-                                <p:calendar id="button" showOn="button" pattern="dd/MM/yyyy" locale="pt_BR" value="#{pacienteController.paciente.dataNascimento}"/>
+                                <p:calendar id="button" showOn="button" pattern="dd/MM/yyyy" value="#{pacienteController.paciente.dataNascimento}"/>
                             </p:panelGrid>
                         </p:fieldset>
 

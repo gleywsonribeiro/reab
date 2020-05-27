@@ -16,14 +16,13 @@
                     <div class="card card-w-title">
                         <p:growl autoUpdate="true"/>
                         <h1>Avaliação do paciente</h1>
-
-
+                        
                         <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
-                            <p:inputText value="#{avaliacaoController.psv}"  required="true" requiredMessage="Campo obrigatório"/>
-                            <label>PSV-PS</label>
+                            <p:inputText value="#{triagemController.rass}" required="true" requiredMessage="Campo obrigatório"/>
+                            <label>RASS</label>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarPsv()}"/>
+                        <p:commandButton value="Próximo" action="#{triagemController.validarRass()}"/>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">

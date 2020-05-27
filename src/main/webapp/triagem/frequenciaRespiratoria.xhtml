@@ -17,13 +17,21 @@
                         <p:growl autoUpdate="true"/>
                         <h1>Avaliação do paciente</h1>
 
-                        <h:panelGroup styleClass="md-inputfield" style="margin: 30px 0 10px 0">
-                            <p:inputText value="#{avaliacaoController.plaquetas}" required="true" requiredMessage="Campo obrigatório"/>
-                            <label>Plaquetas</label>
+
+                        <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
+                            <p:inputText  value="#{triagemController.frequenciaRespiratoria}" required="true" requiredMessage="Campo obrigatório">
+                                <f:convertNumber locale="pt_Br" />
+                            </p:inputText>
+                            <label>Frequência Respiratória (rpm)</label>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <p:selectBooleanCheckbox value="#{triagemController.suporteVentilacao}"/>
+                            <p:outputLabel value="Suporte de ventilação mecânica"/>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarPlaquetas()}" />
+                        <p:commandButton value="Próximo" action="#{triagemController.validarFrequenciaRespiratoria()}"/>
                     </div>
+
                 </div>
                 <div class="ui-g-12 ui-lg-6">
                     <!-- Right colum -->

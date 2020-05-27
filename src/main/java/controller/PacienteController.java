@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import model.Hospital;
 import model.Paciente;
 import model.Perfil;
@@ -32,15 +33,20 @@ public class PacienteController implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private PacienteDao dao = new PacienteDao();
-    private Paciente paciente;
-    
-    private List<Paciente> pacientes = new ArrayList<>();
+    private Paciente paciente = new Paciente();
 
+    private List<Paciente> pacientes = new ArrayList<>();
 
     @PostConstruct
     private void init() {
-      paciente = new Paciente();
-      pacientes = dao.findAll();
+        pacientes = dao.findAll();
+        String chave = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+
+        if (chave != null) {
+            Long id = Long.parseLong(chave);
+            paciente = dao.find(id);
+        }
+
     }
 
     public Paciente getPaciente() {
@@ -51,7 +57,6 @@ public class PacienteController implements Serializable {
         this.paciente = paciente;
     }
 
-    
     public void salvar() {
         try {
             if (paciente.getId() == null) {
@@ -59,7 +64,8 @@ public class PacienteController implements Serializable {
             } else {
                 dao.edit(paciente);
             }
-          JsfUtil.addMessage("Salvo com sucesso!");
+            pacientes = null;
+            JsfUtil.addMessage("Salvo com sucesso!");
         } catch (DBException e) {
             JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
         }
@@ -70,18 +76,20 @@ public class PacienteController implements Serializable {
         List<Paciente> pacientesFiltrados = dao.findAll();
         return pacientesFiltrados.stream().filter(t -> t.getNome().toLowerCase().contains(queryLowerCase)).collect(Collectors.toList());
     }
-    
-    
 
-//    public void remover() {
-//        try {
-//            dao.remove(hospital);
-//            hospitais = null;
-//            JsfUtil.addMessage(hospital.getNome() + " removido com sucesso!");
-//        } catch (DBException e) {
-//            JsfUtil.addErrorMessage("Erro ao remover " + hospital.getNome() + ": " + e.getMessage());
-//        }
-//    }
+    public void novo() {
+        paciente = new Paciente();
+    }
+
+    public void remover() {
+        try {
+            dao.remove(paciente);
+            pacientes = null;
+            JsfUtil.addMessage(paciente.getNome() + " apagado com sucesso!");
+        } catch (DBException e) {
+            JsfUtil.addErrorMessage("Erro ao remover " + paciente.getNome() + ": " + e.getMessage());
+        }
+    }
 
     public List<Paciente> getPacientes() {
         if (pacientes == null) {

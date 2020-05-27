@@ -19,13 +19,11 @@
 
 
                         <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
-                            <p:inputText  value="#{avaliacaoController.frequenciaCardiaca}" required="true" requiredMessage="Campo obrigatório">
-                                <f:convertNumber locale="pt_Br" />
-                            </p:inputText>
-                            <label>Frequência Cardíada (bpm)</label>
+                            <p:inputText value="#{triagemController.hemoglobina}" required="true" requiredMessage="Campo obrigatório"/>
+                            <label>Hemoglobina</label>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarFrequenciaCardiaca()}"/>
+                        <p:commandButton value="Próximo" action="#{triagemController.validarHemoglobina()}"/>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">

@@ -19,13 +19,11 @@
 
 
                         <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
-                            <p:inputText  value="#{avaliacaoController.pressaoArterial}" required="true" requiredMessage="Campo obrigatório">
-                                <f:convertNumber locale="pt_Br" />
-                            </p:inputText>
-                            <label>Pressão Arterial Média (mmhg)</label>
+                            <p:inputText value="#{triagemController.psv}"  required="true" requiredMessage="Campo obrigatório"/>
+                            <label>PSV-PS</label>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{avaliacaoController.validarPressao()}"/>
+                        <p:commandButton value="Próximo" action="#{triagemController.validarPsv()}"/>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">

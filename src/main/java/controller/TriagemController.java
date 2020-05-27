@@ -6,20 +6,11 @@
 package controller;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import model.Hospital;
 import model.Paciente;
-import model.Perfil;
-import model.Usuario;
-import model.dao.HospitalDao;
-import model.dao.PacienteDao;
-import model.dao.UsuarioDao;
-import util.exception.DBException;
-import util.jsf.JsfUtil;
+import model.Triagem;
+import model.dao.TriagemDao;
 
 /**
  *
@@ -27,11 +18,15 @@ import util.jsf.JsfUtil;
  */
 @ManagedBean
 @ViewScoped
-public class AvaliacaoController implements Serializable {
+public class TriagemController implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Paciente paciente;
+
+    private Triagem triagem = new Triagem();
+    private TriagemDao dao = new TriagemDao();
+
+    private Paciente paciente = new Paciente();
     private Integer pressaoArterial; //50-100
     private Integer frequenciaCardiaca; //60-100
 
@@ -154,43 +149,20 @@ public class AvaliacaoController implements Serializable {
         this.rass = rass;
     }
 
-    public void salvar() {
-        boolean liberado = true;
-
-        if (pressaoArterial < 50 || pressaoArterial > 100) {
-            liberado = false;
-        }
-
-        if (frequenciaCardiaca < 60 || frequenciaCardiaca > 100) {
-            liberado = false;
-        }
-
-        if (FrequenciaRespiratoria < 12 || FrequenciaRespiratoria > 20) {
-            liberado = false;
-        }
-
-        if (isSuporteVentilacao()) {
-            if (psv > 10 || peep > 8 || fio2 > 60) {
-                liberado = false;
-            }
-        }
-
-        if (glasgow > 9 || rass < -2 || rass > 2) {
-            liberado = false;
-        }
-
-        if (liberado) {
-            resultado = "Paciente liberado para mobilização";
-        } else {
-            resultado = "Paciente liberado para mobilização";
-        }
-
-    }
-
     public String getResultado() {
         return resultado;
     }
 
+    public Triagem getTriagem() {
+        return triagem;
+    }
+
+    public void setTriagem(Triagem triagem) {
+        this.triagem = triagem;
+    }
+
+    
+    
     public void setResultado(String resultado) {
         this.resultado = resultado;
     }
@@ -252,7 +224,7 @@ public class AvaliacaoController implements Serializable {
     }
 
     public String validarPlaquetas() {
-        if(plaquetas <= 35) {
+        if (plaquetas <= 35) {
             return "glasgow?faces-redirect=true";
         } else {
             return "reprovado?faces-redirect=true";
@@ -264,6 +236,22 @@ public class AvaliacaoController implements Serializable {
     }
 
     public String validarRass() {
-        return (rass >= -2 && rass <= 2) ? "aprovado?faces-redirect=true" : "reprovado?faces-redirect=true";
+        String destino;
+        if (rass >= -2 && rass <= 2) {
+            triagem.setLiberadoMobilizacao(true);
+            destino = "aprovado?faces-redirect=true";
+        } else {
+            triagem.setLiberadoMobilizacao(false);
+            destino = "reprovado?faces-redirect=true";
+        }
+        
+        triagem.setPaciente(paciente);
+        
+        try {
+            dao.create(triagem);
+            return destino;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

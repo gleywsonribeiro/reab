@@ -6,6 +6,7 @@
     <class>model.Hospital</class>
     <class>model.Setor</class>
     <class>model.Paciente</class>
+    <class>model.Triagem</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!--Configuração local-->
