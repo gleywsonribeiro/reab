@@ -17,6 +17,9 @@ import model.Paciente;
 import model.Triagem;
 
 import model.dao.TriagemDao;
+import service.TriagemService;
+import util.exception.NegocioException;
+import util.jsf.JsfUtil;
 
 /**
  *
@@ -32,25 +35,12 @@ public class TriagemController2 implements Serializable {
     private Paciente paciente;
 
     private List<Triagem> triagens;
-    private TriagemDao dao;
+    private final TriagemService service = new TriagemService(new TriagemDao());
 
     @PostConstruct
     private void init() {
         triagem = new Triagem();
     }
-
-//    public void salvar() {
-//        try {
-//            if (hospital.getId() == null) {
-//                dao.create(hospital);
-//            } else {
-//                dao.edit(hospital);
-//            }
-//            hospitais = null;
-//        } catch (DBException e) {
-//            JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
-//        }
-//    }
 
     public Triagem getTriagem() {
         return triagem;
@@ -68,24 +58,125 @@ public class TriagemController2 implements Serializable {
         this.paciente = paciente;
     }
 
-    
-    
     public List<Triagem> getTriagens() {
         return triagens;
     }
 
-   
-    public String resultado() {
-        try {
-            triagem.setPaciente(paciente);
-            String resultado = triagem.validarRass();
-            dao.create(triagem);
-            
-            return resultado;
-        } catch (Exception e) {
-            return "web/404";
+    //--
+    public String validarPressao() {
+        if (triagem.getPressaoArterial() >= 50 && triagem.getPressaoArterial() <= 100) {
+            return "frequenciaCardiaca?faces-redirect=true";
+        } else {
+            salvar();
+            return "reprovado?faces-redirect=true";
         }
     }
-    
+
+    public String validarFrequenciaCardiaca() {
+        if (triagem.getFrequenciaCardiaca() >= 60 && triagem.getFrequenciaCardiaca() <= 100) {
+            return "frequenciaRespiratoria?faces-redirect=true";
+        } else {
+            salvar();
+            return "reprovado?faces-redirect=true";
+        }
+    }
+
+    public String validarFrequenciaRespiratoria() {
+        if (triagem.getFrequenciaRespiratoria() >= 12 && triagem.getFrequenciaRespiratoria() <= 20) {
+            if (triagem.isSuporteVentilacao()) {
+                return "psv-ps?faces-redirect=true";
+            } else {
+                return "hemoglobina?faces-redirect=true";
+            }
+        } else {
+            salvar();
+            return "reprovado?faces-redirect=true";
+        }
+    }
+
+    public String validarPsv() {
+        if (triagem.getPsv() <= 10) {
+            return "peep?faces-redirect=true";
+        } else {
+            salvar();
+            return "reprovado?faces-redirect=true";
+        }
+    }
+
+    public String validarPeep() {
+        if (triagem.getPeep() <= 8) {
+            return "fio2";
+        } else {
+            salvar();
+            return "reprovado?faces-redirect=true";
+        }
+    }
+
+    public String validarFio2() {
+        if (triagem.getFio2() <= 60) {
+            return "hemoglobina?faces-redirect=true";
+        } else {
+            salvar();
+            return "reprovado?faces-redirect=true";
+        }
+    }
+
+    public String validarHemoglobina() {
+        if (triagem.getHemoglobina() <= 7) {
+            return "lactato?faces-redirect=true";
+        } else {
+            salvar();
+            return "reprovado?faces-redirect=true";
+        }
+    }
+
+    public String validarLactato() {
+        if (triagem.getLactato() >= 2) {
+            return "plaqueta?faces-redirect=true";
+        } else {
+            salvar();
+            return "reprovado?faces-redirect=true";
+        }
+    }
+
+    public String validarPlaquetas() {
+        if (triagem.getPlaquetas() <= 35) {
+            return "glasgow?faces-redirect=true";
+        } else {
+            salvar();
+            return "reprovado?faces-redirect=true";
+        }
+    }
+
+    public String validarGlasgow() {
+        if (triagem.getGlasgow() <= 9) {
+            return "rass?faces-redirect=true";
+        } else {
+            salvar();
+            return "reprovado?faces-redirect=true";
+        }
+    }
+
+    public String validarRass() {
+        String destino;
+        if (triagem.getRass() >= -2 && triagem.getRass() <= 2) {
+            triagem.setLiberadoMobilizacao(true);
+            destino = "aprovado?faces-redirect=true";
+        } else {
+            triagem.setLiberadoMobilizacao(false);
+            destino = "reprovado?faces-redirect=true";
+        }
+        salvar();
+        return destino;
+    }
+
+
+    public void salvar() {
+        try {
+            service.salvar(triagem);
+        } catch (NegocioException e) {
+            JsfUtil.addErrorMessage(e.getMessage());
+        }
+    }
 
 }
