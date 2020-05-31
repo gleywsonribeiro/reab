@@ -18,11 +18,11 @@
                         <h1>Avaliação do paciente</h1>
 
                         <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
-                            <p:inputText value="#{triagemController.lactato}" required="true" requiredMessage="Campo obrigatório"/>
+                            <p:inputText value="#{triagemController2.triagem.lactato}" required="true" requiredMessage="Campo obrigatório"/>
                             <label>Lactato</label>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{triagemController.validarLactato()}"/>
+                        <p:commandButton value="Próximo" action="#{triagemController2.triagem.validarLactato()}"/>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">

@@ -19,11 +19,11 @@
 
 
                         <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
-                            <p:inputText value="#{triagemController.hemoglobina}" required="true" requiredMessage="Campo obrigatório"/>
+                            <p:inputText value="#{triagemController2.triagem.hemoglobina}" required="true" requiredMessage="Campo obrigatório"/>
                             <label>Hemoglobina</label>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{triagemController.validarHemoglobina()}"/>
+                        <p:commandButton value="Próximo" action="#{triagemController2.triagem.validarHemoglobina()}"/>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">

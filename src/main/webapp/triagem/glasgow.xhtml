@@ -17,11 +17,11 @@
                         <p:growl autoUpdate="true"/>
                         <h1>Avaliação do paciente</h1>
                         <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
-                            <p:inputText value="#{triagemController.glasgow}" required="true" requiredMessage="Campo obrigatório"/>
+                            <p:inputText value="#{triagemController2.triagem.glasgow}" required="true" requiredMessage="Campo obrigatório"/>
                             <label>Glasgow</label>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{triagemController.validarGlasgow()}"/>
+                        <p:commandButton value="Próximo" action="#{triagemController2.triagem.validarGlasgow()}"/>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">

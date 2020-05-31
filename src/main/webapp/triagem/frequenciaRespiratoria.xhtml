@@ -19,17 +19,17 @@
 
 
                         <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
-                            <p:inputText  value="#{triagemController.frequenciaRespiratoria}" required="true" requiredMessage="Campo obrigatório">
+                            <p:inputText  value="#{triagemController2.triagem.frequenciaRespiratoria}" required="true" requiredMessage="Campo obrigatório">
                                 <f:convertNumber locale="pt_Br" />
                             </p:inputText>
                             <label>Frequência Respiratória (rpm)</label>
                         </h:panelGroup>
                         <h:panelGroup>
-                            <p:selectBooleanCheckbox value="#{triagemController.suporteVentilacao}"/>
+                            <p:selectBooleanCheckbox value="#{triagemController2.triagem.suporteVentilacao}"/>
                             <p:outputLabel value="Suporte de ventilação mecânica"/>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{triagemController.validarFrequenciaRespiratoria()}"/>
+                        <p:commandButton value="Próximo" action="#{triagemController2.triagem.validarFrequenciaRespiratoria()}"/>
                     </div>
 
                 </div>

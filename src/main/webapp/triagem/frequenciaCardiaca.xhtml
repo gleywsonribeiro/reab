@@ -19,13 +19,13 @@
 
 
                         <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
-                            <p:inputText  value="#{triagemController.frequenciaCardiaca}" required="true" requiredMessage="Campo obrigatório">
+                            <p:inputText  value="#{triagemController2.triagem.frequenciaCardiaca}" required="true" requiredMessage="Campo obrigatório">
                                 <f:convertNumber locale="pt_Br" />
                             </p:inputText>
                             <label>Frequência Cardíada (bpm)</label>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{triagemController.validarFrequenciaCardiaca()}"/>
+                        <p:commandButton value="Próximo" action="#{triagemController2.triagem.validarFrequenciaCardiaca()}"/>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">

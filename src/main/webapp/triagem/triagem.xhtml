@@ -17,19 +17,25 @@
                         <p:growl autoUpdate="true"/>
                         <h1>Triagem do paciente</h1>
 
-                        <p:autoComplete value="#{triagemController.paciente}" completeMethod="#{pacienteController.completePaciente}"
-                                        var="paciente" itemLabel="#{paciente.nome}" itemValue="#{paciente}" forceSelection="true"
-                                        dropdown="true" converter="pacienteConverter" converterMessage="Erro ao converter paciente"
-                                        />
+                        <!--                        <p:autoComplete value="{triagemController2.paciente}" completeMethod="{pacienteController.completePaciente}"
+                                                                var="paciente" itemLabel="{paciente.nome}" itemValue="{paciente}" forceSelection="true"
+                                                                dropdown="true" required="true" requiredMessage="Escolha um paciente" converter="pacienteConverter"
+                                                                converterMessage="Erro ao converter paciente"
+                                                                />-->
+
+                        <p:selectOneMenu value="#{triagemController2.paciente}" required="true" requiredMessage="Paciente obrigatório" converter="pacienteConverter">
+                            <f:selectItem itemLabel="Selecione um paciente"/>
+                            <f:selectItems value="#{pacienteController.pacientes}" var="paciente" itemLabel="#{paciente.nome}" itemValue="#{paciente}"/>
+                        </p:selectOneMenu>
 
                         <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
-                            <p:inputText  value="#{triagemController.pressaoArterial}" required="true" requiredMessage="Campo obrigatório">
-                                <f:convertNumber locale="pt_Br" />
+                            <p:inputText  value="#{triagemController2.triagem.pressaoArterial}" required="true" requiredMessage="Campo obrigatório">
+                                <f:convertNumber />
                             </p:inputText>
                             <label>Pressão Arterial Média (mmhg)</label>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{triagemController.validarPressao()}"/>
+                        <p:commandButton value="Próximo" action="#{triagemController2.triagem.validarPressao()}"/>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">

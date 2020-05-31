@@ -19,11 +19,11 @@
 
 
                         <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
-                            <p:inputText value="#{triagemController.psv}"  required="true" requiredMessage="Campo obrigatório"/>
+                            <p:inputText value="#{triagemController2.triagem.psv}"  required="true" requiredMessage="Campo obrigatório"/>
                             <label>PSV-PS</label>
                         </h:panelGroup>
 
-                        <p:commandButton value="Próximo" action="#{triagemController.validarPsv()}"/>
+                        <p:commandButton value="Próximo" action="#{triagemController2.triagem.validarPsv()}"/>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">
