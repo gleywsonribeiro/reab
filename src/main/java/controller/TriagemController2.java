@@ -17,7 +17,7 @@ import model.Paciente;
 import model.Triagem;
 
 import model.dao.TriagemDao;
-import service.TriagemService;
+import model.service.TriagemService;
 import util.exception.NegocioException;
 import util.jsf.JsfUtil;
 
@@ -174,6 +174,7 @@ public class TriagemController2 implements Serializable {
     public void salvar() {
         try {
             service.salvar(triagem);
+            triagem = new Triagem();
         } catch (NegocioException e) {
             JsfUtil.addErrorMessage(e.getMessage());
         }

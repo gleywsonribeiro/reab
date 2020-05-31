@@ -7,6 +7,7 @@
     <class>model.Setor</class>
     <class>model.Paciente</class>
     <class>model.Triagem</class>
+    <class>model.Motivo</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!--Configuração local-->

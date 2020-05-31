@@ -56,12 +56,13 @@
                             <p:menuitem id="listaPaciente" value="Pesquisa de Pacientes" icon="&#128270;" outcome="/paciente/pesquisa"/>
                         </p:submenu>
                         <p:menuitem id="atendimento" value="Cadastrar Atendimento" icon="&#128657;"/>
-                        <p:menuitem id="admissao" value="Admisão" icon="&#128716;"/>
+                        <p:menuitem id="admissao" value="Admisão" icon="&#127973;"/>
                         <p:menuitem id="triagem" value="Triagem" icon="&#128186;" outcome="/triagem/triagem"/>
-                        <p:menuitem id="avaliacao" value="Avaliação" icon="&#128186;"/>
+                        <p:menuitem id="avaliacao" value="Avaliação" icon="&#127777;"/>
                         <p:submenu label="Tabelas" icon="&#128229;">
                             <p:menuitem id="hospital" value="Hospital" icon="&#127976;" outcome="/tabelas/hospital/cadastro"/>
                             <p:menuitem id="setor" value="Setor" icon="&#128204;" outcome="/tabelas/setor/cadastro"/>
+                            <p:menuitem id="motivo" value="Motivos da Internação" icon="&#128209;" outcome="/tabelas/motivo/cadastro"/>
                         </p:submenu>
                         <p:submenu id="usuarios" label="Usuários" icon="&#128373;" rendered="#{not loginController.usuario.user}">
                             <p:menuitem value="Cadastro" icon="&#128209;" outcome="/usuario/cadastro"/>

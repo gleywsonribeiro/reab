@@ -23,7 +23,7 @@
                                                                 converterMessage="Erro ao converter paciente"
                                                                 />-->
 
-                        <p:selectOneMenu value="#{triagemController2.paciente}" required="true" requiredMessage="Paciente obrigatório" converter="pacienteConverter">
+                        <p:selectOneMenu value="#{triagemController2.triagem.paciente}" required="true" requiredMessage="Paciente obrigatório" converter="pacienteConverter">
                             <f:selectItem itemLabel="Selecione um paciente"/>
                             <f:selectItems value="#{pacienteController.pacientes}" var="paciente" itemLabel="#{paciente.nome}" itemValue="#{paciente}"/>
                         </p:selectOneMenu>
