@@ -7,11 +7,15 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -29,6 +33,9 @@ public class Paciente implements Serializable {
 
     @Column(nullable = false)
     private String nome;
+    
+    @Enumerated(EnumType.STRING)
+    private Sexo sexo;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "dt_nascimento")
@@ -37,12 +44,29 @@ public class Paciente implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "dh_cadastro", nullable = false)
     private Date dataCadastro;
+    
+    @OneToMany(mappedBy = "paciente")
+    private List<Atendimento> atendimentos;
 
     public Paciente() {
         this.dataCadastro = new Date();
     }
-    
-    
+
+    public Sexo getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(Sexo sexo) {
+        this.sexo = sexo;
+    }
+
+    public List<Atendimento> getAtendimentos() {
+        return atendimentos;
+    }
+
+    public void setAtendimentos(List<Atendimento> atendimentos) {
+        this.atendimentos = atendimentos;
+    }
 
     public Long getId() {
         return id;

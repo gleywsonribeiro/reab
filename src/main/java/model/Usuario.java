@@ -36,7 +36,7 @@ public class Usuario implements Serializable {
     private String login;
     @Column(nullable = false)
     private String nome;
-      @Column(nullable = false)
+    @Column(nullable = false)
     private boolean ativo;
 
     @Column(length = 50)
@@ -60,8 +60,6 @@ public class Usuario implements Serializable {
         this.senha = senha;
         this.perfil = perfil;
     }
-    
-    
 
     public Long getId() {
         return id;
@@ -103,7 +101,6 @@ public class Usuario implements Serializable {
         this.nome = nome;
     }
 
-   
     public boolean isAtivo() {
         return ativo;
     }

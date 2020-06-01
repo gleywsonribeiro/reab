@@ -23,7 +23,7 @@
                                     <label>Descrição</label>
                                 </h:panelGroup>
                       
-                                <p:commandButton icon="ui-icon-add" value="Salvar" action="#{motivoController.salvar()}" update="motivos"/>
+                                <p:commandButton icon="fa fa-save" action="#{motivoController.salvar()}" update="@form"/>
                                 
                             </p:panelGrid>
                         </p:fieldset>
@@ -33,7 +33,7 @@
                         <p:dataTable id="motivos" value="#{motivoController.motivos}" var="motivo"
                                      emptyMessage="Sem dados." reflow="true">
                             <f:facet name="header">
-                                Hospitais
+                                Motivos do atendimento
                             </f:facet>
                             <p:column headerText="Código">
                                 <h:outputText value="#{motivo.id}"/>

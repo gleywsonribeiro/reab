@@ -1,0 +1,37 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package model.dao;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import jpa.util.HibernateUtil;
+import model.Atendimento;
+import model.Paciente;
+
+/**
+ *
+ * @author gleyw
+ */
+public class AtendimentoDao extends Dao<Atendimento>{
+
+    EntityManager em = HibernateUtil.getEntityManager();
+
+    public AtendimentoDao() {
+        super(Atendimento.class);
+    }
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+    
+    public boolean isPacienteEmAtendimento(Paciente paciente) {
+        Query query = em.createQuery("SELECT a FROM Atendimento as a where a.dataAlta IS NULL and a.paciente = :paciente", Atendimento.class);
+        Atendimento atendimento = (Atendimento) query.setParameter("paciente", paciente).getSingleResult();
+        return atendimento != null;
+    }
+
+}

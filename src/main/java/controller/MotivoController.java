@@ -62,7 +62,9 @@ public class MotivoController implements Serializable {
             } else {
                 dao.edit(motivo);
             }
+            motivo = new Motivo();
             motivos = null;
+            JsfUtil.addMessage("Salvo com sucesso!");
         } catch (DBException e) {
             JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
         }
