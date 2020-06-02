@@ -8,15 +8,12 @@ package controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import model.Atendimento;
-import model.Paciente;
 import model.dao.AtendimentoDao;
-import model.dao.PacienteDao;
 import model.service.AtendimentoService;
 import util.exception.DBException;
 import util.exception.NegocioException;
@@ -56,10 +53,9 @@ public class AtendimentoController implements Serializable {
         this.atendimento = atendimento;
     }
 
-    
     public void salvar() {
         try {
-           service.salvar(atendimento);
+            service.salvar(atendimento);
             atendimentos = null;
             JsfUtil.addMessage("Salvo com sucesso!");
         } catch (DBException e) {
@@ -74,7 +70,6 @@ public class AtendimentoController implements Serializable {
 //        List<Paciente> pacientesFiltrados = dao.findAll();
 //        return pacientesFiltrados.stream().filter(t -> t.getNome().toLowerCase().contains(queryLowerCase)).collect(Collectors.toList());
 //    }
-
     public void novo() {
         atendimento = new Atendimento();
     }
@@ -90,11 +85,10 @@ public class AtendimentoController implements Serializable {
     }
 
     public List<Atendimento> getAtendimentos() {
-        if(atendimentos == null) {
+        if (atendimentos == null) {
             atendimentos = service.listarTodos();
         }
         return atendimentos;
     }
 
-  
 }

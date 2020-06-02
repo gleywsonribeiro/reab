@@ -7,7 +7,6 @@ package model.dao;
 
 import javax.persistence.EntityManager;
 import jpa.util.HibernateUtil;
-import model.Hospital;
 import model.Paciente;
 
 /**

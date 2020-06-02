@@ -8,6 +8,7 @@ package model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -125,5 +126,8 @@ public class Paciente implements Serializable {
         return "Paciente{" + "id=" + id + '}';
     }
 
-    
+    public boolean isEmAtendimento() {
+        List<Atendimento> corrente = getAtendimentos().stream().filter(a -> a.getDataAlta() == null).collect(Collectors.toList());
+        return (!corrente.isEmpty());
+    }
 }

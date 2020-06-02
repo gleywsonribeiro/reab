@@ -13,13 +13,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import model.Hospital;
 import model.Paciente;
-import model.Perfil;
-import model.Usuario;
-import model.dao.HospitalDao;
 import model.dao.PacienteDao;
-import model.dao.UsuarioDao;
+import model.service.PacienteService;
 import util.exception.DBException;
 import util.jsf.JsfUtil;
 
@@ -32,19 +28,19 @@ import util.jsf.JsfUtil;
 public class PacienteController implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private PacienteDao dao = new PacienteDao();
+    private PacienteService service = new PacienteService(new PacienteDao());
     private Paciente paciente = new Paciente();
 
     private List<Paciente> pacientes = new ArrayList<>();
 
     @PostConstruct
     private void init() {
-        pacientes = dao.findAll();
+        pacientes = service.listarTodos();
         String chave = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 
         if (chave != null) {
             Long id = Long.parseLong(chave);
-            paciente = dao.find(id);
+            paciente = service.buscarPorId(id);
         }
 
     }
@@ -59,11 +55,7 @@ public class PacienteController implements Serializable {
 
     public void salvar() {
         try {
-            if (paciente.getId() == null) {
-                dao.create(paciente);
-            } else {
-                dao.edit(paciente);
-            }
+            service.salvar(paciente);
             pacientes = null;
             JsfUtil.addMessage("Salvo com sucesso!");
         } catch (DBException e) {
@@ -73,7 +65,7 @@ public class PacienteController implements Serializable {
 
     public List<Paciente> completePaciente(String query) {
         String queryLowerCase = query.toLowerCase();
-        List<Paciente> pacientesFiltrados = dao.findAll();
+        List<Paciente> pacientesFiltrados = service.listarTodos();
         return pacientesFiltrados.stream().filter(t -> t.getNome().toLowerCase().contains(queryLowerCase)).collect(Collectors.toList());
     }
 
@@ -83,7 +75,7 @@ public class PacienteController implements Serializable {
 
     public void remover() {
         try {
-            dao.remove(paciente);
+            service.remover(paciente);
             pacientes = null;
             JsfUtil.addMessage(paciente.getNome() + " apagado com sucesso!");
         } catch (DBException e) {
@@ -93,7 +85,7 @@ public class PacienteController implements Serializable {
 
     public List<Paciente> getPacientes() {
         if (pacientes == null) {
-            pacientes = dao.findAll();
+            pacientes = service.listarTodos();
         }
         return pacientes;
     }

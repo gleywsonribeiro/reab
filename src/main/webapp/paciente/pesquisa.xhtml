@@ -28,7 +28,7 @@
                         <p:growl autoUpdate="true"/>
                         <p:dataTable value="#{pacienteController.pacientes}" var="paciente" reflow="true" emptyMessage="Sem dados.">
                             <f:facet name="header">Pacientes</f:facet>
-                            <p:column headerText="Código">
+                            <p:column headerText="Código" style="width: 10%">
                                 <h:outputText value="#{paciente.id}"/>
                             </p:column>
                             <p:column headerText="Nome">
@@ -38,6 +38,14 @@
                                 <h:outputText value="#{paciente.dataNascimento}">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </h:outputText>
+                            </p:column>
+                            
+                            <p:column style="text-align: center">
+                                <h:outputLink value="cadastro.xhtml">
+                                    <p:button id="atender" icon="fa fa-stethoscope" />
+                                    <f:param name="id" value="#{paciente.id}"/>
+                                    <p:tooltip for="atender" value="Atender"/>
+                                </h:outputLink>
                             </p:column>
 
                             <p:column style="text-align: center">

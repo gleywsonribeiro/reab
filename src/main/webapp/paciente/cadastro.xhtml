@@ -40,13 +40,14 @@
                                 </h:panelGroup>
 
                                 <p:outputLabel value="Sexo: "/>
-                                <p:selectOneRadio value="#{pacienteController.paciente.sexo}" layout="responsive" columns="6">
+                                <p:selectOneRadio value="#{pacienteController.paciente.sexo}" layout="responsive" columns="6" required="true" requiredMessage="Escolha o sexo">
                                     <f:selectItem itemLabel="Masculino" itemValue="M" />
                                     <f:selectItem itemLabel="Feminino" itemValue="F" />
                                 </p:selectOneRadio>
 
                                 <p:outputLabel for="button" value="Data de Nascimento" />
-                                <p:calendar id="button" showOn="button" pattern="dd/MM/yyyy" value="#{pacienteController.paciente.dataNascimento}"/>
+                                <p:calendar id="button" showOn="button" pattern="dd/MM/yyyy" required="true" requiredMessage="Informe a data de nascimento"
+                                            value="#{pacienteController.paciente.dataNascimento}"/>
                             </p:panelGrid>
                         </p:fieldset>
 
