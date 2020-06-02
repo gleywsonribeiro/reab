@@ -39,6 +39,12 @@
                                     <label>Nome completo</label>
                                 </h:panelGroup>
 
+                                <p:outputLabel value="Sexo: "/>
+                                <p:selectOneRadio value="#{pacienteController.paciente.sexo}" layout="responsive" columns="6">
+                                    <f:selectItem itemLabel="Masculino" itemValue="M" />
+                                    <f:selectItem itemLabel="Feminino" itemValue="F" />
+                                </p:selectOneRadio>
+
                                 <p:outputLabel for="button" value="Data de Nascimento" />
                                 <p:calendar id="button" showOn="button" pattern="dd/MM/yyyy" value="#{pacienteController.paciente.dataNascimento}"/>
                             </p:panelGrid>
