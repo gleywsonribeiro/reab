@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Hospital</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <p:toolbar id="tb">
+                <f:facet name="left">
+                    <p:commandButton value="Novo" icon="fa fa-user-plus" process="@this" action="cadastro?faces-redirect=true"/>
+                    <span class="ui-separator">
+                        <span class="ui-icon pi pi-ellipsis-v" />
+                    </span>
+                    <p:commandButton id="btnSave" value="Salvar" icon="fa fa-save" action="#{pacienteController.salvar()}" update="@form" />
+                </f:facet>
+            </p:toolbar>
+            <div class="ui-g ui-fluid">
+
+                <div class="ui-g-12 ui-lg-9">
+                    <!-- Left colum -->
+                    <div class="card card-w-title">
+
+                        <p:growl autoUpdate="true"/>
+                        <p:dataTable value="#{pacienteController.pacientes}" var="paciente" reflow="true" emptyMessage="Sem dados.">
+                            <f:facet name="header">Pacientes</f:facet>
+                            <p:column headerText="Código">
+                                <h:outputText value="#{paciente.id}"/>
+                            </p:column>
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{paciente.nome}"/>
+                            </p:column>
+                            <p:column headerText="Nascimento">
+                                <h:outputText value="#{paciente.dataNascimento}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column style="text-align: center">
+                                <h:outputLink value="cadastro.xhtml">
+                                    <p:button icon="fa fa-edit" />
+                                    <f:param name="id" value="#{paciente.id}"/>
+                                </h:outputLink>
+                            </p:column>
+                            <p:column style="text-align: center">
+                                <p:commandButton  id="bt" icon="fa fa-trash" action="#{pacienteController.remover()}" styleClass="red-btn"
+                                                  update="@form" process="@this">
+                                    <f:setPropertyActionListener target="#{pacienteController.paciente}" value="#{paciente}"/>
+                                    <p:confirm header="Alerta" message="Quer mesmo apagar este paciente?" icon="fa fa-exclamation-triangle" />
+                                </p:commandButton>
+
+                            </p:column>
+
+                        </p:dataTable>
+
+                        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                            <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+                            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+                        </p:confirmDialog>
+
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Right colum -->
+
+                </div>
+            </div>
+
+            <p:sticky target="tb" margin="75"/>
+        </h:form>    
+    </ui:define>
+
+</ui:composition>

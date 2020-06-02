@@ -5,8 +5,10 @@
  */
 package model.service;
 
+import java.util.List;
 import model.Atendimento;
 import model.dao.AtendimentoDao;
+import util.exception.DBException;
 import util.exception.NegocioException;
 
 
@@ -30,6 +32,22 @@ public class AtendimentoService {
             dao.create(atendimento);
         } else {
             dao.edit(atendimento);
+        }
+    }
+    
+    public List<Atendimento> listarTodos() {
+        return dao.findAll();
+    }
+    
+    public Atendimento buscarPorId(Long id) {
+        return dao.find(id);
+    }
+    
+    public void remover(Atendimento atendimento) {
+        try {
+            dao.remove(atendimento);
+        } catch (Exception e) {
+            throw new DBException("Não foi possível remover:" + e.getMessage());
         }
     }
 }

@@ -1,0 +1,59 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Hospital</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <p:toolbar id="tb">
+                <f:facet name="left">
+                    <p:commandButton value="Listar" icon="fa fa-search" process="@this" action="pesquisa?faces-redirect=true"/>
+                    <p:commandButton value="Novo" icon="fa fa-file-o" process="@this" update="form" action="#{pacienteController.novo()}"/>
+                    <span class="ui-separator">
+                        <span class="ui-icon pi pi-ellipsis-v" />
+                    </span>
+                    <p:commandButton id="btnSave" value="Salvar" icon="fa fa-save" action="#{pacienteController.salvar()}" update="@form" />
+                </f:facet>
+            </p:toolbar>
+            <div class="ui-g ui-fluid">
+
+                <div class="ui-g-12 ui-lg-9">
+                    <!-- Left colum -->
+                    <div class="card card-w-title">
+
+                        <p:growl autoUpdate="true"/>
+                        <p:fieldset legend="Cadastro de Paciente">
+                            <p:panelGrid id="cadastro" columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                                <h:panelGroup styleClass="md-inputfield">
+                                    <p:inputText value="#{pacienteController.paciente.id}" disabled="true"/>
+                                    <label>Código</label>
+                                </h:panelGroup>
+
+                                <h:panelGroup styleClass="md-inputfield">
+                                    <p:inputText value="#{pacienteController.paciente.nome}" required="true"/>
+                                    <label>Nome completo</label>
+                                </h:panelGroup>
+
+                                <p:outputLabel for="button" value="Data de Nascimento" />
+                                <p:calendar id="button" showOn="button" pattern="dd/MM/yyyy" value="#{pacienteController.paciente.dataNascimento}"/>
+                            </p:panelGrid>
+                        </p:fieldset>
+
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Right colum -->
+
+                </div>
+            </div>
+
+            <p:sticky target="tb" margin="75"/>
+        </h:form>    
+    </ui:define>
+
+</ui:composition>
