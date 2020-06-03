@@ -34,11 +34,11 @@
                                     <label>Código</label>
                                 </h:panelGroup>
 
-                                <p:autoComplete id="paciene" dropdown="true" value="#{atendimentoController.atendimento.paciente}" var="paciente"
+                                <p:autoComplete id="paciente" dropdown="true" value="#{atendimentoController.atendimento.paciente}" var="paciente"
                                                 itemValue="#{paciente}" itemLabel="#{paciente.nome}"
                                                 converter="pacienteConverter" forceSelection="true"
                                                 completeMethod="#{pacienteController.completePaciente}" style="margin-bottom:10px;">
-                                    <p:ajax event="itemSelect" update="@form" />
+                                    <p:ajax event="itemSelect" update="cadastro" />
                                 </p:autoComplete>
 
                                 <p:outputLabel value="Sexo: "/>
@@ -48,8 +48,19 @@
                                 </p:selectOneRadio>
 
                                 <p:outputLabel for="button" value="Data de Nascimento" />
-                                <p:calendar id="button" showOn="button" pattern="dd/MM/yyyy" value="#{atendimentoController.atendimento.paciente}" disabled="true"/>
+                                <p:calendar id="button" showOn="button" pattern="dd/MM/yyyy" value="#{atendimentoController.atendimento.paciente.dataNascimento}" disabled="true"/>
                             </p:panelGrid>
+                        </p:fieldset>
+                        <p:fieldset legend="Dados do Atendimento">
+
+                            <h:panelGroup>
+                                <p:outputLabel value="Setor"/>
+                                <p:selectOneMenu value="#{atendimentoController.atendimento.setor}" converter="setorConverter">
+                                    <f:selectItem itemLabel="Selecione"/>
+                                    <f:selectItems value="#{setorController.setores}" var="setor" itemLabel="#{setor.nome}" itemValue="#{setor}"/>
+                                </p:selectOneMenu>
+                            </h:panelGroup>
+
                         </p:fieldset>
 
                     </div>
