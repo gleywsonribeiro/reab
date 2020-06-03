@@ -6,6 +6,7 @@
 package model.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import jpa.util.HibernateUtil;
 import model.Atendimento;
@@ -15,7 +16,7 @@ import model.Paciente;
  *
  * @author gleyw
  */
-public class AtendimentoDao extends Dao<Atendimento>{
+public class AtendimentoDao extends Dao<Atendimento> {
 
     EntityManager em = HibernateUtil.getEntityManager();
 
@@ -27,11 +28,15 @@ public class AtendimentoDao extends Dao<Atendimento>{
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
     public boolean isPacienteEmAtendimento(Paciente paciente) {
         Query query = em.createQuery("SELECT a FROM Atendimento as a where a.dataAlta IS NULL and a.paciente = :paciente", Atendimento.class);
-        Atendimento atendimento = (Atendimento) query.setParameter("paciente", paciente).getSingleResult();
-        return atendimento != null;
+        try {
+            Atendimento atendimento = (Atendimento) query.setParameter("paciente", paciente).getSingleResult();
+            return atendimento != null;
+        } catch (NoResultException nr) {
+            return false;
+        }
     }
 
 }

@@ -16,7 +16,7 @@
                     <span class="ui-separator">
                         <span class="ui-icon pi pi-ellipsis-v" />
                     </span>
-                    <p:commandButton id="btnSave" value="Salvar" icon="fa fa-save" action="#{pacienteController.salvar()}" update="@form" />
+                    
                 </f:facet>
             </p:toolbar>
             <div class="ui-g ui-fluid">
@@ -26,30 +26,36 @@
                     <div class="card card-w-title">
 
                         <p:growl autoUpdate="true"/>
-                        <p:dataTable value="#{pacienteController.pacientes}" var="paciente" reflow="true" emptyMessage="Sem dados.">
-                            <f:facet name="header">Pacientes</f:facet>
-                            <p:column headerText="Código">
-                                <h:outputText value="#{paciente.id}"/>
+                        <p:dataTable value="#{atendimentoController.atendimentos}" var="atendimento" reflow="true" emptyMessage="Sem Atendimentos">
+                            <f:facet name="header">Atendimento</f:facet>
+                            <p:column headerText="Atendimento">
+                                <h:outputText value="#{atendimento.id}"/>
                             </p:column>
-                            <p:column headerText="Nome">
-                                <h:outputText value="#{paciente.nome}"/>
-                            </p:column>
-                            <p:column headerText="Nascimento">
-                                <h:outputText value="#{paciente.dataNascimento}">
+                           
+                            <p:column headerText="Data">
+                                <h:outputText value="#{atendimento.dataAtendimento}">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </h:outputText>
+                            </p:column>
+                            
+                            <p:column headerText="Cod. Paciente">
+                                <h:outputText value="#{atendimento.paciente.id}"/>
+                            </p:column>
+                            
+                            <p:column headerText="Paciente">
+                                <h:outputText value="#{atendimento.paciente.nome}"/>
                             </p:column>
 
                             <p:column style="text-align: center">
                                 <h:outputLink value="cadastro.xhtml">
                                     <p:button icon="fa fa-edit" />
-                                    <f:param name="id" value="#{paciente.id}"/>
+                                    <f:param name="id" value="#{atendimento.id}"/>
                                 </h:outputLink>
                             </p:column>
                             <p:column style="text-align: center">
-                                <p:commandButton  id="bt" icon="fa fa-trash" action="#{pacienteController.remover()}" styleClass="red-btn"
+                                <p:commandButton  id="bt" icon="fa fa-trash" action="#{atendimentoController.remover()}" styleClass="red-btn"
                                                   update="@form" process="@this">
-                                    <f:setPropertyActionListener target="#{pacienteController.paciente}" value="#{paciente}"/>
+                                    <f:setPropertyActionListener target="#{atendimentoController.atendimento}" value="#{atendimento}"/>
                                     <p:confirm header="Alerta" message="Quer mesmo apagar este paciente?" icon="fa fa-exclamation-triangle" />
                                 </p:commandButton>
 

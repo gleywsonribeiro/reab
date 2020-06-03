@@ -7,12 +7,15 @@ package controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 import model.Atendimento;
+import model.Usuario;
 import model.dao.AtendimentoDao;
 import model.service.AtendimentoService;
 import util.exception.DBException;
@@ -54,6 +57,11 @@ public class AtendimentoController implements Serializable {
     }
 
     public void salvar() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        HttpSession httpSession = (HttpSession) fc.getExternalContext().getSession(false);
+        Usuario usuario = (Usuario) httpSession.getAttribute("currentUser");
+        atendimento.setAtendente(usuario);
+        atendimento.setDataAtendimento(new Date());
         try {
             service.salvar(atendimento);
             atendimentos = null;

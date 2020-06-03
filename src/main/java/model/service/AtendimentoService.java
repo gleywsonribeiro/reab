@@ -26,13 +26,12 @@ public class AtendimentoService {
 
     public void salvar(Atendimento atendimento) {
         if (dao.isPacienteEmAtendimento(atendimento.getPaciente())) {
+            if(atendimento.getId() != null) {
+                dao.edit(atendimento);
+            }
             throw new NegocioException("Paciente já está em atendimento");
         }
-        if (atendimento.getId() == null) {
-            dao.create(atendimento);
-        } else {
-            dao.edit(atendimento);
-        }
+        dao.create(atendimento);
     }
     
     public List<Atendimento> listarTodos() {
