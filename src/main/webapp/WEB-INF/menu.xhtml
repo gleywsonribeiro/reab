@@ -55,7 +55,10 @@
                             <p:menuitem id="paciene" value="Cadastro de Paciente" icon="&#128694;" outcome="/paciente/cadastro"/>
                             <p:menuitem id="listaPaciente" value="Pesquisa de Pacientes" icon="&#128270;" outcome="/paciente/pesquisa"/>
                         </p:submenu>
-                        <p:menuitem id="atendimento" value="Cadastrar Atendimento" icon="&#128657;" outcome="/atendimento/cadastro"/>
+                        <p:submenu label="Atendimento" icon="&#128221;">
+                            <p:menuitem id="atender" value="Atender" icon="&#128657;" outcome="/atendimento/cadastro"/>
+
+                        </p:submenu>
                         <p:menuitem id="admissao" value="Admisão" icon="&#127973;"/>
                         <p:menuitem id="triagem" value="Triagem" icon="&#128186;" outcome="/triagem/triagem"/>
                         <p:menuitem id="avaliacao" value="Avaliação" icon="&#127777;"/>
@@ -95,7 +98,7 @@
                             <p:menuitem id="custom9" value="Inline Profile" icon="&#xE0BA;" actionListener="#{guestPreferences.setProfileMode('inline')}" ajax="false" />
                             <p:menuitem id="custom10" value="Top Profile" icon="&#xE55A;" actionListener="#{guestPreferences.setProfileMode('overlay')}" ajax="false"/>
                         </p:submenu>
-                        
+
                         <p:submenu id="um_components" label="Components" icon="&#xE896;" rendered="#{loginController.usuario.developer}">
                             <p:menuitem id="um_sample" value="Sample Page" icon="&#xE30B;" outcome="/sample" />
                             <p:menuitem id="um_forms" value="Forms" icon="&#xE890;" outcome="/forms" />
@@ -116,7 +119,7 @@
                             <p:menuitem id="um_404" value="404 Page" icon="&#xE001;" outcome="/404" />
                             <p:menuitem id="um_access" value="Access Denied Page" icon="&#xE32A;" outcome="/access" />
                         </p:submenu>
-                        
+
                         <p:menuitem id="um_utils" value="Utils" icon="&#xE869;" outcome="/utils" rendered="#{loginController.usuario.developer}"/>
                         <p:menuitem id="um_doc" value="Documentation" icon="&#xE880;" outcome="/docs" rendered="#{loginController.usuario.developer}"/>
                     </pu:menu>

@@ -56,6 +56,18 @@ public class AtendimentoController implements Serializable {
         this.atendimento = atendimento;
     }
 
+    public void darAlta() {
+        atendimento.setDataAlta(new Date());
+
+        try {
+            service.salvar(atendimento);
+            JsfUtil.addMessage("Alta realizada com sucesso!");
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage("Erro ao realizar alta");
+        }
+
+    }
+
     public void salvar() {
         FacesContext fc = FacesContext.getCurrentInstance();
         HttpSession httpSession = (HttpSession) fc.getExternalContext().getSession(false);
@@ -99,4 +111,7 @@ public class AtendimentoController implements Serializable {
         return atendimentos;
     }
 
+    public Long getPacientesInternados() {
+        return service.getPacientesInternados();
+    }
 }

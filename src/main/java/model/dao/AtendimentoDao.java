@@ -39,4 +39,9 @@ public class AtendimentoDao extends Dao<Atendimento> {
         }
     }
 
+    public Long getPacientesInternados() {
+        Query query = em.createQuery("SELECT COUNT(A) FROM Atendimento AS A WHERE A.dataAlta IS NULL");
+        return (Long) query.getSingleResult();
+    }
+
 }

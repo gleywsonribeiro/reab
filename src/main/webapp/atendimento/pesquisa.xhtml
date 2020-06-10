@@ -16,7 +16,7 @@
                     <span class="ui-separator">
                         <span class="ui-icon pi pi-ellipsis-v" />
                     </span>
-                    
+
                 </f:facet>
             </p:toolbar>
             <div class="ui-g ui-fluid">
@@ -31,26 +31,40 @@
                             <p:column headerText="Atendimento">
                                 <h:outputText value="#{atendimento.id}"/>
                             </p:column>
-                           
+
                             <p:column headerText="Data">
                                 <h:outputText value="#{atendimento.dataAtendimento}">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </h:outputText>
                             </p:column>
-                            
+
                             <p:column headerText="Cod. Paciente">
                                 <h:outputText value="#{atendimento.paciente.id}"/>
                             </p:column>
-                            
+
                             <p:column headerText="Paciente">
                                 <h:outputText value="#{atendimento.paciente.nome}"/>
                             </p:column>
 
-                            <p:column style="text-align: center">
+                            <p:column headerText="Alta">
+                                <h:outputText value="#{atendimento.dataAlta}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                            </p:column>
+
+<!--                            <p:column style="text-align: center">
                                 <h:outputLink value="cadastro.xhtml">
                                     <p:button icon="fa fa-edit" />
-                                    <f:param name="id" value="#{atendimento.id}"/>
+                                    <f:param name="id" value="{atendimento.id}"/>
                                 </h:outputLink>
+                            </p:column>-->
+                            <p:column style="text-align: center">
+                                <p:commandButton  id="alta" icon="ui-icon-airline-seat-recline-extra" action="#{atendimentoController.darAlta()}"
+                                                  update="@form" process="@this" disabled="#{not atendimento.emAtendimento}">
+                                    <f:setPropertyActionListener target="#{atendimentoController.atendimento}" value="#{atendimento}"/>
+                                    <p:confirm header="Alerta" message="Confirma a alta de #{atendimento.paciente.nome} ?" icon="fa fa-exclamation-triangle" />
+                                </p:commandButton>
+                                <p:tooltip for="alta" value="Liberar paciente"/>
                             </p:column>
                             <p:column style="text-align: center">
                                 <p:commandButton  id="bt" icon="fa fa-trash" action="#{atendimentoController.remover()}" styleClass="red-btn"

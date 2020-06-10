@@ -11,7 +11,6 @@ import model.dao.AtendimentoDao;
 import util.exception.DBException;
 import util.exception.NegocioException;
 
-
 /**
  *
  * @author gleyw
@@ -26,22 +25,28 @@ public class AtendimentoService {
 
     public void salvar(Atendimento atendimento) {
         if (dao.isPacienteEmAtendimento(atendimento.getPaciente())) {
-            if(atendimento.getId() != null) {
+            if (atendimento.getId() != null) {
                 dao.edit(atendimento);
+            } else {
+                throw new NegocioException("Paciente já está em atendimento");
             }
-            throw new NegocioException("Paciente já está em atendimento");
+
         }
         dao.create(atendimento);
     }
-    
+
     public List<Atendimento> listarTodos() {
         return dao.findAll();
     }
     
+    public Long getPacientesInternados() {
+        return dao.getPacientesInternados();
+    }
+
     public Atendimento buscarPorId(Long id) {
         return dao.find(id);
     }
-    
+
     public void remover(Atendimento atendimento) {
         try {
             dao.remove(atendimento);

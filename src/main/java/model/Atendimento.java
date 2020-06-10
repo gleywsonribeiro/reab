@@ -105,7 +105,9 @@ public class Atendimento implements Serializable {
         this.dataAlta = dataAlta;
     }
     
-    
+    public boolean isEmAtendimento() {
+        return getDataAlta() == null;
+    }
 
     @Override
     public int hashCode() {
