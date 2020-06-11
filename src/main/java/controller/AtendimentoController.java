@@ -34,7 +34,7 @@ public class AtendimentoController implements Serializable {
     private static final long serialVersionUID = 1L;
     private AtendimentoService service = new AtendimentoService(new AtendimentoDao());
     private Atendimento atendimento = new Atendimento();
-    private Paciente paciente = new Paciente();
+    private Paciente paciente;
 
     private List<Atendimento> atendimentos = new ArrayList<>();
 
@@ -52,7 +52,7 @@ public class AtendimentoController implements Serializable {
     
     public void selecionar() {
         this.atendimento.setPaciente(paciente);
-        this.paciente = new Paciente();
+        this.paciente = null;
     }
 
     public Atendimento getAtendimento() {
