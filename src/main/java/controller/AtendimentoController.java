@@ -15,6 +15,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import model.Atendimento;
+import model.Paciente;
 import model.Usuario;
 import model.dao.AtendimentoDao;
 import model.service.AtendimentoService;
@@ -33,6 +34,7 @@ public class AtendimentoController implements Serializable {
     private static final long serialVersionUID = 1L;
     private AtendimentoService service = new AtendimentoService(new AtendimentoDao());
     private Atendimento atendimento = new Atendimento();
+    private Paciente paciente = new Paciente();
 
     private List<Atendimento> atendimentos = new ArrayList<>();
 
@@ -47,6 +49,11 @@ public class AtendimentoController implements Serializable {
         }
 
     }
+    
+    public void selecionar() {
+        this.atendimento.setPaciente(paciente);
+        this.paciente = new Paciente();
+    }
 
     public Atendimento getAtendimento() {
         return atendimento;
@@ -54,6 +61,14 @@ public class AtendimentoController implements Serializable {
 
     public void setAtendimento(Atendimento atendimento) {
         this.atendimento = atendimento;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
 
     public void darAlta() {

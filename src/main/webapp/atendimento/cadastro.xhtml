@@ -17,7 +17,7 @@
                     <span class="ui-separator">
                         <span class="ui-icon pi pi-ellipsis-v" />
                     </span>
-                        <p:commandButton id="btnSave" value="Salvar" icon="fa fa-save" action="#{atendimentoController.salvar()}" update="@form" />
+                    <p:commandButton id="btnSave" value="Salvar" icon="fa fa-save" action="#{atendimentoController.salvar()}" update="@form" />
                 </f:facet>
             </p:toolbar>
             <div class="ui-g ui-fluid">
@@ -29,26 +29,36 @@
                         <p:growl autoUpdate="true"/>
                         <p:fieldset legend="Cadastro de Paciente">
                             <p:panelGrid id="cadastro" columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
-                                <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{atendimentoController.atendimento.paciente.id}" disabled="true"/>
-                                    <label>Código</label>
-                                </h:panelGroup>
-
-                                <p:autoComplete id="paciente" dropdown="true" value="#{atendimentoController.atendimento.paciente}" var="paciente"
+                                <p:autoComplete id="paciente" dropdown="true" value="#{atendimentoController.paciente}" var="paciente"
                                                 itemValue="#{paciente}" itemLabel="#{paciente.nome}"
                                                 converter="pacienteConverter" forceSelection="true"
                                                 completeMethod="#{pacienteController.completePaciente}" style="margin-bottom:10px;">
-                                    <p:ajax event="itemSelect" update="cadastro" />
+                                    <p:ajax event="itemSelect" update="cadastro" listener="#{atendimentoController.selecionar()}"/>
                                 </p:autoComplete>
+                                <p:watermark for="paciente" value="Buscar paciente"/>
 
-                                <p:outputLabel value="Sexo: "/>
-                                <p:selectOneRadio value="#{atendimentoController.atendimento.paciente.sexo}" layout="responsive" columns="6" disabled="true">
-                                    <f:selectItem itemLabel="Masculino" itemValue="M" />
-                                    <f:selectItem itemLabel="Feminino" itemValue="F" />
-                                </p:selectOneRadio>
+                                <h:panelGroup styleClass="md-inputfield">
+                                    <p:inputText value="#{atendimentoController.atendimento.paciente.id}" readonly="true"/>
+                                    <label>Código</label>
+                                </h:panelGroup>
 
-                                <p:outputLabel for="button" value="Data de Nascimento" />
-                                <p:calendar id="button" showOn="button" pattern="dd/MM/yyyy" value="#{atendimentoController.atendimento.paciente.dataNascimento}" disabled="true"/>
+                                <h:panelGroup styleClass="md-inputfield">
+                                    <p:inputText value="#{atendimentoController.atendimento.paciente.nome}" readonly="true"/>
+                                    <label>Paciente</label>
+                                </h:panelGroup>
+
+                                <h:panelGroup styleClass="md-inputfield">
+                                    <p:inputText value="#{atendimentoController.atendimento.paciente.sexo.descricao}" readonly="true"/>
+                                    <label>Sexo</label>
+                                </h:panelGroup>
+
+                                <h:panelGroup styleClass="md-inputfield">
+                                    <p:inputText value="#{atendimentoController.atendimento.paciente.dataNascimento}" readonly="true">
+                                        <f:convertDateTime locale="pt_BR" timeZone="GMT-3"/>
+                                    </p:inputText>
+                                    <label>Data de Nascimento</label>
+                                </h:panelGroup>
+
                             </p:panelGrid>
                         </p:fieldset>
                         <p:fieldset legend="Dados do Atendimento">
