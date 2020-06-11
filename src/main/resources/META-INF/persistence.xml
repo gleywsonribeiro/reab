@@ -9,6 +9,7 @@
     <class>model.Triagem</class>
     <class>model.Motivo</class>
     <class>model.Atendimento</class>
+    <class>model.Admissao</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!--Configuração local-->

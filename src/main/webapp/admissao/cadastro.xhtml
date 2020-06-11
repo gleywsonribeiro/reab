@@ -12,12 +12,12 @@
         <h:form id="form">
             <p:toolbar id="tb">
                 <f:facet name="left">
-                    <p:commandButton value="Listar" icon="fa fa-search" process="@this" action="pesquisa?faces-redirect=true"/>
+                    <p:commandButton value="Listar" icon="fa fa-search" process="@this"/>
                     <p:commandButton value="Novo" icon="fa fa-file-o" process="@this" update="form" action="#{atendimentoController.novo()}"/>
                     <span class="ui-separator">
                         <span class="ui-icon pi pi-ellipsis-v" />
                     </span>
-                    <p:commandButton id="btnSave" value="Salvar" icon="fa fa-save" action="#{atendimentoController.salvar()}" update="@form" />
+                        <p:commandButton id="btnSave" value="Salvar" icon="fa fa-save" action="#{admissaoController.admitir()}" update="@form" />
                 </f:facet>
             </p:toolbar>
             <div class="ui-g ui-fluid">
@@ -27,33 +27,38 @@
                     <div class="card card-w-title">
 
                         <p:growl autoUpdate="true"/>
-                        <p:fieldset legend="Dados do Paciente">
+                        <p:fieldset legend="Daods do Paciente">
                             <p:panelGrid id="cadastro" columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
-                                <p:autoComplete id="paciente" dropdown="true" value="#{atendimentoController.paciente}" var="paciente"
-                                                itemValue="#{paciente}" itemLabel="#{paciente.nome}"
-                                                converter="pacienteConverter" forceSelection="true"
-                                                completeMethod="#{pacienteController.completePaciente}" style="margin-bottom:10px;">
-                                    <p:ajax event="itemSelect" listener="#{atendimentoController.selecionar()}" update="cadastro" />
+                                <p:autoComplete id="atendimento" dropdown="true" value="#{admissaoController.atendimento}" var="atendimento"
+                                                itemValue="#{atendimento}" itemLabel="#{atendimento.paciente.nome}"
+                                                converter="atendimentoConverter" forceSelection="true"
+                                                completeMethod="#{admissaoController.completeAtendimento}" style="margin-bottom:10px;">
+                                    <p:ajax event="itemSelect" listener="#{admissaoController.selecionar()}" update="cadastro" />
                                 </p:autoComplete>
-                                <p:watermark for="paciente" value="Buscar paciente"/>
+                                <p:watermark for="atendimento" value="Buscar atendimento do paciente"/>
 
                                 <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{atendimentoController.atendimento.paciente.id}" readonly="true"/>
-                                    <label>Código</label>
+                                    <p:inputText value="#{admissaoController.admissao.atendimento.id}" readonly="true"/>
+                                    <label>Atendimento</label>
                                 </h:panelGroup>
 
                                 <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{atendimentoController.atendimento.paciente.nome}" readonly="true"/>
+                                    <p:inputText value="#{admissaoController.admissao.atendimento.paciente.nome}" readonly="true"/>
                                     <label>Paciente</label>
                                 </h:panelGroup>
 
                                 <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{atendimentoController.atendimento.paciente.sexo.descricao}" readonly="true"/>
+                                    <p:inputText value="#{admissaoController.admissao.atendimento.paciente.sexo.descricao}" readonly="true"/>
                                     <label>Sexo</label>
                                 </h:panelGroup>
 
                                 <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{atendimentoController.atendimento.paciente.dataNascimento}" readonly="true">
+                                    <p:inputText value="#{admissaoController.admissao.atendimento.setor.nome}" readonly="true"/>
+                                    <label>Setor atual</label>
+                                </h:panelGroup>
+
+                                <h:panelGroup styleClass="md-inputfield">
+                                    <p:inputText value="#{admissaoController.admissao.atendimento.paciente.dataNascimento}" readonly="true">
                                         <f:convertDateTime locale="pt_BR" timeZone="GMT-3"/>
                                     </p:inputText>
                                     <label>Data de Nascimento</label>
@@ -61,24 +66,21 @@
 
                             </p:panelGrid>
                         </p:fieldset>
-                        <p:fieldset legend="Dados do Atendimento">
+                        <p:fieldset legend="Dados da Admissão">
 
                             <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
                                 <h:panelGroup>
                                     <h4 style="margin-bottom: 20px">Setor: </h4>
-                                    <p:selectOneMenu value="#{atendimentoController.atendimento.setor}" required="true" requiredMessage="Escolha um setor"
+                                    <p:selectOneMenu value="#{admissaoController.admissao.setorDestino}" required="true" requiredMessage="Escolha o setor para admissão"
                                                      converter="setorConverter" filter="true" filterMatchMode="contains">
                                         <f:selectItem itemLabel="Selecione"/>
                                         <f:selectItems value="#{setorController.setores}" var="setor" itemLabel="#{setor.nome}" itemValue="#{setor}"/>
                                     </p:selectOneMenu>
                                 </h:panelGroup>
-                                <h:panelGroup>
-                                    <h4 style="margin-bottom: 20px">Motivo: </h4>
-                                    <p:selectOneMenu value="#{atendimentoController.atendimento.motivo}" required="true" requiredMessage="Escolha um motivo"
-                                                     converter="motivoConverter" filter="true" filterMatchMode="contains">
-                                        <f:selectItem itemLabel="Selecione"/>
-                                        <f:selectItems value="#{motivoController.motivos}" var="motivo" itemLabel="#{motivo.descricao}" itemValue="#{motivo}"/>
-                                    </p:selectOneMenu>
+
+                                <h:panelGroup styleClass="md-inputfield">
+                                    <p:inputTextarea value="#{admissaoController.admissao.observacao}" rows="4"/>
+                                    <label>Observação</label>
                                 </h:panelGroup>
                             </p:panelGrid>
 
