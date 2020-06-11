@@ -39,6 +39,10 @@ public class AtendimentoService {
         return dao.findAll();
     }
     
+    public List<Atendimento> getAtendimentosEmAndamento() {
+        return dao.getAtendimentosEmAndamento();
+    }
+    
     public Long getPacientesInternados() {
         return dao.getPacientesInternados();
     }

@@ -104,6 +104,7 @@ public class AdmissaoController implements Serializable {
             JsfUtil.addMessage("Admissão feita com sucesso!");
         } catch (DBException e) {
             JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
+            e.printStackTrace();
         } catch (NegocioException negocio) {
             JsfUtil.addErrorMessage(negocio.getMessage());
         }
@@ -111,7 +112,7 @@ public class AdmissaoController implements Serializable {
 
     public List<Atendimento> completeAtendimento(String query) {
         String queryLowerCase = query.toLowerCase();
-        List<Atendimento> atendimentosFiltrados = service.listarTodos();
+        List<Atendimento> atendimentosFiltrados = service.getAtendimentosEmAndamento();
         return atendimentosFiltrados.stream().filter(a -> a.getPaciente().getNome().toLowerCase().contains(queryLowerCase)).collect(Collectors.toList());
     }
     public void novo() {

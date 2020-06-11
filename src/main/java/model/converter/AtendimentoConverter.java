@@ -17,7 +17,7 @@ import model.dao.AtendimentoDao;
  *
  * @author gleywson
  */
-@FacesConverter("AtendimentoConverter")
+@FacesConverter("atendimentoConverter")
 public class AtendimentoConverter implements Converter {
 
     private final AtendimentoDao dao = new AtendimentoDao();
