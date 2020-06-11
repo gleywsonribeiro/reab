@@ -44,6 +44,7 @@ public class AdmissaoController implements Serializable {
     private Setor destino = new Setor();
 
     private Atendimento atendimento;
+    private Atendimento atendimentoEditado;
 
     @PostConstruct
     private void init() {
@@ -58,6 +59,7 @@ public class AdmissaoController implements Serializable {
 
     public void selecionar() {
         this.admissao.setAtendimento(atendimento);
+        this.atendimentoEditado = atendimento;
         this.atendimento = null;
     }
 
@@ -93,9 +95,12 @@ public class AdmissaoController implements Serializable {
         Usuario usuario = (Usuario) httpSession.getAttribute("currentUser");
 
         admissao.setUsuarioAdmissao(usuario);
+        admissao.setSetorOrigem(atendimentoEditado.getSetor());
+        
+        atendimentoEditado.setSetor(admissao.getSetorDestino());
         try {
             admissaoService.admitir(admissao);
-
+            service.salvar(atendimentoEditado);
             JsfUtil.addMessage("Admissão feita com sucesso!");
         } catch (DBException e) {
             JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
