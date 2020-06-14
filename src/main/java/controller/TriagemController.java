@@ -8,6 +8,7 @@ package controller;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import model.Atendimento;
 import model.Paciente;
 import model.Triagem;
 import model.dao.TriagemDao;
@@ -26,7 +27,7 @@ public class TriagemController implements Serializable {
     private Triagem triagem = new Triagem();
     private TriagemDao dao = new TriagemDao();
 
-    private Paciente paciente = new Paciente();
+    private Atendimento atendimento = new Atendimento();
     private Integer pressaoArterial; //50-100
     private Integer frequenciaCardiaca; //60-100
 
@@ -45,13 +46,15 @@ public class TriagemController implements Serializable {
 
     private String resultado;
 
-    public Paciente getPaciente() {
-        return paciente;
+    public Atendimento getAtendimento() {
+        return atendimento;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setAtendimento(Atendimento atendimento) {
+        this.atendimento = atendimento;
     }
+
+    
 
     public Integer getPressaoArterial() {
         return pressaoArterial;

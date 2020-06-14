@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
@@ -49,8 +50,11 @@ public class Triagem implements Serializable {
     private Integer glasgow; // glasgow < 9
     private Integer rass; // -2 ---- 2
 
+
+    
     @ManyToOne
-    private Paciente paciente;
+    @JoinColumn(nullable = false)
+    private Atendimento atendimento;
 
     public Triagem() {
         dataTriagem = new Date();
@@ -176,13 +180,15 @@ public class Triagem implements Serializable {
         this.rass = rass;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public Atendimento getAtendimento() {
+        return atendimento;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setAtendimento(Atendimento atendimento) {
+        this.atendimento = atendimento;
     }
+
+    
 
     
     

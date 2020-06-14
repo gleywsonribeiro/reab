@@ -129,4 +129,8 @@ public class AtendimentoController implements Serializable {
     public Long getPacientesInternados() {
         return service.getPacientesInternados();
     }
+    
+    public List<Atendimento> getAtendimentosEmAndamento() {
+        return service.getAtendimentosEmAndamento();
+    }
 }

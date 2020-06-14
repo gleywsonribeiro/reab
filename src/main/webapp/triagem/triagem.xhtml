@@ -23,9 +23,10 @@
                                                                 converterMessage="Erro ao converter paciente"
                                                                 />-->
 
-                        <p:selectOneMenu value="#{triagemController2.triagem.paciente}" required="true" requiredMessage="Paciente obrigatório" converter="pacienteConverter">
+                        <p:selectOneMenu value="#{triagemController2.triagem.atendimento}" required="true"
+                                         requiredMessage="Paciente obrigatório" converter="atendimentoConverter">
                             <f:selectItem itemLabel="Selecione um paciente"/>
-                            <f:selectItems value="#{pacienteController.pacientes}" var="paciente" itemLabel="#{paciente.nome}" itemValue="#{paciente}"/>
+                            <f:selectItems value="#{atendimentoController.atendimentosEmAndamento}" var="atendimento" itemLabel="#{atendimento.paciente.nome}" itemValue="#{atendimento}"/>
                         </p:selectOneMenu>
 
                         <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">

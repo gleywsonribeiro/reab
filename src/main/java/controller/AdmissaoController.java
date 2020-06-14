@@ -100,6 +100,7 @@ public class AdmissaoController implements Serializable {
         atendimentoEditado.setSetor(admissao.getSetorDestino());
         try {
             admissaoService.admitir(admissao);
+            atendimentoEditado = service.buscarPorId(atendimentoEditado.getId());
             service.salvar(atendimentoEditado);
             JsfUtil.addMessage("Admissão feita com sucesso!");
         } catch (DBException e) {
