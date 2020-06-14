@@ -12,11 +12,14 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import model.Atendimento;
 import model.Paciente;
 
 import model.Triagem;
+import model.dao.AtendimentoDao;
 
 import model.dao.TriagemDao;
+import model.service.AtendimentoService;
 import model.service.TriagemService;
 import util.exception.NegocioException;
 import util.jsf.JsfUtil;
@@ -32,10 +35,10 @@ public class TriagemController2 implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Triagem triagem = new Triagem();
-    private Paciente paciente;
 
     private List<Triagem> triagens;
     private final TriagemService service = new TriagemService(new TriagemDao());
+    private AtendimentoService as = new AtendimentoService(new AtendimentoDao());
 
     @PostConstruct
     private void init() {
@@ -50,13 +53,7 @@ public class TriagemController2 implements Serializable {
         this.triagem = triagem;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
+  
 
     public List<Triagem> getTriagens() {
         return triagens;
@@ -173,7 +170,11 @@ public class TriagemController2 implements Serializable {
 
     public void salvar() {
         try {
+            Atendimento temp = as.buscarPorId(triagem.getAtendimento().getId());
+            temp.setLiberadoMobilizacao(triagem.isLiberadoMobilizacao());
+            
             service.salvar(triagem);
+            as.salvar(temp);
             triagem = new Triagem();
         } catch (NegocioException e) {
             JsfUtil.addErrorMessage(e.getMessage());

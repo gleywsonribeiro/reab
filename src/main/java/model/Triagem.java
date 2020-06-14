@@ -32,7 +32,7 @@ public class Triagem implements Serializable {
     @Column(name = "dt_triagem", nullable = false)
     private Date dataTriagem;
     @Column(name = "sn_liberado")
-    private boolean liberadoMobilizacao;
+    private Boolean liberadoMobilizacao;
 
     private Integer pressaoArterial; //50-100
     private Integer frequenciaCardiaca; //60-100
@@ -76,11 +76,11 @@ public class Triagem implements Serializable {
         this.dataTriagem = dataTriagem;
     }
 
-    public boolean isLiberadoMobilizacao() {
+    public Boolean isLiberadoMobilizacao() {
         return liberadoMobilizacao;
     }
 
-    public void setLiberadoMobilizacao(boolean liberadoMobilizacao) {
+    public void setLiberadoMobilizacao(Boolean liberadoMobilizacao) {
         this.liberadoMobilizacao = liberadoMobilizacao;
     }
 

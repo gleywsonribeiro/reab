@@ -36,6 +36,9 @@ public class Atendimento implements Serializable {
     @Column(name = "dt_alta")
     private Date dataAlta;
     
+    @Column(name = "sn_mobilizacao")
+    private Boolean liberadoMobilizacao;
+    
     @ManyToOne(optional = false)
     private Usuario atendente;
     
@@ -55,6 +58,14 @@ public class Atendimento implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Boolean isLiberadoMobilizacao() {
+        return liberadoMobilizacao;
+    }
+
+    public void setLiberadoMobilizacao(Boolean liberadoMobilizacao) {
+        this.liberadoMobilizacao = liberadoMobilizacao;
     }
 
     public Date getDataAtendimento() {
