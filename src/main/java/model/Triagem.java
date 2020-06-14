@@ -32,7 +32,7 @@ public class Triagem implements Serializable {
     @Column(name = "dt_triagem", nullable = false)
     private Date dataTriagem;
     @Column(name = "sn_liberado")
-    private Boolean liberadoMobilizacao;
+    private Boolean liberadoMobilizacao = false;
 
     private Integer pressaoArterial; //50-100
     private Integer frequenciaCardiaca; //60-100

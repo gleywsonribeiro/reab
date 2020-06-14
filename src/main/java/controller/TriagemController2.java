@@ -160,7 +160,6 @@ public class TriagemController2 implements Serializable {
             triagem.setLiberadoMobilizacao(true);
             destino = "aprovado?faces-redirect=true";
         } else {
-            triagem.setLiberadoMobilizacao(false);
             destino = "reprovado?faces-redirect=true";
         }
         salvar();

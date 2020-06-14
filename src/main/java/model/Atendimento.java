@@ -37,7 +37,7 @@ public class Atendimento implements Serializable {
     private Date dataAlta;
     
     @Column(name = "sn_mobilizacao")
-    private Boolean liberadoMobilizacao;
+    private Boolean liberadoMobilizacao = false;
     
     @ManyToOne(optional = false)
     private Usuario atendente;
