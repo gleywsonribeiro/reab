@@ -6,6 +6,7 @@
 package model.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import model.Atendimento;
 import model.dao.AtendimentoDao;
 import util.exception.DBException;
@@ -38,11 +39,17 @@ public class AtendimentoService {
     public List<Atendimento> listarTodos() {
         return dao.findAll();
     }
-    
+
     public List<Atendimento> getAtendimentosEmAndamento() {
         return dao.getAtendimentosEmAndamento();
     }
-    
+
+    public List<Atendimento> getAtendimentosLiberados() {
+        List<Atendimento> teste = dao.getAtendimentosEmAndamento().stream().filter(a -> a.isLiberadoMobilizacao() == true).collect(Collectors.toList());
+        System.out.println(teste);
+        return teste;
+    }
+
     public Long getPacientesInternados() {
         return dao.getPacientesInternados();
     }

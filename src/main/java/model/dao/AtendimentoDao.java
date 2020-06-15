@@ -6,6 +6,7 @@
 package model.dao;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -49,5 +50,6 @@ public class AtendimentoDao extends Dao<Atendimento> {
         Query query = em.createQuery("SELECT a FROM Atendimento as a where a.dataAlta IS NULL", Atendimento.class);
         return query.getResultList();
     }
+    
 
 }

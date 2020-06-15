@@ -10,6 +10,7 @@
     <class>model.Motivo</class>
     <class>model.Atendimento</class>
     <class>model.Admissao</class>
+    <class>model.Avaliacao</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!--Configuração local-->
