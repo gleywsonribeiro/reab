@@ -61,7 +61,7 @@ public class TriagemController2 implements Serializable {
 
     //--
     public String validarPressao() {
-        if (triagem.getPressaoArterial() >= 50 && triagem.getPressaoArterial() <= 100) {
+        if (triagem.isPressaoArterial()) {
             return "frequenciaCardiaca?faces-redirect=true";
         } else {
             salvar();
@@ -70,7 +70,7 @@ public class TriagemController2 implements Serializable {
     }
 
     public String validarFrequenciaCardiaca() {
-        if (triagem.getFrequenciaCardiaca() >= 60 && triagem.getFrequenciaCardiaca() <= 100) {
+        if (triagem.isFrequenciaCardiaca()) {
             return "frequenciaRespiratoria?faces-redirect=true";
         } else {
             salvar();
@@ -79,7 +79,7 @@ public class TriagemController2 implements Serializable {
     }
 
     public String validarFrequenciaRespiratoria() {
-        if (triagem.getFrequenciaRespiratoria() >= 12 && triagem.getFrequenciaRespiratoria() <= 20) {
+        if (triagem.isFrequenciaRespiratoria()) {
             if (triagem.isSuporteVentilacao()) {
                 return "psv-ps?faces-redirect=true";
             } else {
@@ -92,7 +92,7 @@ public class TriagemController2 implements Serializable {
     }
 
     public String validarPsv() {
-        if (triagem.getPsv() <= 10) {
+        if (triagem.isPsv()) {
             return "peep?faces-redirect=true";
         } else {
             salvar();
@@ -101,7 +101,7 @@ public class TriagemController2 implements Serializable {
     }
 
     public String validarPeep() {
-        if (triagem.getPeep() <= 8) {
+        if (triagem.isPeep()) {
             return "fio2";
         } else {
             salvar();
@@ -110,7 +110,7 @@ public class TriagemController2 implements Serializable {
     }
 
     public String validarFio2() {
-        if (triagem.getFio2() <= 60) {
+        if (triagem.isFio2()) {
             return "hemoglobina?faces-redirect=true";
         } else {
             salvar();
@@ -119,7 +119,7 @@ public class TriagemController2 implements Serializable {
     }
 
     public String validarHemoglobina() {
-        if (triagem.getHemoglobina() <= 7) {
+        if (triagem.isHemoglobina()) {
             return "lactato?faces-redirect=true";
         } else {
             salvar();
@@ -128,7 +128,7 @@ public class TriagemController2 implements Serializable {
     }
 
     public String validarLactato() {
-        if (triagem.getLactato() >= 2) {
+        if (triagem.isLactato()) {
             return "plaqueta?faces-redirect=true";
         } else {
             salvar();
@@ -137,7 +137,7 @@ public class TriagemController2 implements Serializable {
     }
 
     public String validarPlaquetas() {
-        if (triagem.getPlaquetas() <= 35) {
+        if (triagem.isPlaquetas()) {
             return "glasgow?faces-redirect=true";
         } else {
             salvar();
@@ -146,7 +146,7 @@ public class TriagemController2 implements Serializable {
     }
 
     public String validarGlasgow() {
-        if (triagem.getGlasgow() <= 9) {
+        if (triagem.isGlasgow()) {
             return "rass?faces-redirect=true";
         } else {
             salvar();
@@ -156,7 +156,7 @@ public class TriagemController2 implements Serializable {
 
     public String validarRass() {
         String destino;
-        if (triagem.getRass() >= -2 && triagem.getRass() <= 2) {
+        if (triagem.isRass()) {
             triagem.setLiberadoMobilizacao(true);
             destino = "aprovado?faces-redirect=true";
         } else {

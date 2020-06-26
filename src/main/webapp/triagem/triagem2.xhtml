@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Hospital</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-lg-9">
+                    <!-- Left colum -->
+                    <div class="card card-w-title">
+                        <p:growl autoUpdate="true"/>
+                        <h1>Triagem do paciente</h1>
+
+                        <p:selectOneMenu value="#{triagemController2.triagem.atendimento}" required="true"
+                                         requiredMessage="Paciente obrigatório" converter="atendimentoConverter">
+                            <f:selectItem itemLabel="Selecione um paciente"/>
+                            <f:selectItems value="#{atendimentoController.atendimentosEmAndamento}" var="atendimento" itemLabel="#{atendimento.paciente.nome}" itemValue="#{atendimento}"/>
+                        </p:selectOneMenu>
+
+                        <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
+                            <p:inputText  value="#{triagemController2.triagem.pressaoArterial}" required="true" requiredMessage="Campo obrigatório">
+                                <f:convertNumber />
+                            </p:inputText>
+                            <label>Pressão Arterial Média (mmhg)</label>
+                        </h:panelGroup>
+
+                        <p:commandButton value="Próximo" action="#{triagemController2.validarPressao()}" ajax="false"/>
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Right colum -->
+
+                </div>
+            </div>
+
+        </h:form>    
+    </ui:define>
+
+</ui:composition>

@@ -32,23 +32,23 @@ public class Triagem implements Serializable {
     @Column(name = "dt_triagem", nullable = false)
     private Date dataTriagem;
     @Column(name = "sn_liberado")
-    private Boolean liberadoMobilizacao = false;
+    private boolean liberadoMobilizacao = false;
 
-    private Integer pressaoArterial; //50-100
-    private Integer frequenciaCardiaca; //60-100
+    private boolean pressaoArterial; //50-100
+    private boolean frequenciaCardiaca; //60-100
 
-    private Integer FrequenciaRespiratoria; //12-20
+    private boolean FrequenciaRespiratoria; //12-20
     private boolean suporteVentilacao;
-    private Integer psv;  //<10
-    private Integer peep; //<8
-    private Integer fio2; // <0.6
+    private boolean psv;  //<10
+    private boolean peep; //<8
+    private boolean fio2; // <0.6
 
-    private Integer hemoglobina; //< 7
-    private Integer lactato; // > 2
-    private Integer plaquetas; //< 35
+    private boolean hemoglobina; //< 7
+    private boolean lactato; // > 2
+    private boolean plaquetas; //< 35
 
-    private Integer glasgow; // glasgow < 9
-    private Integer rass; // -2 ---- 2
+    private boolean glasgow; // glasgow < 9
+    private boolean rass; // -2 ---- 2
 
 
     
@@ -76,35 +76,35 @@ public class Triagem implements Serializable {
         this.dataTriagem = dataTriagem;
     }
 
-    public Boolean isLiberadoMobilizacao() {
+    public boolean isLiberadoMobilizacao() {
         return liberadoMobilizacao;
     }
 
-    public void setLiberadoMobilizacao(Boolean liberadoMobilizacao) {
+    public void setLiberadoMobilizacao(boolean liberadoMobilizacao) {
         this.liberadoMobilizacao = liberadoMobilizacao;
     }
 
-    public Integer getPressaoArterial() {
+    public boolean isPressaoArterial() {
         return pressaoArterial;
     }
 
-    public void setPressaoArterial(Integer pressaoArterial) {
+    public void setPressaoArterial(boolean pressaoArterial) {
         this.pressaoArterial = pressaoArterial;
     }
 
-    public Integer getFrequenciaCardiaca() {
+    public boolean isFrequenciaCardiaca() {
         return frequenciaCardiaca;
     }
 
-    public void setFrequenciaCardiaca(Integer frequenciaCardiaca) {
+    public void setFrequenciaCardiaca(boolean frequenciaCardiaca) {
         this.frequenciaCardiaca = frequenciaCardiaca;
     }
 
-    public Integer getFrequenciaRespiratoria() {
+    public boolean isFrequenciaRespiratoria() {
         return FrequenciaRespiratoria;
     }
 
-    public void setFrequenciaRespiratoria(Integer FrequenciaRespiratoria) {
+    public void setFrequenciaRespiratoria(boolean FrequenciaRespiratoria) {
         this.FrequenciaRespiratoria = FrequenciaRespiratoria;
     }
 
@@ -116,67 +116,67 @@ public class Triagem implements Serializable {
         this.suporteVentilacao = suporteVentilacao;
     }
 
-    public Integer getPsv() {
+    public boolean isPsv() {
         return psv;
     }
 
-    public void setPsv(Integer psv) {
+    public void setPsv(boolean psv) {
         this.psv = psv;
     }
 
-    public Integer getPeep() {
+    public boolean isPeep() {
         return peep;
     }
 
-    public void setPeep(Integer peep) {
+    public void setPeep(boolean peep) {
         this.peep = peep;
     }
 
-    public Integer getFio2() {
+    public boolean isFio2() {
         return fio2;
     }
 
-    public void setFio2(Integer fio2) {
+    public void setFio2(boolean fio2) {
         this.fio2 = fio2;
     }
 
-    public Integer getHemoglobina() {
+    public boolean isHemoglobina() {
         return hemoglobina;
     }
 
-    public void setHemoglobina(Integer hemoglobina) {
+    public void setHemoglobina(boolean hemoglobina) {
         this.hemoglobina = hemoglobina;
     }
 
-    public Integer getLactato() {
+    public boolean isLactato() {
         return lactato;
     }
 
-    public void setLactato(Integer lactato) {
+    public void setLactato(boolean lactato) {
         this.lactato = lactato;
     }
 
-    public Integer getPlaquetas() {
+    public boolean isPlaquetas() {
         return plaquetas;
     }
 
-    public void setPlaquetas(Integer plaquetas) {
+    public void setPlaquetas(boolean plaquetas) {
         this.plaquetas = plaquetas;
     }
 
-    public Integer getGlasgow() {
+    public boolean isGlasgow() {
         return glasgow;
     }
 
-    public void setGlasgow(Integer glasgow) {
+    public void setGlasgow(boolean glasgow) {
         this.glasgow = glasgow;
     }
 
-    public Integer getRass() {
+    public boolean isRass() {
         return rass;
     }
 
-    public void setRass(Integer rass) {
+    public void setRass(boolean rass) {
         this.rass = rass;
     }
 
@@ -189,8 +189,9 @@ public class Triagem implements Serializable {
     }
 
     
-
     
+    
+
     
     @Override
     public int hashCode() {
@@ -216,7 +217,5 @@ public class Triagem implements Serializable {
     public String toString() {
         return "model.Triagem[ id=" + id + " ]";
     }
-
     
-
 }
