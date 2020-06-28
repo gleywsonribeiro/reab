@@ -15,28 +15,81 @@
                     <!-- Left colum -->
                     <div class="card card-w-title">
                         <p:growl autoUpdate="true"/>
-                        <h1>Triagem do paciente</h1>
+                        <h1>Critérios de Segurança para Mobilização Precoce</h1>
 
-                        <!--                        <p:autoComplete value="{triagemController2.paciente}" completeMethod="{pacienteController.completePaciente}"
-                                                                var="paciente" itemLabel="{paciente.nome}" itemValue="{paciente}" forceSelection="true"
-                                                                dropdown="true" required="true" requiredMessage="Escolha um paciente" converter="pacienteConverter"
-                                                                converterMessage="Erro ao converter paciente"
-                                                                />-->
+                        <p:fieldset legend="Triagem de Paciente">
+                            <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
 
-                        <p:selectOneMenu value="#{triagemController2.triagem.atendimento}" required="true"
-                                         requiredMessage="Paciente obrigatório" converter="atendimentoConverter">
-                            <f:selectItem itemLabel="Selecione um paciente"/>
-                            <f:selectItems value="#{atendimentoController.atendimentosEmAndamento}" var="atendimento" itemLabel="#{atendimento.paciente.nome}" itemValue="#{atendimento}"/>
-                        </p:selectOneMenu>
+                                <h:outputText value="Pressão arterial média entre 50 e 100 mmhg?" />
+                                <p:inputSwitch value="#{triagemController.triagem.pressaoArterial}">
+                                    <!--<p:ajax listener="{selectBooleanView.addMessage}" update="msg" />-->
+                                </p:inputSwitch>
 
-                        <h:panelGroup styleClass="md-inputfield" style="margin:  30px 10px;">
-                            <p:inputText  value="#{triagemController2.triagem.pressaoArterial}" required="true" requiredMessage="Campo obrigatório">
-                                <f:convertNumber />
-                            </p:inputText>
-                            <label>Pressão Arterial Média (mmhg)</label>
-                        </h:panelGroup>
+                                <h:outputText value="Frequência cardiaca está ente 60 e 100 bpm?" />
+                                <p:inputSwitch value="#{triagemController.triagem.frequenciaCardiaca}">
+                                    <!--<p:ajax listener="{selectBooleanView.addMessage}" update="msg" />-->
+                                </p:inputSwitch>
 
-                        <p:commandButton value="Próximo" action="#{triagemController2.validarPressao()}" ajax="false"/>
+                                <h:outputText value="Frequência respiratória está entre 12 e 20 rpm" />
+                                <p:inputSwitch value="#{triagemController.triagem.frequenciaRespiratoria}">
+                                    <!--<p:ajax listener="{selectBooleanView.addMessage}" update="msg" />-->
+                                </p:inputSwitch>
+
+                                <h:outputText value="Paciente em suporte de ventilação mecânica?" />
+                                <p:inputSwitch value="#{triagemController.triagem.suporteVentilacao}">
+                                    <!--<p:ajax listener="{selectBooleanView.addMessage}" update="msg" />-->
+                                </p:inputSwitch>
+
+                                <h:outputText value="PSV - PS menor que 10?" />
+                                <p:inputSwitch value="#{triagemController.triagem.psv}">
+                                    <!--<p:ajax listener="{selectBooleanView.addMessage}" update="msg" />-->
+                                </p:inputSwitch>
+
+                                <h:outputText value="PEEP menor que 8?" />
+                                <p:inputSwitch value="#{triagemController.triagem.peep}">
+                                    <!--<p:ajax listener="{selectBooleanView.addMessage}" update="msg" />-->
+                                </p:inputSwitch>
+
+                                <h:outputText value="Fio2 menor que 60%?" />
+                                <p:inputSwitch value="#{triagemController.triagem.fio2}">
+                                    <!--<p:ajax listener="{selectBooleanView.addMessage}" update="msg" />-->
+                                </p:inputSwitch>
+
+                                <h:outputText value="Hemoglobina a baixo de 7?" />
+                                <p:inputSwitch value="#{triagemController.triagem.hemoglobina}">
+                                    <!--<p:ajax listener="{selectBooleanView.addMessage}" update="msg" />-->
+                                </p:inputSwitch>
+
+                                <h:outputText value="Lactato acima de 2?" />
+                                <p:inputSwitch value="#{triagemController.triagem.lactato}">
+                                    <!--<p:ajax listener="{selectBooleanView.addMessage}" update="msg" />-->
+                                </p:inputSwitch>
+
+
+                                <h:outputText value="Plaquetas abaixo de 35 mil?" />
+                                <p:inputSwitch value="#{triagemController.triagem.plaquetas}">
+                                    <!--<p:ajax listener="{selectBooleanView.addMessage}" update="msg" />-->
+                                </p:inputSwitch>
+
+                                <h:outputText value="Glasgow menor que 9?" />
+                                <p:inputSwitch value="#{triagemController.triagem.glasgow}">
+                                    <!--<p:ajax listener="{selectBooleanView.addMessage}" update="msg" />-->
+                                </p:inputSwitch>
+
+                                <h:outputText value="Glasgow menor que 9?" />
+                                <p:inputSwitch value="#{triagemController.triagem.glasgow}">
+                                    <!--<p:ajax listener="{selectBooleanView.addMessage}" update="msg" />-->
+                                </p:inputSwitch>
+                                
+                                <h:outputText value="RASS entre 2 e -2?" />
+                                <p:inputSwitch value="#{triagemController.triagem.rass}">
+                                    <!--<p:ajax listener="{selectBooleanView.addMessage}" update="msg" />-->
+                                </p:inputSwitch>
+
+                            </p:panelGrid>
+                        </p:fieldset>
+
+                        <!--<p:commandButton value="Próximo" action="{triagemController2.validarPressao()}" ajax="false"/>-->
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">
