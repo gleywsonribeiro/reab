@@ -50,14 +50,29 @@ public class Triagem implements Serializable {
     private boolean glasgow; // glasgow < 9
     private boolean rass; // -2 ---- 2
 
-
-    
     @ManyToOne
     @JoinColumn(nullable = false)
     private Atendimento atendimento;
 
     public Triagem() {
         dataTriagem = new Date();
+        setPressaoArterial(true);
+        setFrequenciaCardiaca(true);
+
+        setFrequenciaRespiratoria(true);
+
+        setSuporteVentilacao(true);
+        setPeep(true);
+        setPsv(true);
+        setFio2(true);
+
+        setHemoglobina(true);
+        setLactato(true);
+        setPlaquetas(true);
+
+        setGlasgow(true);
+        setRass(true);
+
     }
 
     public Long getId() {
@@ -188,11 +203,6 @@ public class Triagem implements Serializable {
         this.atendimento = atendimento;
     }
 
-    
-    
-    
-
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -217,5 +227,5 @@ public class Triagem implements Serializable {
     public String toString() {
         return "model.Triagem[ id=" + id + " ]";
     }
-    
+
 }
