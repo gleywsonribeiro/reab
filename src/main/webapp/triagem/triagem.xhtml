@@ -15,7 +15,7 @@
                     <!-- Left colum -->
                     <div class="card card-w-title">
                         <p:growl autoUpdate="true"/>
-                        <h1>Critérios de Segurança para Mobilização Precoce</h1>
+                        <h1 style="color: #193a59; font-weight: 900">Critérios de Segurança para Mobilização Precoce</h1>
 
                         <p:selectOneMenu value="#{triagemController.triagem.atendimento}" required="true"
                                          requiredMessage="Paciente obrigatório" converter="atendimentoConverter">
@@ -23,83 +23,82 @@
                             <f:selectItems value="#{atendimentoController.atendimentosEmAndamento}" var="atendimento" itemLabel="#{atendimento.paciente.nome}" itemValue="#{atendimento}"/>
                         </p:selectOneMenu>
 
-                        <p:fieldset legend="Triagem de Paciente">
+                        <p:fieldset legend="Hemodinâmicos">
                             <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
-
                                 <h:outputText value="Pressão arterial média entre 50 e 100 mmhg?" />
-                                <p:inputSwitch value="#{triagemController.triagem.pressaoArterial}">
-                                    <p:ajax listener="#{triagemController.validar()}"/>
-                                </p:inputSwitch>
+                                <p:selectBooleanButton value="#{triagemController.triagem.pressaoArterial}" onLabel="Sim" offLabel="Não" onIcon="fa fa-thumbs-up" offIcon="fa fa-thumbs-down" style="width:80px">
+                                </p:selectBooleanButton>
 
                                 <h:outputText value="Frequência cardiaca está ente 60 e 100 bpm?" />
-                                <p:inputSwitch value="#{triagemController.triagem.frequenciaCardiaca}">
-                                    <p:ajax listener="#{triagemController.validar()}"/>
-                                </p:inputSwitch>
-
-                                <h:outputText value="Frequência respiratória está entre 12 e 20 rpm" />
-                                <p:inputSwitch value="#{triagemController.triagem.frequenciaRespiratoria}">
-                                    <p:ajax listener="#{triagemController.validar()}"/>
-                                </p:inputSwitch>
-
-                                <h:outputText value="Paciente em suporte de ventilação mecânica?"/>
-                                <p:inputSwitch value="#{triagemController.triagem.suporteVentilacao}">
-                                    <p:ajax update="@form" />
-                                </p:inputSwitch>
-
-                                <h:panelGroup id="kitVent" rendered="#{triagemController.triagem.suporteVentilacao}">
-                                    <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
-                                        <h:outputText value="PSV - PS menor que 10?" />
-                                        <p:inputSwitch value="#{triagemController.triagem.psv}">
-                                           <p:ajax listener="#{triagemController.validar()}"/>
-                                        </p:inputSwitch>
-
-                                        <h:outputText value="PEEP menor que 8?" />
-                                        <p:inputSwitch value="#{triagemController.triagem.peep}">
-                                            <p:ajax listener="#{triagemController.validar()}"/>
-                                        </p:inputSwitch>
-
-                                        <h:outputText value="Fio2 menor que 60%?" />
-                                        <p:inputSwitch value="#{triagemController.triagem.fio2}">
-                                            <p:ajax listener="#{triagemController.validar()}"/>
-                                        </p:inputSwitch>
-                                    </p:panelGrid>
-                                </h:panelGroup>
-
-                                <h:outputText value="Hemoglobina a baixo de 7?" />
-                                <p:inputSwitch value="#{triagemController.triagem.hemoglobina}">
-                                   <p:ajax listener="#{triagemController.validar()}"/>
-                                </p:inputSwitch>
-
-                                <h:outputText value="Lactato acima de 2?" />
-                                <p:inputSwitch value="#{triagemController.triagem.lactato}">
-                                    <p:ajax listener="#{triagemController.validar()}"/>
-                                </p:inputSwitch>
-
-
-                                <h:outputText value="Plaquetas abaixo de 35 mil?" />
-                                <p:inputSwitch value="#{triagemController.triagem.plaquetas}">
-                                   <p:ajax listener="#{triagemController.validar()}"/>
-                                </p:inputSwitch>
-
-                                <h:outputText value="Glasgow menor que 9?" />
-                                <p:inputSwitch value="#{triagemController.triagem.glasgow}">
-                                    <p:ajax listener="#{triagemController.validar()}"/>
-                                </p:inputSwitch>
-
-                                <h:outputText value="Glasgow menor que 9?" />
-                                <p:inputSwitch value="#{triagemController.triagem.glasgow}">
-                                   <p:ajax listener="#{triagemController.validar()}"/>
-                                </p:inputSwitch>
-
-                                <h:outputText value="RASS entre -2 e 2?" />
-                                <p:inputSwitch value="#{triagemController.triagem.rass}">
-                                    <p:ajax listener="#{triagemController.validar()}"/>
-                                </p:inputSwitch>
+                                <p:selectBooleanButton value="{triagemController.triagem.frequenciaCardiaca}" onLabel="Sim" offLabel="Não" onIcon="fa fa-thumbs-up" offIcon="fa fa-thumbs-down" style="width:80px">
+                                </p:selectBooleanButton>
 
                             </p:panelGrid>
                         </p:fieldset>
 
-                        <p:commandButton value="Confirmar" action="#{triagemController.validar()}" ajax="false"/>
+                        <p:fieldset legend="Respiratórios">
+                            <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                                <h:outputText value="Frequência respiratória está entre 12 e 20 rpm" />
+                                <p:selectBooleanButton value="#{triagemController.triagem.frequenciaRespiratoria}" onLabel="Sim" offLabel="Não" onIcon="fa fa-thumbs-up" offIcon="fa fa-thumbs-down" style="width:80px">
+                                </p:selectBooleanButton>
+
+                                
+                                <p:selectManyCheckbox layout="responsive" columns="1">
+                                    <f:selectItem itemLabel="Paciente em suporte de ventilação mecânica?" itemValue="#{triagemController.triagem.suporteVentilacao}"/>
+                                </p:selectManyCheckbox>
+
+                                <h:panelGroup id="kitVent" rendered="#{triagemController.triagem.suporteVentilacao}">
+                                    <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                                        <h:outputText value="PSV - PS menor que 10?" />
+                                        <p:selectBooleanButton value="#{triagemController.triagem.psv}" onLabel="Sim" offLabel="Não" onIcon="fa fa-thumbs-up" offIcon="fa fa-thumbs-down" style="width:80px">
+                                        </p:selectBooleanButton>
+
+
+
+                                        <h:outputText value="PEEP menor que 8?" />
+                                        <p:selectBooleanButton value="#{triagemController.triagem.peep}" onLabel="Sim" offLabel="Não" onIcon="fa fa-thumbs-up" offIcon="fa fa-thumbs-down" style="width:80px">
+                                        </p:selectBooleanButton>
+
+                                        <h:outputText value="Fio2 menor que 60%?" />
+                                        <p:selectBooleanButton value="#{triagemController.triagem.fio2}" onLabel="Sim" offLabel="Não" onIcon="fa fa-thumbs-up" offIcon="fa fa-thumbs-down" style="width:80px">
+                                        </p:selectBooleanButton>
+                                    </p:panelGrid>
+                                </h:panelGroup>
+                            </p:panelGrid>
+                        </p:fieldset>
+
+                        <p:fieldset legend="Laboratoriais">
+                            <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                                <h:outputText value="Hemoglobina a baixo de 7?" />
+                                <p:selectBooleanButton value="#{triagemController.triagem.hemoglobina}" onLabel="Sim" offLabel="Não" onIcon="fa fa-thumbs-up" offIcon="fa fa-thumbs-down" style="width:80px">
+                                </p:selectBooleanButton>
+
+                                <h:outputText value="Lactato acima de 2?" />
+                                <p:selectBooleanButton value="#{triagemController.triagem.lactato}" onLabel="Sim" offLabel="Não" onIcon="fa fa-thumbs-up" offIcon="fa fa-thumbs-down" style="width:80px">
+                                </p:selectBooleanButton>
+
+
+                                <h:outputText value="Plaquetas abaixo de 35 mil?" />
+                                <p:selectBooleanButton value="#{triagemController.triagem.plaquetas}" onLabel="Sim" offLabel="Não" onIcon="fa fa-thumbs-up" offIcon="fa fa-thumbs-down" style="width:80px">
+                                </p:selectBooleanButton>
+                            </p:panelGrid>
+                        </p:fieldset>
+
+                        <p:fieldset legend="Neurológicos">
+                            <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+
+                                <h:outputText value="Glasgow menor que 9?" />
+                                <p:selectBooleanButton value="#{triagemController.triagem.glasgow}" onLabel="Sim" offLabel="Não" onIcon="fa fa-thumbs-up" offIcon="fa fa-thumbs-down" style="width:80px">
+                                </p:selectBooleanButton>
+
+                                <h:outputText value="RASS entre -2 e 2?" />
+                                <p:selectBooleanButton value="#{triagemController.triagem.rass}" onLabel="Sim" offLabel="Não" onIcon="fa fa-thumbs-up" offIcon="fa fa-thumbs-down" style="width:80px">
+                                </p:selectBooleanButton>
+
+                            </p:panelGrid>
+                        </p:fieldset>
+
+                        <p:commandButton value="Confirmar" action="#{triagemController.salvar()}" ajax="false"/>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">

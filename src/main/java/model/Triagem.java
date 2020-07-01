@@ -32,23 +32,23 @@ public class Triagem implements Serializable {
     @Column(name = "dt_triagem", nullable = false)
     private Date dataTriagem;
     @Column(name = "sn_liberado")
-    private boolean liberadoMobilizacao = false;
+    private Boolean liberadoMobilizacao = false;
 
-    private boolean pressaoArterial; //50-100
-    private boolean frequenciaCardiaca; //60-100
+    private Boolean pressaoArterial; //50-100
+    private Boolean frequenciaCardiaca; //60-100
 
-    private boolean FrequenciaRespiratoria; //12-20
-    private boolean suporteVentilacao;
-    private boolean psv;  //<10
-    private boolean peep; //<8
-    private boolean fio2; // <0.6
+    private Boolean FrequenciaRespiratoria; //12-20
+    private Boolean suporteVentilacao;
+    private Boolean psv;  //<10
+    private Boolean peep; //<8
+    private Boolean fio2; // <0.6
 
-    private boolean hemoglobina; //< 7
-    private boolean lactato; // > 2
-    private boolean plaquetas; //< 35
+    private Boolean hemoglobina; //< 7
+    private Boolean lactato; // > 2
+    private Boolean plaquetas; //< 35
 
-    private boolean glasgow; // glasgow < 9
-    private boolean rass; // -2 ---- 2
+    private Boolean glasgow; // glasgow < 9
+    private Boolean rass; // -2 ---- 2
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -56,23 +56,6 @@ public class Triagem implements Serializable {
 
     public Triagem() {
         dataTriagem = new Date();
-        setPressaoArterial(true);
-        setFrequenciaCardiaca(true);
-
-        setFrequenciaRespiratoria(true);
-
-        setSuporteVentilacao(true);
-        setPeep(true);
-        setPsv(true);
-        setFio2(true);
-
-        setHemoglobina(true);
-        setLactato(true);
-        setPlaquetas(true);
-
-        setGlasgow(true);
-        setRass(true);
-
     }
 
     public Long getId() {
@@ -91,117 +74,125 @@ public class Triagem implements Serializable {
         this.dataTriagem = dataTriagem;
     }
 
-    public boolean isLiberadoMobilizacao() {
-        return liberadoMobilizacao;
-    }
-
-    public void setLiberadoMobilizacao(boolean liberadoMobilizacao) {
+    public void setLiberadoMobilizacao(Boolean liberadoMobilizacao) {
         this.liberadoMobilizacao = liberadoMobilizacao;
     }
 
-    public boolean isPressaoArterial() {
-        return pressaoArterial;
-    }
-
-    public void setPressaoArterial(boolean pressaoArterial) {
+    public void setPressaoArterial(Boolean pressaoArterial) {
         this.pressaoArterial = pressaoArterial;
     }
 
-    public boolean isFrequenciaCardiaca() {
-        return frequenciaCardiaca;
-    }
-
-    public void setFrequenciaCardiaca(boolean frequenciaCardiaca) {
+    public void setFrequenciaCardiaca(Boolean frequenciaCardiaca) {
         this.frequenciaCardiaca = frequenciaCardiaca;
     }
 
-    public boolean isFrequenciaRespiratoria() {
-        return FrequenciaRespiratoria;
-    }
-
-    public void setFrequenciaRespiratoria(boolean FrequenciaRespiratoria) {
+    public void setFrequenciaRespiratoria(Boolean FrequenciaRespiratoria) {
         this.FrequenciaRespiratoria = FrequenciaRespiratoria;
     }
 
-    public boolean isSuporteVentilacao() {
-        return suporteVentilacao;
-    }
-
-    public void setSuporteVentilacao(boolean suporteVentilacao) {
+    public void setSuporteVentilacao(Boolean suporteVentilacao) {
         this.suporteVentilacao = suporteVentilacao;
     }
 
-    public boolean isPsv() {
-        return psv;
-    }
-
-    public void setPsv(boolean psv) {
+    public void setPsv(Boolean psv) {
         this.psv = psv;
     }
 
-    public boolean isPeep() {
-        return peep;
-    }
-
-    public void setPeep(boolean peep) {
+    public void setPeep(Boolean peep) {
         this.peep = peep;
     }
 
-    public boolean isFio2() {
-        return fio2;
-    }
-
-    public void setFio2(boolean fio2) {
+    public void setFio2(Boolean fio2) {
         this.fio2 = fio2;
     }
 
-    public boolean isHemoglobina() {
-        return hemoglobina;
-    }
-
-    public void setHemoglobina(boolean hemoglobina) {
+    public void setHemoglobina(Boolean hemoglobina) {
         this.hemoglobina = hemoglobina;
     }
 
-    public boolean isLactato() {
-        return lactato;
-    }
-
-    public void setLactato(boolean lactato) {
+    public void setLactato(Boolean lactato) {
         this.lactato = lactato;
     }
 
-    public boolean isPlaquetas() {
-        return plaquetas;
-    }
-
-    public void setPlaquetas(boolean plaquetas) {
+    public void setPlaquetas(Boolean plaquetas) {
         this.plaquetas = plaquetas;
     }
 
-    public boolean isGlasgow() {
-        return glasgow;
-    }
-
-    public void setGlasgow(boolean glasgow) {
+    public void setGlasgow(Boolean glasgow) {
         this.glasgow = glasgow;
     }
 
-    public boolean isRass() {
-        return rass;
+    public void setRass(Boolean rass) {
+        this.rass = rass;
     }
 
-    public void setRass(boolean rass) {
-        this.rass = rass;
+    public void setAtendimento(Atendimento atendimento) {
+        this.atendimento = atendimento;
     }
 
     public Atendimento getAtendimento() {
         return atendimento;
     }
 
-    public void setAtendimento(Atendimento atendimento) {
-        this.atendimento = atendimento;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
+
+    public Boolean getLiberadoMobilizacao() {
+        return liberadoMobilizacao;
+    }
+
+    public Boolean getPressaoArterial() {
+        return pressaoArterial;
+    }
+
+    public Boolean getFrequenciaCardiaca() {
+        return frequenciaCardiaca;
+    }
+
+    public Boolean getFrequenciaRespiratoria() {
+        return FrequenciaRespiratoria;
+    }
+
+    public Boolean getPsv() {
+        return psv;
+    }
+
+    public Boolean getPeep() {
+        return peep;
+    }
+
+    public Boolean getFio2() {
+        return fio2;
+    }
+
+    public Boolean getHemoglobina() {
+        return hemoglobina;
+    }
+
+    public Boolean getLactato() {
+        return lactato;
+    }
+
+    public Boolean getPlaquetas() {
+        return plaquetas;
+    }
+
+    public Boolean getGlasgow() {
+        return glasgow;
+    }
+
+    public Boolean getRass() {
+        return rass;
+    }
+
+    public Boolean getSuporteVentilacao() {
+        return suporteVentilacao;
+    }
+
+    
+
+    
 
     @Override
     public int hashCode() {

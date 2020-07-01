@@ -43,12 +43,12 @@ public class TriagemController implements Serializable {
     public String salvar() {
         try {
             Atendimento temp = as.buscarPorId(triagem.getAtendimento().getId());
-            temp.setLiberadoMobilizacao(triagem.isLiberadoMobilizacao());
+            temp.setLiberadoMobilizacao(triagem.getLiberadoMobilizacao());
 
             service.salvar(triagem);
             as.salvar(temp);
             triagem = new Triagem();
-            return triagem.isLiberadoMobilizacao() ? "aprovado?faces-redirect=true" : "reprovado?faces-redirect=true";
+            return triagem.getLiberadoMobilizacao() ? "aprovado?faces-redirect=true" : "reprovado?faces-redirect=true";
         } catch (NegocioException e) {
             JsfUtil.addErrorMessage(e.getMessage());
             return "";
@@ -56,10 +56,10 @@ public class TriagemController implements Serializable {
     }
 
     public void validar() {
-        if (triagem.isPressaoArterial() && triagem.isFrequenciaCardiaca()
-                && triagem.isFrequenciaRespiratoria() && triagem.isPsv()
-                && triagem.isPeep() && triagem.isFio2() && triagem.isHemoglobina()
-                && triagem.isLactato() && triagem.isPlaquetas() && triagem.isGlasgow() && triagem.isRass()) {
+        if (triagem.getPressaoArterial() && triagem.getFrequenciaCardiaca()
+                && triagem.getFrequenciaRespiratoria() && triagem.getPsv()
+                && triagem.getPeep() && triagem.getFio2() && triagem.getHemoglobina()
+                && triagem.getLactato() && triagem.getPlaquetas() && triagem.getGlasgow() && triagem.getRass()) {
             triagem.setLiberadoMobilizacao(true);
             salvar();
 
