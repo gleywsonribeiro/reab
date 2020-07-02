@@ -34,21 +34,22 @@ public class Triagem implements Serializable {
     @Column(name = "sn_liberado")
     private Boolean liberadoMobilizacao = false;
 
-    private Boolean pressaoArterial; //50-100
-    private Boolean frequenciaCardiaca; //60-100
+    
+    private Opcao pressaoArterial; 
+    private Opcao frequenciaCardiaca; 
 
-    private Boolean FrequenciaRespiratoria; //12-20
-    private Boolean suporteVentilacao;
-    private Boolean psv;  //<10
-    private Boolean peep; //<8
-    private Boolean fio2; // <0.6
+    private Opcao FrequenciaRespiratoria; 
+    private Opcao suporteVentilacao;
+    private Opcao psv;  
+    private Opcao peep; 
+    private Opcao fio2; 
 
-    private Boolean hemoglobina; //< 7
-    private Boolean lactato; // > 2
-    private Boolean plaquetas; //< 35
+    private Opcao hemoglobina; 
+    private Opcao lactato; 
+    private Opcao plaquetas; 
 
-    private Boolean glasgow; // glasgow < 9
-    private Boolean rass; // -2 ---- 2
+    private Opcao glasgow; 
+    private Opcao rass; 
 
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -74,123 +75,117 @@ public class Triagem implements Serializable {
         this.dataTriagem = dataTriagem;
     }
 
+    public Boolean getLiberadoMobilizacao() {
+        return liberadoMobilizacao;
+    }
+
     public void setLiberadoMobilizacao(Boolean liberadoMobilizacao) {
         this.liberadoMobilizacao = liberadoMobilizacao;
     }
 
-    public void setPressaoArterial(Boolean pressaoArterial) {
+    public Opcao getPressaoArterial() {
+        return pressaoArterial;
+    }
+
+    public void setPressaoArterial(Opcao pressaoArterial) {
         this.pressaoArterial = pressaoArterial;
     }
 
-    public void setFrequenciaCardiaca(Boolean frequenciaCardiaca) {
+    public Opcao getFrequenciaCardiaca() {
+        return frequenciaCardiaca;
+    }
+
+    public void setFrequenciaCardiaca(Opcao frequenciaCardiaca) {
         this.frequenciaCardiaca = frequenciaCardiaca;
     }
 
-    public void setFrequenciaRespiratoria(Boolean FrequenciaRespiratoria) {
+    public Opcao getFrequenciaRespiratoria() {
+        return FrequenciaRespiratoria;
+    }
+
+    public void setFrequenciaRespiratoria(Opcao FrequenciaRespiratoria) {
         this.FrequenciaRespiratoria = FrequenciaRespiratoria;
     }
 
-    public void setSuporteVentilacao(Boolean suporteVentilacao) {
+    public Opcao getSuporteVentilacao() {
+        return suporteVentilacao;
+    }
+
+    public void setSuporteVentilacao(Opcao suporteVentilacao) {
         this.suporteVentilacao = suporteVentilacao;
     }
 
-    public void setPsv(Boolean psv) {
+    public Opcao getPsv() {
+        return psv;
+    }
+
+    public void setPsv(Opcao psv) {
         this.psv = psv;
     }
 
-    public void setPeep(Boolean peep) {
+    public Opcao getPeep() {
+        return peep;
+    }
+
+    public void setPeep(Opcao peep) {
         this.peep = peep;
     }
 
-    public void setFio2(Boolean fio2) {
+    public Opcao getFio2() {
+        return fio2;
+    }
+
+    public void setFio2(Opcao fio2) {
         this.fio2 = fio2;
     }
 
-    public void setHemoglobina(Boolean hemoglobina) {
+    public Opcao getHemoglobina() {
+        return hemoglobina;
+    }
+
+    public void setHemoglobina(Opcao hemoglobina) {
         this.hemoglobina = hemoglobina;
     }
 
-    public void setLactato(Boolean lactato) {
+    public Opcao getLactato() {
+        return lactato;
+    }
+
+    public void setLactato(Opcao lactato) {
         this.lactato = lactato;
     }
 
-    public void setPlaquetas(Boolean plaquetas) {
+    public Opcao getPlaquetas() {
+        return plaquetas;
+    }
+
+    public void setPlaquetas(Opcao plaquetas) {
         this.plaquetas = plaquetas;
     }
 
-    public void setGlasgow(Boolean glasgow) {
+    public Opcao getGlasgow() {
+        return glasgow;
+    }
+
+    public void setGlasgow(Opcao glasgow) {
         this.glasgow = glasgow;
     }
 
-    public void setRass(Boolean rass) {
-        this.rass = rass;
+    public Opcao getRass() {
+        return rass;
     }
 
-    public void setAtendimento(Atendimento atendimento) {
-        this.atendimento = atendimento;
+    public void setRass(Opcao rass) {
+        this.rass = rass;
     }
 
     public Atendimento getAtendimento() {
         return atendimento;
     }
 
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
+    public void setAtendimento(Atendimento atendimento) {
+        this.atendimento = atendimento;
     }
-
-    public Boolean getLiberadoMobilizacao() {
-        return liberadoMobilizacao;
-    }
-
-    public Boolean getPressaoArterial() {
-        return pressaoArterial;
-    }
-
-    public Boolean getFrequenciaCardiaca() {
-        return frequenciaCardiaca;
-    }
-
-    public Boolean getFrequenciaRespiratoria() {
-        return FrequenciaRespiratoria;
-    }
-
-    public Boolean getPsv() {
-        return psv;
-    }
-
-    public Boolean getPeep() {
-        return peep;
-    }
-
-    public Boolean getFio2() {
-        return fio2;
-    }
-
-    public Boolean getHemoglobina() {
-        return hemoglobina;
-    }
-
-    public Boolean getLactato() {
-        return lactato;
-    }
-
-    public Boolean getPlaquetas() {
-        return plaquetas;
-    }
-
-    public Boolean getGlasgow() {
-        return glasgow;
-    }
-
-    public Boolean getRass() {
-        return rass;
-    }
-
-    public Boolean getSuporteVentilacao() {
-        return suporteVentilacao;
-    }
-
-    
 
     
 

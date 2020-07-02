@@ -56,17 +56,17 @@ public class TriagemController implements Serializable {
     }
 
     public void validar() {
-        if (triagem.getPressaoArterial() && triagem.getFrequenciaCardiaca()
-                && triagem.getFrequenciaRespiratoria() && triagem.getPsv()
-                && triagem.getPeep() && triagem.getFio2() && triagem.getHemoglobina()
-                && triagem.getLactato() && triagem.getPlaquetas() && triagem.getGlasgow() && triagem.getRass()) {
-            triagem.setLiberadoMobilizacao(true);
-            salvar();
-
-        } else {
-            triagem.setLiberadoMobilizacao(false);
-            salvar();
-        }
+//        if (triagem.getPressaoArterial() && triagem.getFrequenciaCardiaca()
+//                && triagem.getFrequenciaRespiratoria() && triagem.getPsv()
+//                && triagem.getPeep() && triagem.getFio2() && triagem.getHemoglobina()
+//                && triagem.getLactato() && triagem.getPlaquetas() && triagem.getGlasgow() && triagem.getRass()) {
+//            triagem.setLiberadoMobilizacao(true);
+//            salvar();
+//
+//        } else {
+//            triagem.setLiberadoMobilizacao(false);
+//            salvar();
+//        }
     }
 
     public Triagem getTriagem() {

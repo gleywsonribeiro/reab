@@ -43,9 +43,9 @@
                                 </p:selectBooleanButton>
 
                                 
-                                <p:selectManyCheckbox layout="responsive" columns="1">
-                                    <f:selectItem itemLabel="Paciente em suporte de ventilação mecânica?" itemValue="#{triagemController.triagem.suporteVentilacao}"/>
-                                </p:selectManyCheckbox>
+<!--                                <p:selectManyCheckbox layout="responsive" columns="1">
+                                    <f:selectItem itemLabel="Paciente em suporte de ventilação mecânica?" itemValue="{triagemController.triagem.suporteVentilacao}"/>
+                                </p:selectManyCheckbox>-->
 
                                 <h:panelGroup id="kitVent" rendered="#{triagemController.triagem.suporteVentilacao}">
                                     <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
