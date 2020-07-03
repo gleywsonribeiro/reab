@@ -13,6 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import model.Atendimento;
+import model.Opcao;
 import model.Paciente;
 
 import model.Triagem;
@@ -80,5 +81,7 @@ public class TriagemController implements Serializable {
     public List<Triagem> getTriagens() {
         return triagens;
     }
+    
+    
 
 }

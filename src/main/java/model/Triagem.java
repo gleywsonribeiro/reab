@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,21 +36,38 @@ public class Triagem implements Serializable {
     @Column(name = "sn_liberado")
     private Boolean liberadoMobilizacao = false;
 
-    
+    @Enumerated(EnumType.STRING)
     private Opcao pressaoArterial; 
+    @Enumerated(EnumType.STRING)
     private Opcao frequenciaCardiaca; 
 
+    @Enumerated(EnumType.STRING)
     private Opcao FrequenciaRespiratoria; 
-    private Opcao suporteVentilacao;
+    
+    private Boolean suporteVentilacao;
+    
+    @Enumerated(EnumType.STRING)
     private Opcao psv;  
+    
+    @Enumerated(EnumType.STRING)
     private Opcao peep; 
+    
+    @Enumerated(EnumType.STRING)
     private Opcao fio2; 
 
+    @Enumerated(EnumType.STRING)
     private Opcao hemoglobina; 
+    
+    @Enumerated(EnumType.STRING)
     private Opcao lactato; 
+    
+    @Enumerated(EnumType.STRING)
     private Opcao plaquetas; 
 
+    @Enumerated(EnumType.STRING)
     private Opcao glasgow; 
+    
+    @Enumerated(EnumType.STRING)
     private Opcao rass; 
 
     @ManyToOne
@@ -107,13 +126,15 @@ public class Triagem implements Serializable {
         this.FrequenciaRespiratoria = FrequenciaRespiratoria;
     }
 
-    public Opcao getSuporteVentilacao() {
+    public Boolean getSuporteVentilacao() {
         return suporteVentilacao;
     }
 
-    public void setSuporteVentilacao(Opcao suporteVentilacao) {
+    public void setSuporteVentilacao(Boolean suporteVentilacao) {
         this.suporteVentilacao = suporteVentilacao;
     }
+
+   
 
     public Opcao getPsv() {
         return psv;
@@ -212,6 +233,10 @@ public class Triagem implements Serializable {
     @Override
     public String toString() {
         return "model.Triagem[ id=" + id + " ]";
+    }
+    
+    public void valida() {
+        
     }
 
 }
