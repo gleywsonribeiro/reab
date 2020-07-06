@@ -6,15 +6,13 @@
 package controller;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import model.Atendimento;
 import model.Opcao;
-import model.Paciente;
 
 import model.Triagem;
 import model.dao.AtendimentoDao;
@@ -44,30 +42,46 @@ public class TriagemController implements Serializable {
     public String salvar() {
         try {
             Atendimento temp = as.buscarPorId(triagem.getAtendimento().getId());
-            temp.setLiberadoMobilizacao(triagem.getLiberadoMobilizacao());
+            boolean liberado = validar();
+            temp.setLiberadoMobilizacao(liberado);
+            triagem.setLiberadoMobilizacao(liberado);
 
             service.salvar(triagem);
             as.salvar(temp);
             triagem = new Triagem();
+            System.out.println("Liberado?   ->   " + triagem.getLiberadoMobilizacao().booleanValue());
+            System.out.println("Liberado retorno?   ->   " + liberado);
             return triagem.getLiberadoMobilizacao() ? "aprovado?faces-redirect=true" : "reprovado?faces-redirect=true";
         } catch (NegocioException e) {
             JsfUtil.addErrorMessage(e.getMessage());
             return "";
         }
     }
+    
+    public Opcao[] getOpcoes() {
+        return Opcao.values();
+    }
 
-    public void validar() {
-//        if (triagem.getPressaoArterial() && triagem.getFrequenciaCardiaca()
-//                && triagem.getFrequenciaRespiratoria() && triagem.getPsv()
-//                && triagem.getPeep() && triagem.getFio2() && triagem.getHemoglobina()
-//                && triagem.getLactato() && triagem.getPlaquetas() && triagem.getGlasgow() && triagem.getRass()) {
-//            triagem.setLiberadoMobilizacao(true);
-//            salvar();
-//
-//        } else {
-//            triagem.setLiberadoMobilizacao(false);
-//            salvar();
-//        }
+    public boolean validar() {
+        Class<?> classeTriagem = triagem.getClass();
+        Field[] campos = classeTriagem.getDeclaredFields();
+
+        String nomeAtributo = "";
+        Object valorAtributo = null;
+        for (Field campo : campos) {
+            try {
+                nomeAtributo = campo.getName();
+                campo.setAccessible(true); //Necessário por conta do encapsulamento das variáveis (private)
+                valorAtributo = campo.get(triagem);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            System.out.println(nomeAtributo + ": " + valorAtributo);
+            if(valorAtributo != null && valorAtributo.equals(Opcao.NAO)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public Triagem getTriagem() {
@@ -81,7 +95,5 @@ public class TriagemController implements Serializable {
     public List<Triagem> getTriagens() {
         return triagens;
     }
-    
-    
 
 }
