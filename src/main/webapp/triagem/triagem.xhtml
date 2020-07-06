@@ -27,14 +27,12 @@
                             <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
                                 <h:outputText value="Pressão arterial média entre 50 e 100 mmhg?" style="font-weight: bold; color: #193a59"/>
                                 <p:selectOneRadio value="#{triagemController.triagem.pressaoArterial}" layout="responsive" columns="6" required="true" requiredMessage="Escolha a pressão arterial">
-                                    <f:selectItem itemLabel="Sim" itemValue="SIM"/>
-                                    <f:selectItem itemLabel="Não" itemValue="NAO"/>
+                                    <f:selectItems value="#{triagemController.opcoes}" var="opcao" itemValue="#{opcao}" itemLabel="#{opcao.descricao}"/>
                                 </p:selectOneRadio>
 
                                 <h:outputText value="Frequência cardiaca está ente 60 e 100 bpm?" style="font-weight: bold; color: #193a59"/>
                                 <p:selectOneRadio value="#{triagemController.triagem.frequenciaCardiaca}" layout="responsive" columns="6" required="true" requiredMessage="Escolha o frequência cardíada">
-                                    <f:selectItem itemLabel="Sim" itemValue="SIM"/>
-                                    <f:selectItem itemLabel="Não" itemValue="NAO"/>
+                                    <f:selectItems value="#{triagemController.opcoes}" var="opcao" itemValue="#{opcao}" itemLabel="#{opcao.descricao}"/>
                                 </p:selectOneRadio>
 
                             </p:panelGrid>
@@ -44,38 +42,37 @@
                             <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
                                 <h:outputText value="Frequência respiratória está entre 12 e 20 rpm" style="font-weight: bold; color: #193a59"/>
                                 <p:selectOneRadio value="#{triagemController.triagem.frequenciaRespiratoria}" layout="responsive" columns="6" required="true" requiredMessage="Escolha frequência respiratória">
-                                    <f:selectItem itemLabel="Sim" itemValue="SIM"/>
-                                    <f:selectItem itemLabel="Não" itemValue="NAO"/>
+                                    <f:selectItems value="#{triagemController.opcoes}" var="opcao" itemValue="#{opcao}" itemLabel="#{opcao.descricao}"/>
                                 </p:selectOneRadio>
 
                                 <h:panelGrid columns="2">
                                     <p:selectBooleanCheckbox value="#{triagemController.triagem.suporteVentilacao}">
-                                        <p:ajax update="@all" process="@this" listener="#{triagemController.validar()}"/>
+                                        <p:ajax update="kit" event="change" process="@this"/>
                                     </p:selectBooleanCheckbox>
                                     <p:outputLabel value="Ventilação mecânica?" />
                                 </h:panelGrid>
 
-                                <h:panelGroup id="kit" rendered="#{triagemController.triagem.suporteVentilacao}">
-                                    <h:outputText value="PSV - PS menor que 10?" id="lbpsv"  rendered="#{triagemController.triagem.suporteVentilacao}" style="font-weight: bold; color: #193a59"/>
-                                    <p:selectOneRadio id="psv" value="#{triagemController.triagem.psv}" layout="responsive" columns="6" required="true" 
-                                                      requiredMessage="Escolha o PSV" rendered="#{triagemController.triagem.suporteVentilacao}">
-                                        <f:selectItem itemLabel="Sim" itemValue="SIM"/>
-                                        <f:selectItem itemLabel="Não" itemValue="NAO"/>
-                                    </p:selectOneRadio>
+                                <h:panelGroup id="kit">
+                                    <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                                        <h:outputText value="PSV - PS menor que 10?" id="lbpsv"  rendered="#{triagemController.triagem.suporteVentilacao}" style="font-weight: bold; color: #193a59"/>
+                                        <p:selectOneRadio id="psv" value="#{triagemController.triagem.psv}" layout="responsive" columns="6" required="true"
+                                                          requiredMessage="Escolha o PSV" rendered="#{triagemController.triagem.suporteVentilacao}">
+                                            <f:selectItems value="#{triagemController.opcoes}" var="opcao" itemValue="#{opcao}" itemLabel="#{opcao.descricao}"/>
+                                            <p:ajax listener="#{triagemController.validar()}"/>
+                                        </p:selectOneRadio>
 
-                                    <h:outputText id="lbpeep" value="PEEP menor que 8?" rendered="#{triagemController.triagem.suporteVentilacao}" style="font-weight: bold; color: #193a59"/>
-                                    <p:selectOneRadio id="peep" value="#{triagemController.triagem.peep}" layout="responsive" columns="6" required="true" 
-                                                      requiredMessage="Escolha o Peep" rendered="#{triagemController.triagem.suporteVentilacao}">
-                                        <f:selectItem itemLabel="Sim" itemValue="SIM"/>
-                                        <f:selectItem itemLabel="Não" itemValue="NAO"/>
-                                    </p:selectOneRadio>
+                                        <h:outputText id="lbpeep" value="PEEP menor que 8?" rendered="#{triagemController.triagem.suporteVentilacao}" style="font-weight: bold; color: #193a59"/>
+                                        <p:selectOneRadio id="peep" value="#{triagemController.triagem.peep}" layout="responsive" columns="6" required="true" 
+                                                          requiredMessage="Escolha o Peep" rendered="#{triagemController.triagem.suporteVentilacao}">
+                                            <f:selectItems value="#{triagemController.opcoes}" var="opcao" itemValue="#{opcao}" itemLabel="#{opcao.descricao}"/>
+                                        </p:selectOneRadio>
 
-                                    <h:outputText id="lbfio2" value="Fio2 menor que 60%?" rendered="#{triagemController.triagem.suporteVentilacao}" style="font-weight: bold; color: #193a59"/>
-                                    <p:selectOneRadio id="fio2" value="#{triagemController.triagem.fio2}" layout="responsive" columns="6" required="true" 
-                                                      requiredMessage="Escolha o Fio2" rendered="#{triagemController.triagem.suporteVentilacao}">
-                                        <f:selectItem itemLabel="Sim" itemValue="SIM"/>
-                                        <f:selectItem itemLabel="Não" itemValue="NAO"/>
-                                    </p:selectOneRadio>
+                                        <h:outputText id="lbfio2" value="Fio2 menor que 60%?" rendered="#{triagemController.triagem.suporteVentilacao}" style="font-weight: bold; color: #193a59"/>
+                                        <p:selectOneRadio id="fio2" value="#{triagemController.triagem.fio2}" layout="responsive" columns="6" required="true" 
+                                                          requiredMessage="Escolha o Fio2" rendered="#{triagemController.triagem.suporteVentilacao}">
+                                            <f:selectItems value="#{triagemController.opcoes}" var="opcao" itemValue="#{opcao}" itemLabel="#{opcao.descricao}"/>
+                                        </p:selectOneRadio>
+                                    </p:panelGrid>
                                 </h:panelGroup>
 
                             </p:panelGrid>
@@ -85,21 +82,18 @@
                             <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
                                 <h:outputText value="Hemoglobina a baixo de 7?" style="font-weight: bold; color: #193a59"/>
                                 <p:selectOneRadio value="#{triagemController.triagem.hemoglobina}" layout="responsive" columns="6" required="true" requiredMessage="Escolha o Hemoglobina">
-                                    <f:selectItem itemLabel="Sim" itemValue="SIM"/>
-                                    <f:selectItem itemLabel="Não" itemValue="NAO"/>
+                                    <f:selectItems value="#{triagemController.opcoes}" var="opcao" itemValue="#{opcao}" itemLabel="#{opcao.descricao}"/>
                                 </p:selectOneRadio>
 
                                 <h:outputText value="Lactato acima de 2?" style="font-weight: bold; color: #193a59"/>
                                 <p:selectOneRadio value="#{triagemController.triagem.lactato}" layout="responsive" columns="6" required="true" requiredMessage="Escolha o Lactato">
-                                    <f:selectItem itemLabel="Sim" itemValue="SIM"/>
-                                    <f:selectItem itemLabel="Não" itemValue="NAO"/>
+                                    <f:selectItems value="#{triagemController.opcoes}" var="opcao" itemValue="#{opcao}" itemLabel="#{opcao.descricao}"/>
                                 </p:selectOneRadio>
 
 
                                 <h:outputText value="Plaquetas abaixo de 35 mil?" style="font-weight: bold; color: #193a59" />
                                 <p:selectOneRadio value="#{triagemController.triagem.plaquetas}" layout="responsive" columns="6" required="true" requiredMessage="Escolha o Plaquetas">
-                                    <f:selectItem itemLabel="Sim" itemValue="SIM"/>
-                                    <f:selectItem itemLabel="Não" itemValue="NAO"/>
+                                    <f:selectItems value="#{triagemController.opcoes}" var="opcao" itemValue="#{opcao}" itemLabel="#{opcao.descricao}"/>
                                 </p:selectOneRadio>
                             </p:panelGrid>
                         </p:fieldset>
@@ -109,14 +103,12 @@
 
                                 <h:outputText value="Glasgow menor que 9?" style="font-weight: bold; color: #193a59" />
                                 <p:selectOneRadio value="#{triagemController.triagem.glasgow}" layout="responsive" columns="6" required="true" requiredMessage="Escolha o Glasgow">
-                                    <f:selectItem itemLabel="Sim" itemValue="SIM"/>
-                                    <f:selectItem itemLabel="Não" itemValue="NAO"/>
+                                    <f:selectItems value="#{triagemController.opcoes}" var="opcao" itemValue="#{opcao}" itemLabel="#{opcao.descricao}"/>
                                 </p:selectOneRadio>
 
                                 <h:outputText value="RASS entre -2 e 2?" style="font-weight: bold; color: #193a59" />
                                 <p:selectOneRadio value="#{triagemController.triagem.rass}" layout="responsive" columns="6" required="true" requiredMessage="Escolha o RASS">
-                                    <f:selectItem itemLabel="Sim" itemValue="SIM"/>
-                                    <f:selectItem itemLabel="Não" itemValue="NAO"/>
+                                    <f:selectItems value="#{triagemController.opcoes}" var="opcao" itemValue="#{opcao}" itemLabel="#{opcao.descricao}"/>
                                 </p:selectOneRadio>
 
                             </p:panelGrid>
