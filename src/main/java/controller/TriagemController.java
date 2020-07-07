@@ -49,15 +49,14 @@ public class TriagemController implements Serializable {
             service.salvar(triagem);
             as.salvar(temp);
             triagem = new Triagem();
-            System.out.println("Liberado?   ->   " + triagem.getLiberadoMobilizacao().booleanValue());
-            System.out.println("Liberado retorno?   ->   " + liberado);
-            return triagem.getLiberadoMobilizacao() ? "aprovado?faces-redirect=true" : "reprovado?faces-redirect=true";
+
+            return liberado ? "aprovado?faces-redirect=true" : "reprovado?faces-redirect=true";
         } catch (NegocioException e) {
             JsfUtil.addErrorMessage(e.getMessage());
             return "";
         }
     }
-    
+
     public Opcao[] getOpcoes() {
         return Opcao.values();
     }
@@ -77,7 +76,7 @@ public class TriagemController implements Serializable {
                 e.printStackTrace();
             }
             System.out.println(nomeAtributo + ": " + valorAtributo);
-            if(valorAtributo != null && valorAtributo.equals(Opcao.NAO)) {
+            if (valorAtributo != null && valorAtributo.equals(Opcao.NAO)) {
                 return false;
             }
         }

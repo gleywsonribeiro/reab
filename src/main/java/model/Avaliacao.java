@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -26,9 +27,9 @@ public class Avaliacao implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @ManyToOne
+    @OneToOne
     @JoinColumn(nullable = false)
-    private Atendimento atendimento;
+    private Triagem triagem;
     
     @Column(name = "controle_cervical")
     private Boolean controleCervical;
@@ -57,13 +58,14 @@ public class Avaliacao implements Serializable {
         this.id = id;
     }
 
-    public Atendimento getAtendimento() {
-        return atendimento;
+    public Triagem getTriagem() {
+        return triagem;
     }
 
-    public void setAtendimento(Atendimento atendimento) {
-        this.atendimento = atendimento;
+    public void setTriagem(Triagem triagem) {
+        this.triagem = triagem;
     }
+
 
     public Boolean getControleCervical() {
         return controleCervical;

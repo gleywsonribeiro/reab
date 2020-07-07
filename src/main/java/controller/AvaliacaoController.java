@@ -20,11 +20,14 @@ import model.Atendimento;
 import model.Avaliacao;
 import model.Paciente;
 import model.Setor;
+import model.Triagem;
 import model.Usuario;
 import model.dao.AdmissaoDao;
 import model.dao.AtendimentoDao;
+import model.dao.TriagemDao;
 import model.service.AdmissaoService;
 import model.service.AtendimentoService;
+import model.service.TriagemService;
 import util.exception.DBException;
 import util.exception.NegocioException;
 import util.jsf.JsfUtil;
@@ -39,22 +42,22 @@ public class AvaliacaoController implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
-    private Atendimento atendimento;
+    private Triagem triagem;
     
     private Avaliacao avaliacao = new Avaliacao();
     
-    private AtendimentoService atendimentoService = new AtendimentoService(new AtendimentoDao());
+    private TriagemService triagemService = new TriagemService(new TriagemDao());
     
 
     @PostConstruct
     private void init() {
 
-//        String chave = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-//
-//        if (chave != null) {
-//            Long id = Long.parseLong(chave);
-//            atendimento = service.buscarPorId(id);
-//        }
+        String chave = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+
+        if (chave != null) {
+            Long id = Long.parseLong(chave);
+            atendimento = triagemService.buscarPorId(id);
+        }
     
     }
 

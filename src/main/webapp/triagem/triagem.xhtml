@@ -61,7 +61,7 @@
                                             <p:ajax listener="#{triagemController.validar()}"/>
                                         </p:selectOneRadio>
 
-                                        <h:outputText id="lbpeep" value="PEEP menor que 8?" rendered="#{triagemController.triagem.suporteVentilacao}" style="font-weight: bold; color: #193a59"/>
+                                        <h:outputText id="lbpeep" value="PEEP menor ou igual que 8?" rendered="#{triagemController.triagem.suporteVentilacao}" style="font-weight: bold; color: #193a59"/>
                                         <p:selectOneRadio id="peep" value="#{triagemController.triagem.peep}" layout="responsive" columns="6" required="true" 
                                                           requiredMessage="Escolha o Peep" rendered="#{triagemController.triagem.suporteVentilacao}">
                                             <f:selectItems value="#{triagemController.opcoes}" var="opcao" itemValue="#{opcao}" itemLabel="#{opcao.descricao}"/>
