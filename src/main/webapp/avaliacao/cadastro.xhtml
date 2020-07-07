@@ -29,27 +29,24 @@
                         <p:growl autoUpdate="true"/>
                         <h1>Avaliação</h1>
                         <p:fieldset legend="Dados do Paciente">
-                            <div class="card card-w-title">
-                                <p:panelGrid id="cadastro" columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
-                                    <p:autoComplete id="atendimento" dropdown="true" value="#{avaliacaoController.avaliacao.atendimento}" var="atendimento"
-                                                    itemValue="#{atendimento}" itemLabel="#{atendimento.paciente.nome}"
-                                                    converter="atendimentoConverter" forceSelection="true"
-                                                    completeMethod="#{avaliacaoController.completeAtendimento}" >
-                                        <p:ajax event="itemSelect" update="cadastro" listener="#{avaliacaoController.teste()}"/>
-                                    </p:autoComplete>
-                                    <p:watermark for="atendimento" value="Buscar atendimento do paciente"/>
-
-                                </p:panelGrid>
-                            </div>
+                            <!--                            <div class="card card-w-title">
+                                                            <p:panelGrid id="cadastro" columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                                                                <p:autoComplete id="atendimento" dropdown="true" value="{avaliacaoController.avaliacao.atendimento}" var="atendimento"
+                                                                                itemValue="{atendimento}" itemLabel="{atendimento.paciente.nome}"
+                                                                                converter="atendimentoConverter" forceSelection="true"
+                                                                                completeMethod="{avaliacaoController.completeAtendimento}" >
+                                                                    <p:ajax event="itemSelect" update="cadastro" listener="{avaliacaoController.teste()}"/>
+                                                                </p:autoComplete>
+                                                                <p:watermark for="atendimento" value="Buscar atendimento do paciente"/>
+                            
+                                                            </p:panelGrid>
+                                                        </div>-->
 
                             <div class="card card-w-title">
                                 <p:outputLabel value="Avaliação Motora:" style="color: #193a59; font-weight: 900"/>
-                                <p:selectManyCheckbox layout="responsive" columns="1">
-                                    <f:selectItem itemLabel="Controle de Cervical" itemValue="#{avaliacaoController.avaliacao.controleCervical}"/>
-                                    <f:selectItem itemLabel="Controle de Tronco"  itemValue="#{avaliacaoController.avaliacao.controleTronco}"/>
-                                    <f:selectItem itemLabel="Bipesdação"  itemValue="#{avaliacaoController.avaliacao.bipesdacao}"/>
-                                    <f:selectItem itemLabel="Deambulação" itemValue="#{avaliacaoController.avaliacao.deambulacao}" />
-                                </p:selectManyCheckbox>
+                                <p:selectOneRadio value="#{avaliacaoController.avaliacao.score}" required="true">
+                                    <f:selectItems value="#{avaliacaoController.avaliacao.score}" var="score" itemLabel="#{score}" itemValue="#{score}" />
+                                </p:selectOneRadio >
                             </div>
 
                             <p:commandButton value="Avaliar" action="#"/>

@@ -50,7 +50,8 @@ public class TriagemController implements Serializable {
             as.salvar(temp);
             triagem = new Triagem();
 
-            return liberado ? "aprovado?faces-redirect=true" : "reprovado?faces-redirect=true";
+            return liberado ? "/avaliacao/cadastro.xhtml?faces-redirect=true" : "reprovado?faces-redirect=true"; //"/avaliacao/cadastro.xhtml?faces-redirect=true&id=" + triagem.getId()
+            
         } catch (NegocioException e) {
             JsfUtil.addErrorMessage(e.getMessage());
             return "";

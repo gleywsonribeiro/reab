@@ -14,13 +14,17 @@ import util.exception.NegocioException;
  * @author gleyw
  */
 public class TriagemService {
+
     private TriagemDao dao;
 
     public TriagemService(TriagemDao dao) {
         this.dao = dao;
     }
-    
-    
+
+    public Triagem buscarPorId(Long id) {
+        return this.dao.find(id);
+    }
+
     public void salvar(Triagem triagem) {
         try {
             dao.create(triagem);

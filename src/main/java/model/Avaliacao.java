@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -23,6 +25,7 @@ import javax.persistence.OneToOne;
 public class Avaliacao implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -31,24 +34,10 @@ public class Avaliacao implements Serializable {
     @JoinColumn(nullable = false)
     private Triagem triagem;
     
-    @Column(name = "controle_cervical")
-    private Boolean controleCervical;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dataCadastro;
     
-    @Column(name = "controle_tronco")
-    private Boolean controleTronco;
-   
-    private Boolean bipesdacao;
-
-    private Boolean deambulacao;
-
-    public Avaliacao() {
-        this.controleCervical = false;
-        this.controleTronco = false;
-        this.bipesdacao = false;
-        this.deambulacao = false;
-    }
-    
-    
+    private Score score; 
 
     public Long getId() {
         return id;
@@ -66,38 +55,24 @@ public class Avaliacao implements Serializable {
         this.triagem = triagem;
     }
 
-
-    public Boolean getControleCervical() {
-        return controleCervical;
+    public Date getDataCadastro() {
+        return dataCadastro;
     }
 
-    public void setControleCervical(Boolean controleCervical) {
-        this.controleCervical = controleCervical;
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 
-    public Boolean getControleTronco() {
-        return controleTronco;
+    public Score getScore() {
+        return score;
     }
 
-    public void setControleTronco(Boolean controleTronco) {
-        this.controleTronco = controleTronco;
+    public void setScore(Score score) {
+        this.score = score;
     }
 
-    public Boolean getBipesdacao() {
-        return bipesdacao;
-    }
-
-    public void setBipesdacao(Boolean bipesdacao) {
-        this.bipesdacao = bipesdacao;
-    }
-
-    public Boolean getDeambulacao() {
-        return deambulacao;
-    }
-
-    public void setDeambulacao(Boolean deambulacao) {
-        this.deambulacao = deambulacao;
-    }
+   
+    
 
     @Override
     public int hashCode() {
