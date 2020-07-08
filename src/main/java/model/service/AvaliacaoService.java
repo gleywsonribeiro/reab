@@ -5,11 +5,8 @@
  */
 package model.service;
 
-import model.Admissao;
-import model.Triagem;
-import model.dao.AdmissaoDao;
+import model.Avaliacao;
 import model.dao.AvaliacaoDao;
-import model.dao.TriagemDao;
 import util.exception.NegocioException;
 
 /**
@@ -18,11 +15,19 @@ import util.exception.NegocioException;
  */
 public class AvaliacaoService {
 
-    private AvaliacaoDao dao;
-
-    public AvaliacaoService(AvaliacaoDao dao) {
-        this.dao = dao;
-    }
+    private AvaliacaoDao dao = new AvaliacaoDao();
 
     
+
+    public Avaliacao buscarPorId(Long id) {
+        return this.dao.find(id);
+    }
+
+    public void salvar(Avaliacao aval) {
+        try {
+            dao.create(aval);
+        } catch (Exception e) {
+            throw new NegocioException("Erro ao realizar avaliação");
+        }
+    }
 }

@@ -6,7 +6,6 @@
     <class>model.Hospital</class>
     <class>model.Setor</class>
     <class>model.Paciente</class>
-    <class>model.Triagem</class>
     <class>model.Motivo</class>
     <class>model.Atendimento</class>
     <class>model.Admissao</class>

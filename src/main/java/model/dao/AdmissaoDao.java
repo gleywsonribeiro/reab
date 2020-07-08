@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import jpa.util.HibernateUtil;
 import model.Admissao;
-import model.Triagem;
+import model.Avaliacao;
 import model.Usuario;
 import util.Seguranca;
 

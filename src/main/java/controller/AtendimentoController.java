@@ -32,7 +32,7 @@ import util.jsf.JsfUtil;
 public class AtendimentoController implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private AtendimentoService service = new AtendimentoService(new AtendimentoDao());
+    private AtendimentoService service = new AtendimentoService();
     private Atendimento atendimento = new Atendimento();
     private Paciente paciente;
 

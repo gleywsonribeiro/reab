@@ -18,12 +18,7 @@ import util.exception.NegocioException;
  */
 public class AtendimentoService {
 
-    private AtendimentoDao dao;
-
-    public AtendimentoService(AtendimentoDao dao) {
-        this.dao = dao;
-    }
-
+    private AtendimentoDao dao = new AtendimentoDao();
     public void salvar(Atendimento atendimento) {
         if (dao.isPacienteEmAtendimento(atendimento.getPaciente())) {
             if (atendimento.getId() != null) {

@@ -6,9 +6,9 @@
 package model.service;
 
 import model.Admissao;
-import model.Triagem;
+import model.Avaliacao;
 import model.dao.AdmissaoDao;
-import model.dao.TriagemDao;
+import model.dao.AvaliacaoDao;
 import util.exception.NegocioException;
 
 /**
@@ -17,11 +17,7 @@ import util.exception.NegocioException;
  */
 public class AdmissaoService {
 
-    private AdmissaoDao dao;
-
-    public AdmissaoService(AdmissaoDao dao) {
-        this.dao = dao;
-    }
+    private AdmissaoDao dao = new AdmissaoDao();
 
     public void admitir(Admissao admissao) {
         try {

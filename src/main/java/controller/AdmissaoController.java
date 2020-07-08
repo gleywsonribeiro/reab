@@ -37,8 +37,8 @@ import util.jsf.JsfUtil;
 public class AdmissaoController implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private AtendimentoService service = new AtendimentoService(new AtendimentoDao());
-    private AdmissaoService admissaoService = new AdmissaoService(new AdmissaoDao());
+    private AtendimentoService service = new AtendimentoService();
+    private AdmissaoService admissaoService = new AdmissaoService();
 
     private Admissao admissao = new Admissao();
     private Setor destino = new Setor();

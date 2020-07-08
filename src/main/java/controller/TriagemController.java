@@ -8,18 +8,17 @@ package controller;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.util.List;
+import javax.annotation.PostConstruct;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import model.Atendimento;
 import model.Opcao;
 
-import model.Triagem;
-import model.dao.AtendimentoDao;
-
-import model.dao.TriagemDao;
+import model.Avaliacao;
 import model.service.AtendimentoService;
-import model.service.TriagemService;
+import model.service.AvaliacaoService;
 import util.exception.NegocioException;
 import util.jsf.JsfUtil;
 
@@ -33,25 +32,27 @@ public class TriagemController implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Triagem triagem = new Triagem();
+    private Avaliacao avaliacao = new Avaliacao();
 
-    private List<Triagem> triagens;
-    private final TriagemService service = new TriagemService(new TriagemDao());
-    private AtendimentoService as = new AtendimentoService(new AtendimentoDao());
+    private List<Avaliacao> avaliacoes;
+    private final AvaliacaoService service = new AvaliacaoService();
+    private AtendimentoService as = new AtendimentoService();
 
     public String salvar() {
         try {
-            Atendimento temp = as.buscarPorId(triagem.getAtendimento().getId());
+            Atendimento temp = as.buscarPorId(avaliacao.getAtendimento().getId());
             boolean liberado = validar();
             temp.setLiberadoMobilizacao(liberado);
-            triagem.setLiberadoMobilizacao(liberado);
+            avaliacao.setLiberadoMobilizacao(liberado);
 
-            service.salvar(triagem);
+            service.salvar(avaliacao);
             as.salvar(temp);
-            triagem = new Triagem();
-
-            return liberado ? "/avaliacao/cadastro.xhtml?faces-redirect=true" : "reprovado?faces-redirect=true"; //"/avaliacao/cadastro.xhtml?faces-redirect=true&id=" + triagem.getId()
             
+            String id = avaliacao.getId().toString();
+            avaliacao = new Avaliacao();
+
+            return liberado ? "cadastro?faces-redirect=true&id=" + id : "reprovado?faces-redirect=true"; //"/avaliacao/cadastro?faces-redirect=true&id=" + triagem.getId()
+
         } catch (NegocioException e) {
             JsfUtil.addErrorMessage(e.getMessage());
             return "";
@@ -63,8 +64,8 @@ public class TriagemController implements Serializable {
     }
 
     public boolean validar() {
-        Class<?> classeTriagem = triagem.getClass();
-        Field[] campos = classeTriagem.getDeclaredFields();
+        Class<?> classeAvaliacao = avaliacao.getClass();
+        Field[] campos = classeAvaliacao.getDeclaredFields();
 
         String nomeAtributo = "";
         Object valorAtributo = null;
@@ -72,7 +73,7 @@ public class TriagemController implements Serializable {
             try {
                 nomeAtributo = campo.getName();
                 campo.setAccessible(true); //Necessário por conta do encapsulamento das variáveis (private)
-                valorAtributo = campo.get(triagem);
+                valorAtributo = campo.get(avaliacao);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -84,16 +85,16 @@ public class TriagemController implements Serializable {
         return true;
     }
 
-    public Triagem getTriagem() {
-        return triagem;
+    public Avaliacao getAvaliacao() {
+        return avaliacao;
     }
 
-    public void setTriagem(Triagem triagem) {
-        this.triagem = triagem;
+    public void setAvaliacao(Avaliacao avaliacao) {
+        this.avaliacao = avaliacao;
     }
 
-    public List<Triagem> getTriagens() {
-        return triagens;
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
     }
 
 }

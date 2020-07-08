@@ -20,11 +20,7 @@ import util.exception.NegocioException;
  */
 public class PacienteService {
 
-    private PacienteDao dao;
-
-    public PacienteService(PacienteDao dao) {
-        this.dao = dao;
-    }
+    private PacienteDao dao = new PacienteDao();
 
     public void salvar(Paciente paciente) {
        

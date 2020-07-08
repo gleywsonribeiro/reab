@@ -6,18 +6,22 @@
 package controller;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import model.Atendimento;
+import model.Opcao;
+
 import model.Avaliacao;
 import model.Score;
-import model.Triagem;
-import model.dao.TriagemDao;
-import model.service.TriagemService;
+import model.service.AtendimentoService;
+import model.service.AvaliacaoService;
+import util.exception.NegocioException;
+import util.jsf.JsfUtil;
 
 /**
  *
@@ -28,24 +32,46 @@ import model.service.TriagemService;
 public class AvaliacaoController implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
-    private Triagem triagem;
-    
-    private Avaliacao avaliacao = new Avaliacao();
-    
-    private TriagemService triagemService = new TriagemService(new TriagemDao());
-    
 
+    private Avaliacao avaliacao = new Avaliacao();
+
+    
+    private final AvaliacaoService service = new AvaliacaoService();
+    
     @PostConstruct
     private void init() {
-
+        
         String chave = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 
         if (chave != null) {
             Long id = Long.parseLong(chave);
-            triagem = triagemService.buscarPorId(id);
+            avaliacao = service.buscarPorId(id);
         }
-    
+
+    }
+
+    public String salvar() {
+        try {
+            //Atendimento temp = as.buscarPorId(avaliacao.getAtendimento().getId());
+            //boolean liberado = validar();
+            //emp.setLiberadoMobilizacao(liberado);
+            //avaliacao.setLiberadoMobilizacao(liberado);
+
+            service.salvar(avaliacao);
+            
+
+            return "sucesso?faces-redirect=true";
+
+        } catch (NegocioException e) {
+            JsfUtil.addErrorMessage(e.getMessage());
+            return "";
+        }
+    }
+
+
+
+    public Score[] getScores() {
+        return Score.values();
     }
 
     public Avaliacao getAvaliacao() {
@@ -55,15 +81,5 @@ public class AvaliacaoController implements Serializable {
     public void setAvaliacao(Avaliacao avaliacao) {
         this.avaliacao = avaliacao;
     }
-    
-    public Score[] getOpcoes() {
-        return Score.values();
-    }
-
-//    public List<Atendimento> completeAtendimento(String query) {
-//        String queryLowerCase = query.toLowerCase();
-//        List<Atendimento> atendimentosFiltrados = atendimentoService.getAtendimentosLiberados();
-//        return atendimentosFiltrados.stream().filter(a -> a.getPaciente().getNome().toLowerCase().contains(queryLowerCase)).collect(Collectors.toList());
-//    }
 
 }

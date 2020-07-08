@@ -9,10 +9,7 @@ import java.io.Serializable;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import jpa.util.HibernateUtil;
-import model.Admissao;
-import model.Atendimento;
 import model.Avaliacao;
-import model.Triagem;
 import model.Usuario;
 import util.Seguranca;
 

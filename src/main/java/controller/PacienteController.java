@@ -28,7 +28,7 @@ import util.jsf.JsfUtil;
 public class PacienteController implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private PacienteService service = new PacienteService(new PacienteDao());
+    private PacienteService service = new PacienteService();
     private Paciente paciente = new Paciente();
 
     private List<Paciente> pacientes = new ArrayList<>();

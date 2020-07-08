@@ -9,12 +9,13 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -25,19 +26,59 @@ import javax.persistence.Temporal;
 public class Avaliacao implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @OneToOne
-    @JoinColumn(nullable = false)
-    private Triagem triagem;
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dataCadastro;
-    
-    private Score score; 
+    @Column(name = "dt_avaliacao", nullable = false)
+    private Date dataAvaliacao;
+    @Column(name = "sn_liberado")
+    private Boolean liberadoMobilizacao = false;
+
+    @Enumerated(EnumType.STRING)
+    private Opcao pressaoArterial;
+    @Enumerated(EnumType.STRING)
+    private Opcao frequenciaCardiaca;
+
+    @Enumerated(EnumType.STRING)
+    private Opcao FrequenciaRespiratoria;
+
+    private Boolean suporteVentilacao;
+
+    @Enumerated(EnumType.STRING)
+    private Opcao psv;
+
+    @Enumerated(EnumType.STRING)
+    private Opcao peep;
+
+    @Enumerated(EnumType.STRING)
+    private Opcao fio2;
+
+    @Enumerated(EnumType.STRING)
+    private Opcao hemoglobina;
+
+    @Enumerated(EnumType.STRING)
+    private Opcao lactato;
+
+    @Enumerated(EnumType.STRING)
+    private Opcao plaquetas;
+
+    @Enumerated(EnumType.STRING)
+    private Opcao glasgow;
+
+    @Enumerated(EnumType.STRING)
+    private Opcao rass;
+
+    private Integer score;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Atendimento atendimento;
+
+    public Avaliacao() {
+        dataAvaliacao = new Date();
+    }
 
     public Long getId() {
         return id;
@@ -47,32 +88,135 @@ public class Avaliacao implements Serializable {
         this.id = id;
     }
 
-    public Triagem getTriagem() {
-        return triagem;
-    }
-
-    public void setTriagem(Triagem triagem) {
-        this.triagem = triagem;
-    }
-
-    public Date getDataCadastro() {
-        return dataCadastro;
-    }
-
-    public void setDataCadastro(Date dataCadastro) {
-        this.dataCadastro = dataCadastro;
-    }
-
-    public Score getScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public void setScore(Score score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 
+    public Date getDataAvaliacao() {
+        return dataAvaliacao;
+    }
+
+    public void setDataAvaliacao(Date dataAvaliacao) {
+        this.dataAvaliacao = dataAvaliacao;
+    }
+
    
-    
+
+    public Boolean getLiberadoMobilizacao() {
+        return liberadoMobilizacao;
+    }
+
+    public void setLiberadoMobilizacao(Boolean liberadoMobilizacao) {
+        this.liberadoMobilizacao = liberadoMobilizacao;
+    }
+
+    public Opcao getPressaoArterial() {
+        return pressaoArterial;
+    }
+
+    public void setPressaoArterial(Opcao pressaoArterial) {
+        this.pressaoArterial = pressaoArterial;
+    }
+
+    public Opcao getFrequenciaCardiaca() {
+        return frequenciaCardiaca;
+    }
+
+    public void setFrequenciaCardiaca(Opcao frequenciaCardiaca) {
+        this.frequenciaCardiaca = frequenciaCardiaca;
+    }
+
+    public Opcao getFrequenciaRespiratoria() {
+        return FrequenciaRespiratoria;
+    }
+
+    public void setFrequenciaRespiratoria(Opcao FrequenciaRespiratoria) {
+        this.FrequenciaRespiratoria = FrequenciaRespiratoria;
+    }
+
+    public Boolean getSuporteVentilacao() {
+        return suporteVentilacao;
+    }
+
+    public void setSuporteVentilacao(Boolean suporteVentilacao) {
+        this.suporteVentilacao = suporteVentilacao;
+    }
+
+    public Opcao getPsv() {
+        return psv;
+    }
+
+    public void setPsv(Opcao psv) {
+        this.psv = psv;
+    }
+
+    public Opcao getPeep() {
+        return peep;
+    }
+
+    public void setPeep(Opcao peep) {
+        this.peep = peep;
+    }
+
+    public Opcao getFio2() {
+        return fio2;
+    }
+
+    public void setFio2(Opcao fio2) {
+        this.fio2 = fio2;
+    }
+
+    public Opcao getHemoglobina() {
+        return hemoglobina;
+    }
+
+    public void setHemoglobina(Opcao hemoglobina) {
+        this.hemoglobina = hemoglobina;
+    }
+
+    public Opcao getLactato() {
+        return lactato;
+    }
+
+    public void setLactato(Opcao lactato) {
+        this.lactato = lactato;
+    }
+
+    public Opcao getPlaquetas() {
+        return plaquetas;
+    }
+
+    public void setPlaquetas(Opcao plaquetas) {
+        this.plaquetas = plaquetas;
+    }
+
+    public Opcao getGlasgow() {
+        return glasgow;
+    }
+
+    public void setGlasgow(Opcao glasgow) {
+        this.glasgow = glasgow;
+    }
+
+    public Opcao getRass() {
+        return rass;
+    }
+
+    public void setRass(Opcao rass) {
+        this.rass = rass;
+    }
+
+    public Atendimento getAtendimento() {
+        return atendimento;
+    }
+
+    public void setAtendimento(Atendimento atendimento) {
+        this.atendimento = atendimento;
+    }
 
     @Override
     public int hashCode() {
@@ -96,7 +240,8 @@ public class Avaliacao implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Avaliacao[ id=" + id + " ]";
+        return "model.Triagem[ id=" + id + " ]";
     }
-    
+
+
 }
