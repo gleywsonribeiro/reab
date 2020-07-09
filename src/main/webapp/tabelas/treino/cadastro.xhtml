@@ -1,0 +1,52 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Hospital</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-lg-9">
+                    <!-- Left colum -->
+                    <div class="card card-w-title">
+
+                        <p:growl autoUpdate="true"/>
+                        <p:fieldset legend="Cadastro de Treinos">
+                            <p:panelGrid id="cadastro" columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                                <h:panelGroup styleClass="md-inputfield">
+                                    <p:inputText value="#{treinoController.treino.nome}" required="true"/>
+                                    <label>Descrição</label>
+                                </h:panelGroup>
+                      
+                                <p:commandButton icon="fa fa-save" action="#{treinoController.salvar()}" update="@form"/>
+                            </p:panelGrid>
+                        </p:fieldset>
+
+                    </div>
+                    <div class="card card-w-title">
+                        <p:panel header="Exercícios">
+                            
+                        </p:panel>
+                    </div>
+
+                </div>
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Right colum -->
+
+                </div>
+            </div>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+            </p:confirmDialog>
+
+        </h:form>    
+    </ui:define>
+
+</ui:composition>

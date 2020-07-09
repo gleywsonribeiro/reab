@@ -10,6 +10,9 @@
     <class>model.Atendimento</class>
     <class>model.Admissao</class>
     <class>model.Avaliacao</class>
+    <class>model.Exercicio</class>
+    <class>model.ItemExercicio</class>
+    <class>model.Treino</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!--Configuração local-->
