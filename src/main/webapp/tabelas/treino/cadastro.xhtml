@@ -10,18 +10,20 @@
     <ui:define name="content">
 
         <h:form id="form">
+            <p:toolbar id="tb">
+                <f:facet name="left">
+                    <p:commandButton value="Listar" icon="fa fa-search" process="@this" action="pesquisa?faces-redirect=true"/>
+                    <p:commandButton value="Novo" icon="fa fa-file-o" process="@this" update="form" action="#{treinoController.novo()}"/>
+                    <span class="ui-separator">
+                        <span class="ui-icon pi pi-ellipsis-v" />
+                    </span>
+                    <p:commandButton id="btnSave" value="Salvar" icon="fa fa-save" action="#{treinoController.salvar()}" update="@form" />
+                </f:facet>
+            </p:toolbar>
             <div class="ui-g ui-fluid">
+
                 <div class="ui-g-12 ui-lg-9">
-                    <p:toolbar id="tb">
-                        <f:facet name="left">
-                            <p:commandButton value="Listar" icon="fa fa-search" process="@this" action="pesquisa?faces-redirect=true"/>
-                            <p:commandButton value="Novo" icon="fa fa-file-o" process="@this" update="form" action="#{treinoController.novo()}"/>
-                            <span class="ui-separator">
-                                <span class="ui-icon pi pi-ellipsis-v" />
-                            </span>
-                            <p:commandButton id="btnSave" value="Salvar" icon="fa fa-save" action="#{treinoController.salvar()}" update="@form" />
-                        </f:facet>
-                    </p:toolbar>
+
                     <div class="card card-w-title">
 
                         <p:growl autoUpdate="true"/>
@@ -40,13 +42,14 @@
                         <p:panel header="Exercícios">
 
                             <p:panelGrid id="item" columns="2" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
-                                <p:autoComplete id="itemcomplete" value="#{treinoController.exercicio}" 
+                                <p:autoComplete id="itemcomplete" value="#{treinoController.itemExercicio.exercicio}" 
                                                 var="exercicio" itemLabel="#{exercicio.nome}" itemValue="#{exercicio}" maxResults="10"
                                                 completeMethod="#{exercicioController.completeTreino}" forceSelection="true"
-                                                
+                                                converter="exercicioConverter" converterMessage="Erro de conversão"
                                                 size="75">
                                     <p:ajax update="item" event="itemSelect"/>
                                 </p:autoComplete>
+                                <p:commandButton icon="fa fa-plus" disabled="#{treinoController.exercicioNulo}" action="#{exercicioController.}"/>
                             </p:panelGrid>
 
                             <p:dataTable id="exercicios" paginatorAlwaysVisible="false" paginatorPosition="bottom" value="#{treinoController.treino.exercicios}" 

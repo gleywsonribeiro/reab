@@ -12,10 +12,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import model.Exercicio;
-import model.Motivo;
+import model.ItemExercicio;
 import model.Treino;
-import model.dao.ExercicioDao;
-import model.dao.MotivoDao;
 import model.service.TreinoService;
 import util.exception.DBException;
 import util.exception.NegocioException;
@@ -32,7 +30,7 @@ public class TreinoController implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Treino treino;
-    private Exercicio exercicio;
+    private ItemExercicio itemExercicio;
 
     private List<Treino> treinos;
     private TreinoService ts = new TreinoService();
@@ -40,7 +38,7 @@ public class TreinoController implements Serializable {
     @PostConstruct
     private void init() {
         treino = new Treino();
-        exercicio = new Exercicio();
+        itemExercicio = new ItemExercicio();
         treinos = ts.ListarTreinos();
         
         String chave = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
@@ -50,7 +48,14 @@ public class TreinoController implements Serializable {
             treino = ts.buscarPorId(id);
         }
     }
-
+    
+    public boolean isExercicioNulo() {
+        return itemExercicio.getExercicio() == null;
+    }
+    
+     public void addItem() {
+        treino.getExercicios().add(itemExercicio);
+    }
     
     public void salvar() {
         try {
@@ -62,9 +67,10 @@ public class TreinoController implements Serializable {
             JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
         }
     }
+   
 
-    public Exercicio getExercicio() {
-        return exercicio;
+    public ItemExercicio getItemExercicio() {
+        return itemExercicio;
     }
 
 //    public List<Motivo> completeMotivo(String query) {
@@ -72,8 +78,8 @@ public class TreinoController implements Serializable {
 //        List<Motivo> motivosFiltrados = getMotivos();
 //        return motivosFiltrados.stream().filter(t -> t.getNome().toLowerCase().startsWith(queryLowerCase)).collect(Collectors.toList());
 //    }
-    public void setExercicio(Exercicio exercicio) {
-        this.exercicio = exercicio;
+    public void setItemExercicio(ItemExercicio itemExercicio) {   
+        this.itemExercicio = itemExercicio;
     }
 
     public Treino getTreino() {

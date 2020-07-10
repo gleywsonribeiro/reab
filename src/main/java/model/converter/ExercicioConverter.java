@@ -11,9 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import model.Exercicio;
-import model.Hospital;
 import model.dao.ExercicioDao;
-import model.dao.HospitalDao;
 
 
 /**
