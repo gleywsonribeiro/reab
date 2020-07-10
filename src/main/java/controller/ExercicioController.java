@@ -7,11 +7,13 @@ package controller;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import model.Exercicio;
 import model.Motivo;
+import model.Paciente;
 import model.dao.ExercicioDao;
 import model.dao.MotivoDao;
 import util.exception.DBException;
@@ -55,6 +57,12 @@ public class ExercicioController implements Serializable {
 
     public void setExercicios(List<Exercicio> exercicios) {
         this.exercicios = exercicios;
+    }
+    
+     public List<Exercicio> completeTreino(String query) {
+        String queryLowerCase = query.toLowerCase();
+        List<Exercicio> exerciciosFiltrados = dao.findAll();
+        return exerciciosFiltrados.stream().filter(t -> t.getNome().toLowerCase().contains(queryLowerCase)).collect(Collectors.toList());
     }
 
     

@@ -10,6 +10,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import model.Exercicio;
 import model.Motivo;
 import model.Treino;
@@ -31,6 +32,7 @@ public class TreinoController implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Treino treino;
+    private Exercicio exercicio;
 
     private List<Treino> treinos;
     private TreinoService ts = new TreinoService();
@@ -38,7 +40,15 @@ public class TreinoController implements Serializable {
     @PostConstruct
     private void init() {
         treino = new Treino();
+        exercicio = new Exercicio();
         treinos = ts.ListarTreinos();
+        
+        String chave = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+
+        if (chave != null) {
+            Long id = Long.parseLong(chave);
+            treino = ts.buscarPorId(id);
+        }
     }
 
     
@@ -53,11 +63,18 @@ public class TreinoController implements Serializable {
         }
     }
 
+    public Exercicio getExercicio() {
+        return exercicio;
+    }
+
 //    public List<Motivo> completeMotivo(String query) {
 //        String queryLowerCase = query.toLowerCase();
 //        List<Motivo> motivosFiltrados = getMotivos();
 //        return motivosFiltrados.stream().filter(t -> t.getNome().toLowerCase().startsWith(queryLowerCase)).collect(Collectors.toList());
 //    }
+    public void setExercicio(Exercicio exercicio) {
+        this.exercicio = exercicio;
+    }
 
     public Treino getTreino() {
         return treino;
@@ -67,6 +84,25 @@ public class TreinoController implements Serializable {
         this.treino = treino;
     }
 
-    
+    public List<Treino> getTreinos() {
+        if(treinos == null) {
+            treinos = ts.ListarTreinos();
+        }
+        return treinos;
+    }
+
+    public void novo() {
+        treino = new Treino();
+    }
+
+    public void remover() {
+        try {
+            ts.remover(treino);
+            treinos = null;
+            JsfUtil.addMessage(treino.getNome() + " apagado com sucesso!");
+        } catch (DBException e) {
+            JsfUtil.addErrorMessage("Erro ao remover " + treino.getNome() + ": " + e.getMessage());
+        }
+    }
 
 }

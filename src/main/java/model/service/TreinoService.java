@@ -35,5 +35,13 @@ public class TreinoService {
     public List<Treino> ListarTreinos() {
         return dao.findAll();
     }
+
+    public Treino buscarPorId(Long id) {
+        return dao.find(id);
+    }
+
+    public void remover(Treino treino) {
+        dao.remove(treino);
+    }
     
 }
