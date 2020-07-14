@@ -45,19 +45,29 @@
                                 <p:autoComplete id="itemcomplete" value="#{treinoController.itemExercicio.exercicio}" 
                                                 var="exercicio" itemLabel="#{exercicio.nome}" itemValue="#{exercicio}" maxResults="10"
                                                 completeMethod="#{exercicioController.completeTreino}" forceSelection="true"
-                                                converter="exercicioConverter" converterMessage="Erro de conversão"
+                                                converter="exercicioConverter" converterMessage="Erro de conversão" dropdown="true"
                                                 size="75">
                                     <p:ajax update="item" event="itemSelect"/>
                                 </p:autoComplete>
-                                <p:commandButton icon="fa fa-plus" disabled="#{treinoController.exercicioNulo}" action="#{exercicioController.}"/>
+                                <p:commandButton icon="fa fa-plus" disabled="#{treinoController.exercicioNulo}" action="#{treinoController.addItem()}" process="@this item" update="exercicios item"/>
                             </p:panelGrid>
 
                             <p:dataTable id="exercicios" paginatorAlwaysVisible="false" paginatorPosition="bottom" value="#{treinoController.treino.exercicios}" 
-                                         var="exercicio" reflow="true" emptyMessage="Sem itens." paginator="true" rows="5">
+                                         var="item" reflow="true" emptyMessage="Sem itens." paginator="true" rows="5">
 
                                 <p:column headerText="Exercício">
-                                    <h:outputText value="#{exercicio.exercicio.nome}"/>
+                                    <h:outputText value="#{item.exercicio.nome}"/>
                                 </p:column>
+
+                                <p:column style="text-align: center">
+                                    <p:commandButton icon="fa fa-trash" action="#{treinoController.removerItem()}" styleClass="red-btn"
+                                                     update="exercicios" process="@this">
+                                        <f:setPropertyActionListener target="#{treinoController.itemExercicio}" value="#{item}"/>
+                                    </p:commandButton>
+
+                                </p:column>
+
+
 
                             </p:dataTable>
                         </p:panel>

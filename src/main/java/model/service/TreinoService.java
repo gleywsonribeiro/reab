@@ -28,7 +28,9 @@ public class TreinoService {
                 dao.edit(treino);
             }
         } catch (Exception e) {
+            e.printStackTrace();
             throw new NegocioException("Erro ao salvar!");
+            
         }
     }
     
