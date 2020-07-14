@@ -29,9 +29,8 @@ public class Treino implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String nome;
-    
 
     public Long getId() {
         return id;
@@ -57,7 +56,6 @@ public class Treino implements Serializable {
         this.exercicios = exercicios;
     }
 
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -82,5 +80,5 @@ public class Treino implements Serializable {
     public String toString() {
         return "model.Treino[ id=" + id + " ]";
     }
-    
+
 }

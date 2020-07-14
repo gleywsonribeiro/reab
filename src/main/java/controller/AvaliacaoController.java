@@ -52,13 +52,8 @@ public class AvaliacaoController implements Serializable {
 
     public String salvar() {
         try {
-            //Atendimento temp = as.buscarPorId(avaliacao.getAtendimento().getId());
-            //boolean liberado = validar();
-            //emp.setLiberadoMobilizacao(liberado);
-            //avaliacao.setLiberadoMobilizacao(liberado);
 
             service.salvar(avaliacao);
-            
 
             return "sucesso?faces-redirect=true";
 

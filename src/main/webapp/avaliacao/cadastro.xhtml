@@ -28,18 +28,6 @@
 
                         <p:growl autoUpdate="true"/>
                         <p:panel header="Avaliação">
-                            <!--                            <div class="card card-w-title">
-                                                            <p:panelGrid id="cadastro" columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
-                                                                <p:autoComplete id="atendimento" dropdown="true" value="{avaliacaoController.avaliacao.atendimento}" var="atendimento"
-                                                                                itemValue="{atendimento}" itemLabel="{atendimento.paciente.nome}"
-                                                                                converter="atendimentoConverter" forceSelection="true"
-                                                                                completeMethod="{avaliacaoController.completeAtendimento}" >
-                                                                    <p:ajax event="itemSelect" update="cadastro" listener="{avaliacaoController.teste()}"/>
-                                                                </p:autoComplete>
-                                                                <p:watermark for="atendimento" value="Buscar atendimento do paciente"/>
-                            
-                                                            </p:panelGrid>
-                                                        </div>-->
                             <h3>#{avaliacaoController.avaliacao.atendimento.paciente.nome}</h3>
                             <div class="card card-w-title">
                                 <p:outputLabel value="Score de mobilidade Motora:" style="color: #193a59; font-weight: 900"/>

@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 import model.Exercicio;
 import model.ItemExercicio;
 import model.Treino;
+import model.dao.ItemExercicioDao;
 import model.service.TreinoService;
 import util.exception.DBException;
 import util.exception.NegocioException;
@@ -26,44 +27,53 @@ import util.jsf.JsfUtil;
 @ManagedBean
 @ViewScoped
 public class TreinoController implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
-    
+
     private Treino treino = new Treino();
     private ItemExercicio itemExercicio;
-    
+
     private List<Treino> treinos;
     private TreinoService ts = new TreinoService();
-    
+
     @PostConstruct
     private void init() {
         treino = new Treino();
         itemExercicio = new ItemExercicio();
         treinos = ts.ListarTreinos();
-        
+
         String chave = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
-        
+
         if (chave != null) {
             Long id = Long.parseLong(chave);
             treino = ts.buscarPorId(id);
         }
     }
-    
+
     public boolean isExercicioNulo() {
         return itemExercicio.getExercicio() == null;
     }
-    
+
     public void addItem() {
         treino.getExercicios().add(itemExercicio);
         itemExercicio.setTreino(treino);
         itemExercicio = new ItemExercicio();
     }
-    
+
     public void removerItem() {
-        treino.getExercicios().remove(itemExercicio);
-        itemExercicio = new ItemExercicio();
+        try {
+            treino.getExercicios().remove(itemExercicio);
+            if (itemExercicio.getId() != null) {
+                ItemExercicioDao itemExercicioDao = new ItemExercicioDao();
+                itemExercicioDao.remove(itemExercicio);
+                System.out.println("chamou aqui");
+            }
+            itemExercicio = new ItemExercicio();
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage("Erro ao remover item: " + e.getMessage());
+        }
     }
-    
+
     public void salvar() {
         try {
             ts.salvar(treino);
@@ -75,7 +85,7 @@ public class TreinoController implements Serializable {
             e.printStackTrace();
         }
     }
-    
+
     public ItemExercicio getItemExercicio() {
         return itemExercicio;
     }
@@ -88,26 +98,26 @@ public class TreinoController implements Serializable {
     public void setItemExercicio(ItemExercicio itemExercicio) {
         this.itemExercicio = itemExercicio;
     }
-    
+
     public Treino getTreino() {
         return treino;
     }
-    
+
     public void setTreino(Treino treino) {
         this.treino = treino;
     }
-    
+
     public List<Treino> getTreinos() {
         if (treinos == null) {
             treinos = ts.ListarTreinos();
         }
         return treinos;
     }
-    
+
     public void novo() {
         treino = new Treino();
     }
-    
+
     public void remover() {
         try {
             ts.remover(treino);
@@ -117,5 +127,5 @@ public class TreinoController implements Serializable {
             JsfUtil.addErrorMessage("Erro ao remover " + treino.getNome() + ": " + e.getMessage());
         }
     }
-    
+
 }
