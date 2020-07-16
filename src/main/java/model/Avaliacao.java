@@ -73,6 +73,9 @@ public class Avaliacao implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Atendimento atendimento;
+    
+    @ManyToOne
+    private Resultado score;
 
     public Avaliacao() {
         dataAvaliacao = new Date();
@@ -84,6 +87,14 @@ public class Avaliacao implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Resultado getScore() {
+        return score;
+    }
+
+    public void setScore(Resultado score) {
+        this.score = score;
     }
 
     public Date getDataAvaliacao() {
