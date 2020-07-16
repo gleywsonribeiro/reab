@@ -22,16 +22,23 @@
                                     <p:inputText value="#{resultadoController.resultado.descricao}" required="true"/>
                                     <label>Descrição</label>
                                 </h:panelGroup>
-                                
+
                                 <h:panelGroup styleClass="md-inputfield">
                                     <p:inputText value="#{resultadoController.resultado.score}" required="true">
                                         <f:convertNumber/>
                                     </p:inputText>
                                     <label>Score</label>
                                 </h:panelGroup>
-                      
-                                <p:commandButton icon="fa fa-save" action="#{motivoController.salvar()}" update="@form"/>
-                                
+
+                                <p:outputLabel value="Treino" for="treino"/>
+                                <p:selectOneMenu id="treino" value="#{resultadoController.resultado.treino}" required="true"
+                                                 converter="treinoConverter" filter="true" filterMatchMode="contains">
+                                    <f:selectItem itemLabel="Selecione"/>
+                                    <f:selectItems value="#{treinoController.treinos}" var="treino" itemLabel="#{treino.nome}" itemValue="#{treino}"/>
+                                </p:selectOneMenu>
+
+                                <p:commandButton icon="fa fa-save" action="#{resultadoController.salvar()}" update="@form"/>
+
                             </p:panelGrid>
                         </p:fieldset>
 
@@ -48,7 +55,7 @@
                             <p:column headerText="Score">
                                 <h:outputText value="#{resultado.score}"/>
                             </p:column>
-                            
+
                             <p:column style="text-align: center; width: 50px">
                                 <p:commandButton icon="ui-icon-edit" update="form:cadastro" process="@this">
                                     <f:setPropertyActionListener value="#{resultado}" target="#{resultadoController.resultado}"/>

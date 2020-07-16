@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -23,18 +24,29 @@ public class Resultado implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(nullable = false)
     private Integer score;
-     @Column(nullable = false)
+    @Column(nullable = false)
     private String descricao;
 
+    @ManyToOne(optional = false)
+    private Treino treino;
+    
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Treino getTreino() {
+        return treino;
+    }
+
+    public void setTreino(Treino treino) {
+        this.treino = treino;
     }
 
     public Integer getScore() {
@@ -52,8 +64,6 @@ public class Resultado implements Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-    
-    
 
     @Override
     public int hashCode() {
@@ -79,5 +89,5 @@ public class Resultado implements Serializable {
     public String toString() {
         return "model.Resultado[ id=" + id + " ]";
     }
-    
+
 }
