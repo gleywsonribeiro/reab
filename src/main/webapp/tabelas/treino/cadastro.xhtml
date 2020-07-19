@@ -58,6 +58,9 @@
                                 <p:column headerText="Exercício">
                                     <h:outputText value="#{item.exercicio.nome}"/>
                                 </p:column>
+                                <p:column headerText="Essencial">
+                                    <p:selectBooleanCheckbox value="#{item.essencial}"  />
+                                </p:column>
 
                                 <p:column style="text-align: center">
                                     <p:commandButton icon="fa fa-trash" action="#{treinoController.removerItem()}" styleClass="red-btn"
