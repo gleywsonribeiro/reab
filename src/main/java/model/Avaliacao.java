@@ -73,9 +73,12 @@ public class Avaliacao implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Atendimento atendimento;
-    
-    @ManyToOne
-    private Resultado score;
+
+    @ManyToOne(optional = false)
+    private Score score;
+
+    @ManyToOne(optional = false)
+    private Treinamento treinamento;
 
     public Avaliacao() {
         dataAvaliacao = new Date();
@@ -89,11 +92,19 @@ public class Avaliacao implements Serializable {
         this.id = id;
     }
 
-    public Resultado getScore() {
+    public Treinamento getTreinamento() {
+        return treinamento;
+    }
+
+    public void setTreinamento(Treinamento treinamento) {
+        this.treinamento = treinamento;
+    }
+
+    public Score getScore() {
         return score;
     }
 
-    public void setScore(Resultado score) {
+    public void setScore(Score score) {
         this.score = score;
     }
 
@@ -104,8 +115,6 @@ public class Avaliacao implements Serializable {
     public void setDataAvaliacao(Date dataAvaliacao) {
         this.dataAvaliacao = dataAvaliacao;
     }
-
-   
 
     public Boolean getLiberadoMobilizacao() {
         return liberadoMobilizacao;
@@ -243,6 +252,5 @@ public class Avaliacao implements Serializable {
     public String toString() {
         return "model.Triagem[ id=" + id + " ]";
     }
-
 
 }

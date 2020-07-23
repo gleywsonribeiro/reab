@@ -13,9 +13,9 @@
     <class>model.Exercicio</class>
     <class>model.ItemExercicio</class>
     <class>model.Treino</class>
-    <class>model.Resultado</class>
     <class>model.Treinamento</class>
     <class>model.ItemTreinamento</class>
+    <class>model.Score</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!--Configuração local-->

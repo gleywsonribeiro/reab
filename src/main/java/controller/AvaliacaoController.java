@@ -63,12 +63,6 @@ public class AvaliacaoController implements Serializable {
         }
     }
 
-
-
-    public Score[] getScores() {
-        return Score.values();
-    }
-
     public Avaliacao getAvaliacao() {
         return avaliacao;
     }

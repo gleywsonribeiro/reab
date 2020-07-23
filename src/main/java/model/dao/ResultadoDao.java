@@ -11,7 +11,7 @@ import javax.persistence.NoResultException;
 import jpa.util.HibernateUtil;
 import model.Admissao;
 import model.Avaliacao;
-import model.Resultado;
+import model.Score;
 import model.Usuario;
 import util.Seguranca;
 
@@ -19,12 +19,12 @@ import util.Seguranca;
  *
  * @author Gleywson
  */
-public class ResultadoDao extends Dao<Resultado> {
+public class ResultadoDao extends Dao<Score> {
 
     EntityManager em = HibernateUtil.getEntityManager();
 
     public ResultadoDao() {
-        super(Resultado.class);
+        super(Score.class);
     }
 
     @Override

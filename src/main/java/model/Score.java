@@ -5,35 +5,89 @@
  */
 package model;
 
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 /**
  *
- * @author Gleywson
+ * @author gleyw
  */
-public enum Score {
+@Entity
+public class Score implements Serializable {
 
-    CAMINHAR_76_METROS(8, "Caminhar mais de 76 metros"),
-    CAMINHAR_7_METROS(7, "Caminhar mais de 7 metros"),
-    CAMINHAR_10_PASSOS(6, "Caminhar mais de 10 passos"),
-    FICAR_1_MINUTO(5, "Ficar >= 1 minuto"),
-    TRANSFERIR_CADEIRA(4, "Tranferir para cadeira"),
-    SENTAR_BEIRADA_CAMA(3, "Sentar na beira da cama"),
-    EXERCICIOS_CAMA(2, "Virar-se/exercícios na cama"),
-    SOMENTE_DEITADO(1, "Somente deitado");
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private Score(Integer valor, String descricao) {
-        this.valor = valor;
-        this.descricao = descricao;
-    }
+    @Column(nullable = false)
+    private Integer score;
+    @Column(nullable = false)
+    private String descricao;
+
+    @ManyToOne(optional = false)
+    private Treino treino;
     
-    private final Integer valor;
-    private final String descricao;
-
-    public Integer getValor() {
-        return valor;
+    public Long getId() {
+        return id;
     }
-    
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Treino getTreino() {
+        return treino;
+    }
+
+    public void setTreino(Treino treino) {
+        this.treino = treino;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
     public String getDescricao() {
         return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Score)) {
+            return false;
+        }
+        Score other = (Score) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "model.Score[ id=" + id + " ]";
     }
 
 }

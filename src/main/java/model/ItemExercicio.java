@@ -25,7 +25,7 @@ public class ItemExercicio implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Boolean realizado;
-    private Boolean essencial;
+    private Boolean principal;
     @Column(columnDefinition = "text")
     private String observacao;
     
@@ -53,12 +53,12 @@ public class ItemExercicio implements Serializable {
         this.realizado = realizado;
     }
 
-    public Boolean getEssencial() {
-        return essencial;
+    public Boolean getPrincipal() {
+        return principal;
     }
 
-    public void setEssencial(Boolean essencial) {
-        this.essencial = essencial;
+    public void setPrincipal(Boolean principal) {
+        this.principal = principal;
     }
 
     public String getObservacao() {

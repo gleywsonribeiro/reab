@@ -11,7 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import model.Motivo;
-import model.Resultado;
+import model.Score;
 import model.dao.MotivoDao;
 import model.dao.ResultadoDao;
 import util.exception.DBException;
@@ -27,28 +27,28 @@ public class ResultadoController implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Resultado resultado;
+    private Score resultado;
 
-    private List<Resultado> resultados;
+    private List<Score> resultados;
     private ResultadoDao dao = new ResultadoDao();
 
     @PostConstruct
     private void init() {
-        resultado = new Resultado();
+        resultado = new Score();
         resultados = dao.findAll();
     }
 
-    public Resultado getResultado() {
+    public Score getResultado() {
         return resultado;
     }
 
-    public void setResultado(Resultado resultado) {
+    public void setResultado(Score resultado) {
         this.resultado = resultado;
     }
 
    
 
-    public List<Resultado> getResultados() {
+    public List<Score> getResultados() {
         if (resultados == null) {
             resultados = dao.findAll();
         }
@@ -64,7 +64,7 @@ public class ResultadoController implements Serializable {
             } else {
                 dao.edit(resultado);
             }
-            resultado = new Resultado();
+            resultado = new Score();
             resultados = null;
             JsfUtil.addMessage("Salvo com sucesso!");
         } catch (DBException e) {

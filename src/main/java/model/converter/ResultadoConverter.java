@@ -10,7 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import model.Motivo;
-import model.Resultado;
+import model.Score;
 
 import model.dao.MotivoDao;
 import model.dao.ResultadoDao;
@@ -28,7 +28,7 @@ public class ResultadoConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
-        Resultado m;
+        Score m;
         if (value == null || value.equals("")) {
             return null;
         }
@@ -48,7 +48,7 @@ public class ResultadoConverter implements Converter {
         if (value == null) {
             return "";
         }
-        return ((Resultado)value).getId().toString();
+        return ((Score)value).getId().toString();
     }
 
     
