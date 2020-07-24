@@ -7,6 +7,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,7 +30,7 @@ public class Treinamento implements Serializable {
     @ManyToOne(optional = false)
     private Treino treino;
 
-    @OneToMany(mappedBy = "treinamento")
+    @OneToMany(mappedBy = "treinamento", cascade = CascadeType.ALL)
     private List<ItemTreinamento> itemTreinamentos;
 
     public Long getId() {

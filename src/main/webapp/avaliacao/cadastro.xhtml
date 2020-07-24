@@ -23,7 +23,7 @@
                             <div class="card card-w-title">
                                 <p:outputLabel value="Score de mobilidade Motora:" style="color: #193a59; font-weight: 900"/>
                                 <p:selectOneRadio value="#{avaliacaoController.avaliacao.score}" required="true" columns="1" layout="responsive" converter="resultadConverter">
-                                    <f:selectItems value="#{resultadoController.resultados}" var="score" itemLabel="#{score.descricao}" itemValue="#{score}"/>
+                                    <f:selectItems value="#{resultadoController.resultados}" var="score" itemLabel="(#{score.score}) #{score.descricao}" itemValue="#{score}"/>
                                 </p:selectOneRadio >
                             </div>
 

@@ -74,10 +74,10 @@ public class Avaliacao implements Serializable {
     @JoinColumn(nullable = false)
     private Atendimento atendimento;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Score score;
 
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Treinamento treinamento;
 
     public Avaliacao() {

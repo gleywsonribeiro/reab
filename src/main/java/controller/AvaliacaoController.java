@@ -17,7 +17,11 @@ import model.Atendimento;
 import model.Opcao;
 
 import model.Avaliacao;
+import model.ItemExercicio;
+import model.ItemTreinamento;
 import model.Score;
+import model.Treinamento;
+import model.dao.TreinamentoDao;
 import model.service.AtendimentoService;
 import model.service.AvaliacaoService;
 import util.exception.NegocioException;
@@ -35,12 +39,11 @@ public class AvaliacaoController implements Serializable {
 
     private Avaliacao avaliacao = new Avaliacao();
 
-    
     private final AvaliacaoService service = new AvaliacaoService();
-    
+
     @PostConstruct
     private void init() {
-        
+
         String chave = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 
         if (chave != null) {
@@ -52,7 +55,21 @@ public class AvaliacaoController implements Serializable {
 
     public String salvar() {
         try {
+            Treinamento treinamento = new Treinamento();
+            treinamento.setTreino(avaliacao.getScore().getTreino());
+            for (ItemExercicio exercicio : avaliacao.getScore().getTreino().getExercicios()) {
+                ItemTreinamento item = new ItemTreinamento();
+                item.setItemExercicio(exercicio);
+                item.setPrincipal(exercicio.getPrincipal());
 
+                
+                treinamento.getItemTreinamentos().add(item);
+            }
+            
+            TreinamentoDao td = new TreinamentoDao();
+            td.create(treinamento);
+            
+            avaliacao.setTreinamento(treinamento);
             service.salvar(avaliacao);
 
             return "sucesso?faces-redirect=true";
