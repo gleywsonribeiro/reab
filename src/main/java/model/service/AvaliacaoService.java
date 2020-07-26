@@ -27,7 +27,9 @@ public class AvaliacaoService {
         try {
             dao.create(aval);
         } catch (Exception e) {
-            throw new NegocioException("Erro ao realizar avaliação");
+            e.printStackTrace();
+            throw new NegocioException("Erro ao realizar avaliação: " + e.getMessage());
+            
         }
     }
 }

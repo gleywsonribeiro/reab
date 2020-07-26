@@ -21,6 +21,7 @@ import model.ItemExercicio;
 import model.ItemTreinamento;
 import model.Score;
 import model.Treinamento;
+import model.Treino;
 import model.dao.TreinamentoDao;
 import model.service.AtendimentoService;
 import model.service.AvaliacaoService;
@@ -40,6 +41,7 @@ public class AvaliacaoController implements Serializable {
     private Avaliacao avaliacao = new Avaliacao();
 
     private final AvaliacaoService service = new AvaliacaoService();
+    private TreinamentoDao treinamentoDao= new TreinamentoDao();
 
     @PostConstruct
     private void init() {
@@ -56,19 +58,20 @@ public class AvaliacaoController implements Serializable {
     public String salvar() {
         try {
             Treinamento treinamento = new Treinamento();
-            treinamento.setTreino(avaliacao.getScore().getTreino());
-            for (ItemExercicio exercicio : avaliacao.getScore().getTreino().getExercicios()) {
-                ItemTreinamento item = new ItemTreinamento();
-                item.setItemExercicio(exercicio);
-                item.setPrincipal(exercicio.getPrincipal());
-
+            Treino treino = avaliacao.getScore().getTreino();
+            treinamento.setTreino(treino);
+            treino.getExercicios().forEach((item) -> {
+                ItemTreinamento itemTreinamento = new ItemTreinamento();
+                itemTreinamento.setItemExercicio(item);
+                itemTreinamento.setPrincipal(item.getPrincipal());
                 
-                treinamento.getItemTreinamentos().add(item);
-            }
-            
-            TreinamentoDao td = new TreinamentoDao();
-            td.create(treinamento);
-            
+                treinamento.getItemTreinamentos().add(itemTreinamento);
+                itemTreinamento.setTreinamento(treinamento);
+                
+            });
+
+            treinamentoDao.create(treinamento);
+
             avaliacao.setTreinamento(treinamento);
             service.salvar(avaliacao);
 

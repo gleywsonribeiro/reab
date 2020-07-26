@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -31,7 +32,7 @@ public class Treinamento implements Serializable {
     private Treino treino;
 
     @OneToMany(mappedBy = "treinamento", cascade = CascadeType.ALL)
-    private List<ItemTreinamento> itemTreinamentos;
+    private List<ItemTreinamento> itemTreinamentos = new ArrayList<>();
 
     public Long getId() {
         return id;
