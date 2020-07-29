@@ -11,3 +11,9 @@ and open the template in the editor.
 .margem {
     margin:  30px 10px;
 }
+
+.principal {
+    color: #cd001c !important;
+    background-color: red;
+    
+}

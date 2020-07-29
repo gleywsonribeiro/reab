@@ -10,7 +10,7 @@
     <ui:define name="content">
 
         <h:form id="form">
-            
+
             <div class="ui-g ui-fluid">
 
                 <div class="ui-g-12 ui-lg-9">
@@ -18,19 +18,25 @@
                     <div class="card card-w-title">
 
                         <p:growl autoUpdate="true"/>
-                        <p:panel header="Avaliação">
-                            <p:dataTable value="#{checagemController.avaliacoesPorAtendimento}" var="avaliacao">
-                                <p:column headerText="id">
-                                    <h:outputText value="#{avaliacao.id}"/>
-                                </p:column>
-                                <p:column headerText="atendimento">
-                                    <h:outputText value="#{avaliacao.atendimento}"/>
-                                </p:column>
-                                <p:column headerText="paciente">
-                                    <h:outputText value="#{avaliacao.atendimento.paciente.nome}"/>
-                                </p:column>
-                            </p:dataTable>
-                        </p:panel>
+                        <p:dataTable value="#{checagemController.avaliacoesPorAtendimento}" var="avaliacao">
+                            <f:facet name="header">
+                                <h:outputText value="Checagem"/>
+                            </f:facet>
+                            
+                            <p:column headerText="atendimento">
+                                <h:outputText value="#{avaliacao.atendimento.id}"/>
+                            </p:column>
+                            <p:column headerText="paciente">
+                                <h:outputText value="#{avaliacao.atendimento.paciente.nome}"/>
+                            </p:column>
+                            <p:column style="text-align: center">
+                                <h:outputLink value="cadastro.xhtml">
+                                    <p:button id="checar" icon="fa fa-stethoscope" />
+                                    <f:param name="id" value="#{avaliacao.id}"/>
+                                    <p:tooltip for="checar" value="Realizar checagem"/>
+                                </h:outputLink>
+                            </p:column>
+                        </p:dataTable>
 
 
                     </div>

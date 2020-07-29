@@ -39,9 +39,17 @@ public class ChecagemController implements Serializable {
     private AtendimentoDao atendimentoDao = new AtendimentoDao();
     private List<Avaliacao> avaliacoesPorAtendimento;
     
+    private Avaliacao avaliacao = new Avaliacao();
+    
     @PostConstruct
     private void init() {
         atualizaLista();
+        String chave = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+
+        if (chave != null) {
+            Long id = Long.parseLong(chave);
+            avaliacao = avaliacaoDao.find(id);
+        }
     }
     
     public void atualizaLista() {
@@ -58,7 +66,14 @@ public class ChecagemController implements Serializable {
         atualizaLista();
         return avaliacoesPorAtendimento;
     }
-    
-    
 
+    public Avaliacao getAvaliacao() {
+        return avaliacao;
+    }
+
+    public void setAvaliacao(Avaliacao avaliacao) {
+        this.avaliacao = avaliacao;
+    }
+    
+    
 }

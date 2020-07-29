@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Hospital</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="form">
+
+            <div class="ui-g ui-fluid">
+
+                <div class="ui-g-12 ui-lg-9">
+                    <!-- Left colum -->
+                    <div class="card card-w-title">
+
+                        <p:growl autoUpdate="true"/>
+
+                        <div class="card card-w-title">
+
+                            <h3>#{checagemController.avaliacao.atendimento.paciente.nome}</h3>
+                            <p:dataList value="#{checagemController.avaliacao.treinamento.itemTreinamentos}" var="exercicio" 
+                                        type="unordered" itemType="none" styleClass="cars-datalist">
+                                <f:facet name="header">
+                                    Exercícios propostos
+                                </f:facet>
+                                <div>
+                                    <div>
+                                        <p  class="principal">
+                                            <p:selectBooleanCheckbox value="#{exercicio.realizado}" /> - #{exercicio.itemExercicio.exercicio.nome}
+                                        </p>
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </p:dataList>
+                        </div>
+
+                        <p:commandButton value="Avaliar" action="#{avaliacaoController.salvar()}"/>
+
+
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Right colum -->
+
+                </div>
+            </div>
+
+            <!--<p:sticky target="tb" margin="75"/>-->
+        </h:form>    
+    </ui:define>
+
+</ui:composition>
