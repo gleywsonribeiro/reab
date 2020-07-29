@@ -27,14 +27,11 @@
                                 <f:facet name="header">
                                     Exercícios propostos
                                 </f:facet>
-                                <div>
-                                    <div>
-                                        <p  class="principal">
-                                            <p:selectBooleanCheckbox value="#{exercicio.realizado}" /> - #{exercicio.itemExercicio.exercicio.nome}
-                                        </p>
-                                        <p></p>
-                                    </div>
-                                </div>
+                                <p  class="principal">
+                                    <p:selectBooleanCheckbox value="#{exercicio.realizado}" /> - <h:outputText class="#{exercicio.carregaClasseCSS()}" value="#{exercicio.itemExercicio.exercicio.nome}"/>
+                                </p>
+
+
                             </p:dataList>
                         </div>
 

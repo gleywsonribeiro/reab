@@ -86,6 +86,14 @@ public class ItemTreinamento implements Serializable {
     public Boolean getRealizado() {
         return realizado;
     }
+    
+    public String carregaClasseCSS() {
+        if(principal) {
+            return "principal";
+        } else {
+            return "";
+        }
+    }
 
     public void setRealizado(Boolean realizado) {
         this.realizado = realizado;

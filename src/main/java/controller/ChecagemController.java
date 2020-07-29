@@ -6,7 +6,6 @@
 package controller;
 
 import java.io.Serializable;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -15,15 +14,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import model.Atendimento;
-import model.Opcao;
 
 import model.Avaliacao;
 import model.dao.AtendimentoDao;
 import model.dao.AvaliacaoDao;
-import model.service.AtendimentoService;
-import model.service.AvaliacaoService;
-import util.exception.NegocioException;
-import util.jsf.JsfUtil;
 
 /**
  *

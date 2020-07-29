@@ -13,7 +13,6 @@ and open the template in the editor.
 }
 
 .principal {
-    color: #cd001c !important;
-    background-color: red;
-    
+    color: #cd001c; 
+    font-weight: bold;
 }
