@@ -22,7 +22,7 @@
                         <div class="card card-w-title">
 
                             <h3>#{checagemController.avaliacao.atendimento.paciente.nome}</h3>
-                            <p:dataList value="#{checagemController.avaliacao.treinamento.itemTreinamentos}" var="exercicio" 
+                            <p:dataList id="lista" value="#{checagemController.avaliacao.treinamento.itemTreinamentos}" var="exercicio" 
                                         type="unordered" itemType="none" styleClass="cars-datalist">
                                 <f:facet name="header">
                                     Exercícios propostos
@@ -30,12 +30,10 @@
                                 <p  class="principal">
                                     <p:selectBooleanCheckbox value="#{exercicio.realizado}" /> - <h:outputText class="#{exercicio.carregaClasseCSS()}" value="#{exercicio.itemExercicio.exercicio.nome}"/>
                                 </p>
-
-
                             </p:dataList>
                         </div>
 
-                        <p:commandButton value="Avaliar" action="#{avaliacaoController.salvar()}"/>
+                        <p:commandButton value="checar" action="#{checagemController.checar()}" update="lista"/>
 
 
                     </div>

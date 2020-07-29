@@ -16,8 +16,10 @@ import javax.faces.context.FacesContext;
 import model.Atendimento;
 
 import model.Avaliacao;
+import model.ItemTreinamento;
 import model.dao.AtendimentoDao;
 import model.dao.AvaliacaoDao;
+import util.jsf.JsfUtil;
 
 /**
  *
@@ -67,6 +69,27 @@ public class ChecagemController implements Serializable {
 
     public void setAvaliacao(Avaliacao avaliacao) {
         this.avaliacao = avaliacao;
+    }
+    
+    public void checar() {
+        try {
+            boolean salva = true;
+            for (ItemTreinamento item : avaliacao.getTreinamento().getItemTreinamentos()) {
+                if(!item.getRealizado() || item.getRealizado() == null) {
+                    salva = false;
+                }
+            }
+            
+            if(salva) {
+                avaliacaoDao.edit(avaliacao);
+                JsfUtil.addMessage("Salvo com sucesso!");
+            } else {
+                JsfUtil.addErrorMessage("Itens não checados!");
+            }
+            
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage("Erro ao avaliar!");
+        }
     }
     
     
