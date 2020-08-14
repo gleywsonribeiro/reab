@@ -22,14 +22,47 @@
                         <div class="card card-w-title">
 
                             <h3>#{checagemController.avaliacao.atendimento.paciente.nome}</h3>
-                            <p:dataList id="lista" value="#{checagemController.avaliacao.treinamento.itemTreinamentos}" var="exercicio" 
-                                        type="unordered" itemType="none" styleClass="cars-datalist">
+                            <p:dataList id="lista" value="#{checagemController.exerciciosManha}" var="exercicio" rendered="#{checagemController.manha}"
+                                        type="ordered" styleClass="cars-datalist">
                                 <f:facet name="header">
                                     Exercícios propostos
                                 </f:facet>
-                                <p  class="principal">
-                                    <p:selectBooleanCheckbox value="#{exercicio.realizado}" /> - <h:outputText class="#{exercicio.carregaClasseCSS()}" value="#{exercicio.itemExercicio.exercicio.nome}"/>
+                                <p>
+                                    <h:outputText value="#{exercicio.itemExercicio.exercicio.nome}" class="#{exercicio.carregaClasseCSS()}"/>
+                                    <div>Realizado?
+                                        <p:selectOneRadio value="#{exercicio.realizado}" required="true" requiredMessage="As opções precisam ser checadas">
+                                            <f:selectItem itemLabel="Sim" itemValue="true" />
+                                            <f:selectItem itemLabel="Não" itemValue="false" />
+                                            <p:ajax event="change" update="lista"/>
+                                        </p:selectOneRadio>
+
+                                        <p:inputTextarea value="#{exercicio.observacao}" required="true" rendered="#{exercicio.naoRealizado}"
+                                                         placeholder="Motivo da não realização" requiredMessage="Justificativa obrigatória" />
+                                    </div>
+                                    <p:separator/>
                                 </p>
+                            </p:dataList>
+
+                            <p:dataList id="lista2" value="#{checagemController.exerciciosTarde}" var="exercicio"  rendered="#{checagemController.tarde}"
+                                        type="ordered" styleClass="cars-datalist">
+                                <f:facet name="header">
+                                    Exercícios propostos tarde
+                                </f:facet>
+                                <!--<h:panelGrid rendered="{exercicio.turno eq 'TARDE'}" >-->
+                                    <h:outputText value="#{exercicio.itemExercicio.exercicio.nome}" class="#{exercicio.carregaClasseCSS()}"/>
+                                    <div>Realizado?
+                                        <p:selectOneRadio value="#{exercicio.realizado}" required="true" requiredMessage="As opções precisam ser checadas">
+                                            <f:selectItem itemLabel="Sim" itemValue="true" />
+                                            <f:selectItem itemLabel="Não" itemValue="false" />
+                                            <p:ajax event="change" update="lista2"/>
+                                        </p:selectOneRadio>
+
+                                        <p:inputTextarea value="#{exercicio.observacao}" required="true" rendered="#{exercicio.naoRealizado}"
+                                                         placeholder="Motivo da não realização" requiredMessage="Justificativa obrigatória" />
+                                    </div>
+                                    <p:separator/>
+                                <!--</h:panelGrid>-->
+
                             </p:dataList>
                         </div>
 

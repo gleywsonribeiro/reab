@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Hospital</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="form">
+
+            <div class="ui-g ui-fluid">
+
+                <div class="ui-g-12 ui-lg-9">
+                    <!-- Left colum -->
+                    <div class="card card-w-title">
+
+                        <p:growl autoUpdate="true"/>
+                        <p:panel header="Turnos">
+                            <h3>#{avaliacaoController.avaliacao.atendimento.paciente.nome}</h3>
+                            <p:dataList id="lista" value="#{avaliacaoController.avaliacao.treinamento.itemTreinamentos}" var="exercicio" 
+                                        type="unordered" itemType="none" styleClass="cars-datalist">
+                                <f:facet name="header">
+                                    Distribuição dos exercícios
+                                </f:facet>
+                                <p>
+                                    <h:outputText style="font-weight: bold" class="#{exercicio.carregaClasseCSS()}" value="#{exercicio.itemExercicio.exercicio.nome}"/>
+
+                                    <p:selectOneRadio value="#{exercicio.turno}" layout="responsive" columns="6" required="true" requiredMessage="Escolha o turno">
+                                        <f:selectItems value="#{avaliacaoController.turnos}" var="turno" itemValue="#{turno}" itemLabel="#{turno.descricao}"/>
+                                    </p:selectOneRadio>
+                                    <p:separator/>
+                                </p>
+                            </p:dataList>
+
+                            <p:commandButton value="Salvar Turnos" action="#{avaliacaoController.salvarTurnos()}" ajax="false"/>
+
+                        </p:panel>
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Right colum -->
+
+                </div>
+            </div>
+
+            <!--<p:sticky target="tb" margin="75"/>-->
+        </h:form>    
+    </ui:define>
+
+</ui:composition>

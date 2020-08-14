@@ -16,6 +16,7 @@ import model.Avaliacao;
 import model.ItemTreinamento;
 import model.Treinamento;
 import model.Treino;
+import model.Turno;
 import model.dao.TreinamentoDao;
 import model.service.AvaliacaoService;
 import util.exception.NegocioException;
@@ -68,12 +69,26 @@ public class AvaliacaoController implements Serializable {
             avaliacao.setTreinamento(treinamento);
             service.salvar(avaliacao);
 
-            return "sucesso?faces-redirect=true";
+            return "turno?faces-redirect=true&id=" + avaliacao.getId();
 
         } catch (NegocioException e) {
             JsfUtil.addErrorMessage(e.getMessage());
             return "";
         }
+    }
+    
+    public String salvarTurnos() {
+        try {
+            service.salvar(avaliacao);
+            return "sucesso?faces-redirect=true";
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage("Erro ao salvar!");
+            return "";
+        }
+    }
+    
+    public Turno[] getTurnos() {
+        return Turno.values();
     }
 
     public Avaliacao getAvaliacao() {

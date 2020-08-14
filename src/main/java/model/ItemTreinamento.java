@@ -87,6 +87,15 @@ public class ItemTreinamento implements Serializable {
         return realizado;
     }
     
+    public Boolean getNaoRealizado() {
+        if(realizado == null) {
+            return Boolean.FALSE;
+        } else {
+            return !realizado;
+        }
+        
+    }
+    
     public String carregaClasseCSS() {
         if(principal) {
             return "principal";

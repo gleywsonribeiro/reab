@@ -10,5 +10,15 @@ package model;
  * @author Gleywson
  */
 public enum Turno {
-    MANHA, TARDE
+    MANHA("Manhã"), TARDE("Tarde");
+    
+    private Turno(String descricao) {
+        this.descricao = descricao;
+    }
+
+    private final String descricao;
+
+    public String getDescricao() {
+        return descricao;
+    }
 }
