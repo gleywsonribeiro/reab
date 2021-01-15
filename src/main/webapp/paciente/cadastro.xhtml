@@ -38,6 +38,11 @@
                                     <p:inputText value="#{pacienteController.paciente.nome}" required="true"/>
                                     <label>Nome completo</label>
                                 </h:panelGroup>
+                                
+                                <h:panelGroup styleClass="md-inputfield">
+                                    <p:inputMask mask="999.999.999-99" value="#{pacienteController.paciente.cpf}" required="true"/>
+                                    <label>CPF</label>
+                                </h:panelGroup>
 
                                 <p:outputLabel value="Sexo: "/>
                                 <p:selectOneRadio value="#{pacienteController.paciente.sexo}" layout="responsive" columns="6" required="true" requiredMessage="Escolha o sexo">

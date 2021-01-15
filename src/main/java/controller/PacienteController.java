@@ -17,6 +17,7 @@ import model.Paciente;
 import model.dao.PacienteDao;
 import model.service.PacienteService;
 import util.exception.DBException;
+import util.exception.NegocioException;
 import util.jsf.JsfUtil;
 
 /**
@@ -60,6 +61,8 @@ public class PacienteController implements Serializable {
             JsfUtil.addMessage("Salvo com sucesso!");
         } catch (DBException e) {
             JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
+        } catch (NegocioException e) {
+            JsfUtil.addErrorMessage(e.getMessage());
         }
     }
 

@@ -23,6 +23,10 @@ public class PacienteService {
     private PacienteDao dao = new PacienteDao();
 
     public void salvar(Paciente paciente) {
+        
+        if(isCPFCadastrado(paciente)) {
+            throw new NegocioException("Paciente existe um paciente com este CPF!");
+        }
        
         if (paciente.getId() == null) {
             dao.create(paciente);
@@ -45,6 +49,18 @@ public class PacienteService {
         } catch (Exception e) {
             throw new DBException("Não foi possível remover:" + e.getMessage());
         }
+    }
+    
+    public boolean isCPFCadastrado(Paciente p) {
+        List<Paciente> pacientes = listarTodos();
+//        boolean existe = false;
+        
+        for (Paciente paciente : pacientes) {
+            if(p.getCpf().equals(paciente.getCpf())) {
+                return true;
+            }
+        }
+        return false;
     }
    
 }

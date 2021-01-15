@@ -46,6 +46,8 @@ public class Paciente implements Serializable {
     @Column(name = "dh_cadastro", nullable = false)
     private Date dataCadastro;
     
+    private String cpf;
+    
     @OneToMany(mappedBy = "paciente")
     private List<Atendimento> atendimentos;
 
@@ -67,6 +69,14 @@ public class Paciente implements Serializable {
 
     public void setAtendimentos(List<Atendimento> atendimentos) {
         this.atendimentos = atendimentos;
+    }
+    
+    public void add(Atendimento atendimento) {
+        atendimentos.add(atendimento);
+    }
+    
+    public void remove(Atendimento atendimento) {
+        atendimentos.remove(atendimento);
     }
 
     public Long getId() {
@@ -100,6 +110,16 @@ public class Paciente implements Serializable {
     public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+    
+    
 
     @Override
     public int hashCode() {
