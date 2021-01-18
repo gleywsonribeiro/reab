@@ -52,12 +52,12 @@
                                 </h:outputText>
                             </p:column>
 
-<!--                            <p:column style="text-align: center">
-                                <h:outputLink value="cadastro.xhtml">
-                                    <p:button icon="fa fa-edit" />
-                                    <f:param name="id" value="{atendimento.id}"/>
-                                </h:outputLink>
-                            </p:column>-->
+                            <!--                            <p:column style="text-align: center">
+                                                            <h:outputLink value="cadastro.xhtml">
+                                                                <p:button icon="fa fa-edit" />
+                                                                <f:param name="id" value="{atendimento.id}"/>
+                                                            </h:outputLink>
+                                                        </p:column>-->
                             <p:column style="text-align: center">
                                 <p:commandButton  id="alta" icon="ui-icon-airline-seat-recline-extra" action="#{atendimentoController.darAlta()}"
                                                   update="@form" process="@this" disabled="#{not atendimento.emAtendimento}">
@@ -73,6 +73,13 @@
                                     <p:confirm header="Alerta" message="Quer mesmo apagar este paciente?" icon="fa fa-exclamation-triangle" />
                                 </p:commandButton>
 
+                            </p:column>
+
+                            <p:column style="text-align: center">
+                                <h:outputLink value="edit.xhtml">
+                                    <p:button icon="fa fa-heartbeat" />
+                                    <f:param name="id" value="#{atendimento.id}"/>
+                                </h:outputLink>
                             </p:column>
 
                         </p:dataTable>
