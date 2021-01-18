@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -31,6 +32,27 @@ public class Atendimento implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     @Column(name = "dt_atendimento")
     private Date dataAtendimento;
+    
+    @Column(name = "dt_pri_sedestacao")
+    @Temporal(TemporalType.DATE)
+    private Date dataPrimeiraSedestacao;
+    
+    @Temporal(TemporalType.DATE)
+    @Column(name = "dt_pri_ortostase")
+    private Date dataPrimeiraOrtostase;
+    
+    @Temporal(TemporalType.DATE)
+    @Column(name = "dt_pri_deambulacao")
+    private Date dataPrimeiraDeambulacao;
+    
+    @Temporal(TemporalType.DATE)
+    @Column(name = "dt_intubacao")
+    private Date dataIntubacao;
+    
+    @Temporal(TemporalType.DATE)
+    @Column(name = "dt_extubacao")
+    private Date dataExtubacao;
+    
     
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     @Column(name = "dt_alta")
@@ -119,6 +141,48 @@ public class Atendimento implements Serializable {
     public boolean isEmAtendimento() {
         return getDataAlta() == null;
     }
+
+    public Date getDataPrimeiraSedestacao() {
+        return dataPrimeiraSedestacao;
+    }
+
+    public void setDataPrimeiraSedestacao(Date dataPrimeiraSedestacao) {
+        this.dataPrimeiraSedestacao = dataPrimeiraSedestacao;
+    }
+
+    public Date getDataPrimeiraOrtostase() {
+        return dataPrimeiraOrtostase;
+    }
+
+    public void setDataPrimeiraOrtostase(Date dataPrimeiraOrtostase) {
+        this.dataPrimeiraOrtostase = dataPrimeiraOrtostase;
+    }
+
+    public Date getDataPrimeiraDeambulacao() {
+        return dataPrimeiraDeambulacao;
+    }
+
+    public void setDataPrimeiraDeambulacao(Date dataPrimeiraDeambulacao) {
+        this.dataPrimeiraDeambulacao = dataPrimeiraDeambulacao;
+    }
+
+    public Date getDataIntubacao() {
+        return dataIntubacao;
+    }
+
+    public void setDataIntubacao(Date dataIntubacao) {
+        this.dataIntubacao = dataIntubacao;
+    }
+
+    public Date getDataExtubacao() {
+        return dataExtubacao;
+    }
+
+    public void setDataExtubacao(Date dataExtubacao) {
+        this.dataExtubacao = dataExtubacao;
+    }
+    
+    
 
     @Override
     public int hashCode() {
