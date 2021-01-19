@@ -51,8 +51,8 @@
                                 </p:selectOneRadio>
 
                                 <p:outputLabel for="button" value="Data de Nascimento" />
-                                <p:calendar id="button" showOn="button" pattern="dd/MM/yyyy" required="true" requiredMessage="Informe a data de nascimento"
-                                            value="#{pacienteController.paciente.dataNascimento}"/>
+                                <p:calendar id="button" mask="true" pattern="dd/MM/yyyy" required="true" requiredMessage="Informe a data de nascimento"
+                                            locale="pt" value="#{pacienteController.paciente.dataNascimento}"/>
                             </p:panelGrid>
                         </p:fieldset>
 

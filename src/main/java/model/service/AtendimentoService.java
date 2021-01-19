@@ -60,4 +60,6 @@ public class AtendimentoService {
             throw new DBException("Não foi possível remover:" + e.getMessage());
         }
     }
+    
+    
 }
