@@ -5,6 +5,9 @@
  */
 package model.service;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 import model.Atendimento;
@@ -58,6 +61,15 @@ public class AtendimentoService {
             dao.remove(atendimento);
         } catch (Exception e) {
             throw new DBException("Não foi possível remover:" + e.getMessage());
+        }
+    }
+    
+    
+    public void contagem() {
+        List<Atendimento> atendimentos = listarTodos();
+        for (Atendimento atendimento : atendimentos) {
+            LocalDate localDate = atendimento.getDataAtendimento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            System.out.println(localDate.getMonth().APRIL.toString());
         }
     }
     

@@ -206,7 +206,9 @@ public class Atendimento implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Atendimento[ id=" + id + " ]";
+        return "Atendimento{" + "id=" + id + ", dataAtendimento=" + dataAtendimento + ", dataPrimeiraSedestacao=" + dataPrimeiraSedestacao + ", dataPrimeiraOrtostase=" + dataPrimeiraOrtostase + ", dataPrimeiraDeambulacao=" + dataPrimeiraDeambulacao + ", dataIntubacao=" + dataIntubacao + ", dataExtubacao=" + dataExtubacao + ", dataAlta=" + dataAlta + ", liberadoMobilizacao=" + liberadoMobilizacao + ", atendente=" + atendente + ", paciente=" + paciente + ", motivo=" + motivo + ", setor=" + setor + '}';
     }
+
+   
     
 }

@@ -6,9 +6,12 @@
 package controller;
 
 import java.io.Serializable;
+import java.time.Month;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -40,11 +43,13 @@ public class GraficoController implements Serializable {
     private BarChartModel intubacao;
     private BarChartModel extubacao;
     
-    private List<String> meses = new ArrayList<>();
+    List<Atendimento> atendimentos =  new ArrayList<>();
+    AtendimentoService atendimentoService = new AtendimentoService();
     
     @PostConstruct
     public void init() {
         createDeambulacao();
+
     }
 
     public BarChartModel getDeambulacao() {
@@ -71,41 +76,25 @@ public class GraficoController implements Serializable {
 
     private void createDeambulacao() {
         deambulacao = new BarChartModel();
+        
+        List<Month> meses = Arrays.asList(Month.JANUARY, Month.FEBRUARY, 
+                Month.MARCH, Month.APRIL, Month.MAY, Month.JUNE, Month.JULY, 
+                Month.AUGUST, Month.SEPTEMBER, Month.OCTOBER, Month.NOVEMBER, 
+                Month.DECEMBER);
  
         ChartSeries boys = new ChartSeries();
         boys.setLabel("Boys");
-        boys.set("Jan", 120);
-        boys.set("Fev", 100);
-        boys.set("Mar", 44);
-        boys.set("Abr", 150);
-        boys.set("Mai", 25);
-        boys.set("Jun", 15);
-        boys.set("Jul", 26);
-        boys.set("Ago", 48);
-        boys.set("Set", 59);
-        boys.set("Out", 19);
-        boys.set("Nov", 91);
-        boys.set("Dez", 82);
-        
- 
+
         ChartSeries girls = new ChartSeries();
         girls.setLabel("Girls");
-        girls.set("Jan", 52);
-        girls.set("Fev", 60);
-        girls.set("Mar", 110);
-        girls.set("Abr", 135);
-        girls.set("Mai", 120);
-        girls.set("Jun", 58);
-        girls.set("Jul", 23);
-        girls.set("Ago", 47);
-        girls.set("Set", 69);
-        girls.set("Out", 36);
-        girls.set("Nov", 25);
-        girls.set("Dez", 14);
  
+        Random random = new Random();
+        
+        for (Month mes : meses) {
+            boys.set(mes.toString(), random.nextInt(10));
+            girls.set(mes.toString(), random.nextInt(10));
+        }
         deambulacao.addSeries(boys);
         deambulacao.addSeries(girls);
-        
-        
     }
 }

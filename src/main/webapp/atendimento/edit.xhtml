@@ -40,6 +40,12 @@
                                     <p:inputText value="#{atendimentoController.atendimento.paciente.nome}" readonly="true"/>
                                     <label>Paciente</label>
                                 </h:panelGroup>
+                                <h:panelGroup styleClass="md-inputfield">
+                                    <p:inputText value="#{atendimentoController.atendimento.dataAtendimento}" readonly="true">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </p:inputText>
+                                    <label>Atendimento</label>
+                                </h:panelGroup>
 
                             </p:panelGrid>
                         </p:fieldset>
