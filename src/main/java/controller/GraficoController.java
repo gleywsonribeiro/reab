@@ -90,10 +90,7 @@ public class GraficoController implements Serializable {
         DataService dataService = new DataService(atendimentoService.listarTodos());
         
         for (Month mes : meses) {
-            //DadoMensal dado = Classe.getDadoMensal(Month mes);
             DadoMensal dm = dataService.getInfoSedestacao(mes);
-            //qtdPacientes.set(mes.toString(), dado.get);
-            //media.set(mes.toString(), dado.get);
             qtdPacientes.set(mes.toString(), dm.getNumeroPaciente());
             mediaDia.set(mes.toString(), dm.getMediaDias());
         }
