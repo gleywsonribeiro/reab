@@ -18,9 +18,11 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import model.Atendimento;
+import model.DadoMensal;
 import model.Paciente;
 import model.Usuario;
 import model.service.AtendimentoService;
+import model.service.DataService;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
 import util.exception.DBException;
@@ -49,7 +51,6 @@ public class GraficoController implements Serializable {
     @PostConstruct
     public void init() {
         createDeambulacao();
-
     }
 
     public BarChartModel getDeambulacao() {
@@ -71,8 +72,6 @@ public class GraficoController implements Serializable {
     public BarChartModel getExtubacao() {
         return extubacao;
     }
-    
-    
 
     private void createDeambulacao() {
         deambulacao = new BarChartModel();
@@ -82,19 +81,23 @@ public class GraficoController implements Serializable {
                 Month.AUGUST, Month.SEPTEMBER, Month.OCTOBER, Month.NOVEMBER, 
                 Month.DECEMBER);
  
-        ChartSeries boys = new ChartSeries();
-        boys.setLabel("Boys");
+        ChartSeries qtdPacientes = new ChartSeries();
+        qtdPacientes.setLabel("Pacientes");
 
-        ChartSeries girls = new ChartSeries();
-        girls.setLabel("Girls");
+        ChartSeries mediaDia = new ChartSeries();
+        mediaDia.setLabel("Dias");
  
-        Random random = new Random();
+        DataService dataService = new DataService(atendimentoService.listarTodos());
         
         for (Month mes : meses) {
-            boys.set(mes.toString(), random.nextInt(10));
-            girls.set(mes.toString(), random.nextInt(10));
+            //DadoMensal dado = Classe.getDadoMensal(Month mes);
+            DadoMensal dm = dataService.getInfoSedestacao(mes);
+            //qtdPacientes.set(mes.toString(), dado.get);
+            //media.set(mes.toString(), dado.get);
+            qtdPacientes.set(mes.toString(), dm.getNumeroPaciente());
+            mediaDia.set(mes.toString(), dm.getMediaDias());
         }
-        deambulacao.addSeries(boys);
-        deambulacao.addSeries(girls);
+        deambulacao.addSeries(qtdPacientes);
+        deambulacao.addSeries(mediaDia);
     }
 }
