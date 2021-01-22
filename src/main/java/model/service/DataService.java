@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 import model.Atendimento;
@@ -34,9 +35,9 @@ public class DataService implements Serializable {
         int contador = 0;
 
         for (Atendimento atendimento : atendimentos) {
-            if (atendimento.getDataPrimeiraSedestacao() != null && toMonth(atendimento.getDataPrimeiraSedestacao()).equals(mes)) {
+            if (atendimento.getDataPrimeiraSedestacao() != null && toMonth(atendimento.getDataPrimeiraSedestacao()) == mes) {
 
-                soma = DiffData(atendimento.getDataAtendimento(), atendimento.getDataPrimeiraSedestacao());
+                soma += DiffData(atendimento.getDataAtendimento(), atendimento.getDataPrimeiraSedestacao());
                 contador++;
             }
         }
@@ -51,10 +52,11 @@ public class DataService implements Serializable {
         return date.toInstant().atZone(ZoneId.systemDefault()).getMonth();
     }
 
-    private int DiffData(Date data1, Date data2) {
+    private long DiffData(Date data1, Date data2) {
         LocalDate localDate1 = data1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate localDate2 = data2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-        return Period.between(localDate1, localDate2).getDays();
+        
+        return Math.abs(ChronoUnit.DAYS.between(localDate1, localDate2));
     }
 }
