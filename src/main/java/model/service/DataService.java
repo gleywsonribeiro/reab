@@ -6,16 +6,13 @@
 package model.service;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.Month;
-import java.time.Period;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import model.Atendimento;
 import model.DadoMensal;
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 
 /**
  *
@@ -31,23 +28,30 @@ public class DataService implements Serializable {
 
     public DadoMensal getInfoSedestacao(int mes) {
 
-        int soma = 0;
-        float media;
-        int contador = 0;
+        try {
+            int soma = 0;
+            float media;
+            int contador = 0;
 
-        for (Atendimento atendimento : atendimentos) {
-            
-            int month = toMonth(atendimento.getDataPrimeiraSedestacao());
-            if (atendimento.getDataPrimeiraSedestacao() != null && month == mes) {
-                soma += DiffData(atendimento.getDataAtendimento(), atendimento.getDataPrimeiraSedestacao());
+            for (Atendimento atendimento : atendimentos) {
+                Date current = atendimento.getDataPrimeiraSedestacao();
+                if (current != null) {
+                    int month = toMonth(current);
+                    if (month == mes) {
+                        soma += DiffData(atendimento.getDataAtendimento(), current);
+                    }
+                }
                 contador++;
             }
+
+            media = soma / contador;
+            DadoMensal dm = new DadoMensal(contador, media);
+
+            return dm;
+        } catch (ArithmeticException e) {
+            System.out.println("Erro tratado: " + e.getMessage());
+            return new DadoMensal(0, 0);
         }
-
-        media = soma / contador;
-        DadoMensal dm = new DadoMensal(contador, media);
-
-        return dm;
     }
 
     private int toMonth(Date date) {
@@ -57,9 +61,6 @@ public class DataService implements Serializable {
     }
 
     private long DiffData(Date data1, Date data2) {
-        LocalDate localDate1 = data1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate localDate2 = data2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-
-        return Math.abs(ChronoUnit.DAYS.between(localDate1, localDate2));
+        return Math.abs(Days.daysBetween(new DateTime(data1), new DateTime(data2)).getDays());
     }
 }
