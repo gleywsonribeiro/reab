@@ -12,6 +12,7 @@ import java.time.Period;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import model.Atendimento;
 import model.DadoMensal;
@@ -28,15 +29,16 @@ public class DataService implements Serializable {
         this.atendimentos = atendimentos;
     }
 
-    public DadoMensal getInfoSedestacao(Month mes) {
+    public DadoMensal getInfoSedestacao(int mes) {
 
         int soma = 0;
         float media;
         int contador = 0;
 
         for (Atendimento atendimento : atendimentos) {
-            if (atendimento.getDataPrimeiraSedestacao() != null && toMonth(atendimento.getDataPrimeiraSedestacao()) == mes) {
-
+            
+            int month = toMonth(atendimento.getDataPrimeiraSedestacao());
+            if (atendimento.getDataPrimeiraSedestacao() != null && month == mes) {
                 soma += DiffData(atendimento.getDataAtendimento(), atendimento.getDataPrimeiraSedestacao());
                 contador++;
             }
@@ -48,15 +50,16 @@ public class DataService implements Serializable {
         return dm;
     }
 
-    private Month toMonth(Date date) {
-        return date.toInstant().atZone(ZoneId.systemDefault()).getMonth();
+    private int toMonth(Date date) {
+        GregorianCalendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        return calendar.get(GregorianCalendar.MONTH);
     }
 
     private long DiffData(Date data1, Date data2) {
         LocalDate localDate1 = data1.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate localDate2 = data2.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-        
         return Math.abs(ChronoUnit.DAYS.between(localDate1, localDate2));
     }
 }

@@ -47,11 +47,11 @@ public class GraficoController implements Serializable {
     
     List<Atendimento> atendimentos =  new ArrayList<>();
     AtendimentoService atendimentoService = new AtendimentoService();
-    
-    @PostConstruct
-    public void init() {
+
+    public GraficoController() {
         createDeambulacao();
     }
+    
 
     public BarChartModel getDeambulacao() {
         return deambulacao;
@@ -76,10 +76,7 @@ public class GraficoController implements Serializable {
     private void createDeambulacao() {
         deambulacao = new BarChartModel();
         
-        List<Month> meses = Arrays.asList(Month.JANUARY, Month.FEBRUARY, 
-                Month.MARCH, Month.APRIL, Month.MAY, Month.JUNE, Month.JULY, 
-                Month.AUGUST, Month.SEPTEMBER, Month.OCTOBER, Month.NOVEMBER, 
-                Month.DECEMBER);
+        String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
  
         ChartSeries qtdPacientes = new ChartSeries();
         qtdPacientes.setLabel("Pacientes");
@@ -89,11 +86,13 @@ public class GraficoController implements Serializable {
  
         DataService dataService = new DataService(atendimentoService.listarTodos());
         
-//        for (Month mes : meses) {
-//            DadoMensal dm = dataService.getInfoSedestacao(mes);
-//            qtdPacientes.set(mes.toString(), dm.getNumeroPaciente());
-//            mediaDia.set(mes.toString(), dm.getMediaDias());
-//        }
+        for(int i = 0; i < meses.length; i++) {
+            DadoMensal dm = dataService.getInfoSedestacao(i);
+            qtdPacientes.set(meses[i], dm.getNumeroPaciente());
+            mediaDia.set(meses[i], dm.getMediaDias());
+        }
+        
+        
         deambulacao.addSeries(qtdPacientes);
         deambulacao.addSeries(mediaDia);
     }
