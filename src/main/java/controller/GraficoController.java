@@ -39,9 +39,9 @@ public class GraficoController implements Serializable {
 
     private static final long serialVersionUID = 1L;
        
-    private BarChartModel deambulacao;
-    private BarChartModel ortostase;
     private BarChartModel sedestacao;
+    private BarChartModel ortostase;
+    private BarChartModel deambulacao;
     private BarChartModel intubacao;
     private BarChartModel extubacao;
     
@@ -50,19 +50,23 @@ public class GraficoController implements Serializable {
 
     public GraficoController() {
         createSedestacao();
+        createOrtostase();
+//        createOrtostase();
+//        createOrtostase();
+//        createOrtostase();
     }
     
 
-    public BarChartModel getDeambulacao() {
-        return deambulacao;
+    public BarChartModel getSedestacao() {
+        return sedestacao;
     }
 
     public BarChartModel getOrtostase() {
         return ortostase;
     }
 
-    public BarChartModel getSedestacao() {
-        return sedestacao;
+    public BarChartModel getDeambulacao() {
+        return deambulacao;
     }
 
     public BarChartModel getIntubacao() {
@@ -74,15 +78,16 @@ public class GraficoController implements Serializable {
     }
 
     private void createSedestacao() {
-        deambulacao = new BarChartModel();
+        sedestacao = new BarChartModel();
         
         String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
  
         ChartSeries qtdPacientes = new ChartSeries();
-        qtdPacientes.setLabel("Pacientes");
-
+        qtdPacientes.setLabel("Nº Pacientes");
+        
+        
         ChartSeries mediaDia = new ChartSeries();
-        mediaDia.setLabel("Dias");
+        mediaDia.setLabel("Média Dias");
  
         DataService dataService = new DataService(atendimentoService.getAtendimentosEmAndamento());
         
@@ -93,10 +98,39 @@ public class GraficoController implements Serializable {
         }
         
         
-        deambulacao.addSeries(qtdPacientes);
-        deambulacao.addSeries(mediaDia);
-        deambulacao.setAnimate(true);
-        deambulacao.setLegendPosition("ne");
-        deambulacao.setTitle("1ª Sedestação");
+        sedestacao.addSeries(qtdPacientes);
+        sedestacao.addSeries(mediaDia);
+        sedestacao.setAnimate(true);
+        sedestacao.setLegendPosition("ne");
+        sedestacao.setTitle("1ª Sedestação");
+        
+    }
+
+    private void createOrtostase() {
+        ortostase = new BarChartModel();
+        
+        String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
+ 
+        ChartSeries qtdPacientes = new ChartSeries();
+        qtdPacientes.setLabel("Nº Pacientes");
+        
+        
+        ChartSeries mediaDia = new ChartSeries();
+        mediaDia.setLabel("Média Dias");
+ 
+        DataService dataService = new DataService(atendimentoService.getAtendimentosEmAndamento());
+        
+        for(int i = 0; i < meses.length; i++) {
+            DadoMensal dm = dataService.getInfoOrtostase(i);
+            qtdPacientes.set(meses[i], dm.getNumeroPaciente());
+            mediaDia.set(meses[i], dm.getMediaDias());
+        }
+        
+        
+        ortostase.addSeries(qtdPacientes);
+        ortostase.addSeries(mediaDia);
+        ortostase.setAnimate(true);
+        ortostase.setLegendPosition("ne");
+        ortostase.setTitle("1ª Ortostase");
     }
 }

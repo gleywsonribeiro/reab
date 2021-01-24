@@ -39,9 +39,10 @@ public class DataService implements Serializable {
                     int month = toMonth(current);
                     if (month == mes) {
                         soma += DiffData(atendimento.getDataAtendimento(), current);
+                        contador++;
                     }
                 }
-                contador++;
+                
             }
 
             media = soma / contador;
@@ -54,6 +55,34 @@ public class DataService implements Serializable {
         }
     }
 
+    public DadoMensal getInfoOrtostase(int mes) {
+
+        try {
+            int soma = 0;
+            float media;
+            int contador = 0;
+
+            for (Atendimento atendimento : atendimentos) {
+                Date current = atendimento.getDataPrimeiraOrtostase();
+                if (current != null) {
+                    int month = toMonth(current);
+                    if (month == mes) {
+                        soma += DiffData(atendimento.getDataAtendimento(), current);
+                        contador++;
+                    }
+                }
+                
+            }
+
+            media = soma / contador;
+            DadoMensal dm = new DadoMensal(contador, media);
+
+            return dm;
+        } catch (ArithmeticException e) {
+            System.out.println("Erro tratado: " + e.getMessage());
+            return new DadoMensal(0, 0);
+        }
+    }
     private int toMonth(Date date) {
         GregorianCalendar calendar = new GregorianCalendar();
         calendar.setTime(date);

@@ -62,8 +62,12 @@
             <div class="ui-g-12 ui-md-8">
                 <div class="card timeline ui-fluid">
                     Gráficos
-                    <p:chart type="bar" model="#{graficoController.deambulacao}" style="height:300px"/>
-                    
+                    <p:chart type="bar" model="#{graficoController.sedestacao}" style="height:300px" 
+                             responsive="true"/>
+                    <p:separator/>
+                   
+                    <p:chart type="bar" model="#{graficoController.ortostase}" style="height:300px" 
+                             responsive="true"/>
                 </div>
             </div>
 
