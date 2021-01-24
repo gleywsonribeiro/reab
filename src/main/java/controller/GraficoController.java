@@ -49,7 +49,7 @@ public class GraficoController implements Serializable {
     AtendimentoService atendimentoService = new AtendimentoService();
 
     public GraficoController() {
-        createDeambulacao();
+        createSedestacao();
     }
     
 
@@ -73,7 +73,7 @@ public class GraficoController implements Serializable {
         return extubacao;
     }
 
-    private void createDeambulacao() {
+    private void createSedestacao() {
         deambulacao = new BarChartModel();
         
         String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
@@ -84,7 +84,7 @@ public class GraficoController implements Serializable {
         ChartSeries mediaDia = new ChartSeries();
         mediaDia.setLabel("Dias");
  
-        DataService dataService = new DataService(atendimentoService.listarTodos());
+        DataService dataService = new DataService(atendimentoService.getAtendimentosEmAndamento());
         
         for(int i = 0; i < meses.length; i++) {
             DadoMensal dm = dataService.getInfoSedestacao(i);
@@ -95,5 +95,8 @@ public class GraficoController implements Serializable {
         
         deambulacao.addSeries(qtdPacientes);
         deambulacao.addSeries(mediaDia);
+        deambulacao.setAnimate(true);
+        deambulacao.setLegendPosition("ne");
+        deambulacao.setTitle("1ª Sedestação");
     }
 }
