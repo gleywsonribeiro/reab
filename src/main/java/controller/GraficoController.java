@@ -108,7 +108,7 @@ public class GraficoController implements Serializable {
 
     private void createOrtostase() {
         ortostase = new BarChartModel();
-        
+    
         String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
  
         ChartSeries qtdPacientes = new ChartSeries();
