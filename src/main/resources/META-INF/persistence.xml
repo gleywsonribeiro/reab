@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="EmpatiaPU" transaction-type="RESOURCE_LOCAL">
-    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-    <class>model.UsuarioPesquisa</class>
-    <class>model.Hospital</class>
-    <class>model.Setor</class>
-    <class>model.Paciente</class>
-    <class>model.Motivo</class>
-    <class>model.Atendimento</class>
-    <class>model.Admissao</class>
-    <class>model.Avaliacao</class>
-    <class>model.Exercicio</class>
-    <class>model.ItemExercicio</class>
-    <class>model.Treino</class>
-    <class>model.Treinamento</class>
-    <class>model.ItemTreinamento</class>
-    <class>model.Score</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties>
-      <!--Configuração local-->
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/reabilitacao?serverTimezone=UTC"/>
-      <property name="javax.persistence.jdbc.user" value="root"/>
-      <property name="javax.persistence.jdbc.password" value="systemcall"/>
-      <!--Configuração da nuvem-->
-      <!--            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/iridavis_empatia?serverTimezone=UTC"/>
-            <property name="javax.persistence.jdbc.user" value="iridavis_empatia"/>
-            <property name="javax.persistence.jdbc.password" value="SystemC@ll1989"/>-->
-      <!--<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>-->
-      <!--<property name="javax.persistence.schema-generation.database.action" value="create"/>-->
-      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
-      <property name="hibernate.show_sql" value="true"/>
-      <property name="hibernate.format_sql" value="true"/>
-      <property name="hibernate.hbm2ddl.auto" value="update"/>
-      <property name="hibernate.c3p0.min_size" value="5"/>
-      <property name="hibernate.c3p0.max_size" value="20"/>
-      <property name="hibernate.c3p0.timeout" value="300"/>
-      <property name="hibernate.c3p0.validate" value="true"/>
-      <property name="hibernate.c3p0.preferredTestQuery" value="select 1"/>
-    </properties>
-  </persistence-unit>
+    <persistence-unit name="EmpatiaPU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>model.UsuarioPesquisa</class>
+        <class>model.Hospital</class>
+        <class>model.Setor</class>
+        <class>model.Paciente</class>
+        <class>model.Motivo</class>
+        <class>model.Atendimento</class>
+        <class>model.Admissao</class>
+        <class>model.Avaliacao</class>
+        <class>model.Exercicio</class>
+        <class>model.ItemExercicio</class>
+        <class>model.Treino</class>
+        <class>model.Treinamento</class>
+        <class>model.ItemTreinamento</class>
+        <class>model.Score</class>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <properties>
+            <!--Configuração local-->
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/reabilitacao?serverTimezone=UTC"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="systemcall"/>
+            <!--Configuração da nuvem-->
+<!--            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/iridavis_reab?serverTimezone=UTC"/>
+            <property name="javax.persistence.jdbc.user" value="iridavis_reab"/>
+            <property name="javax.persistence.jdbc.password" value="SystemC@ll1989"/>
+            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+            <property name="javax.persistence.schema-generation.database.action" value="create"/>-->
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.c3p0.min_size" value="5"/>
+            <property name="hibernate.c3p0.max_size" value="20"/>
+            <property name="hibernate.c3p0.timeout" value="300"/>
+            <property name="hibernate.c3p0.validate" value="true"/>
+            <property name="hibernate.c3p0.preferredTestQuery" value="select 1"/>
+        </properties>
+    </persistence-unit>
 </persistence>
