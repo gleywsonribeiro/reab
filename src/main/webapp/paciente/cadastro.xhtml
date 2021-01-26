@@ -52,6 +52,7 @@
 
                                 <p:outputLabel for="button" value="Data de Nascimento" />
                                 <p:calendar id="button" mask="true" pattern="dd/MM/yyyy" required="true" requiredMessage="Informe a data de nascimento"
+                                            navigator="true" 
                                             locale="pt" value="#{pacienteController.paciente.dataNascimento}"/>
                             </p:panelGrid>
                         </p:fieldset>
