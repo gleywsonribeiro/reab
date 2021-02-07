@@ -5,6 +5,7 @@
  */
 package model.service;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Calendar;
@@ -19,9 +20,10 @@ import util.exception.NegocioException;
  *
  * @author gleyw
  */
-public class AtendimentoService {
+public class AtendimentoService implements Serializable {
 
     private AtendimentoDao dao = new AtendimentoDao();
+
     public void salvar(Atendimento atendimento) {
         if (dao.isPacienteEmAtendimento(atendimento.getPaciente())) {
             if (atendimento.getId() != null) {
@@ -63,8 +65,7 @@ public class AtendimentoService {
             throw new DBException("Não foi possível remover:" + e.getMessage());
         }
     }
-    
-    
+
     public void contagem() {
         List<Atendimento> atendimentos = listarTodos();
         for (Atendimento atendimento : atendimentos) {
@@ -72,6 +73,5 @@ public class AtendimentoService {
             System.out.println(localDate.getMonth().APRIL.toString());
         }
     }
-    
-    
+
 }

@@ -23,6 +23,11 @@ import model.Paciente;
 import model.Usuario;
 import model.service.AtendimentoService;
 import model.service.DataService;
+import model.service.InfoDataDeambulacao;
+import model.service.InfoDataExtubacao;
+import model.service.InfoDataIntubacao;
+import model.service.InfoDataOrtostase;
+import model.service.InfoDataSedestacao;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
 import util.exception.DBException;
@@ -38,24 +43,24 @@ import util.jsf.JsfUtil;
 public class GraficoController implements Serializable {
 
     private static final long serialVersionUID = 1L;
-       
+
     private BarChartModel sedestacao;
     private BarChartModel ortostase;
     private BarChartModel deambulacao;
     private BarChartModel intubacao;
     private BarChartModel extubacao;
-    
-    List<Atendimento> atendimentos =  new ArrayList<>();
+
+    List<Atendimento> atendimentos = new ArrayList<>();
     AtendimentoService atendimentoService = new AtendimentoService();
 
     public GraficoController() {
+        atendimentos = atendimentoService.getAtendimentosEmAndamento();
         createSedestacao();
         createOrtostase();
-//        createOrtostase();
-//        createOrtostase();
-//        createOrtostase();
+        createOrtostase();
+        createOrtostase();
+        createOrtostase();
     }
-    
 
     public BarChartModel getSedestacao() {
         return sedestacao;
@@ -78,59 +83,45 @@ public class GraficoController implements Serializable {
     }
 
     private void createSedestacao() {
-        sedestacao = new BarChartModel();
-        
-        String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
- 
-        ChartSeries qtdPacientes = new ChartSeries();
-        qtdPacientes.setLabel("Nº Pacientes");
-        
-        
-        ChartSeries mediaDia = new ChartSeries();
-        mediaDia.setLabel("Média Dias");
- 
-        DataService dataService = new DataService(atendimentoService.getAtendimentosEmAndamento());
-        
-        for(int i = 0; i < meses.length; i++) {
-            DadoMensal dm = dataService.getInfoSedestacao(i);
-            qtdPacientes.set(meses[i], dm.getNumeroPaciente());
-            mediaDia.set(meses[i], dm.getMediaDias());
-        }
-        
-        
-        sedestacao.addSeries(qtdPacientes);
-        sedestacao.addSeries(mediaDia);
-        sedestacao.setAnimate(true);
-        sedestacao.setLegendPosition("ne");
-        sedestacao.setTitle("1ª Sedestação");
-        
+        createChartAux(sedestacao, new InfoDataSedestacao(atendimentos), "1ª Sedestação");
     }
 
     private void createOrtostase() {
-        ortostase = new BarChartModel();
-    
+        createChartAux(ortostase, new InfoDataOrtostase(atendimentos), "1ª Ortostase");
+    }
+
+    private void createDeambulacao() {
+        createChartAux(deambulacao, new InfoDataDeambulacao(atendimentos), "1ª Deambulação");
+    }
+
+    private void createIntubacao() {
+        createChartAux(intubacao, new InfoDataIntubacao(atendimentos), "Intubação");
+    }
+
+    private void createExtubacao() {
+        createChartAux(extubacao, new InfoDataExtubacao(atendimentos), "Extubação");
+    }
+
+    private void createChartAux(BarChartModel bcm, DataService service, String titulo) {
+        bcm = new BarChartModel();
         String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
- 
+
         ChartSeries qtdPacientes = new ChartSeries();
         qtdPacientes.setLabel("Nº Pacientes");
-        
-        
+
         ChartSeries mediaDia = new ChartSeries();
         mediaDia.setLabel("Média Dias");
- 
-        DataService dataService = new DataService(atendimentoService.getAtendimentosEmAndamento());
-        
-        for(int i = 0; i < meses.length; i++) {
-            DadoMensal dm = dataService.getInfoOrtostase(i);
+
+        for (int i = 0; i < meses.length; i++) {
+            DadoMensal dm = service.getInfoData(i);
             qtdPacientes.set(meses[i], dm.getNumeroPaciente());
             mediaDia.set(meses[i], dm.getMediaDias());
         }
-        
-        
-        ortostase.addSeries(qtdPacientes);
-        ortostase.addSeries(mediaDia);
-        ortostase.setAnimate(true);
-        ortostase.setLegendPosition("ne");
-        ortostase.setTitle("1ª Ortostase");
+
+        bcm.addSeries(qtdPacientes);
+        bcm.addSeries(mediaDia);
+        bcm.setAnimate(true);
+        bcm.setLegendPosition("ne");
+        bcm.setTitle(titulo);
     }
 }
