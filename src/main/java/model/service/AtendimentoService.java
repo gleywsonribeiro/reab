@@ -66,12 +66,4 @@ public class AtendimentoService implements Serializable {
         }
     }
 
-    public void contagem() {
-        List<Atendimento> atendimentos = listarTodos();
-        for (Atendimento atendimento : atendimentos) {
-            LocalDate localDate = atendimento.getDataAtendimento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            System.out.println(localDate.getMonth().APRIL.toString());
-        }
-    }
-
 }

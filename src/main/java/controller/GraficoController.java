@@ -57,9 +57,9 @@ public class GraficoController implements Serializable {
         atendimentos = atendimentoService.getAtendimentosEmAndamento();
         createSedestacao();
         createOrtostase();
-        createOrtostase();
-        createOrtostase();
-        createOrtostase();
+        createDeambulacao();
+        createIntubacao();
+        createExtubacao();
     }
 
     public BarChartModel getSedestacao() {
@@ -83,27 +83,27 @@ public class GraficoController implements Serializable {
     }
 
     private void createSedestacao() {
-        createChartAux(sedestacao, new InfoDataSedestacao(atendimentos), "1ª Sedestação");
+        sedestacao = createChartAux(new InfoDataSedestacao(atendimentos), "1ª Sedestação");
     }
 
     private void createOrtostase() {
-        createChartAux(ortostase, new InfoDataOrtostase(atendimentos), "1ª Ortostase");
+        ortostase =  createChartAux(new InfoDataOrtostase(atendimentos), "1ª Ortostase");
     }
 
     private void createDeambulacao() {
-        createChartAux(deambulacao, new InfoDataDeambulacao(atendimentos), "1ª Deambulação");
+        deambulacao = createChartAux(new InfoDataDeambulacao(atendimentos), "1ª Deambulação");
     }
 
     private void createIntubacao() {
-        createChartAux(intubacao, new InfoDataIntubacao(atendimentos), "Intubação");
+        intubacao = createChartAux(new InfoDataIntubacao(atendimentos), "Intubação");
     }
 
     private void createExtubacao() {
-        createChartAux(extubacao, new InfoDataExtubacao(atendimentos), "Extubação");
+        extubacao = createChartAux(new InfoDataExtubacao(atendimentos), "Extubação");
     }
 
-    private void createChartAux(BarChartModel bcm, DataService service, String titulo) {
-        bcm = new BarChartModel();
+    private BarChartModel createChartAux(DataService service, String titulo) {
+        BarChartModel bcm = new BarChartModel();
         String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
 
         ChartSeries qtdPacientes = new ChartSeries();
@@ -123,5 +123,7 @@ public class GraficoController implements Serializable {
         bcm.setAnimate(true);
         bcm.setLegendPosition("ne");
         bcm.setTitle(titulo);
+        
+        return bcm;
     }
 }
