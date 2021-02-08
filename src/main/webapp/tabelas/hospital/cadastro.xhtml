@@ -10,58 +10,45 @@
     <ui:define name="content">
 
         <h:form id="form">
+            <p:toolbar id="tb">
+                <f:facet name="left">
+                    <p:commandButton value="Listar" icon="fa fa-search" process="@this" action="#"/>
+                    <p:commandButton value="Novo" icon="fa fa-file-o" process="@this" update="form" action="#"/>
+                    <span class="ui-separator">
+                        <span class="ui-icon pi pi-ellipsis-v" />
+                    </span>
+                    <p:commandButton id="btnSave" value="Salvar" icon="fa fa-save" action="#" update="@form" />
+                </f:facet>
+            </p:toolbar>
             <div class="ui-g ui-fluid">
+
                 <div class="ui-g-12 ui-lg-9">
                     <!-- Left colum -->
                     <div class="card card-w-title">
 
                         <p:growl autoUpdate="true"/>
-                        <p:fieldset legend="Cadastro de Hospital">
-                            <p:panelGrid id="cadastro" columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                        <p:fieldset legend="Dados do Hospital">
+                            <p:panelGrid id="cadastro" columns="2" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
                                 <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{hospitalController.hospital.nome}" required="true"/>
-                                    <label>Nome</label>
+                                    <p:inputText value="#{pacienteController.paciente.id}" disabled="true"/>
+                                    <label>Código</label>
                                 </h:panelGroup>
+
                                 <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputMask mask="99.999.999/9999-99" value="#{hospitalController.hospital.cnpj}" required="true"/>
+                                    <p:inputText value="#{pacienteController.paciente.nome}" required="true"/>
+                                    <label>Nome Fantasia</label>
+                                </h:panelGroup>
+                                
+                                <h:panelGroup styleClass="md-inputfield">
+                                    <p:inputMask mask="99.999.999/9999-99" value="#{pacienteController.paciente.cpf}" required="true"/>
                                     <label>CNPJ</label>
                                 </h:panelGroup>
 
-                                <p:commandButton icon="ui-icon-add" value="Salvar" action="#{hospitalController.salvar()}" update="hospitais"/>
                                 
                             </p:panelGrid>
                         </p:fieldset>
 
                     </div>
-                    <div class="card card-w-title">
-                        <p:dataTable id="hospitais" value="#{hospitalController.hospitais}" var="hospital"
-                                     emptyMessage="Sem dados." reflow="true">
-                            <f:facet name="header">
-                                Hospitais
-                            </f:facet>
-                            <p:column headerText="Código">
-                                <h:outputText value="#{hospital.id}"/>
-                            </p:column>
-                            <p:column headerText="Nome">
-                                <h:outputText value="#{hospital.nome}"/>
-                            </p:column>
-                            <p:column headerText="CNPJ">
-                                <h:outputText value="#{hospital.cnpj}"/>
-                            </p:column>
-                            <p:column style="text-align: center; width: 50px">
-                                <p:commandButton icon="ui-icon-edit" update="form:cadastro" process="@this">
-                                    <f:setPropertyActionListener value="#{hospital}" target="#{hospitalController.hospital}"/>
-                                </p:commandButton>
-                            </p:column>
-                            <p:column style="text-align: center; width: 50px">
-                                <p:commandButton icon="ui-icon-trash" action="#{hospitalController.remover()}" update="hospitais" process="@this">
-                                    <f:setPropertyActionListener value="#{hospital}" target="#{hospitalController.hospital}"/>
-                                    <p:confirm header="Alerta" message="Confirma a exclusão da Unidade #{hospital.nome} ?" icon="fa fa-exclamation-triangle" />
-                                </p:commandButton>
-                            </p:column>
-                        </p:dataTable>
-                    </div>
-
                 </div>
                 <div class="ui-g-12 ui-lg-6">
                     <!-- Right colum -->
@@ -69,11 +56,7 @@
                 </div>
             </div>
 
-            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
-                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times" />
-            </p:confirmDialog>
-
+            <p:sticky target="tb" margin="75"/>
         </h:form>    
     </ui:define>
 
