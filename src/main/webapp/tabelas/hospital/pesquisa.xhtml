@@ -26,39 +26,27 @@
                     <div class="card card-w-title">
 
                         <p:growl autoUpdate="true"/>
-                        <p:dataTable value="#{pacienteController.pacientes}" var="paciente" reflow="true" emptyMessage="Sem dados.">
-                            <f:facet name="header">Pacientes</f:facet>
+                        <p:dataTable value="#{hospitalController.hospitais}" var="hospital" reflow="true" emptyMessage="Sem dados.">
+                            <f:facet name="header">Hospitais</f:facet>
                             <p:column headerText="Código" style="width: 10%">
-                                <h:outputText value="#{paciente.id}"/>
+                                <h:outputText value="#{hospital.id}"/>
                             </p:column>
-                            <p:column headerText="Nome">
-                                <h:outputText value="#{paciente.nome}"/>
-                            </p:column>
-                            <p:column headerText="Nascimento">
-                                <h:outputText value="#{paciente.dataNascimento}">
-                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                </h:outputText>
-                            </p:column>
-                            
-                            <p:column style="text-align: center">
-                                <h:outputLink value="cadastro.xhtml">
-                                    <p:button id="atender" icon="fa fa-stethoscope" />
-                                    <f:param name="id" value="#{paciente.id}"/>
-                                    <p:tooltip for="atender" value="Atender"/>
-                                </h:outputLink>
+                            <p:column headerText="Nome Fantasia">
+                                <h:outputText value="#{hospital.nome}"/>
                             </p:column>
 
-                            <p:column style="text-align: center">
+                            <p:column style="text-align: center; width: 50px">
                                 <h:outputLink value="cadastro.xhtml">
                                     <p:button icon="fa fa-edit" />
-                                    <f:param name="id" value="#{paciente.id}"/>
+                                    <f:param name="id" value="#{hospital.id}"/>
                                 </h:outputLink>
                             </p:column>
-                            <p:column style="text-align: center">
-                                <p:commandButton  id="bt" icon="fa fa-trash" action="#{pacienteController.remover()}" styleClass="red-btn"
+                            
+                            <p:column style="text-align: center; width: 50px">
+                                <p:commandButton  id="bt" icon="fa fa-trash" action="#{hospitalController.remover()}" styleClass="red-btn"
                                                   update="@form" process="@this">
-                                    <f:setPropertyActionListener target="#{pacienteController.paciente}" value="#{paciente}"/>
-                                    <p:confirm header="Alerta" message="Quer mesmo apagar este paciente?" icon="fa fa-exclamation-triangle" />
+                                    <f:setPropertyActionListener target="#{hospitalController.hospital}" value="#{hospital}"/>
+                                    <p:confirm header="Alerta" message="Tem certeza que deseja remover #{hospital.nome}?" icon="fa fa-exclamation-triangle" />
                                 </p:commandButton>
 
                             </p:column>

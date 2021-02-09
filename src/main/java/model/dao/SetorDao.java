@@ -29,9 +29,9 @@ public class SetorDao extends Dao<Setor>{
         return em;
     }
     
-    public List<Setor> getSetoresPorHospital(Hospital h) {
-        Query query = em.createQuery("SELECT s FROM Setor as s where s.hospital = :h", Setor.class);
-        return query.getResultList();
-    }
+//    public List<Setor> getSetoresPorHospital(Hospital h) {
+//        Query query = em.createQuery("SELECT s FROM Setor as s where s.hospital = :h", Setor.class);
+//        return query.getResultList();
+//    }
 
 }

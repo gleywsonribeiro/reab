@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -33,6 +34,9 @@ public class Hospital implements Serializable {
 
     private String nome;
     private String cnpj;
+    
+    @OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
+    private List<Setor> setores;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "hospital_usuario",
@@ -41,9 +45,11 @@ public class Hospital implements Serializable {
     private Set<Usuario> usuarios = new HashSet<>();
 
     public Hospital() {
+        this.setores = new ArrayList<>();
     }
 
     public Hospital(Long id, String nome, String cnpj) {
+        this.setores = new ArrayList<>();
         this.id = id;
         this.nome = nome;
         this.cnpj = cnpj;
@@ -81,6 +87,14 @@ public class Hospital implements Serializable {
 
     public void setUsuarios(Set<Usuario> usuarios) {
         this.usuarios = usuarios;
+    }
+
+    public List<Setor> getSetores() {
+        return setores;
+    }
+
+    public void setSetores(List<Setor> setores) {
+        this.setores = setores;
     }
 
     

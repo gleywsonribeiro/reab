@@ -12,13 +12,11 @@ import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import model.Hospital;
-import model.Perfil;
 import model.Setor;
-import model.Usuario;
 import model.dao.HospitalDao;
 import model.dao.SetorDao;
-import model.dao.UsuarioDao;
 import util.exception.DBException;
 import util.jsf.JsfUtil;
 
@@ -36,22 +34,29 @@ public class HospitalController implements Serializable {
     private List<Hospital> hospitais;
     private HospitalDao dao = new HospitalDao();
     
-    private SetorDao setorDao = new SetorDao();
-    private List<Setor> setores = new ArrayList<>();
+    
     private Setor setor = new Setor();
 
-    @PostConstruct
+     @PostConstruct
     private void init() {
-        hospital = new Hospital();
         hospitais = dao.findAll();
-        
-        setores = setorDao.getSetoresPorHospital(hospital);
+        String chave = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+
+        if (chave != null) {
+            Long id = Long.parseLong(chave);
+            hospital = dao.find(id);
+        }
+
     }
 
-    public List<Setor> getSetores() {
-        return setores;
+    public void removeSetor() {
+        hospital.getSetores().remove(setor);
     }
-
+    
+    public  void addSetor() {
+        hospital.getSetores().add(setor);
+    }
+    
     public Setor getSetor() {
         return setor;
     }

@@ -12,12 +12,12 @@
         <h:form id="form">
             <p:toolbar id="tb">
                 <f:facet name="left">
-                    <p:commandButton value="Listar" icon="fa fa-search" process="@this" action="#"/>
+                    <p:commandButton value="Listar" icon="fa fa-search" process="@this" action="pesquisa?faces-redirect=true"/>
                     <p:commandButton value="Novo" icon="fa fa-file-o" process="@this" update="form" action="#"/>
                     <span class="ui-separator">
                         <span class="ui-icon pi pi-ellipsis-v" />
                     </span>
-                    <p:commandButton id="btnSave" value="Salvar" icon="fa fa-save" action="#" update="@form" />
+                    <p:commandButton id="btnSave" value="Salvar" icon="fa fa-save" action="#{hospitalController.salvar()}" update="@form" />
                 </f:facet>
             </p:toolbar>
             <div class="ui-g ui-fluid">
@@ -47,18 +47,45 @@
                             </p:panelGrid>
                         </p:fieldset>
 
-                        <p:dataTable value="#{hospitalController.setores}" var="setor" reflow="true" >
+
+                    </div>
+                </div>
+
+                <div class="ui-g-12 ui-lg-9">
+                    <div class="card card-w-title">
+
+                        <p:fieldset legend="Unidades de Internação">
+                            <h:panelGrid columns="1">
+                                <p:outputLabel value="Nome" for="nome"/>
+                                <p:inputText id="nome" value="" size="50"/>
+                            </h:panelGrid>
+                        </p:fieldset>
+                        <p:spacer/>
+                        <p:dataTable id="setores" value="#{hospitalController.hospital.setores}" var="setor" reflow="true" >
                             <f:facet name="header">
                                 <h:outputText value="Unidades"/>
                             </f:facet>
-                            <p:column headerText="Código">
+                            <p:column headerText="Código" style="width: 100px; text-align: center">
                                 <h:outputText value="#{setor.id}"/>
                             </p:column>
                             <p:column headerText="Nome">
                                 <h:outputText value="#{setor.nome}"/>
                             </p:column>
+
+                            <p:column style="text-align: center; width: 50px">
+                                <p:commandButton icon="fa fa-edit"/>
+                            </p:column>
+
+                            <p:column style="text-align: center; width: 50px">
+                                <p:commandButton  id="bt" icon="fa fa-trash" action="#{hospitalController.removeSetor()}" styleClass="red-btn"
+                                                  update="setores" process="@this">
+                                    <f:setPropertyActionListener target="#{hospitalController.setor}" value="#{setor}"/>
+                                    <p:confirm header="Alerta" message="Tem certeza que deseja remover o #{setor.nome}?" icon="fa fa-exclamation-triangle" />
+                                </p:commandButton>
+                            </p:column>
                         </p:dataTable>
                     </div>
+
                 </div>
                 <div class="ui-g-12 ui-lg-6">
                     <!-- Right colum -->
@@ -66,6 +93,10 @@
                 </div>
             </div>
 
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+            </p:confirmDialog>
             <p:sticky target="tb" margin="75"/>
         </h:form>    
     </ui:define>
