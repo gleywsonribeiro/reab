@@ -30,24 +30,34 @@
                         <p:fieldset legend="Dados do Hospital">
                             <p:panelGrid id="cadastro" columns="2" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
                                 <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{pacienteController.paciente.id}" disabled="true"/>
+                                    <p:inputText value="#{hospitalController.hospital.id}" disabled="true"/>
                                     <label>Código</label>
                                 </h:panelGroup>
 
                                 <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{pacienteController.paciente.nome}" required="true"/>
+                                    <p:inputText value="#{hospitalController.hospital.nome}" required="true"/>
                                     <label>Nome Fantasia</label>
                                 </h:panelGroup>
-                                
+
                                 <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputMask mask="99.999.999/9999-99" value="#{pacienteController.paciente.cpf}" required="true"/>
+                                    <p:inputMask mask="99.999.999/9999-99" value="#{hospitalController.hospital.cnpj}" required="true"/>
                                     <label>CNPJ</label>
                                 </h:panelGroup>
 
-                                
                             </p:panelGrid>
                         </p:fieldset>
 
+                        <p:dataTable value="#{hospitalController.setores}" var="setor" reflow="true" >
+                            <f:facet name="header">
+                                <h:outputText value="Unidades"/>
+                            </f:facet>
+                            <p:column headerText="Código">
+                                <h:outputText value="#{setor.id}"/>
+                            </p:column>
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{setor.nome}"/>
+                            </p:column>
+                        </p:dataTable>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">

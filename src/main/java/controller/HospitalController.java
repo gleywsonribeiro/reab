@@ -6,6 +6,7 @@
 package controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
@@ -13,8 +14,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import model.Hospital;
 import model.Perfil;
+import model.Setor;
 import model.Usuario;
 import model.dao.HospitalDao;
+import model.dao.SetorDao;
 import model.dao.UsuarioDao;
 import util.exception.DBException;
 import util.jsf.JsfUtil;
@@ -30,14 +33,31 @@ public class HospitalController implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Hospital hospital;
-
     private List<Hospital> hospitais;
     private HospitalDao dao = new HospitalDao();
+    
+    private SetorDao setorDao = new SetorDao();
+    private List<Setor> setores = new ArrayList<>();
+    private Setor setor = new Setor();
 
     @PostConstruct
     private void init() {
         hospital = new Hospital();
         hospitais = dao.findAll();
+        
+        setores = setorDao.getSetoresPorHospital(hospital);
+    }
+
+    public List<Setor> getSetores() {
+        return setores;
+    }
+
+    public Setor getSetor() {
+        return setor;
+    }
+
+    public void setSetor(Setor setor) {
+        this.setor = setor;
     }
 
     public Hospital getHospital() {

@@ -5,7 +5,9 @@
  */
 package model.dao;
 
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import jpa.util.HibernateUtil;
 import model.Hospital;
 import model.Setor;
@@ -25,6 +27,11 @@ public class SetorDao extends Dao<Setor>{
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+    
+    public List<Setor> getSetoresPorHospital(Hospital h) {
+        Query query = em.createQuery("SELECT s FROM Setor as s where s.hospital = :h", Setor.class);
+        return query.getResultList();
     }
 
 }
