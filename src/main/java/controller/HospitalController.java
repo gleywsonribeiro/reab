@@ -17,6 +17,7 @@ import model.Hospital;
 import model.Setor;
 import model.dao.HospitalDao;
 import model.dao.SetorDao;
+import model.service.SetorService;
 import util.exception.DBException;
 import util.jsf.JsfUtil;
 
@@ -33,11 +34,13 @@ public class HospitalController implements Serializable {
     private Hospital hospital;
     private List<Hospital> hospitais;
     private HospitalDao dao = new HospitalDao();
-    
-    
-    private Setor setor = new Setor();
 
-     @PostConstruct
+    private Setor setor = new Setor();
+    private List<Setor> setores;
+    SetorService setorService = new SetorService();
+    
+
+    @PostConstruct
     private void init() {
         hospitais = dao.findAll();
         String chave = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
@@ -45,18 +48,17 @@ public class HospitalController implements Serializable {
         if (chave != null) {
             Long id = Long.parseLong(chave);
             hospital = dao.find(id);
+            setores = setorService.getSetoresPorHospital(hospital);
         }
 
     }
 
     public void removeSetor() {
-        hospital.getSetores().remove(setor);
+        setorService.remover(setor);
+        setores = setorService.getSetoresPorHospital(hospital);
+        setor = new Setor();
     }
-    
-    public  void addSetor() {
-        hospital.getSetores().add(setor);
-    }
-    
+
     public Setor getSetor() {
         return setor;
     }
@@ -84,6 +86,16 @@ public class HospitalController implements Serializable {
         this.hospitais = hospitais;
     }
 
+    public List<Setor> getSetores() {
+        return setores;
+    }
+
+    public void setSetores(List<Setor> setores) {
+        this.setores = setores;
+    }
+    
+    
+
     public void salvar() {
         try {
             if (hospital.getId() == null) {
@@ -92,16 +104,24 @@ public class HospitalController implements Serializable {
                 dao.edit(hospital);
             }
             hospitais = null;
+            setor = new Setor();
+            JsfUtil.addMessage("Salvo com sucesso!");
         } catch (DBException e) {
             JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
         }
     }
-    
-    public void insert() {
-        hospital.getSetores().add(setor);
-        setor = new Setor();
-        salvar();
+
+    public void inserirSetor() {
+       setor.setHospital(hospital);
+
+       setorService.salvar(setor);
+       setor = new Setor();
+       setores = setorService.getSetoresPorHospital(hospital);
+       
     }
+    
+    
+    
 
     public List<Hospital> completeHospital(String query) {
         String queryLowerCase = query.toLowerCase();

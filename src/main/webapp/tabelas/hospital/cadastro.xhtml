@@ -59,12 +59,13 @@
                                 <p:outputLabel value="Nome" for="nome"/>
                                 <p:spacer/>
                                 <p:inputText id="nome" value="#{hospitalController.setor.nome}" size="50"/>
-                                
-                                <p:commandButton icon="fa fa-arrow-circle-down" update="@all" process="@this" action="#{hospitalController.insert()}"/>
+
+                                <p:commandButton icon="fa fa-arrow-circle-down" update="form:nome form:setores" process="@this form:nome" action="#{hospitalController.inserirSetor()}"/>
                             </h:panelGrid>
                         </p:fieldset>
                         <p:spacer/>
-                        <p:dataTable id="setores" value="#{hospitalController.hospital.setores}" var="setor" reflow="true" >
+                        <p:dataTable id="setores" value="#{hospitalController.setores}" var="setor" reflow="true" editable="true">
+                            <p:ajax event="rowEdit" listener="#{hospitalController.inserirSetor()}"/>
                             <f:facet name="header">
                                 <h:outputText value="Unidades"/>
                             </f:facet>
@@ -72,18 +73,24 @@
                                 <h:outputText value="#{setor.id}"/>
                             </p:column>
                             <p:column headerText="Nome">
-                                <h:outputText value="#{setor.nome}"/>
+                                <p:cellEditor>
+                                    <f:facet name="output">
+                                        <h:outputText value="#{setor.nome}" />
+                                    </f:facet>
+                                    <f:facet name="input">
+                                        <p:inputText value="#{setor.nome}" />
+                                    </f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column>
+                                <p:column style="width: 1rem">
+                                    <p:rowEditor editTitle="Editar" cancelTitle="Cancelar" saveTitle="Salvar"/>
+                                </p:column>
                             </p:column>
 
-                            <p:column style="text-align: center; width: 50px">
-                                <p:commandButton icon="fa fa-edit" process="@this" update="form:nome">
-                                    <f:setPropertyActionListener target="#{hospitalController.setor}" value="#{setor}"/>
-                                </p:commandButton>
-                            </p:column>
-
-                            <p:column style="text-align: center; width: 50px">
+                            <p:column style="width:50px">
                                 <p:commandButton  id="bt" icon="fa fa-trash" action="#{hospitalController.removeSetor()}" styleClass="red-btn"
-                                                  update="setores" process="@this">
+                                                  update="form:setores" process="@this">
                                     <f:setPropertyActionListener target="#{hospitalController.setor}" value="#{setor}"/>
                                     <p:confirm header="Alerta" message="Tem certeza que deseja remover o #{setor.nome}?" icon="fa fa-exclamation-triangle" />
                                 </p:commandButton>
