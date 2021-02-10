@@ -96,6 +96,12 @@ public class HospitalController implements Serializable {
             JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
         }
     }
+    
+    public void insert() {
+        hospital.getSetores().add(setor);
+        setor = new Setor();
+        salvar();
+    }
 
     public List<Hospital> completeHospital(String query) {
         String queryLowerCase = query.toLowerCase();
