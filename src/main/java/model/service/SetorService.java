@@ -5,6 +5,7 @@
  */
 package model.service;
 
+import java.io.Serializable;
 import java.util.List;
 import model.Hospital;
 import model.Setor;
@@ -16,7 +17,7 @@ import util.jsf.JsfUtil;
  *
  * @author Gleywson
  */
-public class SetorService {
+public class SetorService implements Serializable {
 
     SetorDao dao = new SetorDao();
 

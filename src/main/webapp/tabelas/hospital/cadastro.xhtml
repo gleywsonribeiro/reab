@@ -65,7 +65,10 @@
                         </p:fieldset>
                         <p:spacer/>
                         <p:dataTable id="setores" value="#{hospitalController.setores}" var="setor" reflow="true" editable="true">
-                            <p:ajax event="rowEdit" listener="#{hospitalController.inserirSetor()}"/>
+                            <p:ajax event="rowEdit" listener="#{hospitalController.editarSetor()}">
+                                <f:setPropertyActionListener target="#{hospitalController.setor}" value="#{setor}"/>
+                            </p:ajax>
+
                             <f:facet name="header">
                                 <h:outputText value="Unidades"/>
                             </f:facet>

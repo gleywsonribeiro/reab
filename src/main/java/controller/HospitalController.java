@@ -120,6 +120,10 @@ public class HospitalController implements Serializable {
        
     }
     
+    public void editarSetor() {
+        setorService.salvar(setor);
+    }
+    
     
     
 
