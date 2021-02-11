@@ -13,11 +13,11 @@
             <p:toolbar id="tb">
                 <f:facet name="left">
                     <p:commandButton value="Listar" icon="fa fa-search" process="@this" action="pesquisa?faces-redirect=true"/>
-                    <p:commandButton value="Novo" icon="fa fa-file-o" process="@this" update="form" action="#"/>
+                    <p:commandButton value="Novo" icon="fa fa-file-o" process="@this" update="form" action="#{hospitalController.novo()}"/>
                     <span class="ui-separator">
                         <span class="ui-icon pi pi-ellipsis-v" />
                     </span>
-                    <p:commandButton id="btnSave" value="Salvar" icon="fa fa-save" action="#{hospitalController.salvar()}" update="@form" />
+                    <p:commandButton id="btnSave" value="Salvar" icon="fa fa-save" action="#{hospitalController.salvar()}" update="@form" process="@this form:cadastro"/>
                 </f:facet>
             </p:toolbar>
             <div class="ui-g ui-fluid">
@@ -28,7 +28,7 @@
 
                         <p:growl autoUpdate="true"/>
                         <p:fieldset legend="Dados do Hospital">
-                            <p:panelGrid id="cadastro" columns="2" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                            <p:panelGrid id="cadastro" columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
                                 <h:panelGroup styleClass="md-inputfield">
                                     <p:inputText value="#{hospitalController.hospital.id}" disabled="true"/>
                                     <label>Código</label>
@@ -54,17 +54,19 @@
                 <div class="ui-g-12 ui-lg-9" id="div-setor">
                     <div class="card card-w-title">
 
-                        <p:fieldset legend="Unidades de Internação">
+                        <p:fieldset legend="Unidades de Internação" rendered="#{hospitalController.cadastrado}">
                             <h:panelGrid columns="2">
                                 <p:outputLabel value="Nome" for="nome"/>
                                 <p:spacer/>
-                                <p:inputText id="nome" value="#{hospitalController.setor.nome}" size="50"/>
+                                <p:inputText id="nome" value="#{hospitalController.setor.nome}" size="50" required="true"/>
 
-                                <p:commandButton icon="fa fa-arrow-circle-down" update="form:nome form:setores" process="@this form:nome" action="#{hospitalController.inserirSetor()}"/>
+                                <p:commandButton icon="fa fa-arrow-circle-down" update="form:nome form:setores"
+                                                 process="@this form:nome" action="#{hospitalController.inserirSetor()}"/>
                             </h:panelGrid>
                         </p:fieldset>
                         <p:spacer/>
-                        <p:dataTable id="setores" value="#{hospitalController.setores}" var="setor" reflow="true" editable="true">
+                        <p:dataTable id="setores" value="#{hospitalController.setores}" var="setor" 
+                                     rendered="#{hospitalController.cadastrado}" reflow="true">
                             <p:ajax event="rowEdit" listener="#{hospitalController.editarSetor()}">
                                 <f:setPropertyActionListener target="#{hospitalController.setor}" value="#{setor}"/>
                             </p:ajax>
@@ -76,20 +78,15 @@
                                 <h:outputText value="#{setor.id}"/>
                             </p:column>
                             <p:column headerText="Nome">
-                                <p:cellEditor>
-                                    <f:facet name="output">
-                                        <h:outputText value="#{setor.nome}" />
-                                    </f:facet>
-                                    <f:facet name="input">
-                                        <p:inputText value="#{setor.nome}" />
-                                    </f:facet>
-                                </p:cellEditor>
+                                <h:outputText value="#{setor.nome}" />
                             </p:column>
-                            <p:column>
-                                <p:column style="width: 1rem">
-                                    <p:rowEditor editTitle="Editar" cancelTitle="Cancelar" saveTitle="Salvar"/>
-                                </p:column>
+
+                            <p:column style="width:50px">
+                                <p:commandButton icon="fa fa-pencil-square" styleClass="teal-btn" update="form:nome" process="@this">
+                                    <f:setPropertyActionListener target="#{hospitalController.setor}" value="#{setor}"/>
+                                </p:commandButton>
                             </p:column>
+
 
                             <p:column style="width:50px">
                                 <p:commandButton  id="bt" icon="fa fa-trash" action="#{hospitalController.removeSetor()}" styleClass="red-btn"

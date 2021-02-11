@@ -31,7 +31,7 @@ public class HospitalController implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Hospital hospital;
+    private Hospital hospital = new Hospital();
     private List<Hospital> hospitais;
     private HospitalDao dao = new HospitalDao();
 
@@ -51,6 +51,11 @@ public class HospitalController implements Serializable {
             setores = setorService.getSetoresPorHospital(hospital);
         }
 
+    }
+    
+    public void novo() {
+        hospital = new Hospital();
+        setores = new ArrayList<>();
     }
 
     public void removeSetor() {
@@ -124,6 +129,10 @@ public class HospitalController implements Serializable {
         setorService.salvar(setor);
     }
     
+    
+    public boolean isCadastrado() {
+        return hospital.getId() != null;
+    }
     
     
 

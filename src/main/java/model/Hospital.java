@@ -35,7 +35,7 @@ public class Hospital implements Serializable {
     private String nome;
     private String cnpj;
     
-    @OneToMany(mappedBy = "hospital")
+    @OneToMany(mappedBy = "hospital", cascade = CascadeType.REMOVE)
     private List<Setor> setores;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
