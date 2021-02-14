@@ -46,4 +46,8 @@ public class SetorService implements Serializable {
     public List<Setor> getSetoresPorHospital(Hospital hospital) {
         return dao.getSetoresPorHospital(hospital);
     }
+    
+    public List<Setor> getSetores() {
+        return dao.findAll();
+    }
 }
