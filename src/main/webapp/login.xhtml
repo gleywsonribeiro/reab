@@ -38,6 +38,14 @@
                             <label>Senha</label>
                         </h:panelGroup>
                     </div>
+                    <div class="ui-g-12" style="text-align: right">
+
+                        <p:selectOneMenu>
+                            <f:selectItem itemLabel="Hospital"/>
+                            <f:selectItem itemLabel="Hospital Metropolitano"/>
+                        </p:selectOneMenu>
+
+                    </div>
                     <div class="ui-g-12">
                         <p:commandButton action="#{loginController.login()}" value="Entrar" icon="ui-icon-person" ajax="false"/>
                     </div>
