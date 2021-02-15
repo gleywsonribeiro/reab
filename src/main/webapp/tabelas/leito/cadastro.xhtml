@@ -1,0 +1,93 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Leitos</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <div class="ui-g ui-fluid">
+
+                <div class="ui-g-12 ui-lg-9">
+                    <!-- Left colum -->
+                    <div class="card card-w-title">
+
+                        <p:growl autoUpdate="true"/>
+                        <h1>
+                            <h:outputText value="#{leitoController.setor.nome}"/>
+                        </h1>
+                        <p:fieldset legend="Dados do leito">
+                            <p:panelGrid id="cadastro" columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                                <h:panelGroup styleClass="md-inputfield">
+                                    <p:inputText value="#{leitoController.leito.descricao}" required="true"/>
+                                    <label>Descrição</label>
+                                </h:panelGroup>
+
+                                <h:panelGroup>
+                                    <p:outputLabel value="Sexo: "/>
+                                    <p:selectOneRadio value="#{leitoController.leito.sexo}" layout="responsive" columns="1" required="true" requiredMessage="Escolha o sexo">
+                                        <f:selectItem itemLabel="Masculino" itemValue="M" />
+                                        <f:selectItem itemLabel="Feminino" itemValue="F" />
+                                        <f:selectItem itemLabel="Ambos" itemValue="A" />
+                                    </p:selectOneRadio>
+                                </h:panelGroup>
+
+                                <h:panelGroup>
+                                    <p:outputLabel value="Ativo: "/>
+                                    <p:selectBooleanCheckbox value="#{leitoController.leito.ativo}"/>
+                                </h:panelGroup>
+
+
+                            </p:panelGrid>
+
+                        </p:fieldset>
+                        
+                        <p:commandButton value="Salvar" icon="fa fa-save" style="width: auto; margin-top: 10px"
+                                         action="#{leitoController.salvar()}" update="cadastro form:leitos"/>
+                    </div>
+                </div>
+
+                <div class="ui-g-12 ui-lg-12">
+                    <div class="card card-w-title">
+                        <p:dataTable id="leitos" value="#{leitoController.leitos}" var="leito">
+                            <f:facet name="header">
+                                <h:outputText value="Leitos"/> 
+                            </f:facet>
+                            <p:column headerText="código" style="width: 50px">
+                                <h:outputText value="#{leito.id}" />
+                            </p:column>
+
+                            <p:column headerText="descrição">
+                                <h:outputText value="#{leito.descricao}" />
+                            </p:column>
+
+                            <p:column headerText="ocupação">
+                                <h:outputText value="#{leito.ocupacao}" />
+                            </p:column>
+
+                            <p:column headerText="ativo">
+                                <h:outputText value="#{leito.ativo}" />
+                            </p:column>
+
+                            <p:column headerText="sexo">
+                                <h:outputText value="#{leito.sexo}" />
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+
+                </div>
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Right colum -->
+
+                </div>
+            </div>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

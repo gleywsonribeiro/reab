@@ -5,10 +5,13 @@
  */
 package model.dao;
 
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import jpa.util.HibernateUtil;
 import model.Leito;
 import model.Motivo;
+import model.Setor;
 
 /**
  *
@@ -25,6 +28,12 @@ public class LeitoDao extends Dao<Leito>{
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+    
+    public List<Leito> getLeitosPorSetor(Setor setor) {
+        Query query = em.createQuery("SELECT l FROM Leito as l where l.setor =: setor", Leito.class);
+        query.setParameter("setor", setor);
+        return query.getResultList();
     }
 
 }

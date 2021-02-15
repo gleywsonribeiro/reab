@@ -50,4 +50,8 @@ public class SetorService implements Serializable {
     public List<Setor> getSetores() {
         return dao.findAll();
     }
+    
+    public Setor buscarPorId(Long id) {
+        return dao.find(id);
+    }
 }

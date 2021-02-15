@@ -32,6 +32,15 @@ public class Leito implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Setor setor;
+
+    public Leito() {
+        this.ativo = true;
+        this.ocupacao = "V";
+    }
+
+
+    
+    
     
 
     public Long getId() {

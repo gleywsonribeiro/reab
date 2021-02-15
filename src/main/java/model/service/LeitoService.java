@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import model.Atendimento;
 import model.Leito;
+import model.Setor;
 import model.dao.AtendimentoDao;
 import model.dao.LeitoDao;
 import util.exception.DBException;
@@ -29,4 +30,18 @@ public class LeitoService implements Serializable {
     public List<Leito> listar() {
         return dao.findAll();
     }
+    
+    public List<Leito> listarPorSetor(Setor setor) {
+        return dao.getLeitosPorSetor(setor);
+    }
+    
+    public void salvar(Leito leito) {
+        if(leito.getId() == null) {
+            dao.create(leito);
+        } else {
+            dao.edit(leito);
+        }
+        
+    }
+    
 }
