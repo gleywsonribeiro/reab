@@ -14,6 +14,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import model.Leito;
+import model.LeitoSexo;
+import model.Ocupacao;
 import model.Paciente;
 import model.Setor;
 import model.dao.PacienteDao;
@@ -95,10 +97,18 @@ public class LeitoController implements Serializable {
     }
 
     public List<Leito> getLeitos() {
-        if(leitos == null) {
-            leitoService.listarPorSetor(setor);
+        if (leitos == null) {
+            leitos = leitoService.listarPorSetor(setor);
         }
         return leitos;
+    }
+
+    public LeitoSexo[] getSexos() {
+        return LeitoSexo.values();
+    }
+    
+    public List<Leito> getLeitosVagos() {
+        return leitoService.getLeitosVagos();
     }
 
 }

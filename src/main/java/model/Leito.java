@@ -7,6 +7,8 @@ package model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,8 +27,12 @@ public class Leito implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descricao;
-    private String sexo;
-    private String ocupacao;
+    
+    @Enumerated(EnumType.STRING)
+    private LeitoSexo sexo;
+    
+    @Enumerated(EnumType.STRING)
+    private Ocupacao ocupacao;
     private Boolean ativo;
     
     @ManyToOne
@@ -35,7 +41,7 @@ public class Leito implements Serializable {
 
     public Leito() {
         this.ativo = true;
-        this.ocupacao = "V";
+        this.ocupacao = Ocupacao.VAGO;
     }
 
 
@@ -59,19 +65,19 @@ public class Leito implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getSexo() {
+    public LeitoSexo getSexo() {
         return sexo;
     }
 
-    public void setSexo(String sexo) {
+    public void setSexo(LeitoSexo sexo) {
         this.sexo = sexo;
     }
 
-    public String getOcupacao() {
+    public Ocupacao getOcupacao() {
         return ocupacao;
     }
 
-    public void setOcupacao(String ocupacao) {
+    public void setOcupacao(Ocupacao ocupacao) {
         this.ocupacao = ocupacao;
     }
 

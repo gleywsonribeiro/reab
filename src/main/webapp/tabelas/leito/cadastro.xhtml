@@ -18,8 +18,10 @@
 
                         <p:growl autoUpdate="true"/>
                         <h1>
-                            <h:outputText value="#{leitoController.setor.nome}"/>
+                            <h:outputText value="#{leitoController.setor.nome}" style="margin-right: 10px"/>
+                            <p:commandButton icon="fa fa-search" action="pesquisa?faces-redirect=true" process="@this"/>
                         </h1>
+
                         <p:fieldset legend="Dados do leito">
                             <p:panelGrid id="cadastro" columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
                                 <h:panelGroup styleClass="md-inputfield">
@@ -30,9 +32,8 @@
                                 <h:panelGroup>
                                     <p:outputLabel value="Sexo: "/>
                                     <p:selectOneRadio value="#{leitoController.leito.sexo}" layout="responsive" columns="1" required="true" requiredMessage="Escolha o sexo">
-                                        <f:selectItem itemLabel="Masculino" itemValue="M" />
-                                        <f:selectItem itemLabel="Feminino" itemValue="F" />
-                                        <f:selectItem itemLabel="Ambos" itemValue="A" />
+                                        <f:selectItems value="#{leitoController.sexos}"
+                                                       var="sexo" itemValue="#{sexo}" itemLabel="#{sexo.descricao}"/>
                                     </p:selectOneRadio>
                                 </h:panelGroup>
 
@@ -45,7 +46,7 @@
                             </p:panelGrid>
 
                         </p:fieldset>
-                        
+
                         <p:commandButton value="Salvar" icon="fa fa-save" style="width: auto; margin-top: 10px"
                                          action="#{leitoController.salvar()}" update="cadastro form:leitos"/>
                     </div>
@@ -69,12 +70,12 @@
                                 <h:outputText value="#{leito.ocupacao}" />
                             </p:column>
 
-                            <p:column headerText="ativo">
-                                <h:outputText value="#{leito.ativo}" />
+                            <p:column headerText="ativo" style="text-align: center">
+                                <p:selectBooleanCheckbox value="#{leito.ativo}" disabled="true" />
                             </p:column>
 
                             <p:column headerText="sexo">
-                                <h:outputText value="#{leito.sexo}" />
+                                <h:outputText value="#{leito.sexo.descricao}" />
                             </p:column>
                         </p:dataTable>
                     </div>

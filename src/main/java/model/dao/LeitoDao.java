@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import jpa.util.HibernateUtil;
 import model.Leito;
 import model.Motivo;
+import model.Ocupacao;
 import model.Setor;
 
 /**
@@ -33,6 +34,12 @@ public class LeitoDao extends Dao<Leito>{
     public List<Leito> getLeitosPorSetor(Setor setor) {
         Query query = em.createQuery("SELECT l FROM Leito as l where l.setor =: setor", Leito.class);
         query.setParameter("setor", setor);
+        return query.getResultList();
+    }
+    
+    public List<Leito> getLeitosVagos() {
+        Query query = em.createQuery("SELECT l FROM Leito as l where l.ocupacao =: ocupacao", Leito.class);
+        query.setParameter("ocupacao", Ocupacao.VAGO);
         return query.getResultList();
     }
 

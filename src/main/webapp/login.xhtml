@@ -41,8 +41,8 @@
                     <div class="ui-g-12" style="text-align: right">
 
                         <p:selectOneMenu>
-                            <f:selectItem itemLabel="Hospital"/>
-                            <f:selectItem itemLabel="Hospital Metropolitano"/>
+                            <f:selectItems value="#{hospitalController.hospitais}" var="hospita"
+                                           itemLabel="#{hospita.nome}" itemValue="#{hospita.nome}"/>
                         </p:selectOneMenu>
 
                     </div>

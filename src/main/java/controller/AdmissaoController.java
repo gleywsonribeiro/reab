@@ -90,25 +90,25 @@ public class AdmissaoController implements Serializable {
     
 
     public void admitir() {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        HttpSession httpSession = (HttpSession) fc.getExternalContext().getSession(false);
-        Usuario usuario = (Usuario) httpSession.getAttribute("currentUser");
-
-        admissao.setUsuarioAdmissao(usuario);
-        admissao.setSetorOrigem(atendimentoEditado.getSetor());
-        
-        atendimentoEditado.setSetor(admissao.getSetorDestino());
-        try {
-            admissaoService.admitir(admissao);
-            atendimentoEditado = service.buscarPorId(atendimentoEditado.getId());
-            service.salvar(atendimentoEditado);
-            JsfUtil.addMessage("Admissão feita com sucesso!");
-        } catch (DBException e) {
-            JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
-            e.printStackTrace();
-        } catch (NegocioException negocio) {
-            JsfUtil.addErrorMessage(negocio.getMessage());
-        }
+//        FacesContext fc = FacesContext.getCurrentInstance();
+//        HttpSession httpSession = (HttpSession) fc.getExternalContext().getSession(false);
+//        Usuario usuario = (Usuario) httpSession.getAttribute("currentUser");
+//
+//        admissao.setUsuarioAdmissao(usuario);
+//        admissao.setSetorOrigem(atendimentoEditado.getSetor());
+//        
+//        atendimentoEditado.setSetor(admissao.getSetorDestino());
+//        try {
+//            admissaoService.admitir(admissao);
+//            atendimentoEditado = service.buscarPorId(atendimentoEditado.getId());
+//            service.salvar(atendimentoEditado);
+//            JsfUtil.addMessage("Admissão feita com sucesso!");
+//        } catch (DBException e) {
+//            JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
+//            e.printStackTrace();
+//        } catch (NegocioException negocio) {
+//            JsfUtil.addErrorMessage(negocio.getMessage());
+//        }
     }
 
     public List<Atendimento> completeAtendimento(String query) {

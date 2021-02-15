@@ -72,7 +72,7 @@ public class Atendimento implements Serializable {
     private Motivo motivo;
     
     @ManyToOne
-    private Setor setor;
+    private Leito leito;
 
     public Long getId() {
         return id;
@@ -122,13 +122,17 @@ public class Atendimento implements Serializable {
         this.motivo = motivo;
     }
 
-    public Setor getSetor() {
-        return setor;
+    public Leito getLeito() {
+        return leito;
     }
 
-    public void setSetor(Setor setor) {
-        this.setor = setor;
+    public void setLeito(Leito leito) {
+        this.leito = leito;
     }
+
+    
+
+    
 
     public Date getDataAlta() {
         return dataAlta;
@@ -206,8 +210,10 @@ public class Atendimento implements Serializable {
 
     @Override
     public String toString() {
-        return "Atendimento{" + "id=" + id + ", dataAtendimento=" + dataAtendimento + ", dataPrimeiraSedestacao=" + dataPrimeiraSedestacao + ", dataPrimeiraOrtostase=" + dataPrimeiraOrtostase + ", dataPrimeiraDeambulacao=" + dataPrimeiraDeambulacao + ", dataIntubacao=" + dataIntubacao + ", dataExtubacao=" + dataExtubacao + ", dataAlta=" + dataAlta + ", liberadoMobilizacao=" + liberadoMobilizacao + ", atendente=" + atendente + ", paciente=" + paciente + ", motivo=" + motivo + ", setor=" + setor + '}';
+        return "Atendimento{" + "id=" + id + '}';
     }
+
+    
 
    
     

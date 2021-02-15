@@ -44,4 +44,8 @@ public class LeitoService implements Serializable {
         
     }
     
+    public List<Leito> getLeitosVagos() {
+        return dao.getLeitosVagos();
+    }
+    
 }
