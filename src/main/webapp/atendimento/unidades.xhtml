@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Hospital</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="form">
+
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-lg-9">
+                    <!-- Left colum -->
+                    <div class="card card-w-title">
+
+                        <p:growl autoUpdate="true"/>
+                        <h1>Hospital</h1>
+                        
+                        <p:dataTable value="#{leitoController.setores}" var="setor" reflow="true" emptyMessage="Sem dados.">
+                            <f:facet name="header">Unidades de Internação</f:facet>
+                            <p:column headerText="Código">
+                                <h:outputText value="#{setor.id}"/>
+                            </p:column>
+
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{setor.nome}"/>
+                            </p:column>
+
+                            <p:column headerText="Hospital">
+                                <h:outputText value="#{setor.hospital.nome}"/>
+                            </p:column>
+
+                            <p:column style="text-align: center">
+                                <h:outputLink value="cadastro.xhtml">
+                                    <p:button icon="fa fa-bed" />
+                                    <f:param name="id" value="#{setor.id}"/>
+                                </h:outputLink>
+                            </p:column>
+
+                        </p:dataTable>
+
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Right colum -->
+
+                </div>
+            </div>
+
+        </h:form>    
+    </ui:define>
+
+</ui:composition>

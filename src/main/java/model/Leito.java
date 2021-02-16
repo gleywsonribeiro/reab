@@ -6,6 +6,8 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -14,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -35,6 +38,15 @@ public class Leito implements Serializable {
     private Ocupacao ocupacao;
     private Boolean ativo;
     
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(name = "dt_ativacao")
+    private Date dataAtivacao;
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(name = "dt_desativacao")
+    private Date dataDesativacao;
+    
     @ManyToOne
     @JoinColumn(nullable = false)
     private Setor setor;
@@ -42,6 +54,23 @@ public class Leito implements Serializable {
     public Leito() {
         this.ativo = true;
         this.ocupacao = Ocupacao.VAGO;
+        this.dataAtivacao = new Date();
+    }
+
+    public Date getDataAtivacao() {
+        return dataAtivacao;
+    }
+
+    public void setDataAtivacao(Date dataAtivacao) {
+        this.dataAtivacao = dataAtivacao;
+    }
+
+    public Date getDataDesativacao() {
+        return dataDesativacao;
+    }
+
+    public void setDataDesativacao(Date dataDesativacao) {
+        this.dataDesativacao = dataDesativacao;
     }
 
 

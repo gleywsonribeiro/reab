@@ -130,10 +130,6 @@ public class Atendimento implements Serializable {
         this.leito = leito;
     }
 
-    
-
-    
-
     public Date getDataAlta() {
         return dataAlta;
     }

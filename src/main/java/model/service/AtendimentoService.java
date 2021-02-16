@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 import model.Atendimento;
+import model.LeitoSexo;
 import model.dao.AtendimentoDao;
 import util.exception.DBException;
 import util.exception.NegocioException;
@@ -25,6 +26,10 @@ public class AtendimentoService implements Serializable {
     private AtendimentoDao dao = new AtendimentoDao();
 
     public void salvar(Atendimento atendimento) {
+        LeitoSexo sexo = atendimento.getLeito().getSexo();
+        if(!sexo.getDescricao().equals(atendimento.getPaciente().getSexo().getDescricao()) && sexo != LeitoSexo.AMBOS) {
+            throw new NegocioException("Leito incompatível com o paciente!");
+        }
         if (dao.isPacienteEmAtendimento(atendimento.getPaciente())) {
             if (atendimento.getId() != null) {
                 dao.edit(atendimento);

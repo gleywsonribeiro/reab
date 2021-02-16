@@ -15,10 +15,14 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import model.Atendimento;
+import model.Leito;
+import model.Ocupacao;
 import model.Paciente;
 import model.Usuario;
 import model.dao.AtendimentoDao;
+import model.dao.LeitoDao;
 import model.service.AtendimentoService;
+import model.service.LeitoService;
 import util.exception.DBException;
 import util.exception.NegocioException;
 import util.jsf.JsfUtil;
@@ -38,6 +42,9 @@ public class AtendimentoController implements Serializable {
 
     private List<Atendimento> atendimentos = new ArrayList<>();
 
+//    private Leito leito = new Leito();
+    private LeitoService leitoService = new LeitoService();
+
     @PostConstruct
     private void init() {
         atendimentos = service.listarTodos();
@@ -49,7 +56,7 @@ public class AtendimentoController implements Serializable {
         }
 
     }
-    
+
     public void selecionar() {
         this.atendimento.setPaciente(paciente);
         this.paciente = null;
@@ -72,10 +79,12 @@ public class AtendimentoController implements Serializable {
     }
 
     public void darAlta() {
-        atendimento.setDataAlta(new Date());
-
         try {
+            atendimento.setDataAlta(new Date());
+            Leito leito = atendimento.getLeito();
             service.salvar(atendimento);
+            leito.setOcupacao(Ocupacao.VAGO);
+            leitoService.salvar(leito);
             JsfUtil.addMessage("Alta realizada com sucesso!");
         } catch (Exception e) {
             JsfUtil.addErrorMessage("Erro ao realizar alta");
@@ -84,14 +93,20 @@ public class AtendimentoController implements Serializable {
     }
 
     public void salvar() {
-        FacesContext fc = FacesContext.getCurrentInstance();
-        HttpSession httpSession = (HttpSession) fc.getExternalContext().getSession(false);
-        Usuario usuario = (Usuario) httpSession.getAttribute("currentUser");
-        atendimento.setAtendente(usuario);
-        atendimento.setDataAtendimento(new Date());
         try {
+            FacesContext fc = FacesContext.getCurrentInstance();
+            HttpSession httpSession = (HttpSession) fc.getExternalContext().getSession(false);
+            Usuario usuario = (Usuario) httpSession.getAttribute("currentUser");
+            atendimento.setAtendente(usuario);
+            atendimento.setDataAtendimento(new Date());
+            
+            Leito leito = atendimento.getLeito();
+            leito.setOcupacao(Ocupacao.OCUPADO);
+            
             service.salvar(atendimento);
+            leitoService.salvar(leito);
             atendimentos = null;
+
             JsfUtil.addMessage("Salvo com sucesso!");
         } catch (DBException e) {
             JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
@@ -129,7 +144,7 @@ public class AtendimentoController implements Serializable {
     public Long getPacientesInternados() {
         return service.getPacientesInternados();
     }
-    
+
     public List<Atendimento> getAtendimentosEmAndamento() {
         return service.getAtendimentosEmAndamento();
     }

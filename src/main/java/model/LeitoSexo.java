@@ -10,9 +10,9 @@ package model;
  * @author Gleywson
  */
 public enum LeitoSexo {
-    A("Ambos"),
-    M("Masculino"),
-    F("Feminino");
+    AMBOS("Ambos"),
+    MASCULINO("Masculino"),
+    FEMININO("Feminino");
 
     private LeitoSexo(String descricao) {
         this.descricao = descricao;

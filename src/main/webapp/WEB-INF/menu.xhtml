@@ -51,27 +51,28 @@
 
                     <pu:menu widgetVar="me">
                         <p:menuitem id="um_dashboard" value="Dashboard" icon="&#xE871;" outcome="/dashboard"/>
-                        <p:submenu label="Pacientes" icon="&#128203;">
-                            <p:menuitem id="paciene" value="Cadastro de Paciente" icon="&#128694;" outcome="/paciente/cadastro"/>
-                            <p:menuitem id="listaPaciente" value="Pesquisa de Pacientes" icon="&#128270;" outcome="/paciente/pesquisa"/>
+                        <p:submenu label="Pacientes" icon="&#xe85e;">
+                            <p:menuitem id="paciene" value="Cadastro de Paciente" icon="&#xe7fe;" outcome="/paciente/cadastro"/>
+                            <p:menuitem id="listaPaciente" value="Pesquisa de Pacientes" icon="	&#xe8b6;" outcome="/paciente/pesquisa"/>
                         </p:submenu>
-                        <p:submenu label="Atendimento" icon="&#128680;">
-                            <p:menuitem id="atender" value="Atender" icon="&#128657;" outcome="/atendimento/cadastro"/>
+                        <p:submenu label="Atendimento" icon="&#xe0d0;">
+                            <p:menuitem id="atender" value="Atender" icon="&#xe862;" outcome="/atendimento/cadastro"/>
+                            <p:menuitem value="Unidades" icon="&#xe7ee;" outcome="/atendimento/unidades"/>
 
                         </p:submenu>
-                        <p:menuitem id="admissao" value="Admisão" icon="&#127973;" outcome="/admissao/cadastro"/>
-                        <p:menuitem id="avaliacao" value="Avaliação" icon="&#128186;" outcome="/avaliacao/triagem"/>
-                        <p:menuitem id="checagem" value="Checagem" icon="&#128221;" outcome="/checagem/avaliacoes"/>
-                        <p:submenu label="Tabelas" icon="&#128229;">
-                            <p:menuitem id="hospital" value="Hospital" icon="&#127976;" outcome="/tabelas/hospital/cadastro"/>
-                            <p:menuitem id="leito" value="Leitos" icon="&#128716;" outcome="/tabelas/leito/pesquisa"/>
-                            <p:menuitem id="motivo" value="Motivos da Internação" icon="&#128209;" outcome="/tabelas/motivo/cadastro"/>
-                            <p:menuitem id="exercicio" value="Exercícios" icon="&#128170;" outcome="/tabelas/exercicio/cadastro"/>
-                            <p:menuitem id="treino" value="Treino" icon="&#127947;" outcome="/tabelas/treino/cadastro"/>
-                            <p:menuitem id="score" value="Score" icon="&#128200;" outcome="/tabelas/resultado/cadastro"/>
+                        <p:menuitem id="admissao" value="Admisão" icon="&#xe634;" outcome="/admissao/cadastro"/>
+                        <p:menuitem id="avaliacao" value="Avaliação" icon="&#xe636;" outcome="/avaliacao/triagem"/>
+                        <p:menuitem id="checagem" value="Checagem" icon="&#xe065;" outcome="/checagem/avaliacoes"/>
+                        <p:submenu label="Tabelas" icon="&#xe30d;">
+                            <p:menuitem id="hospital" value="Hospital" icon="&#xe548;" outcome="/tabelas/hospital/cadastro"/>
+                            <p:menuitem id="leito" value="Leitos" icon="&#xe53a;" outcome="/tabelas/leito/pesquisa"/>
+                            <p:menuitem id="motivo" value="Motivos da Internação" icon="&#xe14f;" outcome="/tabelas/motivo/cadastro"/>
+                            <p:menuitem id="exercicio" value="Exercícios" icon="&#xe52f;" outcome="/tabelas/exercicio/cadastro"/>
+                            <p:menuitem id="treino" value="Treino" icon="&#xeb43;" outcome="/tabelas/treino/cadastro"/>
+                            <p:menuitem id="score" value="Score" icon="&#xe6e1;" outcome="/tabelas/resultado/cadastro"/>
                         </p:submenu>
-                        <p:submenu id="usuarios" label="Usuários" icon="&#128373;" rendered="#{not loginController.usuario.user}">
-                            <p:menuitem value="Cadastro" icon="&#128209;" outcome="/usuario/cadastro"/>
+                        <p:submenu id="usuarios" label="Usuários" icon="&#xe7ef;" rendered="#{not loginController.usuario.user}">
+                            <p:menuitem value="Cadastro" icon="&#xe7fe;" outcome="/usuario/cadastro"/>
                         </p:submenu>
                         <p:submenu id="themes" label="Themes" icon="&#xE40A;" rendered="#{loginController.usuario.developer}">
                             <f:attribute name="badge" value="5" />

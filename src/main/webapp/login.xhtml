@@ -38,12 +38,15 @@
                             <label>Senha</label>
                         </h:panelGroup>
                     </div>
-                    <div class="ui-g-12" style="text-align: right">
+                    <div class="ui-g-12" style="text-align: left">
 
-                        <p:selectOneMenu>
-                            <f:selectItems value="#{hospitalController.hospitais}" var="hospita"
-                                           itemLabel="#{hospita.nome}" itemValue="#{hospita.nome}"/>
-                        </p:selectOneMenu>
+                        <h:panelGrid columns="1">
+                            <h:outputText value="Hospital"  style="font-weight: 700; color: #3e464c; font-size: 13px"/>
+                            <p:selectOneMenu style="width: 100px">
+                                <f:selectItems value="#{hospitalController.hospitais}" var="hospita"
+                                               itemLabel="#{hospita.nome}" itemValue="#{hospita.nome}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
 
                     </div>
                     <div class="ui-g-12">
