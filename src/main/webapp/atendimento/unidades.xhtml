@@ -12,37 +12,32 @@
         <h:form id="form">
 
             <div class="ui-g ui-fluid">
+                <p:growl autoUpdate="true"/>
                 <div class="ui-g-12 ui-lg-9">
                     <!-- Left colum -->
-                    <div class="card card-w-title">
 
-                        <p:growl autoUpdate="true"/>
-                        <h1>Hospital</h1>
-                        
-                        <p:dataTable value="#{leitoController.setores}" var="setor" reflow="true" emptyMessage="Sem dados.">
-                            <f:facet name="header">Unidades de Internação</f:facet>
-                            <p:column headerText="Código">
-                                <h:outputText value="#{setor.id}"/>
-                            </p:column>
+                    <ui:repeat value="#{hospitalController.hospitais}" var="hospital">
+                        <div class="card card-w-title">
 
-                            <p:column headerText="Nome">
-                                <h:outputText value="#{setor.nome}"/>
-                            </p:column>
+                            <h1>#{hospital.nome}</h1>
 
-                            <p:column headerText="Hospital">
-                                <h:outputText value="#{setor.hospital.nome}"/>
-                            </p:column>
+                            <p:dataTable value="#{leitoController.setores}" var="setor" reflow="true" emptyMessage="Sem dados.">
 
-                            <p:column style="text-align: center">
-                                <h:outputLink value="cadastro.xhtml">
-                                    <p:button icon="fa fa-bed" />
-                                    <f:param name="id" value="#{setor.id}"/>
-                                </h:outputLink>
-                            </p:column>
+                                <p:column headerText="Unidades de Internação">
+                                    <h:outputText value="#{setor.nome}"/>
+                                </p:column>
 
-                        </p:dataTable>
+                                <p:column style="text-align: center;width: 50px">
+                                    <h:outputLink value="painel.xhtml">
+                                        <p:button icon="fa fa-arrow-circle-right" />
+                                        <f:param name="id" value="#{setor.id}"/>
+                                    </h:outputLink>
+                                </p:column>
 
-                    </div>
+                            </p:dataTable>
+
+                        </div>
+                    </ui:repeat>
                 </div>
                 <div class="ui-g-12 ui-lg-6">
                     <!-- Right colum -->
