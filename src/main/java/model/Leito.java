@@ -37,6 +37,7 @@ public class Leito implements Serializable {
     @Enumerated(EnumType.STRING)
     private Ocupacao ocupacao;
     private Boolean ativo;
+    private Boolean extra;
     
     
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -55,6 +56,14 @@ public class Leito implements Serializable {
         this.ativo = true;
         this.ocupacao = Ocupacao.VAGO;
         this.dataAtivacao = new Date();
+    }
+
+    public Boolean getExtra() {
+        return extra;
+    }
+
+    public void setExtra(Boolean extra) {
+        this.extra = extra;
     }
 
     public Date getDataAtivacao() {

@@ -6,13 +6,17 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -31,6 +35,9 @@ public class Setor implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Hospital hospital;
+    
+    @OneToMany(mappedBy = "setor")
+    private List<Leito> leitos = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -54,6 +61,36 @@ public class Setor implements Serializable {
 
     public void setHospital(Hospital hospital) {
         this.hospital = hospital;
+    }
+
+    public List<Leito> getLeitos() {
+        return leitos;
+    }
+
+    public void setLeitos(List<Leito> leitos) {
+        this.leitos = leitos;
+    }
+    
+    public int getTotalLeitos() {
+        return getLeitos().size();
+    }
+    
+    public int getTotalLeitosOcupados() {
+        return getLeitos().stream()
+                .filter(leito -> leito.getOcupacao() == Ocupacao.OCUPADO)
+                .collect(Collectors.toList()).size();
+    }
+    
+    public int getTotalLeitosVagos() {
+        return getLeitos().stream()
+                .filter(leito -> leito.getOcupacao() == Ocupacao.VAGO)
+                .collect(Collectors.toList()).size();
+    }
+    
+    public int getTotalLeitosExtras() {
+        return getLeitos().stream()
+                .filter(leito -> leito.getExtra() == true)
+                .collect(Collectors.toList()).size();
     }
 
     @Override
@@ -81,9 +118,6 @@ public class Setor implements Serializable {
         }
         return true;
     }
-    
-    
-
     
 
     @Override

@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import model.Ocupacao;
 import model.Paciente;
 import model.Setor;
 import model.dao.PacienteDao;
@@ -53,7 +54,5 @@ public class PainelController implements Serializable {
     public void setUnidade(Setor unidade) {
         this.unidade = unidade;
     }
-
-    
 
 }

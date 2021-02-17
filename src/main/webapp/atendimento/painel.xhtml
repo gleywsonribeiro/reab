@@ -18,14 +18,29 @@
 
                     <div class="card card-w-title">
 
-                        <h1>#{painelController.unidade}</h1>
-
+                        <h1>#{painelController.unidade.nome}</h1>
+                        <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                            <h:outputText value="Leitos: #{painelController.unidade.totalLeitos}"/>
+                            <h:outputText value="Extra: #{painelController.unidade.totalLeitosExtras}"/>
+                            <h:outputText value="Ocupado: #{painelController.unidade.totalLeitosOcupados}"/>
+                            <h:outputText value="Vago: #{painelController.unidade.totalLeitosVagos}"/>
+                        </p:panelGrid>
                     </div>
 
                 </div>
                 <div class="ui-g-12 ui-lg-6">
                     <!-- Right colum -->
-
+                    <div class="ui-g-12 ui-md-6 ui-lg-3">
+                        <div class="ui-g card colorbox colorbox-3">
+                            <div class="ui-g-4">
+                                <i class="material-icons">&#xe615;</i>
+                            </div>
+                            <div class="ui-g-8">
+                                <span class="colorbox-name">Pendentes</span>
+                                <span class="colorbox-count">22</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

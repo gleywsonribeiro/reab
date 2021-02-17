@@ -32,7 +32,7 @@
                             <p:panelGrid id="cadastro" columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
                                 <p:autoComplete id="paciente" dropdown="true" value="#{atendimentoController.paciente}" var="paciente"
                                                 itemValue="#{paciente}" itemLabel="#{paciente.nome}"
-                                                converter="pacienteConverter" forceSelection="true"
+                                                converter="pacienteConverter" forceSelection="true" required="true" requiredMessage="Escolha um paciente"
                                                 completeMethod="#{pacienteController.completePaciente}" style="margin-bottom:10px;">
                                     <p:ajax event="itemSelect" listener="#{atendimentoController.selecionar()}" update="cadastro" />
                                 </p:autoComplete>

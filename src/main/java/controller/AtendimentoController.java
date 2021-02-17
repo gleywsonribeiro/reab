@@ -59,7 +59,7 @@ public class AtendimentoController implements Serializable {
 
     public void selecionar() {
         this.atendimento.setPaciente(paciente);
-        this.paciente = null;
+//        this.paciente = null;
     }
 
     public Atendimento getAtendimento() {
@@ -126,8 +126,11 @@ public class AtendimentoController implements Serializable {
 
     public void remover() {
         try {
+            Leito leito = atendimento.getLeito();
             service.remover(atendimento);
             atendimentos = null;
+            leito.setOcupacao(Ocupacao.VAGO);
+            leitoService.salvar(leito);
             JsfUtil.addMessage("Atendimento apagado com sucesso!");
         } catch (DBException e) {
             JsfUtil.addErrorMessage(e.getMessage());

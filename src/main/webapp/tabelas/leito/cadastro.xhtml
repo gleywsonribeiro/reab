@@ -37,10 +37,17 @@
                                     </p:selectOneRadio>
                                 </h:panelGroup>
 
-                                <h:panelGroup>
-                                    <p:outputLabel value="Ativo: "/>
-                                    <p:selectBooleanCheckbox value="#{leitoController.leito.ativo}"/>
-                                </h:panelGroup>
+                                <p:panelGrid columns="2">
+                                    <h:panelGroup>
+                                        <p:outputLabel value="Ativo: "/>
+                                        <p:selectBooleanCheckbox value="#{leitoController.leito.ativo}"/>
+                                    </h:panelGroup>
+
+                                    <h:panelGroup>
+                                        <p:outputLabel value="Extra: "/>
+                                        <p:selectBooleanCheckbox value="#{leitoController.leito.extra}"/>
+                                    </h:panelGroup>
+                                </p:panelGrid>
 
 
                             </p:panelGrid>
@@ -72,6 +79,10 @@
 
                             <p:column headerText="ativo" style="text-align: center">
                                 <p:selectBooleanCheckbox value="#{leito.ativo}" disabled="true" />
+                            </p:column>
+
+                            <p:column headerText="extra" style="text-align: center">
+                                <p:selectBooleanCheckbox value="#{leito.extra}" disabled="true" />
                             </p:column>
 
                             <p:column headerText="sexo">
