@@ -13,10 +13,12 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import model.Atendimento;
 import model.Ocupacao;
 import model.Paciente;
 import model.Setor;
 import model.dao.PacienteDao;
+import model.service.AtendimentoService;
 import model.service.PacienteService;
 import model.service.SetorService;
 import util.exception.DBException;
@@ -33,6 +35,8 @@ public class PainelController implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private SetorService setorService = new SetorService();
+    private AtendimentoService atendimentoService = new AtendimentoService();
+    private List<Atendimento> atendimentos = new ArrayList<>();
     private Setor unidade = new Setor();
 
     @PostConstruct
@@ -53,6 +57,11 @@ public class PainelController implements Serializable {
 
     public void setUnidade(Setor unidade) {
         this.unidade = unidade;
+    }
+
+    public List<Atendimento> getAtendimentos() {
+        atendimentos = atendimentoService.getAtendimentosPorUnidade(unidade);
+        return atendimentos;
     }
 
 }

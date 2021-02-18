@@ -11,8 +11,10 @@ import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.persistence.Query;
 import model.Atendimento;
 import model.LeitoSexo;
+import model.Setor;
 import model.dao.AtendimentoDao;
 import util.exception.DBException;
 import util.exception.NegocioException;
@@ -53,6 +55,10 @@ public class AtendimentoService implements Serializable {
         List<Atendimento> teste = dao.getAtendimentosEmAndamento().stream().filter(a -> a.isLiberadoMobilizacao() == true).collect(Collectors.toList());
         System.out.println(teste);
         return teste;
+    }
+    
+    public List<Atendimento> getAtendimentosPorUnidade(Setor setor) {
+        return dao.getAtendimentosPorUnidade(setor);
     }
 
     public Long getPacientesInternados() {

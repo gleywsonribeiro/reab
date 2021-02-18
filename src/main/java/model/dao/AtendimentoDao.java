@@ -14,6 +14,7 @@ import javax.persistence.Query;
 import jpa.util.HibernateUtil;
 import model.Atendimento;
 import model.Paciente;
+import model.Setor;
 
 /**
  *
@@ -49,6 +50,12 @@ public class AtendimentoDao extends Dao<Atendimento> {
     
     public List<Atendimento> getAtendimentosEmAndamento() {
         Query query = em.createQuery("SELECT a FROM Atendimento as a where a.dataAlta IS NULL", Atendimento.class);
+        return query.getResultList();
+    }
+    
+    public List<Atendimento> getAtendimentosPorUnidade(Setor setor) {
+        Query query = em.createQuery("SELECT a FROM Atendimento as a where a.leito.setor = :setor", Atendimento.class);
+        query.setParameter("setor", setor);
         return query.getResultList();
     }
     

@@ -10,7 +10,12 @@
     <ui:define name="content">
 
         <h:form id="form">
-
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:commandButton value="Voltar" icon="fa fa-arrow-left" 
+                                     process="@this" action="unidades?faces-redirect=true"/>
+                </f:facet>
+            </p:toolbar>
             <div class="ui-g ui-fluid">
                 <p:growl autoUpdate="true"/>
                 <div class="ui-g-12 ui-lg-9">
@@ -30,17 +35,15 @@
                 </div>
                 <div class="ui-g-12 ui-lg-6">
                     <!-- Right colum -->
-                    <div class="ui-g-12 ui-md-6 ui-lg-3">
-                        <div class="ui-g card colorbox colorbox-3">
-                            <div class="ui-g-4">
-                                <i class="material-icons">&#xe615;</i>
-                            </div>
-                            <div class="ui-g-8">
-                                <span class="colorbox-name">Pendentes</span>
-                                <span class="colorbox-count">22</span>
-                            </div>
+                    <ui:repeat value="#{painelController.atendimentos}" var="atendimento">
+                        <div class="card card-w-title">
+                            
+                            <p:panelGrid columns="2" layout="grid">
+                                <h:outputText value="#{atendimento.paciente.nome}"/>
+                                <p:commandButton icon="fa fa-save"/>
+                            </p:panelGrid>
                         </div>
-                    </div>
+                    </ui:repeat>
                 </div>
             </div>
 
