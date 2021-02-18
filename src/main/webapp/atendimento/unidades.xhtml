@@ -18,9 +18,16 @@
 
                     <ui:repeat value="#{hospitalController.hospitais}" var="hospital">
                         <div class="card card-w-title">
-
                             <h1>#{hospital.nome}</h1>
+                            <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                                <h:outputText value="Leitos: #{hospital.totalLeitos}"/>
+                                <h:outputText value="Extra: #{hospital.totalLeitosExtras}"/>
+                                <h:outputText value="Ocupado: #{hospital.totalLeitosOcupados}"/>
+                                <h:outputText value="Vago: #{hospital.totalLeitosVagos}"/>
+                            </p:panelGrid>
+                        </div>
 
+                        <div class="card card-w-title">
                             <p:dataTable value="#{leitoController.setores}" var="setor" reflow="true" emptyMessage="Sem dados.">
 
                                 <p:column headerText="Unidades de Internação">

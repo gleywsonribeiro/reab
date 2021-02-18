@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -97,6 +98,38 @@ public class Hospital implements Serializable {
         this.setores = setores;
     }
 
+    public int getTotalLeitos() {
+        int total = 0;
+        for (Setor unidade : setores) {
+            total += unidade.getTotalLeitos();
+        }
+        return total;
+    }
+    
+    public int getTotalLeitosOcupados() {
+        int total = 0;
+        for (Setor unidade : setores) {
+            total+= unidade.getTotalLeitosOcupados();
+        }
+        return total;
+    }
+    
+    public int getTotalLeitosVagos() {
+        int total = 0;
+        for (Setor unidade : setores) {
+            total+= unidade.getTotalLeitosVagos();
+        }
+        return total;
+    }
+    
+    public int getTotalLeitosExtras() {
+       int total = 0;
+        for (Setor unidade : setores) {
+            total+= unidade.getTotalLeitosExtras();
+        }
+        return total;
+    }
+    
     
 
     @Override
