@@ -35,15 +35,12 @@ public class Hospital implements Serializable {
 
     private String nome;
     private String cnpj;
-    
+
     @OneToMany(mappedBy = "hospital", cascade = CascadeType.REMOVE)
     private List<Setor> setores;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "hospital_usuario",
-            joinColumns = @JoinColumn(name = "hospital_id"),
-            inverseJoinColumns = @JoinColumn(name = "usuario_id"))
-    private Set<Usuario> usuarios = new HashSet<>();
+    @OneToMany(mappedBy = "usuario")
+    private List<UsuarioHospital> usuarioHospitals = new ArrayList<>();
 
     public Hospital() {
         this.setores = new ArrayList<>();
@@ -55,8 +52,6 @@ public class Hospital implements Serializable {
         this.nome = nome;
         this.cnpj = cnpj;
     }
-    
-    
 
     public Long getId() {
         return id;
@@ -82,14 +77,12 @@ public class Hospital implements Serializable {
         this.cnpj = cnpj;
     }
 
-    public Set<Usuario> getUsuarios() {
-        return usuarios;
+    public List<UsuarioHospital> getUsuarioHospitals() {
+        return usuarioHospitals;
     }
 
-    public void setUsuarios(Set<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
-
+   
+    
     public List<Setor> getSetores() {
         return setores;
     }
@@ -105,32 +98,30 @@ public class Hospital implements Serializable {
         }
         return total;
     }
-    
+
     public int getTotalLeitosOcupados() {
         int total = 0;
         for (Setor unidade : setores) {
-            total+= unidade.getTotalLeitosOcupados();
+            total += unidade.getTotalLeitosOcupados();
         }
         return total;
     }
-    
+
     public int getTotalLeitosVagos() {
         int total = 0;
         for (Setor unidade : setores) {
-            total+= unidade.getTotalLeitosVagos();
+            total += unidade.getTotalLeitosVagos();
         }
         return total;
     }
-    
+
     public int getTotalLeitosExtras() {
-       int total = 0;
+        int total = 0;
         for (Setor unidade : setores) {
-            total+= unidade.getTotalLeitosExtras();
+            total += unidade.getTotalLeitosExtras();
         }
         return total;
     }
-    
-    
 
     @Override
     public int hashCode() {

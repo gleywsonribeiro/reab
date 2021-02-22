@@ -20,6 +20,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -46,8 +47,8 @@ public class Usuario implements Serializable {
     @Enumerated(EnumType.STRING)
     private Perfil perfil;
 
-    @ManyToMany(mappedBy = "usuarios", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private Set<Hospital> hospitais = new HashSet<>();
+   @OneToMany(mappedBy = "hospital")
+    private List<UsuarioHospital> usuarioHospitals = new ArrayList<>();
 
     public Usuario() {
         this.ativo = true;
@@ -109,6 +110,12 @@ public class Usuario implements Serializable {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
+
+    public List<UsuarioHospital> getUsuarioHospitals() {
+        return usuarioHospitals;
+    }
+    
+    
 
     @Override
     public int hashCode() {
