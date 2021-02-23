@@ -29,6 +29,7 @@
                             <h:outputText value="Extra: #{painelController.unidade.totalLeitosExtras}"/>
                             <h:outputText value="Ocupado: #{painelController.unidade.totalLeitosOcupados}"/>
                             <h:outputText value="Vago: #{painelController.unidade.totalLeitosVagos}"/>
+                            <h:outputText value="Taxa Ocupação:  #{painelController.unidade.taxaOcupacao} %"/>
                         </p:panelGrid>
                     </div>
 
@@ -45,8 +46,13 @@
                             <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
                                 <p:commandButton icon="fa fa-bed"/>
                                 <p:commandButton icon="fa fa-calendar-check-o"/>
-                                <p:commandButton icon="fa fa fa-heartbeat"/>
+                                <h:outputLink value="avaliar.xhtml">
+                                    <p:button id="avaliar" icon="fa fa-heartbeat" />
+                                    <f:param name="id" value="#{atendimento.id}"/>
+                                    <p:tooltip for="avaliar" value="Avaliar"/>
+                                </h:outputLink>
                                 <p:commandButton icon="fa fa-thumbs-up"/>
+
                             </p:panelGrid>
                         </p:column>
                     </p:dataTable>

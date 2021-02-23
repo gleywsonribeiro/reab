@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -29,13 +30,13 @@ public class Setor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String nome;
-    
+
     @ManyToOne
     @JoinColumn(nullable = false)
     private Hospital hospital;
-    
+
     @OneToMany(mappedBy = "setor")
     private List<Leito> leitos = new ArrayList<>();
 
@@ -70,27 +71,36 @@ public class Setor implements Serializable {
     public void setLeitos(List<Leito> leitos) {
         this.leitos = leitos;
     }
-    
+
     public int getTotalLeitos() {
         return getLeitos().size();
     }
-    
+
     public int getTotalLeitosOcupados() {
         return getLeitos().stream()
                 .filter(leito -> leito.getOcupacao() == Ocupacao.OCUPADO)
                 .collect(Collectors.toList()).size();
     }
-    
+
     public int getTotalLeitosVagos() {
         return getLeitos().stream()
                 .filter(leito -> leito.getOcupacao() == Ocupacao.VAGO)
                 .collect(Collectors.toList()).size();
     }
-    
+
     public int getTotalLeitosExtras() {
         return getLeitos().stream()
                 .filter(leito -> leito.getExtra() == true)
                 .collect(Collectors.toList()).size();
+    }
+
+    public String getTaxaOcupacao() {
+        double todo = getTotalLeitos();
+        double parte = getTotalLeitosOcupados();
+        double taxa = parte / todo * 100;
+        
+        DecimalFormat format = new DecimalFormat("00.0");
+        return format.format(taxa);
     }
 
     @Override
@@ -118,11 +128,10 @@ public class Setor implements Serializable {
         }
         return true;
     }
-    
 
     @Override
     public String toString() {
         return "model.Setor[ id=" + id + " ]";
     }
-    
+
 }

@@ -12,12 +12,10 @@
         <h:form id="form">
             <p:toolbar id="tb">
                 <f:facet name="left">
-                    <p:commandButton value="Listar" icon="fa fa-search" process="@this" action="pesquisa?faces-redirect=true"/>
-                    <p:commandButton value="Novo" icon="fa fa-file-o" process="@this" update="form" action="#{atendimentoController.novo()}"/>
                     <span class="ui-separator">
                         <span class="ui-icon pi pi-ellipsis-v" />
                     </span>
-                    <p:commandButton id="btnSave" value="Admitir" icon="fa fa-bed" action="#{atendimentoController.salvar()}" update="@form" />
+                        <p:commandButton id="btnSave" value="Admitir" icon="fa fa-bed" action="#{atendeController.salvar()}" ajax="false" />
                 </f:facet>
             </p:toolbar>
             <div class="ui-g ui-fluid">
@@ -30,31 +28,24 @@
                         <h1>Admissão</h1>
                         <p:fieldset legend="Dados do Paciente">
                             <p:panelGrid id="cadastro" columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
-                                <p:autoComplete id="paciente" dropdown="true" value="#{atendimentoController.paciente}" var="paciente"
-                                                itemValue="#{paciente}" itemLabel="#{paciente.nome}"
-                                                converter="pacienteConverter" forceSelection="true" required="true" requiredMessage="Escolha um paciente"
-                                                completeMethod="#{pacienteController.completePaciente}" style="margin-bottom:10px;">
-                                    <p:ajax event="itemSelect" listener="#{atendimentoController.selecionar()}" update="cadastro" />
-                                </p:autoComplete>
-                                <p:watermark for="paciente" value="Buscar paciente"/>
-
+                                <h1>#{atendeController.atendimento.paciente.nome}</h1>
                                 <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{atendimentoController.atendimento.paciente.id}" readonly="true"/>
+                                    <p:inputText value="#{atendeController.atendimento.paciente.id}" readonly="true"/>
                                     <label>Código</label>
                                 </h:panelGroup>
 
                                 <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{atendimentoController.atendimento.paciente.nome}" readonly="true"/>
+                                    <p:inputText value="#{atendeController.atendimento.paciente.nome}" readonly="true"/>
                                     <label>Paciente</label>
                                 </h:panelGroup>
 
                                 <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{atendimentoController.atendimento.paciente.sexo.descricao}" readonly="true"/>
+                                    <p:inputText value="#{atendeController.atendimento.paciente.sexo.descricao}" readonly="true"/>
                                     <label>Sexo</label>
                                 </h:panelGroup>
 
                                 <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{atendimentoController.atendimento.paciente.dataNascimento}" readonly="true">
+                                    <p:inputText value="#{atendeController.atendimento.paciente.dataNascimento}" readonly="true">
                                         <f:convertDateTime locale="pt_BR" timeZone="GMT-3"/>
                                     </p:inputText>
                                     <label>Data de Nascimento</label>
@@ -67,7 +58,7 @@
                             <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
                                 <h:panelGroup>
                                     <h4 style="margin-bottom: 20px">Leito </h4>
-                                    <p:selectOneMenu value="#{atendimentoController.atendimento.leito}" required="true" requiredMessage="Escolha um leito"
+                                    <p:selectOneMenu value="#{atendeController.atendimento.leito}" required="true" requiredMessage="Escolha um leito"
                                                      converter="leitoConverter" filter="true" filterMatchMode="contains">
                                         <f:selectItem itemLabel="Selecione"/>
                                         <f:selectItems value="#{leitoController.leitosVagos}" var="leito"
@@ -76,7 +67,7 @@
                                 </h:panelGroup>
                                 <h:panelGroup>
                                     <h4 style="margin-bottom: 20px">Motivo: </h4>
-                                    <p:selectOneMenu value="#{atendimentoController.atendimento.motivo}" required="true" requiredMessage="Escolha um motivo"
+                                    <p:selectOneMenu value="#{atendeController.atendimento.motivo}" required="true" requiredMessage="Escolha um motivo"
                                                      converter="motivoConverter" filter="true" filterMatchMode="contains">
                                         <f:selectItem itemLabel="Selecione"/>
                                         <f:selectItems value="#{motivoController.motivos}" var="motivo" itemLabel="#{motivo.descricao}" itemValue="#{motivo}"/>

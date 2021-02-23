@@ -10,16 +10,17 @@
     <ui:define name="content">
 
         <h:form id="form">
+
             <p:toolbar id="tb">
                 <f:facet name="left">
-                    <p:commandButton value="Listar" icon="fa fa-search" process="@this" action="pesquisa?faces-redirect=true"/>
-                    <p:commandButton value="Novo" icon="fa fa-file-o" process="@this" update="form" action="#{atendimentoController.novo()}"/>
+                    <p:commandButton value="Voltar" icon="fa fa fa-arrow-left" process="@this" action="painel?faces-redirect=true"/>
                     <span class="ui-separator">
                         <span class="ui-icon pi pi-ellipsis-v" />
                     </span>
-                    <p:commandButton id="btnSave" value="Salvar" icon="fa fa-save" action="#{atendimentoController.salvar()}" update="@form" />
+                    <p:commandButton value="Salvar" icon="fa fa-bed" action="#{atendimentoController.salvar()}" update="@form" />
                 </f:facet>
             </p:toolbar>
+
             <div class="ui-g ui-fluid">
 
                 <div class="ui-g-12 ui-lg-9">
@@ -27,29 +28,23 @@
                     <div class="card card-w-title">
 
                         <p:growl autoUpdate="true"/>
-                        <h1>Atendimento</h1>
+                        <h1>Dados do Paciente</h1>
                         <p:fieldset legend="Identificação">
-                            <p:panelGrid id="cadastro" columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
 
-                                <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{atendimentoController.atendimento.paciente.id}" readonly="true"/>
-                                    <label>Código</label>
-                                </h:panelGroup>
+                            <h:panelGrid columns="2">
+                                <h:outputText value="Matrícula: " style="font-weight: 900"/>
+                                <h:outputText value="#{atendimentoController.atendimento.paciente.matricula}"/>
 
-                                <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{atendimentoController.atendimento.paciente.nome}" readonly="true"/>
-                                    <label>Paciente</label>
-                                </h:panelGroup>
-                                <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{atendimentoController.atendimento.dataAtendimento}" readonly="true">
-                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                    </p:inputText>
-                                    <label>Atendimento</label>
-                                </h:panelGroup>
+                                <h:outputText value="Nome: " style="font-weight: 900"/>
+                                <h:outputText value="#{atendimentoController.atendimento.paciente.nome}"/>
 
-                            </p:panelGrid>
+                                <h:outputText value="Admissão: " style="font-weight: 900"/>
+                                <h:outputText value="#{atendimentoController.atendimento.paciente.dataNascimento}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                            </h:panelGrid>
                         </p:fieldset>
-                        <p:panelGrid columns="5" styleClass="ui-panelgrid-blank grid-pad" layout="grid">
+                        <p:panelGrid columns="5" styleClass="ui-panelgrid-blank grid-pad" layout="grid" style="margin: 20px 20px 50px 0px">
                             <h:panelGroup>
                                 <p:outputLabel value="1ª Sedestação" />
                                 <p:calendar  pattern="dd/MM/yyyy" mask="true" locale="pt"
@@ -80,6 +75,7 @@
                                             value="#{atendimentoController.atendimento.dataExtubacao}"/>
                             </h:panelGroup>
                         </p:panelGrid>
+
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">
@@ -87,7 +83,6 @@
                 </div>
             </div>
 
-            <p:sticky target="tb" margin="75"/>
         </h:form>    
     </ui:define>
 

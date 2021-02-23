@@ -16,7 +16,7 @@
                     <span class="ui-separator">
                         <span class="ui-icon pi pi-ellipsis-v" />
                     </span>
-                    
+
                 </f:facet>
             </p:toolbar>
             <div class="ui-g ui-fluid">
@@ -39,13 +39,19 @@
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </h:outputText>
                             </p:column>
-                            
+
                             <p:column style="text-align: center">
-                                <h:outputLink value="cadastro.xhtml">
-                                    <p:button id="atender" icon="fa fa-stethoscope" />
+                                <h:outputLink value="atendimento.xhtml">
+                                    <p:button id="atender" icon="fa fa-stethoscope" disabled="#{paciente.emAtendimento}"/>
                                     <f:param name="id" value="#{paciente.id}"/>
                                     <p:tooltip for="atender" value="Atender"/>
                                 </h:outputLink>
+
+<!--                                <p:commandButton action="atendimento?faces-redirect=true"
+                                                 disabled="{paciente.emAtendimento}" ajax="false"
+                                                 icon="fa fa-stethoscope" >
+                                    <f:param name="id" value="{paciente.id}"/>
+                                </p:commandButton>-->
                             </p:column>
 
                             <p:column style="text-align: center">
