@@ -45,8 +45,8 @@ public class Paciente implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "dh_cadastro", nullable = false)
     private Date dataCadastro;
-    
-    private String cpf;
+    @Column(unique = true)
+    private String matricula;
     
     @OneToMany(mappedBy = "paciente")
     private List<Atendimento> atendimentos;
@@ -111,13 +111,15 @@ public class Paciente implements Serializable {
         this.dataCadastro = dataCadastro;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getMatricula() {
+        return matricula;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
+
+    
     
     
 
