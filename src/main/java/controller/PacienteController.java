@@ -93,4 +93,12 @@ public class PacienteController implements Serializable {
         return pacientes;
     }
 
+    public String admitir() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("atendimento?id=");
+        builder.append(paciente.getId());
+        builder.append("faces-redirect=true");
+        return builder.toString();
+    }
+
 }

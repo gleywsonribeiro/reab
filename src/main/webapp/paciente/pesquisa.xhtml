@@ -41,17 +41,18 @@
                             </p:column>
 
                             <p:column style="text-align: center">
-                                <h:outputLink value="atendimento.xhtml">
-                                    <p:button id="atender" icon="fa fa-stethoscope" disabled="#{paciente.emAtendimento}"/>
-                                    <f:param name="id" value="#{paciente.id}"/>
-                                    <p:tooltip for="atender" value="Atender"/>
-                                </h:outputLink>
+                                <!--                                <h:outputLink value="atendimento.xhtml">
+                                                                    <p:button id="atender" icon="fa fa-stethoscope" disabled="{paciente.emAtendimento}"/>
+                                                                    <f:param name="id" value="{paciente.id}"/>
+                                                                    <p:tooltip for="atender" value="Atender"/>
+                                                                </h:outputLink>-->
 
-<!--                                <p:commandButton action="atendimento?faces-redirect=true"
-                                                 disabled="{paciente.emAtendimento}" ajax="false"
+                                <p:commandButton action="#{pacienteController.admitir()}"
+                                                 disabled="#{paciente.emAtendimento}" ajax="false"
                                                  icon="fa fa-stethoscope" >
-                                    <f:param name="id" value="{paciente.id}"/>
-                                </p:commandButton>-->
+                                    <f:setPropertyActionListener target="#{pacienteController.paciente}" value="#{paciente}"/>
+                                </p:commandButton>
+
                             </p:column>
 
                             <p:column style="text-align: center">

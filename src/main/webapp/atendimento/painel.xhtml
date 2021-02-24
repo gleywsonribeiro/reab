@@ -45,9 +45,9 @@
                         <p:column>
                             <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
                                 <h:panelGroup>
-                                    <p:commandButton  id="alta" icon="fa fa-wheelchair" action="#{atendimentoController.darAlta()}"
+                                    <p:commandButton  id="alta" icon="fa fa-wheelchair" action="#{painelController.darAlta()}"
                                                       update="@form" process="@this">
-                                        <f:setPropertyActionListener target="#{atendimentoController.atendimento}" value="#{atendimento}"/>
+                                        <f:setPropertyActionListener target="#{painelController.atendimento}" value="#{atendimento}"/>
                                         <p:confirm header="Alerta" message="Confirma a alta de #{atendimento.paciente.nome} ?" icon="fa fa-exclamation-triangle" />
                                     </p:commandButton>
                                     <p:tooltip for="alta" value="Realizar alta"/>

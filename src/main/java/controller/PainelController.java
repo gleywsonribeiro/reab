@@ -7,6 +7,7 @@ package controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
@@ -14,11 +15,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import model.Atendimento;
+import model.Leito;
 import model.Ocupacao;
 import model.Paciente;
 import model.Setor;
 import model.dao.PacienteDao;
 import model.service.AtendimentoService;
+import model.service.LeitoService;
 import model.service.PacienteService;
 import model.service.SetorService;
 import util.exception.DBException;
@@ -38,6 +41,8 @@ public class PainelController implements Serializable {
     private AtendimentoService atendimentoService = new AtendimentoService();
     private List<Atendimento> atendimentos = new ArrayList<>();
     private Setor unidade = new Setor();
+    
+    private Atendimento atendimento = new Atendimento();
 
     @PostConstruct
     private void init() {
@@ -47,6 +52,21 @@ public class PainelController implements Serializable {
         if (chave != null) {
             Long id = Long.parseLong(chave);
             unidade = setorService.buscarPorId(id);
+        }
+
+    }
+    
+    public void darAlta() {
+        try {
+            atendimento.setDataAlta(new Date());
+            Leito leito = atendimento.getLeito();
+            atendimentoService.salvar(atendimento);
+            leito.setOcupacao(Ocupacao.VAGO);
+            new LeitoService().salvar(leito);
+            atendimentos = null;
+            JsfUtil.addMessage("Alta realizada com sucesso!");
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage("Erro ao realizar alta: " + e.getMessage());
         }
 
     }
@@ -62,6 +82,14 @@ public class PainelController implements Serializable {
     public List<Atendimento> getAtendimentos() {
         atendimentos = atendimentoService.getAtendimentosPorUnidade(unidade);
         return atendimentos;
+    }
+
+    public Atendimento getAtendimento() {
+        return atendimento;
+    }
+
+    public void setAtendimento(Atendimento atendimento) {
+        this.atendimento = atendimento;
     }
 
 }
