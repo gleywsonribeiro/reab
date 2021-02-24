@@ -13,7 +13,7 @@
 
             <p:toolbar id="tb">
                 <f:facet name="left">
-                    <p:commandButton value="Voltar" icon="fa fa fa-arrow-left" process="@this" action="painel?faces-redirect=true"/>
+                    <p:commandButton value="Voltar" icon="fa fa fa-arrow-left" process="@this" action="#{atendimentoController.voltarUnidade()}"/>
                     <span class="ui-separator">
                         <span class="ui-icon pi pi-ellipsis-v" />
                     </span>
@@ -39,40 +39,41 @@
                                 <h:outputText value="#{atendimentoController.atendimento.paciente.nome}"/>
 
                                 <h:outputText value="Admissão: " style="font-weight: 900"/>
-                                <h:outputText value="#{atendimentoController.atendimento.paciente.dataNascimento}">
+                                <h:outputText value="#{atendimentoController.atendimento.dataAtendimento}">
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </h:outputText>
                             </h:panelGrid>
                         </p:fieldset>
                         <p:panelGrid columns="5" styleClass="ui-panelgrid-blank grid-pad" layout="grid" style="margin: 20px 20px 50px 0px">
-                            <h:panelGroup>
-                                <p:outputLabel value="1ª Sedestação" />
+                            <h:panelGroup styleClass="md-inputfield">
                                 <p:calendar  pattern="dd/MM/yyyy" mask="true" locale="pt"
                                              value="#{atendimentoController.atendimento.dataPrimeiraSedestacao}"/>
+                                <label>1ª Sedestação</label>
                             </h:panelGroup>
 
-                            <h:panelGroup>
-                                <p:outputLabel value="1ª Ortostase" />
+                            <h:panelGroup styleClass="md-inputfield">
                                 <p:calendar pattern="dd/MM/yyyy" mask="true" locale="pt"
                                             value="#{atendimentoController.atendimento.dataPrimeiraOrtostase}"/>
+                                <label>1ª Ortostase</label>
                             </h:panelGroup>
 
-                            <h:panelGroup>
-                                <p:outputLabel value="1ª Deambulação" />
+                            <h:panelGroup styleClass="md-inputfield">
                                 <p:calendar pattern="dd/MM/yyyy" mask="true" locale="pt"
                                             value="#{atendimentoController.atendimento.dataPrimeiraDeambulacao}"/>
+                                <label>1ª Deambulação</label>
                             </h:panelGroup>
 
-                            <h:panelGroup>
-                                <p:outputLabel value="Intubação" />
+                            <h:panelGroup styleClass="md-inputfield">
                                 <p:calendar  pattern="dd/MM/yyyy" mask="true" locale="pt"
                                              value="#{atendimentoController.atendimento.dataIntubacao}"/>
+                                <label>Intubação</label>
                             </h:panelGroup>
 
-                            <h:panelGroup>
-                                <p:outputLabel value="Extubação" />
+
+                            <h:panelGroup styleClass="md-inputfield">
                                 <p:calendar pattern="dd/MM/yyyy" mask="true" locale="pt"
                                             value="#{atendimentoController.atendimento.dataExtubacao}"/>
+                                <label>Extubação</label>
                             </h:panelGroup>
                         </p:panelGrid>
 

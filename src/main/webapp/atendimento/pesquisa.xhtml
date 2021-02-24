@@ -58,14 +58,7 @@
                                                                 <f:param name="id" value="{atendimento.id}"/>
                                                             </h:outputLink>
                                                         </p:column>-->
-                            <p:column style="text-align: center">
-                                <p:commandButton  id="alta" icon="ui-icon-airline-seat-recline-extra" action="#{atendimentoController.darAlta()}"
-                                                  update="@form" process="@this" disabled="#{not atendimento.emAtendimento}">
-                                    <f:setPropertyActionListener target="#{atendimentoController.atendimento}" value="#{atendimento}"/>
-                                    <p:confirm header="Alerta" message="Confirma a alta de #{atendimento.paciente.nome} ?" icon="fa fa-exclamation-triangle" />
-                                </p:commandButton>
-                                <p:tooltip for="alta" value="Liberar paciente"/>
-                            </p:column>
+                            
                             <p:column style="text-align: center">
                                 <p:commandButton  id="bt" icon="fa fa-trash" action="#{atendimentoController.remover()}" styleClass="red-btn"
                                                   update="@form" process="@this">

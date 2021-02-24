@@ -87,7 +87,7 @@ public class AtendimentoController implements Serializable {
             leitoService.salvar(leito);
             JsfUtil.addMessage("Alta realizada com sucesso!");
         } catch (Exception e) {
-            JsfUtil.addErrorMessage("Erro ao realizar alta");
+            JsfUtil.addErrorMessage("Erro ao realizar alta: " + e.getMessage());
         }
 
     }
@@ -99,10 +99,10 @@ public class AtendimentoController implements Serializable {
             Usuario usuario = (Usuario) httpSession.getAttribute("currentUser");
             atendimento.setAtendente(usuario);
             atendimento.setDataAtendimento(new Date());
-            
+
             Leito leito = atendimento.getLeito();
             leito.setOcupacao(Ocupacao.OCUPADO);
-            
+
             service.salvar(atendimento);
             leitoService.salvar(leito);
             atendimentos = null;
@@ -150,5 +150,10 @@ public class AtendimentoController implements Serializable {
 
     public List<Atendimento> getAtendimentosEmAndamento() {
         return service.getAtendimentosEmAndamento();
+    }
+
+    public String voltarUnidade() {
+        String id = atendimento.getLeito().getSetor().getId().toString();
+        return "painel?id=" + id + "faces-redirect=true";
     }
 }

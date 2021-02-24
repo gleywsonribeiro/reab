@@ -44,7 +44,15 @@
                         </p:column>
                         <p:column>
                             <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
-                                <p:commandButton icon="fa fa-bed"/>
+                                <h:panelGroup>
+                                    <p:commandButton  id="alta" icon="fa fa-wheelchair" action="#{atendimentoController.darAlta()}"
+                                                      update="@form" process="@this">
+                                        <f:setPropertyActionListener target="#{atendimentoController.atendimento}" value="#{atendimento}"/>
+                                        <p:confirm header="Alerta" message="Confirma a alta de #{atendimento.paciente.nome} ?" icon="fa fa-exclamation-triangle" />
+                                    </p:commandButton>
+                                    <p:tooltip for="alta" value="Realizar alta"/>
+                                </h:panelGroup>
+                                
                                 <p:commandButton icon="fa fa-calendar-check-o"/>
                                 <h:outputLink value="avaliar.xhtml">
                                     <p:button id="avaliar" icon="fa fa-heartbeat" />
@@ -56,6 +64,11 @@
                             </p:panelGrid>
                         </p:column>
                     </p:dataTable>
+
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+                    </p:confirmDialog>
                 </div>
             </div>
 
