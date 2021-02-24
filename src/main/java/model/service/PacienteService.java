@@ -29,6 +29,7 @@ public class PacienteService {
         } else {
             dao.edit(paciente);
         }
+        
     }
     
     public List<Paciente> listarTodos() {

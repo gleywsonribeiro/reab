@@ -74,14 +74,6 @@
                                                        itemLabel="#{leito.descricao} - #{leito.setor.nome}" itemValue="#{leito}"/>
                                     </p:selectOneMenu>
                                 </h:panelGroup>
-                                <h:panelGroup>
-                                    <h4 style="margin-bottom: 20px">Motivo: </h4>
-                                    <p:selectOneMenu value="#{atendimentoController.atendimento.motivo}" required="true" requiredMessage="Escolha um motivo"
-                                                     converter="motivoConverter" filter="true" filterMatchMode="contains">
-                                        <f:selectItem itemLabel="Selecione"/>
-                                        <f:selectItems value="#{motivoController.motivos}" var="motivo" itemLabel="#{motivo.descricao}" itemValue="#{motivo}"/>
-                                    </p:selectOneMenu>
-                                </h:panelGroup>
                             </p:panelGrid>
 
                         </p:fieldset>

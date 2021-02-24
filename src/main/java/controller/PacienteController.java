@@ -16,6 +16,7 @@ import javax.faces.context.FacesContext;
 import model.Paciente;
 import model.dao.PacienteDao;
 import model.service.PacienteService;
+import org.hibernate.exception.ConstraintViolationException;
 import util.exception.DBException;
 import util.exception.NegocioException;
 import util.jsf.JsfUtil;
@@ -59,11 +60,12 @@ public class PacienteController implements Serializable {
             service.salvar(paciente);
             pacientes = null;
             JsfUtil.addMessage("Salvo com sucesso!");
-        } catch (DBException e) {
-            JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
+        }  catch (DBException e) {
+            JsfUtil.addErrorMessage("Já existe paciente com essa matrícula: " + e.getMessage());
         } catch (NegocioException e) {
             JsfUtil.addErrorMessage(e.getMessage());
         }
+
     }
 
     public List<Paciente> completePaciente(String query) {
