@@ -6,6 +6,9 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +22,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
+import org.joda.time.Years;
 
 /**
  *
@@ -117,6 +123,15 @@ public class Paciente implements Serializable {
 
     public void setMatricula(String matricula) {
         this.matricula = matricula;
+    }
+    
+    public int getIdade() {
+        DateTime nascimento = new DateTime(getDataNascimento().getTime());
+        DateTime hoje = new DateTime();
+        
+        Years idade = Years.yearsBetween(nascimento, hoje);
+        
+        return idade.getYears();
     }
 
     

@@ -44,13 +44,6 @@
                                 </h:outputText>
                             </p:column>
 
-                            <!--                            <p:column style="text-align: center">
-                                                            <h:outputLink value="cadastro.xhtml">
-                                                                <p:button icon="fa fa-edit" />
-                                                                <f:param name="id" value="{atendimento.id}"/>
-                                                            </h:outputLink>
-                                                        </p:column>-->
-                            
                             <p:column style="text-align: center">
                                 <p:commandButton  id="bt" icon="fa fa-trash" action="#{atendimentoController.remover()}" styleClass="red-btn"
                                                   update="@form" process="@this">
@@ -74,8 +67,6 @@
 
                 </div>
             </div>
-
-            <p:sticky target="tb" margin="75"/>
         </h:form>    
     </ui:define>
 
