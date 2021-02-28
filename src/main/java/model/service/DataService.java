@@ -6,9 +6,13 @@
 package model.service;
 
 import java.io.Serializable;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 import model.Atendimento;
 import model.DadoMensal;
 import org.joda.time.DateTime;
@@ -32,8 +36,11 @@ public abstract class DataService implements Serializable, InfoData {
             int soma = 0;
             float media;
             int contador = 0;
+            int ano  = new Date().toInstant().atZone(ZoneId.systemDefault()).getYear();
+            List<Atendimento> atendimentosDoAno = atendimentos.stream()
+                    .filter(a -> ano == a.getDataAtendimento().toInstant().atZone(ZoneId.systemDefault()).getYear()).collect(Collectors.toList());
 
-            for (Atendimento atendimento : atendimentos) {
+            for (Atendimento atendimento : atendimentosDoAno) {
                 Date current = getDateReferencia(atendimento);
                 if (current != null) {
                     int month = toMonth(current);

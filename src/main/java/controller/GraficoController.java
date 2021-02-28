@@ -6,21 +6,12 @@
 package controller;
 
 import java.io.Serializable;
-import java.time.Month;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-import java.util.Random;
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
 import model.Atendimento;
 import model.DadoMensal;
-import model.Paciente;
-import model.Usuario;
 import model.service.AtendimentoService;
 import model.service.DataService;
 import model.service.InfoDataDeambulacao;
@@ -30,9 +21,7 @@ import model.service.InfoDataOrtostase;
 import model.service.InfoDataSedestacao;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
-import util.exception.DBException;
-import util.exception.NegocioException;
-import util.jsf.JsfUtil;
+
 
 /**
  *
@@ -54,7 +43,7 @@ public class GraficoController implements Serializable {
     AtendimentoService atendimentoService = new AtendimentoService();
 
     public GraficoController() {
-        atendimentos = atendimentoService.getAtendimentosEmAndamento();
+        atendimentos = atendimentoService.listarTodos();
         createSedestacao();
         createOrtostase();
         createDeambulacao();
