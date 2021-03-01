@@ -13,6 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import model.Hospital;
 import model.Usuario;
 import model.dao.UsuarioDao;
 import util.jsf.JsfUtil;
@@ -32,10 +33,21 @@ public class LoginController implements Serializable {
     private String novaSenha;
 
     private UsuarioDao dao = new UsuarioDao();
+    
+    //hospital da sessao
+    private Hospital hospital = new Hospital();
 
     public LoginController() {
-//        dao.
         this.usuario = new Usuario();
+    }
+    
+    public void buscarUsuario() {
+        Usuario user = dao.getUsuarioPorLogin(usuario.getLogin());
+        if(user == null) {
+            JsfUtil.addErrorMessage("Usuário não encontrado!");
+        } else {
+            usuario = user;
+        }
     }
 
     public String login() {
@@ -47,6 +59,7 @@ public class LoginController implements Serializable {
             return "";
         } else if (usuario.getLogin().toLowerCase().equals(usuario.getSenha())) {
             usuario = usuarioLogado;
+            usuario.setHospitalLogado(hospital);
             FacesContext context = FacesContext.getCurrentInstance();
             HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
             httpSession.setAttribute("currentUser", usuario);
@@ -98,4 +111,14 @@ public class LoginController implements Serializable {
         this.novaSenha = novaSenha;
     }
 
+    public Hospital getHospital() {
+        return hospital;
+    }
+
+    public void setHospital(Hospital hospital) {
+        this.hospital = hospital;
+    }
+
+    
+    
 }

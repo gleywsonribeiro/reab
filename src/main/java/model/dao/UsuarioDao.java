@@ -8,6 +8,7 @@ package model.dao;
 import java.io.Serializable;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
+import javax.persistence.Query;
 import jpa.util.HibernateUtil;
 import model.Usuario;
 import util.Seguranca;
@@ -28,12 +29,11 @@ public class UsuarioDao extends Dao<Usuario> {
     protected EntityManager getEntityManager() {
         return em;
     }
-    
+
     public void resetPassword(Usuario usuario) {
         usuario.setSenha(Seguranca.criptografe(usuario.getSenha()));
         super.edit(usuario);
     }
-    
 
     /**
      *
@@ -46,7 +46,7 @@ public class UsuarioDao extends Dao<Usuario> {
     }
 
     public Usuario getUsuarioByLoginSenha(String nomeUsuario, String senha) {
-        
+
         try {
             Usuario usuario = (Usuario) em
                     .createQuery(
@@ -55,6 +55,18 @@ public class UsuarioDao extends Dao<Usuario> {
                     .setParameter("senha", Seguranca.criptografe(senha)).getSingleResult();
 
             return usuario;
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+
+    public Usuario getUsuarioPorLogin(String login) {
+        try {
+
+            Query query = em.createQuery("SELECT u FROM Usuario AS u WHERE u.login = :login", Usuario.class);
+            query.setParameter("login", login);
+            return (Usuario) query.getSingleResult();
+
         } catch (NoResultException e) {
             return null;
         }

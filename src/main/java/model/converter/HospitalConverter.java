@@ -5,7 +5,6 @@
  */
 package model.converter;
 
-
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -13,35 +12,40 @@ import javax.faces.convert.FacesConverter;
 import model.Hospital;
 import model.dao.HospitalDao;
 
-
 /**
  *
  * @author gleywson
  */
-@FacesConverter(value = "hospitalConverter", forClass = Hospital.class)
+@FacesConverter("hospitalConverter")
 public class HospitalConverter implements Converter {
 
-    
     private final HospitalDao dao = new HospitalDao();
 
     @Override
-    public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        Hospital hospital = null;
-       
-        if (value != null) {
-            Long id = new Long(value);
-            hospital = dao.find(id);
+    public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
+        Hospital hospital;
+        if (value == null || value.equals("")) {
+            return null;
         }
-        return hospital;
+        try {
+            Long id = Long.valueOf(value);
+            hospital = dao.find(id);
+            return hospital;
+        } catch (RuntimeException ex) {
+            throw new RuntimeException("Não foi possível converter", ex);
+
+        }
+
     }
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        if (value != null) {
-            return ((Hospital) value).getId().toString();
-        } else {
+        if (value == null) {
             return "";
         }
+        return ((Hospital)value).getId().toString();
     }
+
+    
 
 }

@@ -24,6 +24,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -54,6 +55,9 @@ public class Usuario implements Serializable {
             joinColumns = @JoinColumn(name = "usuario_id"),
             inverseJoinColumns = @JoinColumn(name = "hospital_id"))
     private Set<Hospital> hospitais = new HashSet<>();
+    
+    @Transient
+    private Hospital hospitalLogado = new Hospital();
 
     public Usuario() {
         this.ativo = true;
@@ -122,6 +126,14 @@ public class Usuario implements Serializable {
 
     public void setHospitais(Set<Hospital> hospitais) {
         this.hospitais = hospitais;
+    }
+
+    public Hospital getHospitalLogado() {
+        return hospitalLogado;
+    }
+
+    public void setHospitalLogado(Hospital hospitalLogado) {
+        this.hospitalLogado = hospitalLogado;
     }
     
     
