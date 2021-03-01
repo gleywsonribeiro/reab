@@ -36,7 +36,14 @@
                                     <f:selectItems value="#{usuarioController.perfis}" var="perfil" itemLabel="#{perfil.descricao}" itemValue="#{perfil}"/>
                                 </p:selectOneRadio>
                                 <p:separator/>
-                               
+
+                                <p:selectManyCheckbox id="grid" value="#{usuarioController.hospitaisSelecionados}" layout="responsive" columns="2" label="Hospitais"
+                                                      styleClass="grid-checkbox" converter="hospitalConverter">
+                                    <f:selectItems value="#{usuarioController.hospitais}" 
+                                                   var="hospital" itemLabel="#{hospital.nome}" 
+                                                   itemValue="#{hospital}" />
+                                </p:selectManyCheckbox>
+
                                 <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank form-group">
                                     <p:commandButton value="Salvar" icon="fa fa-save" action="#{usuarioController.salvar()}" update="form:acordion"/>
                                     <p:commandButton value="Novo" icon="fa fa-user-plus" immediate="true" action="#{usuarioController.limpar()}" update="form:acordion"/>

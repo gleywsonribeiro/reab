@@ -19,6 +19,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -47,8 +49,11 @@ public class Usuario implements Serializable {
     @Enumerated(EnumType.STRING)
     private Perfil perfil;
 
-   @OneToMany(mappedBy = "hospital")
-    private List<UsuarioHospital> usuarioHospitals = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(name = "tb_usuario_hospital",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "hospital_id"))
+    private Set<Hospital> hospitais = new HashSet<>();
 
     public Usuario() {
         this.ativo = true;
@@ -111,8 +116,12 @@ public class Usuario implements Serializable {
         this.ativo = ativo;
     }
 
-    public List<UsuarioHospital> getUsuarioHospitals() {
-        return usuarioHospitals;
+    public Set<Hospital> getHospitais() {
+        return hospitais;
+    }
+
+    public void setHospitais(Set<Hospital> hospitais) {
+        this.hospitais = hospitais;
     }
     
     
@@ -162,9 +171,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "Usuario{" + "login=" + login + ", nome=" + nome + ", perfil=" + perfil + '}';
     }
-
-   
-
-    
 
 }

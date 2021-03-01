@@ -6,13 +6,17 @@
 package controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import model.Hospital;
 import model.Perfil;
 import model.Usuario;
+import model.dao.HospitalDao;
 import model.dao.UsuarioDao;
+import model.service.UsuarioService;
 import util.exception.DBException;
 import util.jsf.JsfUtil;
 
@@ -27,17 +31,18 @@ public class UsuarioController implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer activeIndex = 0;
 
-    private Usuario usuario;
+    private Usuario usuario = new Usuario();
 
     private List<Usuario> usuarios;
-    private UsuarioDao dao = new UsuarioDao();
+    private UsuarioService usuarioService = new UsuarioService();
 
-
+    private List<Hospital> hospitais;
+    private List<Hospital> hospitaisSelecionados = new ArrayList<>();
+    private final HospitalDao hospitalDao = new HospitalDao();
 
     @PostConstruct
     private void init() {
-        usuario = new Usuario();
-        usuarios = dao.findAll();
+        usuarios = usuarioService.listarTodos();
     }
 
     public Usuario getUsuario() {
@@ -50,7 +55,7 @@ public class UsuarioController implements Serializable {
 
     public List<Usuario> getUsuarios() {
         if (usuarios == null) {
-            usuarios = dao.findAll();
+            usuarios = usuarioService.listarTodos();
         }
         return usuarios;
     }
@@ -67,22 +72,38 @@ public class UsuarioController implements Serializable {
         this.activeIndex = activeIndex;
     }
 
+    public List<Hospital> getHospitais() {
+        if (hospitais == null) {
+            hospitais = hospitalDao.findAll();
+        }
+        return hospitais;
+    }
+
+    public List<Hospital> getHospitaisSelecionados() {
+        return hospitaisSelecionados;
+    }
+
+    public void setHospitaisSelecionados(List<Hospital> hospitaisSelecionados) {
+        this.hospitaisSelecionados = hospitaisSelecionados;
+    }
+    
+    
+
+    public void setHospitais(List<Hospital> hospitais) {
+        this.hospitais = hospitais;
+    }
+
     public void salvar() {
         try {
-            if (usuario.getId() == null) {
-                usuario.setSenha(usuario.getLogin());
-                dao.create(usuario);
-                activeIndex = 1;
-                limpar();
-                usuarios = null;
-                JsfUtil.addMessage("Salvo com sucesso!");
-            } else {
-                dao.edit(usuario);
-                activeIndex = 1;
-                limpar();
-                usuarios = null;
-                JsfUtil.addMessage("Alterado com sucesso!");
-            }
+            usuario.setSenha(usuario.getLogin());
+            usuario.getHospitais().clear();
+            usuario.getHospitais().addAll(hospitaisSelecionados);
+            
+            usuarioService.salvar(usuario);
+            activeIndex = 1;
+            limpar();
+            usuarios = null;
+            JsfUtil.addMessage("Salvo com sucesso!");
         } catch (DBException e) {
             JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
 //            JsfUtil.addFatalMessage(e.getCause().getMessage());
@@ -90,7 +111,7 @@ public class UsuarioController implements Serializable {
     }
 
     public void remover() {
-        dao.remove(usuario);
+        usuarioService.remover(usuario);
         limpar();
         usuarios = null;
         activeIndex = 1;
@@ -98,12 +119,13 @@ public class UsuarioController implements Serializable {
     }
 
     public void editar() {
+        usuario.getHospitais().forEach( h -> hospitaisSelecionados.add(h));
         activeIndex = 0;
     }
 
     public void resete() {
         usuario.setSenha(usuario.getLogin().toLowerCase());
-        dao.resetPassword(usuario);
+        usuarioService.resetPassword(usuario);
         usuario = new Usuario();
         activeIndex = 1;
         JsfUtil.addMessage("Senha do usuário alterada com sucesso!");

@@ -39,8 +39,8 @@ public class Hospital implements Serializable {
     @OneToMany(mappedBy = "hospital", cascade = CascadeType.REMOVE)
     private List<Setor> setores;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<UsuarioHospital> usuarioHospitals = new ArrayList<>();
+    @ManyToMany(mappedBy = "hospitais")
+    private Set<Usuario> usuarios = new HashSet<>();
 
     public Hospital() {
         this.setores = new ArrayList<>();
@@ -77,12 +77,6 @@ public class Hospital implements Serializable {
         this.cnpj = cnpj;
     }
 
-    public List<UsuarioHospital> getUsuarioHospitals() {
-        return usuarioHospitals;
-    }
-
-   
-    
     public List<Setor> getSetores() {
         return setores;
     }
@@ -90,6 +84,16 @@ public class Hospital implements Serializable {
     public void setSetores(List<Setor> setores) {
         this.setores = setores;
     }
+
+    public Set<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(Set<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+    
+    
 
     public int getTotalLeitos() {
         int total = 0;
