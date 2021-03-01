@@ -36,7 +36,9 @@ public abstract class DataService implements Serializable, InfoData {
             int soma = 0;
             float media;
             int contador = 0;
+            //extrai o ano corrente
             int ano  = new Date().toInstant().atZone(ZoneId.systemDefault()).getYear();
+            //filtra apenas os atendimentos do ano corrente
             List<Atendimento> atendimentosDoAno = atendimentos.stream()
                     .filter(a -> ano == a.getDataAtendimento().toInstant().atZone(ZoneId.systemDefault()).getYear()).collect(Collectors.toList());
 
