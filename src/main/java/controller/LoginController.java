@@ -15,6 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import model.Hospital;
 import model.Usuario;
+import model.dao.HospitalDao;
 import model.dao.UsuarioDao;
 import util.jsf.JsfUtil;
 
@@ -35,14 +36,16 @@ public class LoginController implements Serializable {
     private UsuarioDao dao = new UsuarioDao();
     
     //hospital da sessao
-    private Hospital hospital = new Hospital();
+    private Long hospitalID;
+    
+    private HospitalDao hospitalDao = new HospitalDao();
 
     public LoginController() {
         this.usuario = new Usuario();
     }
     
     public void buscarUsuario() {
-        Usuario user = dao.getUsuarioPorLogin(usuario.getLogin());
+        Usuario user = dao.getUsuarioPorLogin(usuario.getLogin().toLowerCase());
         if(user == null) {
             JsfUtil.addErrorMessage("Usuário não encontrado!");
         } else {
@@ -54,12 +57,12 @@ public class LoginController implements Serializable {
         Usuario usuarioLogado = dao.getUsuarioByLoginSenha(usuario.getLogin().toLowerCase(), usuario.getSenha());
 
         if (usuarioLogado == null) {
-            usuario = new Usuario();
-            JsfUtil.addErrorMessage("Usuário não encontrado!");
+            //usuario = new Usuario();
+            JsfUtil.addErrorMessage("Usuário ou senha inválidos!");
             return "";
         } else if (usuario.getLogin().toLowerCase().equals(usuario.getSenha())) {
             usuario = usuarioLogado;
-            usuario.setHospitalLogado(hospital);
+            usuario.setHospitalLogado(hospitalDao.find(hospitalID));
             FacesContext context = FacesContext.getCurrentInstance();
             HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
             httpSession.setAttribute("currentUser", usuario);
@@ -111,13 +114,15 @@ public class LoginController implements Serializable {
         this.novaSenha = novaSenha;
     }
 
-    public Hospital getHospital() {
-        return hospital;
+    public Long getHospitalID() {
+        return hospitalID;
     }
 
-    public void setHospital(Hospital hospital) {
-        this.hospital = hospital;
+    public void setHospitalID(Long hospitalID) {
+        this.hospitalID = hospitalID;
     }
+
+   
 
     
     
