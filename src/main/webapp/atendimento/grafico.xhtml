@@ -1,0 +1,64 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Hospital</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:commandButton value="Voltar" icon="fa fa-arrow-left" 
+                                     process="@this" action="unidades?faces-redirect=true"/>
+                </f:facet>
+            </p:toolbar>
+            <div class="ui-g ui-fluid">
+                <p:growl autoUpdate="true"/>
+                <div class="ui-g-12 ui-lg-7">
+                    <!-- Left colum -->
+
+                    <div class="card card-w-title">
+
+                        <h1>#{painelController.unidade.nome}</h1>
+                        <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                            <h:outputText value="Leitos: #{painelController.unidade.totalLeitos}"/>
+                            <h:outputText value="Extra: #{painelController.unidade.totalLeitosExtras}"/>
+                            <h:outputText value="Ocupado: #{painelController.unidade.totalLeitosOcupados}"/>
+                            <h:outputText value="Vago: #{painelController.unidade.totalLeitosVagos}"/>
+                            <h:outputText value="Taxa Ocupação:  #{painelController.unidade.taxaOcupacao} %"/>
+                        </p:panelGrid>
+                    </div>
+
+                </div>
+                <div class="ui-g-12 ui-lg-7">
+                    <div class="card timeline ui-fluid">
+                        Gráficos
+                        <p:chart type="bar" model="#{graficoController.sedestacao}" style="height:300px" 
+                                 responsive="true"/>
+                        <p:separator/>
+
+                        <p:chart type="bar" model="#{graficoController.ortostase}" style="height:300px" 
+                                 responsive="true"/>
+                        <p:separator/>
+                        <p:chart type="bar" model="#{graficoController.deambulacao}" style="height:300px" 
+                                 responsive="true"/>
+                        <p:separator/>
+                        <p:chart type="bar" model="#{graficoController.intubacao}" style="height:300px" 
+                                 responsive="true"/>
+                        <p:separator/>
+                        <p:chart type="bar" model="#{graficoController.extubacao}" style="height:300px" 
+                                 responsive="true"/>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </h:form>    
+    </ui:define>
+
+</ui:composition>

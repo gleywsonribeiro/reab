@@ -8,8 +8,10 @@ package controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import model.Atendimento;
 import model.DadoMensal;
 import model.service.AtendimentoService;
@@ -19,9 +21,9 @@ import model.service.InfoDataExtubacao;
 import model.service.InfoDataIntubacao;
 import model.service.InfoDataOrtostase;
 import model.service.InfoDataSedestacao;
+import model.service.SetorService;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
-
 
 /**
  *
@@ -41,15 +43,33 @@ public class GraficoController implements Serializable {
 
     List<Atendimento> atendimentos = new ArrayList<>();
     AtendimentoService atendimentoService = new AtendimentoService();
+    
 
-    public GraficoController() {
-        atendimentos = atendimentoService.listarTodos();
+    @PostConstruct
+    private void init() {
+        String chave = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
+
+        if (chave != null) {
+            Long id = Long.parseLong(chave);
+            atendimentos = atendimentoService.porUnidade(new SetorService().buscarPorId(id));
+        }
+        
         createSedestacao();
         createOrtostase();
         createDeambulacao();
         createIntubacao();
         createExtubacao();
+
     }
+
+//    public GraficoController() {
+//        atendimentos = atendimentoService.listarTodos();
+//        createSedestacao();
+//        createOrtostase();
+//        createDeambulacao();
+//        createIntubacao();
+//        createExtubacao();
+//    }
 
     public BarChartModel getSedestacao() {
         return sedestacao;
@@ -76,7 +96,7 @@ public class GraficoController implements Serializable {
     }
 
     private void createOrtostase() {
-        ortostase =  createChartAux(new InfoDataOrtostase(atendimentos), "1ª Ortostase");
+        ortostase = createChartAux(new InfoDataOrtostase(atendimentos), "1ª Ortostase");
     }
 
     private void createDeambulacao() {
@@ -112,7 +132,7 @@ public class GraficoController implements Serializable {
         bcm.setAnimate(true);
         bcm.setLegendPosition("ne");
         bcm.setTitle(titulo);
-        
+
         return bcm;
     }
 }

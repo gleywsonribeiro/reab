@@ -33,6 +33,13 @@
                                 <p:column headerText="Unidades de Internação">
                                     <h:outputText value="#{setor.nome}"/>
                                 </p:column>
+                                
+                                <p:column style="text-align: center;width: 50px">
+                                    <h:outputLink value="grafico.xhtml">
+                                        <p:button icon="fa fa-bar-chart-o" />
+                                        <f:param name="id" value="#{setor.id}"/>
+                                    </h:outputLink>
+                                </p:column>
 
                                 <p:column style="text-align: center;width: 50px">
                                     <h:outputLink value="painel.xhtml">

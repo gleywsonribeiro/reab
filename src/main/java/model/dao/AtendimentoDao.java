@@ -47,17 +47,21 @@ public class AtendimentoDao extends Dao<Atendimento> {
         Query query = em.createQuery("SELECT COUNT(A) FROM Atendimento AS A WHERE A.dataAlta IS NULL");
         return (Long) query.getSingleResult();
     }
-    
+
     public List<Atendimento> getAtendimentosEmAndamento() {
         Query query = em.createQuery("SELECT a FROM Atendimento as a where a.dataAlta IS NULL", Atendimento.class);
         return query.getResultList();
     }
-    
+
     public List<Atendimento> getAtendimentosPorUnidade(Setor setor) {
         Query query = em.createQuery("SELECT a FROM Atendimento as a where a.leito.setor = :setor and a.dataAlta IS NULL", Atendimento.class);
         query.setParameter("setor", setor);
         return query.getResultList();
     }
-    
+
+    public List<Atendimento> porSetor(Setor setor) {
+        Query query = em.createQuery("SELECT a FROM Atendimento as a where a.leito.setor = :setor and a.dataAlta IS NULL", Atendimento.class);
+        return null;
+    }
 
 }
