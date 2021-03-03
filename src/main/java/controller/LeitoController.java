@@ -65,7 +65,8 @@ public class LeitoController implements Serializable {
             leitos = null;
             JsfUtil.addMessage("Salvo com sucesso!");
         } catch (Exception e) {
-            JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
+            //JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 

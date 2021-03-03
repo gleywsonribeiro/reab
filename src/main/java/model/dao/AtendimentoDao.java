@@ -59,9 +59,5 @@ public class AtendimentoDao extends Dao<Atendimento> {
         return query.getResultList();
     }
 
-    public List<Atendimento> porSetor(Setor setor) {
-        Query query = em.createQuery("SELECT a FROM Atendimento as a where a.leito.setor = :setor and a.dataAlta IS NULL", Atendimento.class);
-        return null;
-    }
 
 }

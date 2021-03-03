@@ -51,7 +51,7 @@ public class GraficoController implements Serializable {
 
         if (chave != null) {
             Long id = Long.parseLong(chave);
-            atendimentos = atendimentoService.porUnidade(new SetorService().buscarPorId(id));
+            atendimentos = atendimentoService.getAtendimentosPorUnidade(new SetorService().buscarPorId(id));
         }
         
         createSedestacao();

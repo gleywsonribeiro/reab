@@ -7,6 +7,8 @@ package controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
@@ -39,6 +41,7 @@ public class LoginController implements Serializable {
     private Long hospitalID;
     
     private HospitalDao hospitalDao = new HospitalDao();
+    private List<Hospital> hospitais = new ArrayList<>();
 
     public LoginController() {
         this.usuario = new Usuario();
@@ -49,7 +52,7 @@ public class LoginController implements Serializable {
         if(user == null) {
             JsfUtil.addErrorMessage("Usuário não encontrado!");
         } else {
-            usuario = user;
+            hospitais.addAll(user.getHospitais());
         }
     }
 
@@ -120,6 +123,10 @@ public class LoginController implements Serializable {
 
     public void setHospitalID(Long hospitalID) {
         this.hospitalID = hospitalID;
+    }
+
+    public List<Hospital> getHospitais() {
+        return hospitais;
     }
 
    

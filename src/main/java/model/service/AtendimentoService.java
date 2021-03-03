@@ -77,8 +77,4 @@ public class AtendimentoService implements Serializable {
         }
     }
 
-    public List<Atendimento> porUnidade(Setor setor) {
-        return dao.porSetor(setor);
-    }
-
 }
