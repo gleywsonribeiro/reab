@@ -6,9 +6,6 @@
 package model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,11 +16,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.joda.time.DateTime;
-import org.joda.time.LocalDateTime;
 import org.joda.time.Years;
 
 /**
@@ -56,6 +54,10 @@ public class Paciente implements Serializable {
     
     @OneToMany(mappedBy = "paciente")
     private List<Atendimento> atendimentos;
+    
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Hospital hospital;
 
     public Paciente() {
         this.dataCadastro = new Date();
@@ -124,6 +126,16 @@ public class Paciente implements Serializable {
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
+
+    public Hospital getHospital() {
+        return hospital;
+    }
+
+    public void setHospital(Hospital hospital) {
+        this.hospital = hospital;
+    }
+    
+    
     
     public int getIdade() {
         DateTime nascimento = new DateTime(getDataNascimento().getTime());

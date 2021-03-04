@@ -5,15 +5,19 @@
  */
 package model.dao;
 
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import jpa.util.HibernateUtil;
+import model.Atendimento;
+import model.Hospital;
 import model.Paciente;
 
 /**
  *
  * @author gleyw
  */
-public class PacienteDao extends Dao<Paciente>{
+public class PacienteDao extends Dao<Paciente> {
 
     EntityManager em = HibernateUtil.getEntityManager();
 
@@ -24,6 +28,12 @@ public class PacienteDao extends Dao<Paciente>{
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+
+    public List<Paciente> listarPorHospital(Hospital hospital) {
+        Query query = em.createQuery("SELECT p FROM Paciente as p where p.hospital = :hospital", Paciente.class);
+        query.setParameter("hospital", hospital);
+        return query.getResultList();
     }
 
 }

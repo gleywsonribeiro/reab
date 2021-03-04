@@ -14,16 +14,14 @@
             <div class="ui-g ui-fluid">
                 <p:growl autoUpdate="true"/>
                 <div class="ui-g-12 ui-lg-9">
-                    <!-- Left colum -->
-
-                    <ui:repeat value="#{hospitalController.hospitais}" var="hospital">
+                   
                         <div class="card card-w-title">
-                            <h1>#{hospital.nome}</h1>
+                            <h1>#{hospitalController.hospitalLogado.nome}</h1>
                             <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
-                                <h:outputText value="Leitos: #{hospital.totalLeitos}"/>
-                                <h:outputText value="Extra: #{hospital.totalLeitosExtras}"/>
-                                <h:outputText value="Ocupado: #{hospital.totalLeitosOcupados}"/>
-                                <h:outputText value="Vago: #{hospital.totalLeitosVagos}"/>
+                                <h:outputText value="Leitos: #{hospitalController.hospitalLogado.totalLeitos}"/>
+                                <h:outputText value="Extra: #{hospitalController.hospitalLogado.totalLeitosExtras}"/>
+                                <h:outputText value="Ocupado: #{hospitalController.hospitalLogado.totalLeitosOcupados}"/>
+                                <h:outputText value="Vago: #{hospitalController.hospitalLogado.totalLeitosVagos}"/>
                             </p:panelGrid>
                         </div>
 
@@ -51,7 +49,7 @@
                             </p:dataTable>
 
                         </div>
-                    </ui:repeat>
+                   
                 </div>
                 <div class="ui-g-12 ui-lg-6">
                     <!-- Right colum -->

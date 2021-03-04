@@ -13,10 +13,12 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import model.Hospital;
 import model.Paciente;
 import model.dao.PacienteDao;
 import model.service.PacienteService;
 import org.hibernate.exception.ConstraintViolationException;
+import service.Sessao;
 import util.exception.DBException;
 import util.exception.NegocioException;
 import util.jsf.JsfUtil;
@@ -57,6 +59,8 @@ public class PacienteController implements Serializable {
 
     public void salvar() {
         try {
+            Hospital hospital = Sessao.getUsuarioSessao().getHospitalLogado();
+            paciente.setHospital(hospital);
             service.salvar(paciente);
             pacientes = null;
             JsfUtil.addMessage("Salvo com sucesso!");
@@ -90,7 +94,8 @@ public class PacienteController implements Serializable {
 
     public List<Paciente> getPacientes() {
         if (pacientes == null) {
-            pacientes = service.listarTodos();
+            Hospital hospital = Sessao.getUsuarioSessao().getHospitalLogado();
+            pacientes = service.listarPorHospital(hospital);
         }
         return pacientes;
     }

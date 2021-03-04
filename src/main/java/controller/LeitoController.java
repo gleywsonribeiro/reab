@@ -8,22 +8,17 @@ package controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import model.Leito;
 import model.LeitoSexo;
-import model.Ocupacao;
-import model.Paciente;
 import model.Setor;
-import model.dao.PacienteDao;
+import model.Usuario;
 import model.service.LeitoService;
-import model.service.PacienteService;
 import model.service.SetorService;
-import util.exception.DBException;
-import util.exception.NegocioException;
+import service.Sessao;
 import util.jsf.JsfUtil;
 
 /**
@@ -72,10 +67,13 @@ public class LeitoController implements Serializable {
 
     public List<Setor> getSetores() {
         if (setores == null) {
-            setores = setorService.getSetores();
+            Usuario usuario = Sessao.getUsuarioSessao();
+            setores = setorService.getSetoresPorHospital(usuario.getHospitalLogado());
         }
         return setores;
     }
+    
+    
 
     public void setSetores(List<Setor> setores) {
         this.setores = setores;

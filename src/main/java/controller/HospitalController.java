@@ -15,9 +15,11 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import model.Hospital;
 import model.Setor;
+import model.Usuario;
 import model.dao.HospitalDao;
 import model.dao.SetorDao;
 import model.service.SetorService;
+import service.Sessao;
 import util.exception.DBException;
 import util.jsf.JsfUtil;
 
@@ -38,7 +40,6 @@ public class HospitalController implements Serializable {
     private Setor setor = new Setor();
     private List<Setor> setores;
     SetorService setorService = new SetorService();
-    
 
     @PostConstruct
     private void init() {
@@ -52,7 +53,7 @@ public class HospitalController implements Serializable {
         }
 
     }
-    
+
     public void novo() {
         hospital = new Hospital();
         setores = new ArrayList<>();
@@ -87,6 +88,11 @@ public class HospitalController implements Serializable {
         return hospitais;
     }
 
+    public Hospital getHospitalLogado() {
+        Usuario usuario = Sessao.getUsuarioSessao();
+        return usuario.getHospitalLogado();
+    }
+
     public void setHospitais(List<Hospital> hospitais) {
         this.hospitais = hospitais;
     }
@@ -98,8 +104,6 @@ public class HospitalController implements Serializable {
     public void setSetores(List<Setor> setores) {
         this.setores = setores;
     }
-    
-    
 
     public void salvar() {
         try {
@@ -117,24 +121,21 @@ public class HospitalController implements Serializable {
     }
 
     public void inserirSetor() {
-       setor.setHospital(hospital);
+        setor.setHospital(hospital);
 
-       setorService.salvar(setor);
-       setor = new Setor();
-       setores = setorService.getSetoresPorHospital(hospital);
-       
+        setorService.salvar(setor);
+        setor = new Setor();
+        setores = setorService.getSetoresPorHospital(hospital);
+
     }
-    
+
     public void editarSetor() {
         setorService.salvar(setor);
     }
-    
-    
+
     public boolean isCadastrado() {
         return hospital.getId() != null;
     }
-    
-    
 
     public List<Hospital> completeHospital(String query) {
         String queryLowerCase = query.toLowerCase();

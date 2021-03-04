@@ -13,12 +13,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import model.Hospital;
 import model.Usuario;
 import model.dao.HospitalDao;
 import model.dao.UsuarioDao;
+import service.Sessao;
 import util.jsf.JsfUtil;
 
 /**
@@ -26,7 +28,7 @@ import util.jsf.JsfUtil;
  * @author Gleywson
  */
 @ManagedBean
-@SessionScoped
+@SessionScoped ////@ViewScoped
 public class LoginController implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,20 +38,20 @@ public class LoginController implements Serializable {
     private String novaSenha;
 
     private UsuarioDao dao = new UsuarioDao();
-    
+
     //hospital da sessao
     private Long hospitalID;
-    
+
     private HospitalDao hospitalDao = new HospitalDao();
     private List<Hospital> hospitais = new ArrayList<>();
 
     public LoginController() {
         this.usuario = new Usuario();
     }
-    
+
     public void buscarUsuario() {
         Usuario user = dao.getUsuarioPorLogin(usuario.getLogin().toLowerCase());
-        if(user == null) {
+        if (user == null) {
             JsfUtil.addErrorMessage("Usuário não encontrado!");
         } else {
             hospitais.addAll(user.getHospitais());
@@ -61,20 +63,13 @@ public class LoginController implements Serializable {
 
         if (usuarioLogado == null) {
             //usuario = new Usuario();
-            JsfUtil.addErrorMessage("Usuário ou senha inválidos!");
+            JsfUtil.addErrorMessage("Senha inválida!");
             return "";
         } else if (usuario.getLogin().toLowerCase().equals(usuario.getSenha())) {
-            usuario = usuarioLogado;
-            usuario.setHospitalLogado(hospitalDao.find(hospitalID));
-            FacesContext context = FacesContext.getCurrentInstance();
-            HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
-            httpSession.setAttribute("currentUser", usuario);
+            addNaSessao(usuarioLogado);
             return "/usuario/senha?faces-redirect=true";
         } else {
-            usuario = usuarioLogado;
-            FacesContext context = FacesContext.getCurrentInstance();
-            HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
-            httpSession.setAttribute("currentUser", usuario);
+            addNaSessao(usuarioLogado);
             return "dashboard?faces-redirect=true";
         }
 
@@ -129,8 +124,12 @@ public class LoginController implements Serializable {
         return hospitais;
     }
 
-   
+    private void addNaSessao(Usuario usuarioLogado) {
+        usuario = usuarioLogado;
+        usuario.setHospitalLogado(hospitalDao.find(hospitalID));
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
+        httpSession.setAttribute("currentUser", usuario);
+    }
 
-    
-    
 }

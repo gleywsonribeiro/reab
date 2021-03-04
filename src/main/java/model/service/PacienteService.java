@@ -7,6 +7,7 @@ package model.service;
 
 import java.util.List;
 import model.Atendimento;
+import model.Hospital;
 import model.Paciente;
 import model.dao.AtendimentoDao;
 import model.dao.PacienteDao;
@@ -34,6 +35,10 @@ public class PacienteService {
     
     public List<Paciente> listarTodos() {
         return dao.findAll();
+    }
+    
+    public List<Paciente> listarPorHospital(Hospital hospital) {
+        return dao.listarPorHospital(hospital);
     }
     
     public Paciente buscarPorId(Long id) {
