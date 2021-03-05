@@ -27,7 +27,7 @@
             <property name="javax.persistence.jdbc.password" value="systemcall"/>
             <!--==================================================================================================-->
             <!--Configuração da nuvem-->
-<!--                        <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/iridavis_reab?serverTimezone=GMT-3"/>
+<!--            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/iridavis_reab?serverTimezone=GMT-3"/>
             <property name="javax.persistence.jdbc.user" value="iridavis_reab"/>
             <property name="javax.persistence.jdbc.password" value="SystemC@ll1989"/>-->
             <!--=========================================================================================-->
