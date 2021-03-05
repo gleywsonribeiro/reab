@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 import model.Atendimento;
+import model.Hospital;
 import model.Leito;
 import model.Setor;
 import model.dao.AtendimentoDao;
@@ -44,8 +45,8 @@ public class LeitoService implements Serializable {
         
     }
     
-    public List<Leito> getLeitosVagos() {
-        return dao.getLeitosVagos();
+    public List<Leito> getLeitosVagos(Hospital hospital) {
+        return dao.getLeitosVagos(hospital);
     }
     
 }

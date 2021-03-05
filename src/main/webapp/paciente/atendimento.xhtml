@@ -28,16 +28,26 @@
                         <h1>Admissão</h1>
                         <p:fieldset legend="Dados do Paciente">
                             <h1>#{atendeController.atendimento.paciente.nome}</h1>
-                            
+
                             <h:panelGrid columns="2">
                                 <h:outputText value="Matrícula: " style="font-weight: 900"/>
                                 <h:outputText value="#{atendeController.atendimento.paciente.matricula}"/>
-                                
+
                                 <h:outputText value="Idade: " style="font-weight: 900"/>
                                 <h:outputText value="#{atendeController.atendimento.paciente.idade} anos"/>
-                                
+
                                 <h:outputText value="Sexo: " style="font-weight: 900"/>
                                 <h:outputText value="#{atendeController.atendimento.paciente.sexo.descricao}"/>
+
+                                <h:outputText value="Data: " style="font-weight: 900"/>
+                                <p:inplace>
+                                    <p:inputText value="#{atendeController.atendimento.dataAtendimento}" required="true" 
+                                                 requiredMessage="A data de atendimento não pode ficar em branco">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                    </p:inputText>
+                                </p:inplace>
+
+
 
                             </h:panelGrid>
                         </p:fieldset>

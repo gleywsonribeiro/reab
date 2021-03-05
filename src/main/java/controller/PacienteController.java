@@ -39,7 +39,8 @@ public class PacienteController implements Serializable {
 
     @PostConstruct
     private void init() {
-        pacientes = service.listarTodos();
+        Hospital hospital = Sessao.getUsuarioSessao().getHospitalLogado();
+        pacientes = service.listarPorHospital(hospital);
         String chave = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 
         if (chave != null) {
@@ -93,10 +94,6 @@ public class PacienteController implements Serializable {
     }
 
     public List<Paciente> getPacientes() {
-        if (pacientes == null) {
-            Hospital hospital = Sessao.getUsuarioSessao().getHospitalLogado();
-            pacientes = service.listarPorHospital(hospital);
-        }
         return pacientes;
     }
 

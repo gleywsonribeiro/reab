@@ -74,6 +74,12 @@ public class Atendimento implements Serializable {
     @ManyToOne
     private Leito leito;
 
+    public Atendimento() {
+        this.dataAtendimento = new Date();
+    }
+
+    
+
     public Long getId() {
         return id;
     }

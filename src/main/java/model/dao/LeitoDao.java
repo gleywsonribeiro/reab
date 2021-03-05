@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import jpa.util.HibernateUtil;
+import model.Hospital;
 import model.Leito;
 import model.Motivo;
 import model.Ocupacao;
@@ -37,9 +38,10 @@ public class LeitoDao extends Dao<Leito>{
         return query.getResultList();
     }
     
-    public List<Leito> getLeitosVagos() {
-        Query query = em.createQuery("SELECT l FROM Leito as l where l.ocupacao =: ocupacao", Leito.class);
+    public List<Leito> getLeitosVagos(Hospital hospital) {
+        Query query = em.createQuery("SELECT l FROM Leito as l where l.ocupacao =: ocupacao and l.setor.hospital =:hospital", Leito.class);
         query.setParameter("ocupacao", Ocupacao.VAGO);
+        query.setParameter("hospital", hospital);
         return query.getResultList();
     }
 

@@ -43,6 +43,13 @@
                                     <f:convertDateTime pattern="dd/MM/yyyy"/>
                                 </h:outputText>
                             </p:column>
+                            
+                            <p:column style="text-align: center">
+                                <h:outputLink value="cadastro.xhtml">
+                                    <p:button icon="fa fa-edit" />
+                                    <f:param name="id" value="#{atendimento.id}"/>
+                                </h:outputLink>
+                            </p:column>
 
                             <p:column style="text-align: center">
                                 <p:commandButton  id="bt" icon="fa fa-trash" action="#{atendimentoController.remover()}" styleClass="red-btn"

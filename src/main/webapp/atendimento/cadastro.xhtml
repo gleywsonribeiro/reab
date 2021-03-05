@@ -12,12 +12,12 @@
         <h:form id="form">
             <p:toolbar id="tb">
                 <f:facet name="left">
-                    <p:commandButton value="Listar" icon="fa fa-search" process="@this" action="pesquisa?faces-redirect=true"/>
-                    <p:commandButton value="Novo" icon="fa fa-file-o" process="@this" update="form" action="#{atendimentoController.novo()}"/>
+                    <p:commandButton value="Listar" icon="fa fa-search" process="@this" ajax="false" action="pesquisa?faces-redirect=true"/>
+                    <p:commandButton value="Novo" icon="fa fa-file-o" process="@this" ajax="false" action="/paciente/pesquisa?faces-redirect=true"/>
                     <span class="ui-separator">
                         <span class="ui-icon pi pi-ellipsis-v" />
                     </span>
-                    <p:commandButton id="btnSave" value="Admitir" icon="fa fa-stethoscope" action="#{atendimentoController.salvar()}" update="@form" />
+                    <p:commandButton id="btnSave" value="Salvar" icon="fa fa-save" action="#{atendimentoController.salvar()}" update="@form" />
                 </f:facet>
             </p:toolbar>
             <div class="ui-g ui-fluid">
@@ -27,57 +27,37 @@
                     <div class="card card-w-title">
 
                         <p:growl autoUpdate="true"/>
+
                         <h1>Admissão</h1>
                         <p:fieldset legend="Dados do Paciente">
-                            <p:panelGrid id="cadastro" columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
-                                <p:autoComplete id="paciente" dropdown="true" value="#{atendimentoController.paciente}" var="paciente"
-                                                itemValue="#{paciente}" itemLabel="#{paciente.nome}"
-                                                converter="pacienteConverter" forceSelection="true" required="true" requiredMessage="Escolha um paciente"
-                                                completeMethod="#{pacienteController.completePaciente}" style="margin-bottom:10px;">
-                                    <p:ajax event="itemSelect" listener="#{atendimentoController.selecionar()}" update="cadastro" />
-                                </p:autoComplete>
-                                <p:watermark for="paciente" value="Buscar paciente"/>
+                            <h1>#{atendimentoController.atendimento.paciente.nome}</h1>
 
-                                <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{atendimentoController.atendimento.paciente.id}" readonly="true"/>
-                                    <label>Código</label>
-                                </h:panelGroup>
+                            <h:panelGrid columns="2">
+                                <h:outputText value="Matrícula: " style="font-weight: 900"/>
+                                <h:outputText value="#{atendimentoController.atendimento.paciente.matricula}"/>
 
-                                <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{atendimentoController.atendimento.paciente.nome}" readonly="true"/>
-                                    <label>Paciente</label>
-                                </h:panelGroup>
+                                <h:outputText value="Idade: " style="font-weight: 900"/>
+                                <h:outputText value="#{atendimentoController.atendimento.paciente.idade} anos"/>
 
-                                <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{atendimentoController.atendimento.paciente.sexo.descricao}" readonly="true"/>
-                                    <label>Sexo</label>
-                                </h:panelGroup>
+                                <h:outputText value="Sexo: " style="font-weight: 900"/>
+                                <h:outputText value="#{atendimentoController.atendimento.paciente.sexo.descricao}"/>
+                                
+                                <h:outputText value="Leito: " style="font-weight: 900"/>
+                                <h:outputText value="#{atendimentoController.atendimento.leito.descricao}"/>
 
-                                <h:panelGroup styleClass="md-inputfield">
-                                    <p:inputText value="#{atendimentoController.atendimento.paciente.dataNascimento}" readonly="true">
-                                        <f:convertDateTime locale="pt_BR" timeZone="GMT-3"/>
+                                <h:outputText value="Data: " style="font-weight: 900"/>
+                                <p:inplace>
+                                    <p:inputText value="#{atendimentoController.atendimento.dataAtendimento}" required="true" 
+                                                 requiredMessage="A data de atendimento não pode ficar em branco">
+                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
                                     </p:inputText>
-                                    <label>Data de Nascimento</label>
-                                </h:panelGroup>
+                                </p:inplace>
 
-                            </p:panelGrid>
+                                
+
+                            </h:panelGrid>
                         </p:fieldset>
-                        <p:fieldset legend="Dados da Admissão">
-
-                            <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
-                                <h:panelGroup>
-                                    <h4 style="margin-bottom: 20px">Leito </h4>
-                                    <p:selectOneMenu value="#{atendimentoController.atendimento.leito}" required="true" requiredMessage="Escolha um leito"
-                                                     converter="leitoConverter" filter="true" filterMatchMode="contains">
-                                        <f:selectItem itemLabel="Selecione"/>
-                                        <f:selectItems value="#{leitoController.leitosVagos}" var="leito"
-                                                       itemLabel="#{leito.descricao} - #{leito.setor.nome}" itemValue="#{leito}"/>
-                                    </p:selectOneMenu>
-                                </h:panelGroup>
-                            </p:panelGrid>
-
-                        </p:fieldset>
-
+                        
                     </div>
                 </div>
                 <div class="ui-g-12 ui-lg-6">

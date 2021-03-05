@@ -15,6 +15,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import model.Atendimento;
+import model.Hospital;
 import model.Leito;
 import model.Ocupacao;
 import model.Paciente;
@@ -23,6 +24,7 @@ import model.dao.AtendimentoDao;
 import model.dao.LeitoDao;
 import model.service.AtendimentoService;
 import model.service.LeitoService;
+import service.Sessao;
 import util.exception.DBException;
 import util.exception.NegocioException;
 import util.jsf.JsfUtil;
@@ -47,7 +49,8 @@ public class AtendimentoController implements Serializable {
 
     @PostConstruct
     private void init() {
-        atendimentos = service.listarTodos();
+        Hospital hospital = Sessao.getUsuarioSessao().getHospitalLogado();
+        atendimentos = service.listarTodos(hospital);
         String chave = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
 
         if (chave != null) {
@@ -138,14 +141,12 @@ public class AtendimentoController implements Serializable {
     }
 
     public List<Atendimento> getAtendimentos() {
-        if (atendimentos == null) {
-            atendimentos = service.listarTodos();
-        }
         return atendimentos;
     }
 
     public Long getPacientesInternados() {
-        return service.getPacientesInternados();
+        Hospital hospital = Sessao.getUsuarioSessao().getHospitalLogado();
+        return service.getPacientesInternados(hospital);
     }
 
     public List<Atendimento> getAtendimentosEmAndamento() {

@@ -13,6 +13,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import jpa.util.HibernateUtil;
 import model.Atendimento;
+import model.Hospital;
 import model.Paciente;
 import model.Setor;
 
@@ -43,8 +44,9 @@ public class AtendimentoDao extends Dao<Atendimento> {
         }
     }
 
-    public Long getPacientesInternados() {
-        Query query = em.createQuery("SELECT COUNT(A) FROM Atendimento AS A WHERE A.dataAlta IS NULL");
+    public Long getPacientesInternados(Hospital hospital) {
+        Query query = em.createQuery("SELECT COUNT(A) FROM Atendimento AS A WHERE A.dataAlta IS NULL AND A.paciente.hospital =:hospital");
+        query.setParameter("hospital", hospital);
         return (Long) query.getSingleResult();
     }
 
@@ -59,5 +61,10 @@ public class AtendimentoDao extends Dao<Atendimento> {
         return query.getResultList();
     }
 
+    public List<Atendimento> listarPorHospital(Hospital hospital) {
+        Query query = em.createQuery("SELECT a FROM Atendimento as a where a.paciente.hospital = :hospital", Atendimento.class);
+        query.setParameter("hospital", hospital);
+        return query.getResultList();
+    }
 
 }

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.Query;
 import model.Atendimento;
+import model.Hospital;
 import model.LeitoSexo;
 import model.Setor;
 import model.dao.AtendimentoDao;
@@ -43,8 +44,8 @@ public class AtendimentoService implements Serializable {
         dao.create(atendimento);
     }
 
-    public List<Atendimento> listarTodos() {
-        return dao.findAll();
+    public List<Atendimento> listarTodos(Hospital hospital) {
+        return dao.listarPorHospital(hospital);
     }
 
     public List<Atendimento> getAtendimentosEmAndamento() {
@@ -61,8 +62,8 @@ public class AtendimentoService implements Serializable {
         return dao.getAtendimentosPorUnidade(setor);
     }
 
-    public Long getPacientesInternados() {
-        return dao.getPacientesInternados();
+    public Long getPacientesInternados(Hospital hospital) {
+        return dao.getPacientesInternados(hospital);
     }
 
     public Atendimento buscarPorId(Long id) {

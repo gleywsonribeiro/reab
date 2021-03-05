@@ -73,7 +73,6 @@ public class AtendeController implements Serializable {
             HttpSession httpSession = (HttpSession) fc.getExternalContext().getSession(false);
             Usuario usuario = (Usuario) httpSession.getAttribute("currentUser");
             atendimento.setAtendente(usuario);
-            atendimento.setDataAtendimento(new Date());
             
             Leito leito = atendimento.getLeito();
             leito.setOcupacao(Ocupacao.OCUPADO);

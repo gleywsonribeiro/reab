@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import model.Hospital;
 import model.Leito;
 import model.LeitoSexo;
 import model.Setor;
@@ -107,7 +108,8 @@ public class LeitoController implements Serializable {
     }
     
     public List<Leito> getLeitosVagos() {
-        return leitoService.getLeitosVagos();
+        Hospital hospital = Sessao.getUsuarioSessao().getHospitalLogado();
+        return leitoService.getLeitosVagos(hospital);
     }
 
 }
