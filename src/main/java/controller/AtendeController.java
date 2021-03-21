@@ -65,6 +65,7 @@ public class AtendeController implements Serializable {
 //            JsfUtil.addErrorMessage("Erro ao realizar alta");
 //        }
 
+
     }
 
     public String salvar() {
