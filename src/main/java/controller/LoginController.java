@@ -53,6 +53,7 @@ public class LoginController implements Serializable {
         Usuario user = dao.getUsuarioPorLogin(usuario.getLogin().toLowerCase());
         if (user == null) {
             JsfUtil.addErrorMessage("Usuário não encontrado!");
+            hospitais.clear();
         } else {
             hospitais.addAll(user.getHospitais());
         }
