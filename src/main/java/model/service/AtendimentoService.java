@@ -44,6 +44,10 @@ public class AtendimentoService implements Serializable {
         dao.create(atendimento);
     }
 
+    public void edicao(Atendimento atendimento) {
+        dao.edit(atendimento);
+    }
+
     public List<Atendimento> listarTodos(Hospital hospital) {
         return dao.listarPorHospital(hospital);
     }

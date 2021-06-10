@@ -118,6 +118,17 @@ public class AtendimentoController implements Serializable {
         }
     }
 
+    public void editar() {
+        try {
+            service.edicao(atendimento);
+            JsfUtil.addMessage("Alterado com sucesso!");
+        } catch (DBException e) {
+            JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
+        } catch (NegocioException negocio) {
+            JsfUtil.addErrorMessage(negocio.getMessage());
+        }
+    }
+
 //    public List<Paciente> completePaciente(String query) {
 //        String queryLowerCase = query.toLowerCase();
 //        List<Paciente> pacientesFiltrados = dao.findAll();
