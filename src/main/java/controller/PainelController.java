@@ -65,6 +65,7 @@ public class PainelController implements Serializable {
             new LeitoService().salvar(leito);
             atendimentos = null;
             JsfUtil.addMessage("Alta realizada com sucesso!");
+            unidade = setorService.buscarPorId(unidade.getId());
         } catch (Exception e) {
             JsfUtil.addErrorMessage("Erro ao realizar alta: " + e.getMessage());
         }

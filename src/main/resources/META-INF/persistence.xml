@@ -43,4 +43,5 @@
             <property name="hibernate.c3p0.preferredTestQuery" value="select 1"/>
         </properties>
     </persistence-unit>
+
 </persistence>

@@ -13,9 +13,10 @@
             <p:toolbar id="tb">
                 <f:facet name="left">
                     <span class="ui-separator">
-                        <span class="ui-icon pi pi-ellipsis-v" />
+                        <span class="ui-icon pi pi-ellipsis-v"/>
                     </span>
-                    <p:commandButton id="btnSave" value="Admitir" icon="fa fa-bed" action="#{atendeController.salvar()}" ajax="false" />
+                    <p:commandButton id="btnSave" value="Admitir" icon="fa fa-bed" action="#{atendeController.salvar()}"
+                                     ajax="false"/>
                 </f:facet>
             </p:toolbar>
             <div class="ui-g ui-fluid">
@@ -40,13 +41,11 @@
                                 <h:outputText value="#{atendeController.atendimento.paciente.sexo.descricao}"/>
 
                                 <h:outputText value="Data: " style="font-weight: 900"/>
-                                <p:inplace>
-                                    <p:inputText value="#{atendeController.atendimento.dataAtendimento}" required="true" 
-                                                 requiredMessage="A data de atendimento não pode ficar em branco">
-                                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                                    </p:inputText>
-                                </p:inplace>
 
+                                <p:inputText value="#{atendeController.atendimento.dataAtendimento}" required="true"
+                                             requiredMessage="A data de atendimento não pode ficar em branco">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </p:inputText>
 
 
                             </h:panelGrid>
@@ -56,11 +55,14 @@
                             <p:panelGrid columns="2" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
                                 <h:panelGroup>
                                     <h4 style="margin-bottom: 20px">Leito </h4>
-                                    <p:selectOneMenu value="#{atendeController.atendimento.leito}" required="true" requiredMessage="Escolha um leito"
-                                                     converter="leitoConverter" filter="true" filterMatchMode="contains">
+                                    <p:selectOneMenu value="#{atendeController.atendimento.leito}" required="true"
+                                                     requiredMessage="Escolha um leito"
+                                                     converter="leitoConverter" filter="true"
+                                                     filterMatchMode="contains">
                                         <f:selectItem itemLabel="Selecione"/>
                                         <f:selectItems value="#{leitoController.leitosVagos}" var="leito"
-                                                       itemLabel="#{leito.descricao} - #{leito.setor.nome}" itemValue="#{leito}"/>
+                                                       itemLabel="#{leito.descricao} - #{leito.setor.nome}"
+                                                       itemValue="#{leito}"/>
                                     </p:selectOneMenu>
                                 </h:panelGroup>
                             </p:panelGrid>
@@ -76,7 +78,7 @@
             </div>
 
             <p:sticky target="tb" margin="75"/>
-        </h:form>    
+        </h:form>
     </ui:define>
 
 </ui:composition>
