@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+
 import model.Atendimento;
 import model.Hospital;
 import model.Leito;
@@ -30,7 +31,6 @@ import util.exception.NegocioException;
 import util.jsf.JsfUtil;
 
 /**
- *
  * @author gleyw
  */
 @ManagedBean
@@ -44,7 +44,7 @@ public class AtendimentoController implements Serializable {
 
     private List<Atendimento> atendimentos = new ArrayList<>();
 
-//    private Leito leito = new Leito();
+    //    private Leito leito = new Leito();
     private LeitoService leitoService = new LeitoService();
 
     @PostConstruct
@@ -129,11 +129,12 @@ public class AtendimentoController implements Serializable {
         }
     }
 
-//    public List<Paciente> completePaciente(String query) {
-//        String queryLowerCase = query.toLowerCase();
-//        List<Paciente> pacientesFiltrados = dao.findAll();
-//        return pacientesFiltrados.stream().filter(t -> t.getNome().toLowerCase().contains(queryLowerCase)).collect(Collectors.toList());
-//    }
+    public boolean renderedMotivoFalha() {
+        return atendimento.getDataExtubacao() != null
+                && atendimento.getSucessoExtubacao() != null
+                && !atendimento.getSucessoExtubacao();
+    }
+
     public void novo() {
         atendimento = new Atendimento();
     }

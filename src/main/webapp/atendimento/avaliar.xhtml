@@ -13,11 +13,13 @@
 
             <p:toolbar id="tb">
                 <f:facet name="left">
-                    <p:commandButton value="Voltar" icon="fa fa fa-arrow-left" process="@this" action="#{atendimentoController.voltarUnidade()}"/>
+                    <p:commandButton value="Voltar" icon="fa fa fa-arrow-left" process="@this"
+                                     action="#{atendimentoController.voltarUnidade()}"/>
                     <span class="ui-separator">
-                        <span class="ui-icon pi pi-ellipsis-v" />
+                        <span class="ui-icon pi pi-ellipsis-v"/>
                     </span>
-                    <p:commandButton value="Salvar" icon="fa fa-bed" action="#{atendimentoController.salvar()}" update="@form" />
+                    <p:commandButton value="Salvar" icon="fa fa-bed" action="#{atendimentoController.salvar()}"
+                                     update="@form"/>
                 </f:facet>
             </p:toolbar>
 
@@ -37,7 +39,7 @@
 
                                 <h:outputText value="Nome: " style="font-weight: 900"/>
                                 <h:outputText value="#{atendimentoController.atendimento.paciente.nome}"/>
-                                
+
                                 <h:outputText value="Idade: " style="font-weight: 900"/>
                                 <h:outputText value="#{atendimentoController.atendimento.paciente.idade} anos"/>
 
@@ -47,10 +49,11 @@
                                 </h:outputText>
                             </h:panelGrid>
                         </p:fieldset>
-                        <p:panelGrid columns="5" styleClass="ui-panelgrid-blank grid-pad" layout="grid" style="margin: 20px 20px 50px 0px">
+                        <p:panelGrid columns="5" styleClass="ui-panelgrid-blank grid-pad" layout="grid"
+                                     style="margin: 20px 20px 50px 0px">
                             <h:panelGroup styleClass="md-inputfield">
-                                <p:calendar  pattern="dd/MM/yyyy" mask="true" locale="pt"
-                                             value="#{atendimentoController.atendimento.dataPrimeiraSedestacao}"/>
+                                <p:calendar pattern="dd/MM/yyyy" mask="true" locale="pt"
+                                            value="#{atendimentoController.atendimento.dataPrimeiraSedestacao}"/>
                                 <label>1ª Sedestação</label>
                             </h:panelGroup>
 
@@ -67,18 +70,36 @@
                             </h:panelGroup>
 
                             <h:panelGroup styleClass="md-inputfield">
-                                <p:calendar  pattern="dd/MM/yyyy" mask="true" locale="pt"
-                                             value="#{atendimentoController.atendimento.dataIntubacao}"/>
+                                <p:calendar pattern="dd/MM/yyyy" mask="true" locale="pt"
+                                            value="#{atendimentoController.atendimento.dataIntubacao}"/>
                                 <label>Intubação</label>
                             </h:panelGroup>
 
 
                             <h:panelGroup styleClass="md-inputfield">
                                 <p:calendar pattern="dd/MM/yyyy" mask="true" locale="pt"
-                                            value="#{atendimentoController.atendimento.dataExtubacao}"/>
+                                            value="#{atendimentoController.atendimento.dataExtubacao}">
+                                    <p:ajax event="change" update="@form"/>
+                                </p:calendar>
                                 <label>Extubação</label>
                             </h:panelGroup>
+
+                            <h:panelGroup id="ext"
+                                          rendered="#{atendimentoController.atendimento.dataExtubacao != null}">
+                                <p:outputLabel value="Sucesso na Extubação?"/>
+                                <p:selectBooleanButton onLabel="Sim" offLabel="Não"
+                                                       value="#{atendimentoController.atendimento.sucessoExtubacao}">
+                                    <p:ajax update="@form" event="change"/>
+                                </p:selectBooleanButton>
+                            </h:panelGroup>
+
                         </p:panelGrid>
+                        <h:panelGroup id="motivo" styleClass="md-inputfield"
+                                      rendered="#{atendimentoController.renderedMotivoFalha()}">
+                            <p:inputTextarea value="#{atendimentoController.atendimento.motivoFalha}"
+                                             requiredMessage="Por favor, descreva o motivo da falha" required="true"/>
+                            <label>Motivo da Falha</label>
+                        </h:panelGroup>
 
                     </div>
                 </div>
@@ -87,7 +108,7 @@
                 </div>
             </div>
 
-        </h:form>    
+        </h:form>
     </ui:define>
 
 </ui:composition>

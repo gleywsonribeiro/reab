@@ -52,6 +52,12 @@ public class Atendimento implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name = "dt_extubacao")
     private Date dataExtubacao;
+
+    @Column(name = "sucesso_ext")
+    private Boolean sucessoExtubacao;
+
+    @Column(name = "motivo_falha")
+    private String motivoFalha;
     
     
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
@@ -187,8 +193,22 @@ public class Atendimento implements Serializable {
     public void setDataExtubacao(Date dataExtubacao) {
         this.dataExtubacao = dataExtubacao;
     }
-    
-    
+
+    public Boolean getSucessoExtubacao() {
+        return sucessoExtubacao;
+    }
+
+    public void setSucessoExtubacao(Boolean sucessoExtubacao) {
+        this.sucessoExtubacao = sucessoExtubacao;
+    }
+
+    public String getMotivoFalha() {
+        return motivoFalha;
+    }
+
+    public void setMotivoFalha(String motivoFalha) {
+        this.motivoFalha = motivoFalha;
+    }
 
     @Override
     public int hashCode() {

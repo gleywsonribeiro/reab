@@ -60,7 +60,7 @@ public class LoginController implements Serializable {
     }
 
     public String login() {
-        Usuario usuarioLogado = dao.getUsuarioByLoginSenha(usuario.getLogin().toLowerCase(), usuario.getSenha());
+        Usuario usuarioLogado = dao.getUsuarioByLoginSenha(usuario.getLogin().toLowerCase(), usuario.getSenha().toLowerCase());
 
         if (usuarioLogado == null) {
             //usuario = new Usuario();
