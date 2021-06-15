@@ -79,18 +79,20 @@
                             <h:panelGroup styleClass="md-inputfield">
                                 <p:calendar pattern="dd/MM/yyyy" mask="true" locale="pt"
                                             value="#{atendimentoController.atendimento.dataExtubacao}">
-                                    <p:ajax event="change" update="@form"/>
+                                    <p:ajax event="dateSelect" update="@form" process="@this"/>
+                                    <p:ajax event="change" update="@form" process="@this"/>
                                 </p:calendar>
                                 <label>Extubação</label>
                             </h:panelGroup>
 
-                            <h:panelGroup id="ext"
-                                          rendered="#{atendimentoController.atendimento.dataExtubacao != null}">
-                                <p:outputLabel value="Sucesso na Extubação?"/>
-                                <p:selectBooleanButton onLabel="Sim" offLabel="Não"
-                                                       value="#{atendimentoController.atendimento.sucessoExtubacao}">
+                            <h:panelGroup id="ext" rendered="#{atendimentoController.atendimento.dataExtubacao != null}">
+                                <p:outputLabel value="Sucesso na Extubação?" style="font-weight: 900"/>
+                                <p:selectOneRadio   value="#{atendimentoController.atendimento.sucessoExtubacao}"
+                                                  layout="grid" columns="1">
+                                    <f:selectItem itemLabel="Sim" itemValue="true"/>
+                                    <f:selectItem itemLabel="Não" itemValue="false"/>
                                     <p:ajax update="@form" event="change"/>
-                                </p:selectBooleanButton>
+                                </p:selectOneRadio>
                             </h:panelGroup>
 
                         </p:panelGrid>
