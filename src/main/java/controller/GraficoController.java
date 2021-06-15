@@ -41,6 +41,8 @@ public class GraficoController implements Serializable {
     private BarChartModel intubacao;
     private BarChartModel extubacao;
 
+    private BarChartModel falhaExtubacao;
+
     List<Atendimento> atendimentos = new ArrayList<>();
     AtendimentoService atendimentoService = new AtendimentoService();
     
@@ -59,8 +61,10 @@ public class GraficoController implements Serializable {
         createDeambulacao();
         createIntubacao();
         createExtubacao();
-
+        createFalhaExtubacao();
     }
+
+
 
 //    public GraficoController() {
 //        atendimentos = atendimentoService.listarTodos();
@@ -111,6 +115,29 @@ public class GraficoController implements Serializable {
         extubacao = createChartAux(new InfoDataExtubacao(atendimentos), "Extubação");
     }
 
+    private void createFalhaExtubacao() {
+        falhaExtubacao = new BarChartModel();
+        String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
+
+        ChartSeries qtdFalhas = new ChartSeries();
+        qtdFalhas.setLabel("Nº Falhas de Extubação");
+
+        for (int i = 0; i < meses.length; i++) {
+
+
+
+            qtdFalhas.set(meses[i], dm.getNumeroPaciente());
+            mediaDia.set(meses[i], dm.getMediaDias());
+        }
+
+        falhaExtubacao.addSeries(qtdFalhas);
+
+        falhaExtubacao.setAnimate(true);
+        falhaExtubacao.setLegendPosition("ne");
+        falhaExtubacao.setTitle("Qtd Falhas de Extubação");
+
+    }
+
     private BarChartModel createChartAux(DataService service, String titulo) {
         BarChartModel bcm = new BarChartModel();
         String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
@@ -135,4 +162,6 @@ public class GraficoController implements Serializable {
 
         return bcm;
     }
+
+
 }

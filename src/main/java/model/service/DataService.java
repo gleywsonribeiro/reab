@@ -13,13 +13,13 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+
 import model.Atendimento;
 import model.DadoMensal;
 import org.joda.time.DateTime;
 import org.joda.time.Days;
 
 /**
- *
  * @author Gleywson
  */
 public abstract class DataService implements Serializable, InfoData {
@@ -37,7 +37,7 @@ public abstract class DataService implements Serializable, InfoData {
             float media;
             int contador = 0;
             //extrai o ano corrente
-            int ano  = new Date().toInstant().atZone(ZoneId.systemDefault()).getYear();
+            int ano = new Date().toInstant().atZone(ZoneId.systemDefault()).getYear();
             //filtra apenas os atendimentos do ano corrente
             List<Atendimento> atendimentosDoAno = atendimentos.stream()
                     .filter(a -> ano == a.getDataAtendimento().toInstant().atZone(ZoneId.systemDefault()).getYear()).collect(Collectors.toList());
@@ -51,7 +51,7 @@ public abstract class DataService implements Serializable, InfoData {
                         contador++;
                     }
                 }
-                
+
             }
 
             media = soma / contador;
@@ -72,5 +72,22 @@ public abstract class DataService implements Serializable, InfoData {
 
     private long DiffData(Date data1, Date data2) {
         return Math.abs(Days.daysBetween(new DateTime(data1), new DateTime(data2)).getDays());
+    }
+
+    public int getFalhasExtubacao(int mes) {
+        int contador = 0;
+        //extrai o ano corrente
+        int ano = new Date().toInstant().atZone(ZoneId.systemDefault()).getYear();
+        //filtra apenas os atendimentos do ano corrente
+        List<Atendimento> atendimentosDoAno = atendimentos.stream()
+                .filter(a -> ano == a.getDataAtendimento().toInstant().atZone(ZoneId.systemDefault()).getYear()).collect(Collectors.toList());
+
+        //falhas da extubacao
+        for (Atendimento atendimento : atendimentosDoAno) {
+            if (atendimento.getSucessoExtubacao() == false) {
+                contador++;
+            }
+        }
+        return contador;
     }
 }
