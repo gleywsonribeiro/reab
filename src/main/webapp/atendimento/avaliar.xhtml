@@ -86,8 +86,9 @@
                             </h:panelGroup>
 
                             <h:panelGroup id="ext" rendered="#{atendimentoController.atendimento.dataExtubacao != null}">
-                                <p:outputLabel value="Sucesso na Extubação?" style="font-weight: 900"/>
-                                <p:selectOneRadio   value="#{atendimentoController.atendimento.sucessoExtubacao}"
+                                <p:outputLabel for="radioExt" value="Sucesso na Extubação?" style="font-weight: 900"/>
+                                <p:selectOneRadio id="radioExt"  value="#{atendimentoController.atendimento.sucessoExtubacao}"
+                                                    required="true" requiredMessage="Selecione uma opção"
                                                   layout="grid" columns="1">
                                     <f:selectItem itemLabel="Sim" itemValue="true"/>
                                     <f:selectItem itemLabel="Não" itemValue="false"/>
