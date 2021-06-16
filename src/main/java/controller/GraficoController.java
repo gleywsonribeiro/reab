@@ -6,12 +6,17 @@
 package controller;
 
 import java.io.Serializable;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+
 import model.Atendimento;
 import model.DadoMensal;
 import model.service.AtendimentoService;
@@ -26,7 +31,6 @@ import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
 
 /**
- *
  * @author gleyw
  */
 @ManagedBean
@@ -45,7 +49,7 @@ public class GraficoController implements Serializable {
 
     List<Atendimento> atendimentos = new ArrayList<>();
     AtendimentoService atendimentoService = new AtendimentoService();
-    
+
 
     @PostConstruct
     private void init() {
@@ -55,7 +59,7 @@ public class GraficoController implements Serializable {
             Long id = Long.parseLong(chave);
             atendimentos = atendimentoService.getAtendimentosPorUnidade(new SetorService().buscarPorId(id));
         }
-        
+
         createSedestacao();
         createOrtostase();
         createDeambulacao();
@@ -64,16 +68,6 @@ public class GraficoController implements Serializable {
         createFalhaExtubacao();
     }
 
-
-
-//    public GraficoController() {
-//        atendimentos = atendimentoService.listarTodos();
-//        createSedestacao();
-//        createOrtostase();
-//        createDeambulacao();
-//        createIntubacao();
-//        createExtubacao();
-//    }
 
     public BarChartModel getSedestacao() {
         return sedestacao;
@@ -93,6 +87,10 @@ public class GraficoController implements Serializable {
 
     public BarChartModel getExtubacao() {
         return extubacao;
+    }
+
+    public BarChartModel getFalhaExtubacao() {
+        return falhaExtubacao;
     }
 
     private void createSedestacao() {
@@ -117,17 +115,14 @@ public class GraficoController implements Serializable {
 
     private void createFalhaExtubacao() {
         falhaExtubacao = new BarChartModel();
+
         String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
 
         ChartSeries qtdFalhas = new ChartSeries();
         qtdFalhas.setLabel("Nº Falhas de Extubação");
 
         for (int i = 0; i < meses.length; i++) {
-
-
-
-            qtdFalhas.set(meses[i], dm.getNumeroPaciente());
-            mediaDia.set(meses[i], dm.getMediaDias());
+            qtdFalhas.set(meses[i], getFalhasExtubacao(i));
         }
 
         falhaExtubacao.addSeries(qtdFalhas);
@@ -136,6 +131,31 @@ public class GraficoController implements Serializable {
         falhaExtubacao.setLegendPosition("ne");
         falhaExtubacao.setTitle("Qtd Falhas de Extubação");
 
+    }
+
+    private long getFalhasExtubacao(int mes) {
+        int contador = 0;
+        //extrai o ano corrente
+        int ano = new Date().toInstant().atZone(ZoneId.systemDefault()).getYear();
+        //filtra apenas os atendimentos do ano corrente
+        List<Atendimento> atendimentosMesAno = atendimentos.stream()
+                .filter(a -> ano == a.getDataAtendimento().toInstant().atZone(ZoneId.systemDefault()).getYear()).collect(Collectors.toList())
+                .stream().filter(a -> a.getDataExtubacao() != null && a.getDataExtubacao().toInstant().atZone(ZoneId.systemDefault()).getMonth().getValue() + 1 == mes).collect(Collectors.toList());
+        long count = atendimentosMesAno.stream().filter(atendimento -> !atendimento.getSucessoExtubacao()).count();
+
+
+//        GregorianCalendar calendar = new GregorianCalendar();
+//
+//        for (Atendimento atendimento : atendimentosMesAno) {
+//            calendar.setTime(atendimento.getDataExtubacao());
+//            int month = calendar.get(GregorianCalendar.MONTH);
+//
+//            if (!atendimento.getSucessoExtubacao() && mes == month) {
+//                contador++;
+//            }
+//        }
+//        return contador;
+        return count;
     }
 
     private BarChartModel createChartAux(DataService service, String titulo) {

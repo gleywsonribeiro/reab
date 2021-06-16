@@ -21,6 +21,7 @@ import model.Usuario;
 import model.dao.HospitalDao;
 import model.dao.UsuarioDao;
 import service.Sessao;
+import util.Seguranca;
 import util.jsf.JsfUtil;
 
 /**
@@ -66,7 +67,7 @@ public class LoginController implements Serializable {
             //usuario = new Usuario();
             JsfUtil.addErrorMessage("Senha inválida!");
             return "";
-        } else if (usuario.getLogin().toLowerCase().equals(usuario.getSenha())) {
+        } else if (Seguranca.criptografe(usuarioLogado.getLogin().toLowerCase()).equals(usuarioLogado.getSenha())) {
             addNaSessao(usuarioLogado);
             return "/usuario/senha?faces-redirect=true";
         } else {

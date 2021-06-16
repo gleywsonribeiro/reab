@@ -11,17 +11,18 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+
 import model.Hospital;
 import model.Perfil;
 import model.Usuario;
 import model.dao.HospitalDao;
 import model.dao.UsuarioDao;
 import model.service.UsuarioService;
+import util.Seguranca;
 import util.exception.DBException;
 import util.jsf.JsfUtil;
 
 /**
- *
  * @author gleyw
  */
 @ManagedBean
@@ -86,8 +87,7 @@ public class UsuarioController implements Serializable {
     public void setHospitaisSelecionados(List<Hospital> hospitaisSelecionados) {
         this.hospitaisSelecionados = hospitaisSelecionados;
     }
-    
-    
+
 
     public void setHospitais(List<Hospital> hospitais) {
         this.hospitais = hospitais;
@@ -95,15 +95,20 @@ public class UsuarioController implements Serializable {
 
     public void salvar() {
         try {
-            usuario.setSenha(usuario.getLogin());
-            usuario.getHospitais().clear();
-            usuario.getHospitais().addAll(hospitaisSelecionados);
-            
-            usuarioService.salvar(usuario);
+            if (usuario.getId() == null) {
+                usuario.setSenha(Seguranca.criptografe(usuario.getLogin()));
+                usuario.getHospitais().addAll(hospitaisSelecionados);
+                usuarioService.salvar(usuario);
+            } else {
+                usuario.getHospitais().clear();
+                usuario.getHospitais().addAll(hospitaisSelecionados);
+            }
             activeIndex = 1;
             limpar();
             usuarios = null;
+
             JsfUtil.addMessage("Salvo com sucesso!");
+
         } catch (DBException e) {
             JsfUtil.addErrorMessage("Erro ao salvar: " + e.getMessage());
 //            JsfUtil.addFatalMessage(e.getCause().getMessage());
@@ -119,7 +124,7 @@ public class UsuarioController implements Serializable {
     }
 
     public void editar() {
-        usuario.getHospitais().forEach( h -> hospitaisSelecionados.add(h));
+        usuario.getHospitais().forEach(h -> hospitaisSelecionados.add(h));
         activeIndex = 0;
     }
 

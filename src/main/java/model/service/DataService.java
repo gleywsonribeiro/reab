@@ -74,20 +74,5 @@ public abstract class DataService implements Serializable, InfoData {
         return Math.abs(Days.daysBetween(new DateTime(data1), new DateTime(data2)).getDays());
     }
 
-    public int getFalhasExtubacao(int mes) {
-        int contador = 0;
-        //extrai o ano corrente
-        int ano = new Date().toInstant().atZone(ZoneId.systemDefault()).getYear();
-        //filtra apenas os atendimentos do ano corrente
-        List<Atendimento> atendimentosDoAno = atendimentos.stream()
-                .filter(a -> ano == a.getDataAtendimento().toInstant().atZone(ZoneId.systemDefault()).getYear()).collect(Collectors.toList());
 
-        //falhas da extubacao
-        for (Atendimento atendimento : atendimentosDoAno) {
-            if (atendimento.getSucessoExtubacao() == false) {
-                contador++;
-            }
-        }
-        return contador;
-    }
 }

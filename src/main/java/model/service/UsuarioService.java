@@ -6,6 +6,7 @@
 package model.service;
 
 import java.util.List;
+
 import model.Atendimento;
 import model.Paciente;
 import model.Usuario;
@@ -16,7 +17,6 @@ import util.exception.DBException;
 import util.exception.NegocioException;
 
 /**
- *
  * @author gleyw
  */
 public class UsuarioService {
@@ -24,13 +24,10 @@ public class UsuarioService {
     private UsuarioDao dao = new UsuarioDao();
 
     public void salvar(Usuario usuario) {
-
-        if (usuario.getId() == null) {
-            dao.create(usuario);
-        } else {
-            dao.edit(usuario);
-        }
-
+        dao.create(usuario);
+    }
+    public void editar(Usuario usuario) {
+        dao.edit(usuario);
     }
 
     public List<Usuario> listarTodos() {
