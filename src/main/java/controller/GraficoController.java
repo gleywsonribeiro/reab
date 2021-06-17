@@ -139,23 +139,23 @@ public class GraficoController implements Serializable {
         int ano = new Date().toInstant().atZone(ZoneId.systemDefault()).getYear();
         //filtra apenas os atendimentos do ano corrente
         List<Atendimento> atendimentosMesAno = atendimentos.stream()
-                .filter(a -> ano == a.getDataAtendimento().toInstant().atZone(ZoneId.systemDefault()).getYear()).collect(Collectors.toList())
-                .stream().filter(a -> a.getDataExtubacao() != null && a.getDataExtubacao().toInstant().atZone(ZoneId.systemDefault()).getMonth().getValue() + 1 == mes).collect(Collectors.toList());
-        long count = atendimentosMesAno.stream().filter(atendimento -> !atendimento.getSucessoExtubacao()).count();
+                .filter(a -> ano == a.getDataAtendimento().toInstant().atZone(ZoneId.systemDefault()).getYear()).collect(Collectors.toList());
+                //.stream().filter(a -> a.getDataExtubacao().toInstant().atZone(ZoneId.systemDefault()).getMonth().getValue() + 1 == mes).collect(Collectors.toList());
+        //long count = atendimentosMesAno.stream().filter(atendimento -> !atendimento.getSucessoExtubacao()).count();
 
 
-//        GregorianCalendar calendar = new GregorianCalendar();
-//
-//        for (Atendimento atendimento : atendimentosMesAno) {
-//            calendar.setTime(atendimento.getDataExtubacao());
-//            int month = calendar.get(GregorianCalendar.MONTH);
-//
-//            if (!atendimento.getSucessoExtubacao() && mes == month) {
-//                contador++;
-//            }
-//        }
-//        return contador;
-        return count;
+        GregorianCalendar calendar = new GregorianCalendar();
+
+        for (Atendimento atendimento : atendimentosMesAno) {
+            calendar.setTime(atendimento.getDataExtubacao());
+            int month = calendar.get(GregorianCalendar.MONTH);
+            if (atendimento.getDataExtubacao() != null && atendimento.getSucessoExtubacao() != null) {
+                if (!atendimento.getSucessoExtubacao() && mes == month) {
+                    contador++;
+                }
+            }
+        }
+        return contador;
     }
 
     private BarChartModel createChartAux(DataService service, String titulo) {
