@@ -6,12 +6,9 @@
 package model.service;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.persistence.Query;
+
 import model.Atendimento;
 import model.Hospital;
 import model.LeitoSexo;
@@ -82,8 +79,8 @@ public class AtendimentoService implements Serializable {
         }
     }
 
-    public List<Atendimento> pacientesExtubados(Hospital hospital) {
-        return dao.pacientesExtubados(hospital);
+    public List<Atendimento> getPacientesExtubados(Setor setor) {
+        return dao.getPacientesExtubados(setor);
     }
 
 }

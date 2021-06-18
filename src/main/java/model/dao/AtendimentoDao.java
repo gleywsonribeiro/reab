@@ -67,9 +67,9 @@ public class AtendimentoDao extends Dao<Atendimento> {
         return query.getResultList();
     }
 
-    public List<Atendimento> pacientesExtubados(Hospital hospital) {
-        Query query = em.createQuery("SELECT a FROM Atendimento as a where a.paciente.hospital = :hospital and a.dataExtubacao is not null and a.sucessoExtubacao is not null", Atendimento.class);
-        query.setParameter("hospital", hospital);
+    public List<Atendimento> getPacientesExtubados(Setor setor) {
+        Query query = em.createQuery("SELECT a FROM Atendimento as a where a.paciente.hospital = :setor and a.dataExtubacao is not null and a.sucessoExtubacao is not null", Atendimento.class);
+        query.setParameter("setor", setor);
         return query.getResultList();
     }
 

@@ -19,6 +19,7 @@ import javax.faces.context.FacesContext;
 
 import model.Atendimento;
 import model.DadoMensal;
+import model.Setor;
 import model.service.AtendimentoService;
 import model.service.DataService;
 import model.service.InfoDataDeambulacao;
@@ -48,6 +49,7 @@ public class GraficoController implements Serializable {
     private BarChartModel falhaExtubacao;
 
     List<Atendimento> atendimentos = new ArrayList<>();
+    List<Atendimento> atendimentosExt = new ArrayList<>();
     AtendimentoService atendimentoService = new AtendimentoService();
 
 
@@ -57,7 +59,10 @@ public class GraficoController implements Serializable {
 
         if (chave != null) {
             Long id = Long.parseLong(chave);
-            atendimentos = atendimentoService.getAtendimentosPorUnidade(new SetorService().buscarPorId(id));
+            Setor setor = new SetorService().buscarPorId(id);
+            atendimentos = atendimentoService.getAtendimentosPorUnidade(setor);
+            atendimentosExt = atendimentoService.getPacientesExtubados(setor);
+
         }
 
         createSedestacao();
@@ -135,13 +140,11 @@ public class GraficoController implements Serializable {
 
     private long getFalhasExtubacao(int mes) {
         int contador = 0;
-        //extrai o ano corrente
+
         int ano = new Date().toInstant().atZone(ZoneId.systemDefault()).getYear();
-        //filtra apenas os atendimentos do ano corrente
-        List<Atendimento> atendimentosMesAno = atendimentos.stream()
+        //filter the current year
+        List<Atendimento> atendimentosMesAno = atendimentosExt.stream()
                 .filter(a -> ano == a.getDataAtendimento().toInstant().atZone(ZoneId.systemDefault()).getYear()).collect(Collectors.toList());
-                //.stream().filter(a -> a.getDataExtubacao().toInstant().atZone(ZoneId.systemDefault()).getMonth().getValue() + 1 == mes).collect(Collectors.toList());
-        //long count = atendimentosMesAno.stream().filter(atendimento -> !atendimento.getSucessoExtubacao()).count();
 
 
         GregorianCalendar calendar = new GregorianCalendar();
@@ -149,10 +152,8 @@ public class GraficoController implements Serializable {
         for (Atendimento atendimento : atendimentosMesAno) {
             calendar.setTime(atendimento.getDataExtubacao());
             int month = calendar.get(GregorianCalendar.MONTH);
-            if (atendimento.getDataExtubacao() != null && atendimento.getSucessoExtubacao() != null) {
-                if (!atendimento.getSucessoExtubacao() && mes == month) {
-                    contador++;
-                }
+            if (!atendimento.getSucessoExtubacao() && mes == month) {
+                contador++;
             }
         }
         return contador;
