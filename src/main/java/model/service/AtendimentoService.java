@@ -82,4 +82,8 @@ public class AtendimentoService implements Serializable {
         }
     }
 
+    public List<Atendimento> pacientesExtubados(Hospital hospital) {
+        return dao.pacientesExtubados(hospital);
+    }
+
 }
