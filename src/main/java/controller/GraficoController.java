@@ -126,15 +126,19 @@ public class GraficoController implements Serializable {
         ChartSeries qtdFalhas = new ChartSeries();
         qtdFalhas.setLabel("Nº Falhas de Extubação");
 
-        for (int i = 0; i < meses.length; i++) {
-            qtdFalhas.set(meses[i], getFalhasExtubacao(i));
-        }
+        ChartSeries oter = new ChartSeries();
+        oter.setLabel("oter");
 
+        for (int i = 0; i < meses.length; i++) {
+            //qtdFalhas.set(5, 10);
+        }
+        qtdFalhas.set("Jan", 100);
         falhaExtubacao.addSeries(qtdFalhas);
+        falhaExtubacao.addSeries(oter);
 
         falhaExtubacao.setAnimate(true);
         falhaExtubacao.setLegendPosition("ne");
-        falhaExtubacao.setTitle("Qtd Falhas de Extubação");
+        falhaExtubacao.setTitle("Falhas de Extubação");
 
     }
 
