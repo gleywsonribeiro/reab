@@ -170,9 +170,4 @@ public class AtendimentoController implements Serializable {
         String id = atendimento.getLeito().getSetor().getId().toString();
         return "painel?id=" + id + "faces-redirect=true";
     }
-
-    public List<Integer> niveisMobilidade() {
-        List<Integer> niveis = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
-        return niveis;
-    }
 }

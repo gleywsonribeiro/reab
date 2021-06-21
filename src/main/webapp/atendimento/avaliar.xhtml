@@ -113,27 +113,28 @@
 
                     <div class="card card-w-title">
                         <p style="font-weight: 900">Nível de Mobilidade - Pré-hospitalar </p>
-                        <p:selectOneRadio value="#{atendimentoController.atendimento.mobilidadePreHospitalar}"
-                                          required="true" requiredMessage="Selecione uma opção" layout="responsive" columns="7">
-
-                        </p:selectOneRadio>
+                        <h:panelGrid columns="1" style="margin-bottom: 10px">
+                            <p:inputText id="mob_pre" value="#{atendimentoController.atendimento.mobilidadePreHospitalar}" required="true" readonly="true"/>
+                            <p:slider for="mob_pre" minValue="1" maxValue="8"/>
+                        </h:panelGrid>
                     </div>
 
                     <div class="card card-w-title">
                         <p style="font-weight: 900">Nível de Mobilidade - Admissão </p>
-                        <p:selectOneRadio value="#{atendimentoController.atendimento.mobilidadeAdmissao}"
-                                          required="true" requiredMessage="Selecione uma opção" layout="responsive" >
-
-                        </p:selectOneRadio>
+                        <h:panelGrid columns="1" style="margin-bottom: 10px">
+                            <p:inputText id="mob_adm" value="#{atendimentoController.atendimento.mobilidadeAdmissao}" required="true" readonly="true"/>
+                            <p:slider for="mob_adm" minValue="1" maxValue="8"/>
+                        </h:panelGrid>
                     </div>
 
                     <div class="card card-w-title">
                         <p style="font-weight: 900">Nível de Mobilidade - Alta</p>
-                        <p:selectOneRadio value="#{atendimentoController.atendimento.mobilidadePreHospitalar}"
-                                          required="true" requiredMessage="Selecione uma opção" columns="3" styleClass="grid-radio">
-
-                        </p:selectOneRadio>
+                        <h:panelGrid columns="1" style="margin-bottom: 10px">
+                            <p:inputText id="mob_alta" value="#{atendimentoController.atendimento.mobilidadeAlta}" required="true" readonly="true"/>
+                            <p:slider for="mob_alta" minValue="1" maxValue="8"/>
+                        </h:panelGrid>
                     </div>
+
 
                 </div>
             </div>
