@@ -61,7 +61,7 @@ public class GraficoController implements Serializable {
             Long id = Long.parseLong(chave);
             Setor setor = new SetorService().buscarPorId(id);
             atendimentos = atendimentoService.getAtendimentosPorUnidade(setor);
-            atendimentosExt = atendimentoService.getPacientesExtubados(setor);
+//            atendimentosExt = atendimentoService.getPacientesExtubados(setor);
 
         }
 
@@ -70,7 +70,7 @@ public class GraficoController implements Serializable {
         createDeambulacao();
         createIntubacao();
         createExtubacao();
-        createFalhaExtubacao();
+        //createFalhaExtubacao();
     }
 
 

@@ -85,10 +85,12 @@
                                 <label>Extubação</label>
                             </h:panelGroup>
 
-                            <h:panelGroup id="ext" rendered="#{atendimentoController.atendimento.dataExtubacao != null}">
+                            <h:panelGroup id="ext"
+                                          rendered="#{atendimentoController.atendimento.dataExtubacao != null}">
                                 <p:outputLabel for="radioExt" value="Sucesso na Extubação?" style="font-weight: 900"/>
-                                <p:selectOneRadio id="radioExt"  value="#{atendimentoController.atendimento.sucessoExtubacao}"
-                                                    required="true" requiredMessage="Selecione uma opção"
+                                <p:selectOneRadio id="radioExt"
+                                                  value="#{atendimentoController.atendimento.sucessoExtubacao}"
+                                                  required="true" requiredMessage="Selecione uma opção"
                                                   layout="grid" columns="1">
                                     <f:selectItem itemLabel="Sim" itemValue="true"/>
                                     <f:selectItem itemLabel="Não" itemValue="false"/>
@@ -104,9 +106,34 @@
                             <label>Motivo da Falha</label>
                         </h:panelGroup>
 
+
                     </div>
                 </div>
-                <div class="ui-g-12 ui-lg-6">
+                <div class="ui-g-12 ui-lg-12">
+
+                    <div class="card card-w-title">
+                        <p style="font-weight: 900">Nível de Mobilidade - Pré-hospitalar </p>
+                        <p:selectOneRadio value="#{atendimentoController.atendimento.mobilidadePreHospitalar}"
+                                          required="true" requiredMessage="Selecione uma opção" layout="responsive" columns="7">
+
+                        </p:selectOneRadio>
+                    </div>
+
+                    <div class="card card-w-title">
+                        <p style="font-weight: 900">Nível de Mobilidade - Admissão </p>
+                        <p:selectOneRadio value="#{atendimentoController.atendimento.mobilidadeAdmissao}"
+                                          required="true" requiredMessage="Selecione uma opção" layout="responsive" >
+
+                        </p:selectOneRadio>
+                    </div>
+
+                    <div class="card card-w-title">
+                        <p style="font-weight: 900">Nível de Mobilidade - Alta</p>
+                        <p:selectOneRadio value="#{atendimentoController.atendimento.mobilidadePreHospitalar}"
+                                          required="true" requiredMessage="Selecione uma opção" columns="3" styleClass="grid-radio">
+
+                        </p:selectOneRadio>
+                    </div>
 
                 </div>
             </div>

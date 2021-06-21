@@ -30,6 +30,11 @@ public class AtendimentoService implements Serializable {
         if(!sexo.getDescricao().equals(atendimento.getPaciente().getSexo().getDescricao()) && sexo != LeitoSexo.AMBOS) {
             throw new NegocioException("Leito incompatível com o paciente!");
         }
+
+        if(atendimento.getDataExtubacao() != null && atendimento.getDataIntubacao() == null) {
+            throw new NegocioException("Não é possível extubar sem antes intubar!");
+        }
+
         if (dao.isPacienteEmAtendimento(atendimento.getPaciente())) {
             if (atendimento.getId() != null) {
                 dao.edit(atendimento);
@@ -42,6 +47,9 @@ public class AtendimentoService implements Serializable {
     }
 
     public void edicao(Atendimento atendimento) {
+        if(atendimento.getDataExtubacao() != null && atendimento.getDataIntubacao() == null) {
+            throw new NegocioException("Não é possível extubar sem antes intubar!");
+        }
         dao.edit(atendimento);
     }
 

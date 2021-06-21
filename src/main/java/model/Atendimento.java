@@ -66,6 +66,15 @@ public class Atendimento implements Serializable {
     
     @Column(name = "sn_mobilizacao")
     private Boolean liberadoMobilizacao = false;
+
+    @Column(name = "mob_pre_hospitalar")
+    private Integer mobilidadePreHospitalar;
+
+    @Column(name = "mob_admissao")
+    private Integer mobilidadeAdmissao;
+
+    @Column(name = "mob_alta")
+    private Integer mobilidadeAlta;
     
     @ManyToOne(optional = false)
     private Usuario atendente;
@@ -208,6 +217,34 @@ public class Atendimento implements Serializable {
 
     public void setMotivoFalha(String motivoFalha) {
         this.motivoFalha = motivoFalha;
+    }
+
+    public Boolean getLiberadoMobilizacao() {
+        return liberadoMobilizacao;
+    }
+
+    public Integer getMobilidadePreHospitalar() {
+        return mobilidadePreHospitalar;
+    }
+
+    public void setMobilidadePreHospitalar(Integer mobilidadePreHospitalar) {
+        this.mobilidadePreHospitalar = mobilidadePreHospitalar;
+    }
+
+    public Integer getMobilidadeAdmissao() {
+        return mobilidadeAdmissao;
+    }
+
+    public void setMobilidadeAdmissao(Integer mobilidadeAdmissao) {
+        this.mobilidadeAdmissao = mobilidadeAdmissao;
+    }
+
+    public Integer getMobilidadeAlta() {
+        return mobilidadeAlta;
+    }
+
+    public void setMobilidadeAlta(Integer mobilidadeAlta) {
+        this.mobilidadeAlta = mobilidadeAlta;
     }
 
     @Override
