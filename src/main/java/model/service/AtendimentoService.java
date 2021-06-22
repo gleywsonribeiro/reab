@@ -31,10 +31,6 @@ public class AtendimentoService implements Serializable {
             throw new NegocioException("Leito incompatível com o paciente!");
         }
 
-        if(atendimento.getDataExtubacao() != null && atendimento.getDataIntubacao() == null) {
-            throw new NegocioException("Não é possível extubar sem antes intubar!");
-        }
-
         if (dao.isPacienteEmAtendimento(atendimento.getPaciente())) {
             if (atendimento.getId() != null) {
                 dao.edit(atendimento);
