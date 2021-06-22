@@ -170,4 +170,11 @@ public class AtendimentoController implements Serializable {
         String id = atendimento.getLeito().getSetor().getId().toString();
         return "painel?id=" + id + "faces-redirect=true";
     }
+    
+    public void atualizaMotivoExtubacao() {
+        if(atendimento.getDataExtubacao() == null) {
+            atendimento.setSucessoExtubacao(null);
+            atendimento.setMotivoFalha("");
+        }
+    }
 }

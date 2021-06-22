@@ -49,7 +49,7 @@
                                 </h:outputText>
                             </h:panelGrid>
                         </p:fieldset>
-                        <p:panelGrid columns="5" styleClass="ui-panelgrid-blank grid-pad" layout="grid"
+                        <p:panelGrid columns="4" styleClass="ui-panelgrid-blank grid-pad" layout="grid"
                                      style="margin: 20px 20px 50px 0px">
                             <h:panelGroup styleClass="md-inputfield">
                                 <p:calendar pattern="dd/MM/yyyy" mask="true" locale="pt"
@@ -71,16 +71,9 @@
 
                             <h:panelGroup styleClass="md-inputfield">
                                 <p:calendar pattern="dd/MM/yyyy" mask="true" locale="pt"
-                                            value="#{atendimentoController.atendimento.dataIntubacao}"/>
-                                <label>Intubação</label>
-                            </h:panelGroup>
-
-
-                            <h:panelGroup styleClass="md-inputfield">
-                                <p:calendar pattern="dd/MM/yyyy" mask="true" locale="pt"
                                             value="#{atendimentoController.atendimento.dataExtubacao}">
-                                    <p:ajax event="dateSelect" update="@form" process="@this"/>
-                                    <p:ajax event="change" update="@form" process="@this"/>
+                                    <p:ajax event="dateSelect" update="@form" process="@this" listener="#{atendimentoController.atualizaMotivoExtubacao()}"/>
+                                    <p:ajax event="change" update="@form" process="@this" listener="#{atendimentoController.atualizaMotivoExtubacao()}"/>
                                 </p:calendar>
                                 <label>Extubação</label>
                             </h:panelGroup>
@@ -135,7 +128,7 @@
                         </h:panelGrid>
                     </div>
 
-
+ 
                 </div>
             </div>
 
