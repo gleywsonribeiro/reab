@@ -77,9 +77,14 @@
                                 </p:calendar>
                                 <label>Extubação</label>
                             </h:panelGroup>
+                        </p:panelGrid>
 
-                            <h:panelGroup id="ext"
-                                          rendered="#{atendimentoController.atendimento.dataExtubacao != null}">
+
+                        <p:panelGrid columns="1" styleClass="ui-panelgrid-blank grid-pad" layout="grid"
+                                     rendered="#{atendimentoController.atendimento.dataExtubacao != null}"
+                                     style="margin: 20px 20px 50px 0px">
+                            
+                            <h:panelGroup>
                                 <p:outputLabel for="radioExt" value="Sucesso na Extubação?" style="font-weight: 900"/>
                                 <p:selectOneRadio id="radioExt"
                                                   value="#{atendimentoController.atendimento.sucessoExtubacao}"
@@ -90,15 +95,33 @@
                                     <p:ajax update="@form" event="change"/>
                                 </p:selectOneRadio>
                             </h:panelGroup>
+                            
+                            <h:panelGroup id="motivo" styleClass="md-inputfield"
+                                          rendered="#{atendimentoController.renderedMotivoFalha()}">
+                                <p:inputTextarea value="#{atendimentoController.atendimento.motivoFalha}"
+                                                 requiredMessage="Por favor, descreva o motivo da falha" required="true"/>
+                                <label>Motivo da Falha</label>
+                            </h:panelGroup>
+                            
+                            <h:panelGroup>
+                                <p:outputLabel for="ext6" value="Tempo de extubaçao menor que 6 horas?" style="font-weight: 900"/>
+                                <p:selectOneRadio id="ext6"
+                                                  value="#{atendimentoController.atendimento.extMenor}"
+                                                  required="true" requiredMessage="Selecione uma opção"
+                                                  layout="grid" columns="1">
+                                    <f:selectItem itemLabel="Sim" itemValue="true"/>
+                                    <f:selectItem itemLabel="Não" itemValue="false"/>
+                                    <p:ajax update="@form" event="change"/>
+                                </p:selectOneRadio>
+                            </h:panelGroup>
 
+                            <h:panelGroup id="motivo2" styleClass="md-inputfield"
+                                          rendered="#{atendimentoController.atendimento.extMenor eq false}">
+                                <p:inputTextarea value="#{atendimentoController.atendimento.motivoExtMaior}"
+                                                 requiredMessage="Por favor, descreva o motivo por o tempos excedeu 6 horas" required="true"/>
+                                <label>Motivo que levou à exceção</label>
+                            </h:panelGroup>
                         </p:panelGrid>
-                        <h:panelGroup id="motivo" styleClass="md-inputfield"
-                                      rendered="#{atendimentoController.renderedMotivoFalha()}">
-                            <p:inputTextarea value="#{atendimentoController.atendimento.motivoFalha}"
-                                             requiredMessage="Por favor, descreva o motivo da falha" required="true"/>
-                            <label>Motivo da Falha</label>
-                        </h:panelGroup>
-
 
                     </div>
                 </div>
@@ -128,7 +151,7 @@
                         </h:panelGrid>
                     </div>
 
- 
+
                 </div>
             </div>
 

@@ -76,6 +76,12 @@ public class Atendimento implements Serializable {
     @Column(name = "mob_alta")
     private Integer mobilidadeAlta;
     
+    @Column(name = "ext_menor")
+    private Boolean extMenor;
+    
+    @Column(name = "mot_ext_maior")
+    private String motivoExtMaior;
+    
     @ManyToOne(optional = false)
     private Usuario atendente;
     
@@ -246,6 +252,24 @@ public class Atendimento implements Serializable {
     public void setMobilidadeAlta(Integer mobilidadeAlta) {
         this.mobilidadeAlta = mobilidadeAlta;
     }
+
+    public Boolean getExtMenor() {
+        return extMenor;
+    }
+
+    public void setExtMenor(Boolean extMenor) {
+        this.extMenor = extMenor;
+    }
+
+    public String getMotivoExtMaior() {
+        return motivoExtMaior;
+    }
+
+    public void setMotivoExtMaior(String motivoExtMaior) {
+        this.motivoExtMaior = motivoExtMaior;
+    }
+    
+    
 
     @Override
     public int hashCode() {
