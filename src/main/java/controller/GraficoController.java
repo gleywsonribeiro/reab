@@ -54,7 +54,7 @@ public class GraficoController implements Serializable {
 
     private BarChartModel falhaExtubacao;
 
-    private LineChartModel falhaExtubacaoArea;
+//    private LineChartModel falhaExtubacaoArea;
 
     List<Atendimento> atendimentos = new ArrayList<>();
     List<Atendimento> atendimentosExt = new ArrayList<>();
@@ -68,7 +68,7 @@ public class GraficoController implements Serializable {
             Long id = Long.parseLong(chave);
             Setor setor = new SetorService().buscarPorId(id);
             atendimentos = atendimentoService.getAtendimentosPorUnidade(setor);
-//            atendimentosExt = atendimentoService.getPacientesExtubados(setor);
+            atendimentosExt = atendimentoService.getPacientesExtubados(setor);
 
         }
 
@@ -77,7 +77,7 @@ public class GraficoController implements Serializable {
         createDeambulacao();
         createIntubacao();
         createExtubacao();
-        createfalhaExtubacaoArea();
+//        createfalhaExtubacaoArea();
         createFalhaExtubacao();
     }
 
@@ -105,9 +105,9 @@ public class GraficoController implements Serializable {
         return falhaExtubacao;
     }
 
-    public LineChartModel getFalhaExtubacaoArea() {
-        return falhaExtubacaoArea;
-    }
+//    public LineChartModel getFalhaExtubacaoArea() {
+//        return falhaExtubacaoArea;
+//    }
 
     private void createSedestacao() {
         sedestacao = createChartAux(new InfoDataSedestacao(atendimentos), "1ª Sedestação");
@@ -137,15 +137,12 @@ public class GraficoController implements Serializable {
         ChartSeries qtdFalhas = new ChartSeries();
         qtdFalhas.setLabel("Nº Falhas de Extubação");
 
-        ChartSeries oter = new ChartSeries();
-        oter.setLabel("oter");
 
-//        for (int i = 0; i < meses.length; i++) {
-//            qtdFalhas.set(5, 10);
-//        }
-        qtdFalhas.set("Jan", 100);
+        for (int i = 0; i < meses.length; i++) {
+            qtdFalhas.set(meses[i], getFalhasExtubacao(i));
+        }
+        
         falhaExtubacao.addSeries(qtdFalhas);
-        falhaExtubacao.addSeries(oter);
 
         falhaExtubacao.setAnimate(true);
         falhaExtubacao.setShowPointLabels(true);
@@ -200,39 +197,39 @@ public class GraficoController implements Serializable {
         return bcm;
     }
 
-    private void createfalhaExtubacaoArea() {
-        falhaExtubacaoArea = new LineChartModel();
-        LineChartSeries boys = new LineChartSeries();
-        //boys.setFill(true);
-        boys.setLabel("Boys");
-        boys.set("2004", 120);
-        boys.set("2005", 100);
-        boys.set("2006", 44);
-        boys.set("2007", 150);
-        boys.set("2008", 25);
- 
-        LineChartSeries girls = new LineChartSeries();
-        //girls.setFill(true);
-        girls.setLabel("Girls");
-        girls.set("2004", 52);
-        girls.set("2005", 60);
-        girls.set("2006", 110);
-        girls.set("2007", 90);
-        girls.set("2008", 120);
- 
-        falhaExtubacaoArea.addSeries(boys);
-        falhaExtubacaoArea.addSeries(girls);
-        falhaExtubacaoArea.setTitle("Area Chart");
-        falhaExtubacaoArea.setLegendPosition("ne");
-        //falhaExtubacaoArea.setStacked(true);
-        falhaExtubacaoArea.setShowPointLabels(true);
- 
-        Axis xAxis = new CategoryAxis("Years");
-        falhaExtubacaoArea.getAxes().put(AxisType.X, xAxis);
-        Axis yAxis = falhaExtubacaoArea.getAxis(AxisType.Y);
-        yAxis.setLabel("Births");
-        yAxis.setMin(0);
-        yAxis.setMax(300);
-    }
+//    private void createfalhaExtubacaoArea() {
+//        falhaExtubacaoArea = new LineChartModel();
+//        LineChartSeries boys = new LineChartSeries();
+//        //boys.setFill(true);
+//        boys.setLabel("Boys");
+//        boys.set("2004", 120);
+//        boys.set("2005", 100);
+//        boys.set("2006", 44);
+//        boys.set("2007", 150);
+//        boys.set("2008", 25);
+// 
+//        LineChartSeries girls = new LineChartSeries();
+//        //girls.setFill(true);
+//        girls.setLabel("Girls");
+//        girls.set("2004", 52);
+//        girls.set("2005", 60);
+//        girls.set("2006", 110);
+//        girls.set("2007", 90);
+//        girls.set("2008", 120);
+// 
+//        falhaExtubacaoArea.addSeries(boys);
+//        falhaExtubacaoArea.addSeries(girls);
+//        falhaExtubacaoArea.setTitle("Area Chart");
+//        falhaExtubacaoArea.setLegendPosition("ne");
+//        //falhaExtubacaoArea.setStacked(true);
+//        falhaExtubacaoArea.setShowPointLabels(true);
+// 
+//        Axis xAxis = new CategoryAxis("Years");
+//        falhaExtubacaoArea.getAxes().put(AxisType.X, xAxis);
+//        Axis yAxis = falhaExtubacaoArea.getAxis(AxisType.Y);
+//        yAxis.setLabel("Births");
+//        yAxis.setMin(0);
+//        yAxis.setMax(300);
+//    }
 
 }
