@@ -50,10 +50,13 @@
                         <p:separator/>
                         <p:chart type="bar" model="#{graficoController.extubacao}" style="height:300px; margin-top: 50px"
                                  responsive="true"/>
+                        
+                        <p:separator/>
+                        <p:chart type="bar" model="#{graficoController.falhaExtubacao}" style="height:300px; margin-top: 50px"
+                                 responsive="true"/>
 
                         <p:separator/>
-<!--                        <p:chart type="bar" model="#{graficoController.falhaExtubacao}" style="height:300px; margin-top: 50px"-->
-<!--                                 responsive="true"/>-->
+                        <p:chart type="line" model="#{graficoController.falhaExtubacaoArea}" style="height:300px; margin-top: 50px"/>
 
                     </div>
 

@@ -28,8 +28,14 @@ import model.service.InfoDataIntubacao;
 import model.service.InfoDataOrtostase;
 import model.service.InfoDataSedestacao;
 import model.service.SetorService;
+import org.primefaces.model.chart.Axis;
+import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
+import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.LineChartModel;
+import org.primefaces.model.chart.LineChartSeries;
+
 
 /**
  * @author gleyw
@@ -48,10 +54,11 @@ public class GraficoController implements Serializable {
 
     private BarChartModel falhaExtubacao;
 
+    private LineChartModel falhaExtubacaoArea;
+
     List<Atendimento> atendimentos = new ArrayList<>();
     List<Atendimento> atendimentosExt = new ArrayList<>();
     AtendimentoService atendimentoService = new AtendimentoService();
-
 
     @PostConstruct
     private void init() {
@@ -70,9 +77,9 @@ public class GraficoController implements Serializable {
         createDeambulacao();
         createIntubacao();
         createExtubacao();
-        //createFalhaExtubacao();
+        createfalhaExtubacaoArea();
+        createFalhaExtubacao();
     }
-
 
     public BarChartModel getSedestacao() {
         return sedestacao;
@@ -96,6 +103,10 @@ public class GraficoController implements Serializable {
 
     public BarChartModel getFalhaExtubacao() {
         return falhaExtubacao;
+    }
+
+    public LineChartModel getFalhaExtubacaoArea() {
+        return falhaExtubacaoArea;
     }
 
     private void createSedestacao() {
@@ -129,14 +140,15 @@ public class GraficoController implements Serializable {
         ChartSeries oter = new ChartSeries();
         oter.setLabel("oter");
 
-        for (int i = 0; i < meses.length; i++) {
-            //qtdFalhas.set(5, 10);
-        }
+//        for (int i = 0; i < meses.length; i++) {
+//            qtdFalhas.set(5, 10);
+//        }
         qtdFalhas.set("Jan", 100);
         falhaExtubacao.addSeries(qtdFalhas);
         falhaExtubacao.addSeries(oter);
 
         falhaExtubacao.setAnimate(true);
+        falhaExtubacao.setShowPointLabels(true);
         falhaExtubacao.setLegendPosition("ne");
         falhaExtubacao.setTitle("Falhas de Extubação");
 
@@ -149,7 +161,6 @@ public class GraficoController implements Serializable {
         //filter the current year
         List<Atendimento> atendimentosMesAno = atendimentosExt.stream()
                 .filter(a -> ano == a.getDataAtendimento().toInstant().atZone(ZoneId.systemDefault()).getYear()).collect(Collectors.toList());
-
 
         GregorianCalendar calendar = new GregorianCalendar();
 
@@ -182,11 +193,46 @@ public class GraficoController implements Serializable {
         bcm.addSeries(qtdPacientes);
         bcm.addSeries(mediaDia);
         bcm.setAnimate(true);
+        bcm.setShowPointLabels(true);
         bcm.setLegendPosition("ne");
         bcm.setTitle(titulo);
 
         return bcm;
     }
 
+    private void createfalhaExtubacaoArea() {
+        falhaExtubacaoArea = new LineChartModel();
+        LineChartSeries boys = new LineChartSeries();
+        //boys.setFill(true);
+        boys.setLabel("Boys");
+        boys.set("2004", 120);
+        boys.set("2005", 100);
+        boys.set("2006", 44);
+        boys.set("2007", 150);
+        boys.set("2008", 25);
+ 
+        LineChartSeries girls = new LineChartSeries();
+        //girls.setFill(true);
+        girls.setLabel("Girls");
+        girls.set("2004", 52);
+        girls.set("2005", 60);
+        girls.set("2006", 110);
+        girls.set("2007", 90);
+        girls.set("2008", 120);
+ 
+        falhaExtubacaoArea.addSeries(boys);
+        falhaExtubacaoArea.addSeries(girls);
+        falhaExtubacaoArea.setTitle("Area Chart");
+        falhaExtubacaoArea.setLegendPosition("ne");
+        //falhaExtubacaoArea.setStacked(true);
+        falhaExtubacaoArea.setShowPointLabels(true);
+ 
+        Axis xAxis = new CategoryAxis("Years");
+        falhaExtubacaoArea.getAxes().put(AxisType.X, xAxis);
+        Axis yAxis = falhaExtubacaoArea.getAxis(AxisType.Y);
+        yAxis.setLabel("Births");
+        yAxis.setMin(0);
+        yAxis.setMax(300);
+    }
 
 }

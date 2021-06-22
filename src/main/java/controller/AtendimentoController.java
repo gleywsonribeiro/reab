@@ -175,6 +175,8 @@ public class AtendimentoController implements Serializable {
         if(atendimento.getDataExtubacao() == null) {
             atendimento.setSucessoExtubacao(null);
             atendimento.setMotivoFalha("");
+            atendimento.setExtMenor(null);
+            atendimento.setMotivoExtMaior("");
         }
     }
 }
