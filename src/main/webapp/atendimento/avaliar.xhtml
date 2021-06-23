@@ -83,7 +83,7 @@
                         <p:panelGrid columns="1" styleClass="ui-panelgrid-blank grid-pad" layout="grid"
                                      rendered="#{atendimentoController.atendimento.dataExtubacao != null}"
                                      style="margin: 20px 20px 50px 0px">
-                            
+
                             <h:panelGroup>
                                 <p:outputLabel for="radioExt" value="Sucesso na Extubação?" style="font-weight: 900"/>
                                 <p:selectOneRadio id="radioExt"
@@ -92,22 +92,21 @@
                                                   layout="grid" columns="1">
                                     <f:selectItem itemLabel="Sim" itemValue="true"/>
                                     <f:selectItem itemLabel="Não" itemValue="false"/>
-                                    <p:ajax update="@form" event="change"/>
+                                    <p:ajax update="@form" event="change" process="@this"/>
                                 </p:selectOneRadio>
                             </h:panelGroup>
-                            
+
                             <h:panelGroup id="motivo" styleClass="md-inputfield"
                                           rendered="#{atendimentoController.renderedMotivoFalha()}">
                                 <p:inputTextarea value="#{atendimentoController.atendimento.motivoFalha}"
                                                  requiredMessage="Por favor, descreva o motivo da falha" required="true"/>
                                 <label>Motivo da Falha</label>
                             </h:panelGroup>
-                            
+
                             <h:panelGroup>
                                 <p:outputLabel for="ext6" value="Tempo de extubaçao menor que 6 horas?" style="font-weight: 900"/>
                                 <p:selectOneRadio id="ext6"
                                                   value="#{atendimentoController.atendimento.extMenor}"
-                                                  required="true" requiredMessage="Selecione uma opção"
                                                   layout="grid" columns="1">
                                     <f:selectItem itemLabel="Sim" itemValue="true"/>
                                     <f:selectItem itemLabel="Não" itemValue="false"/>
@@ -130,7 +129,7 @@
                     <div class="card card-w-title">
                         <p style="font-weight: 900">Nível de Mobilidade - Pré-hospitalar </p>
                         <h:panelGrid columns="1" style="margin-bottom: 10px">
-                            <p:inputText id="mob_pre" value="#{atendimentoController.atendimento.mobilidadePreHospitalar}" required="true" readonly="true"/>
+                            <p:inputText id="mob_pre" value="#{atendimentoController.atendimento.mobilidadePreHospitalar}" required="true"/>
                             <p:slider for="mob_pre" minValue="1" maxValue="8"/>
                         </h:panelGrid>
                     </div>
@@ -138,7 +137,7 @@
                     <div class="card card-w-title">
                         <p style="font-weight: 900">Nível de Mobilidade - Admissão </p>
                         <h:panelGrid columns="1" style="margin-bottom: 10px">
-                            <p:inputText id="mob_adm" value="#{atendimentoController.atendimento.mobilidadeAdmissao}" required="true" readonly="true"/>
+                            <p:inputText id="mob_adm" value="#{atendimentoController.atendimento.mobilidadeAdmissao}" required="true"/>
                             <p:slider for="mob_adm" minValue="1" maxValue="8"/>
                         </h:panelGrid>
                     </div>
@@ -146,11 +145,12 @@
                     <div class="card card-w-title">
                         <p style="font-weight: 900">Nível de Mobilidade - Alta</p>
                         <h:panelGrid columns="1" style="margin-bottom: 10px">
-                            <p:inputText id="mob_alta" value="#{atendimentoController.atendimento.mobilidadeAlta}" required="true" readonly="true"/>
+                            <p:inputText id="mob_alta" value="#{atendimentoController.atendimento.mobilidadeAlta}" required="true" />
                             <p:slider for="mob_alta" minValue="1" maxValue="8"/>
                         </h:panelGrid>
                     </div>
 
+               
 
                 </div>
             </div>

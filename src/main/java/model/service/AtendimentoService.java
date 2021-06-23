@@ -6,6 +6,9 @@
 package model.service;
 
 import java.io.Serializable;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -85,6 +88,23 @@ public class AtendimentoService implements Serializable {
 
     public List<Atendimento> getPacientesExtubados(Setor setor) {
         return dao.getPacientesExtubados(setor);
+    }
+    
+    public int getQtdExtubacoesMes(List<Atendimento> atendimentos, int i) {
+       int contador = 0;
+
+        int ano = new Date().toInstant().atZone(ZoneId.systemDefault()).getYear();
+        //filter the current year
+        List<Atendimento> atendimentosMesAno = atendimentos.stream()
+                .filter(a -> ano == a.getDataAtendimento().toInstant().atZone(ZoneId.systemDefault()).getYear())
+                .collect(Collectors.toList());
+
+        GregorianCalendar calendar = new GregorianCalendar();
+        int mes = calendar.get(GregorianCalendar.MONTH);
+        
+        contador = atendimentosMesAno.stream().filter((_item) -> (mes == i)).map((_item) -> 1).reduce(contador, Integer::sum);
+        
+        return contador;
     }
 
 }

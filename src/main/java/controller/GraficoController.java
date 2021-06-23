@@ -23,19 +23,12 @@ import model.Setor;
 import model.service.AtendimentoService;
 import model.service.DataService;
 import model.service.InfoDataDeambulacao;
-import model.service.InfoDataExtubacao;
 import model.service.InfoDataIntubacao;
 import model.service.InfoDataOrtostase;
 import model.service.InfoDataSedestacao;
 import model.service.SetorService;
-import org.primefaces.model.chart.Axis;
-import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
-import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.ChartSeries;
-import org.primefaces.model.chart.LineChartModel;
-import org.primefaces.model.chart.LineChartSeries;
-
 
 /**
  * @author gleyw
@@ -54,8 +47,9 @@ public class GraficoController implements Serializable {
 
     private BarChartModel falhaExtubacao;
 
-//    private LineChartModel falhaExtubacaoArea;
+    private final String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
 
+//    private LineChartModel falhaExtubacaoArea;
     List<Atendimento> atendimentos = new ArrayList<>();
     List<Atendimento> atendimentosExt = new ArrayList<>();
     AtendimentoService atendimentoService = new AtendimentoService();
@@ -108,7 +102,6 @@ public class GraficoController implements Serializable {
 //    public LineChartModel getFalhaExtubacaoArea() {
 //        return falhaExtubacaoArea;
 //    }
-
     private void createSedestacao() {
         sedestacao = createChartAux(new InfoDataSedestacao(atendimentos), "1ª Sedestação");
     }
@@ -126,28 +119,55 @@ public class GraficoController implements Serializable {
     }
 
     private void createExtubacao() {
-        extubacao = createChartAux(new InfoDataExtubacao(atendimentos), "Extubação");
+        extubacao = new BarChartModel();
+
+        ChartSeries extubacoes = new ChartSeries("Nº Extubação");
+        ChartSeries percetualFalha = new ChartSeries("Taxa de Falha");
+
+        int ano = new Date().toInstant().atZone(ZoneId.systemDefault()).getYear();
+
+        List<Atendimento> atendimentosExtubados = atendimentos.stream()
+                .filter(a -> a.getDataExtubacao() != null && a.getDataAtendimento().toInstant().atZone(ZoneId.systemDefault()).getYear() == ano)
+                .collect(Collectors.toList());
+
+        for (int i = 0; i < meses.length; i++) {
+            long falhas = getFalhasExtubacao(i);
+            int qtdExtubacoes = atendimentoService.getQtdExtubacoesMes(atendimentosExtubados, i);
+            double taxa;
+            try {
+                taxa = Math.round((falhas / qtdExtubacoes) * 100);
+            } catch (Exception e) {
+                taxa = 0;
+            }
+            extubacoes.set(meses[i], qtdExtubacoes);
+            percetualFalha.set(meses[i], taxa);
+        }
+
+        extubacao.addSeries(extubacoes);
+        extubacao.addSeries(percetualFalha);
+
+        extubacao.setAnimate(true);
+        extubacao.setShowPointLabels(true);
+        extubacao.setLegendPosition("ne");
+        extubacao.setTitle("Extubação");
     }
 
     private void createFalhaExtubacao() {
         falhaExtubacao = new BarChartModel();
 
-        String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
-
         ChartSeries qtdFalhas = new ChartSeries();
         qtdFalhas.setLabel("Nº Falhas de Extubação");
-
 
         for (int i = 0; i < meses.length; i++) {
             qtdFalhas.set(meses[i], getFalhasExtubacao(i));
         }
-        
+
         falhaExtubacao.addSeries(qtdFalhas);
 
         falhaExtubacao.setAnimate(true);
         falhaExtubacao.setShowPointLabels(true);
         falhaExtubacao.setLegendPosition("ne");
-        falhaExtubacao.setTitle("Falhas de Extubação");
+        falhaExtubacao.setTitle("Falência de Extubação");
 
     }
 
@@ -173,7 +193,6 @@ public class GraficoController implements Serializable {
 
     private BarChartModel createChartAux(DataService service, String titulo) {
         BarChartModel bcm = new BarChartModel();
-        String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
 
         ChartSeries qtdPacientes = new ChartSeries();
         qtdPacientes.setLabel("Nº Pacientes");
@@ -231,5 +250,4 @@ public class GraficoController implements Serializable {
 //        yAxis.setMin(0);
 //        yAxis.setMax(300);
 //    }
-
 }
