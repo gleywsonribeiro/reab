@@ -28,13 +28,8 @@ import model.service.InfoDataIntubacao;
 import model.service.InfoDataOrtostase;
 import model.service.InfoDataSedestacao;
 import model.service.SetorService;
-import org.primefaces.model.chart.Axis;
-import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
-import org.primefaces.model.chart.CategoryAxis;
 import org.primefaces.model.chart.ChartSeries;
-import org.primefaces.model.chart.LineChartModel;
-import org.primefaces.model.chart.LineChartSeries;
 
 
 /**
@@ -126,7 +121,7 @@ public class GraficoController implements Serializable {
     }
 
     private void createExtubacao() {
-        //extubacao = createChartAux2(new InfoDataExtubacao(atendimentos), "Extubação");
+        extubacao = createChartAux2(new InfoDataExtubacao(atendimentos), "Extubação");
     }
 
     private void createFalhaExtubacao() {

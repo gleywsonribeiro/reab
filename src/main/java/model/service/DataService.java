@@ -51,7 +51,7 @@ public abstract class DataService implements Serializable, InfoData {
                     if (month == mes) {
                         soma += DiffData(atendimento.getDataAtendimento(), current);
                         contador++;
-                        if (atendimento.getSucessoExtubacao() != null && Objects.equals(atendimento.getSucessoExtubacao(), Boolean.FALSE)) {
+                        if (atendimento.getSucessoExtubacao() != null && atendimento.getSucessoExtubacao() == false) {
                             contadorDeFalhas++;
                         }
                     }
