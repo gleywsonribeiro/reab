@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -36,6 +37,7 @@ public abstract class DataService implements Serializable, InfoData {
             int soma = 0;
             float media;
             int contador = 0;
+            int contadorDeFalhas = 0; //apenas para falhas de extubacao
             //extrai o ano corrente
             int ano = new Date().toInstant().atZone(ZoneId.systemDefault()).getYear();
             //filtra apenas os atendimentos do ano corrente
@@ -49,6 +51,9 @@ public abstract class DataService implements Serializable, InfoData {
                     if (month == mes) {
                         soma += DiffData(atendimento.getDataAtendimento(), current);
                         contador++;
+                        if (atendimento.getSucessoExtubacao() != null && Objects.equals(atendimento.getSucessoExtubacao(), Boolean.FALSE)) {
+                            contadorDeFalhas++;
+                        }
                     }
                 }
 
@@ -56,7 +61,15 @@ public abstract class DataService implements Serializable, InfoData {
 
             media = soma / contador;
             DadoMensal dm = new DadoMensal(contador, media);
-
+            double taxa;
+            
+            if (contador > 0) {
+                taxa = Math.round((contadorDeFalhas / contador) * 100);
+            } else {
+                taxa = 0;
+            }
+            
+            dm.setTaxaFalha(taxa);
             return dm;
         } catch (ArithmeticException e) {
             System.out.println("Erro tratado: " + e.getMessage());
@@ -74,5 +87,9 @@ public abstract class DataService implements Serializable, InfoData {
         return Math.abs(Days.daysBetween(new DateTime(data1), new DateTime(data2)).getDays());
     }
 
+    public double getTaxaFalha() {
+
+        return 0;
+    }
 
 }

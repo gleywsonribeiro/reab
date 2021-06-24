@@ -14,6 +14,7 @@ import java.io.Serializable;
 public class DadoMensal implements Serializable {
     private int numeroPaciente;
     private float mediaDias;
+    private double taxaFalha;
 
     public DadoMensal(int numeroPaciente, float mediaDias) {
         this.numeroPaciente = numeroPaciente;
@@ -34,6 +35,14 @@ public class DadoMensal implements Serializable {
 
     public void setMediaDias(float mediaDias) {
         this.mediaDias = mediaDias;
+    }
+
+    public double getTaxaFalha() {
+        return taxaFalha;
+    }
+
+    public void setTaxaFalha(double taxaFalha) {
+        this.taxaFalha = taxaFalha;
     }
     
     

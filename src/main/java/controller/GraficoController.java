@@ -126,7 +126,7 @@ public class GraficoController implements Serializable {
     }
 
     private void createExtubacao() {
-        extubacao = createChartAux(new InfoDataExtubacao(atendimentos), "Extubação");
+        //extubacao = createChartAux2(new InfoDataExtubacao(atendimentos), "Extubação");
     }
 
     private void createFalhaExtubacao() {
@@ -147,7 +147,7 @@ public class GraficoController implements Serializable {
         falhaExtubacao.setAnimate(true);
         falhaExtubacao.setShowPointLabels(true);
         falhaExtubacao.setLegendPosition("ne");
-        falhaExtubacao.setTitle("Falhas de Extubação");
+        falhaExtubacao.setTitle("Falência de Extubação");
 
     }
 
@@ -189,6 +189,32 @@ public class GraficoController implements Serializable {
 
         bcm.addSeries(qtdPacientes);
         bcm.addSeries(mediaDia);
+        bcm.setAnimate(true);
+        bcm.setShowPointLabels(true);
+        bcm.setLegendPosition("ne");
+        bcm.setTitle(titulo);
+
+        return bcm;
+    }
+    
+    private BarChartModel createChartAux2(DataService service, String titulo) {
+        BarChartModel bcm = new BarChartModel();
+        String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
+
+        ChartSeries extubacoes = new ChartSeries();
+        extubacoes.setLabel("Nº Extubações");
+
+        ChartSeries taxaFalha = new ChartSeries();
+        taxaFalha.setLabel("Taxa de Falha");
+
+        for (int i = 0; i < meses.length; i++) {
+            DadoMensal dm = service.getInfoData(i);
+            extubacoes.set(meses[i], dm.getNumeroPaciente());
+            taxaFalha.set(meses[i], dm.getTaxaFalha());
+        }
+
+        bcm.addSeries(extubacoes);
+        bcm.addSeries(taxaFalha);
         bcm.setAnimate(true);
         bcm.setShowPointLabels(true);
         bcm.setLegendPosition("ne");
