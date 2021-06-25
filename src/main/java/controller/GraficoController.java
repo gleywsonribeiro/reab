@@ -67,13 +67,13 @@ public class GraficoController implements Serializable {
 
         }
 
-        createSedestacao();
-        createOrtostase();
-        createDeambulacao();
-        createIntubacao();
-        createExtubacao();
+//        createSedestacao();
+//        createOrtostase();
+//        createDeambulacao();
+//        createIntubacao();
+//        createExtubacao();
 //        createfalhaExtubacaoArea();
-        createFalhaExtubacao();
+//        createFalhaExtubacao();
     }
 
     public BarChartModel getSedestacao() {
@@ -104,119 +104,119 @@ public class GraficoController implements Serializable {
 //        return falhaExtubacaoArea;
 //    }
 
-    private void createSedestacao() {
-        sedestacao = createChartAux(new InfoDataSedestacao(atendimentos), "1ª Sedestação");
-    }
+//    private void createSedestacao() {
+//        sedestacao = createChartAux(new InfoDataSedestacao(atendimentos), "1ª Sedestação");
+//    }
+//
+//    private void createOrtostase() {
+//        ortostase = createChartAux(new InfoDataOrtostase(atendimentos), "1ª Ortostase");
+//    }
+//
+//    private void createDeambulacao() {
+//        deambulacao = createChartAux(new InfoDataDeambulacao(atendimentos), "1ª Deambulação");
+//    }
+//
+//    private void createIntubacao() {
+//        intubacao = createChartAux(new InfoDataIntubacao(atendimentos), "Intubação");
+//    }
 
-    private void createOrtostase() {
-        ortostase = createChartAux(new InfoDataOrtostase(atendimentos), "1ª Ortostase");
-    }
+//    private void createExtubacao() {
+//        extubacao = createChartAux2(new InfoDataExtubacao(atendimentos), "Extubação");
+//    }
 
-    private void createDeambulacao() {
-        deambulacao = createChartAux(new InfoDataDeambulacao(atendimentos), "1ª Deambulação");
-    }
+//    private void createFalhaExtubacao() {
+//        falhaExtubacao = new BarChartModel();
+//
+//        String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
+//
+//        ChartSeries qtdFalhas = new ChartSeries();
+//        qtdFalhas.setLabel("Nº Falhas de Extubação");
+//
+//
+//        for (int i = 0; i < meses.length; i++) {
+//            qtdFalhas.set(meses[i], getFalhasExtubacao(i));
+//        }
+//
+//        falhaExtubacao.addSeries(qtdFalhas);
+//
+//        falhaExtubacao.setAnimate(true);
+//        falhaExtubacao.setShowPointLabels(true);
+//        falhaExtubacao.setLegendPosition("ne");
+//        falhaExtubacao.setTitle("Falência de Extubação");
+//
+//    }
 
-    private void createIntubacao() {
-        intubacao = createChartAux(new InfoDataIntubacao(atendimentos), "Intubação");
-    }
+//    private long getFalhasExtubacao(int mes) {
+//        int contador = 0;
+//
+//        int ano = new Date().toInstant().atZone(ZoneId.systemDefault()).getYear();
+//        //filter the current year
+//        List<Atendimento> atendimentosMesAno = atendimentosExt.stream()
+//                .filter(a -> ano == a.getDataAtendimento().toInstant().atZone(ZoneId.systemDefault()).getYear()).collect(Collectors.toList());
+//
+//        GregorianCalendar calendar = new GregorianCalendar();
+//
+//        for (Atendimento atendimento : atendimentosMesAno) {
+//            calendar.setTime(atendimento.getDataExtubacao());
+//            int month = calendar.get(GregorianCalendar.MONTH);
+//            if (!atendimento.getSucessoExtubacao() && mes == month) {
+//                contador++;
+//            }
+//        }
+//        return contador;
+//    }
 
-    private void createExtubacao() {
-        extubacao = createChartAux2(new InfoDataExtubacao(atendimentos), "Extubação");
-    }
-
-    private void createFalhaExtubacao() {
-        falhaExtubacao = new BarChartModel();
-
-        String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
-
-        ChartSeries qtdFalhas = new ChartSeries();
-        qtdFalhas.setLabel("Nº Falhas de Extubação");
-
-
-        for (int i = 0; i < meses.length; i++) {
-            qtdFalhas.set(meses[i], getFalhasExtubacao(i));
-        }
-        
-        falhaExtubacao.addSeries(qtdFalhas);
-
-        falhaExtubacao.setAnimate(true);
-        falhaExtubacao.setShowPointLabels(true);
-        falhaExtubacao.setLegendPosition("ne");
-        falhaExtubacao.setTitle("Falência de Extubação");
-
-    }
-
-    private long getFalhasExtubacao(int mes) {
-        int contador = 0;
-
-        int ano = new Date().toInstant().atZone(ZoneId.systemDefault()).getYear();
-        //filter the current year
-        List<Atendimento> atendimentosMesAno = atendimentosExt.stream()
-                .filter(a -> ano == a.getDataAtendimento().toInstant().atZone(ZoneId.systemDefault()).getYear()).collect(Collectors.toList());
-
-        GregorianCalendar calendar = new GregorianCalendar();
-
-        for (Atendimento atendimento : atendimentosMesAno) {
-            calendar.setTime(atendimento.getDataExtubacao());
-            int month = calendar.get(GregorianCalendar.MONTH);
-            if (!atendimento.getSucessoExtubacao() && mes == month) {
-                contador++;
-            }
-        }
-        return contador;
-    }
-
-    private BarChartModel createChartAux(DataService service, String titulo) {
-        BarChartModel bcm = new BarChartModel();
-        String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
-
-        ChartSeries qtdPacientes = new ChartSeries();
-        qtdPacientes.setLabel("Nº Pacientes");
-
-        ChartSeries mediaDia = new ChartSeries();
-        mediaDia.setLabel("Média Dias");
-
-        for (int i = 0; i < meses.length; i++) {
-            DadoMensal dm = service.getInfoData(i);
-            qtdPacientes.set(meses[i], dm.getNumeroPaciente());
-            mediaDia.set(meses[i], dm.getMediaDias());
-        }
-
-        bcm.addSeries(qtdPacientes);
-        bcm.addSeries(mediaDia);
-        bcm.setAnimate(true);
-        bcm.setShowPointLabels(true);
-        bcm.setLegendPosition("ne");
-        bcm.setTitle(titulo);
-
-        return bcm;
-    }
+//    private BarChartModel createChartAux(DataService service, String titulo) {
+//        BarChartModel bcm = new BarChartModel();
+//        String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
+//
+//        ChartSeries qtdPacientes = new ChartSeries();
+//        qtdPacientes.setLabel("Nº Pacientes");
+//
+//        ChartSeries mediaDia = new ChartSeries();
+//        mediaDia.setLabel("Média Dias");
+//
+//        for (int i = 0; i < meses.length; i++) {
+//            DadoMensal dm = service.getInfoData(i);
+//            qtdPacientes.set(meses[i], dm.getNumeroPaciente());
+//            mediaDia.set(meses[i], dm.getMediaDias());
+//        }
+//
+//        bcm.addSeries(qtdPacientes);
+//        bcm.addSeries(mediaDia);
+//        bcm.setAnimate(true);
+//        bcm.setShowPointLabels(true);
+//        bcm.setLegendPosition("ne");
+//        bcm.setTitle(titulo);
+//
+//        return bcm;
+//    }
     
-    private BarChartModel createChartAux2(DataService service, String titulo) {
-        BarChartModel bcm = new BarChartModel();
-        String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
-
-        ChartSeries extubacoes = new ChartSeries();
-        extubacoes.setLabel("Nº Extubações");
-
-        ChartSeries taxaFalha = new ChartSeries();
-        taxaFalha.setLabel("Taxa de Falha");
-
-        for (int i = 0; i < meses.length; i++) {
-            DadoMensal dm = service.getInfoData(i);
-            extubacoes.set(meses[i], dm.getNumeroPaciente());
-            taxaFalha.set(meses[i], dm.getTaxaFalha());
-        }
-
-        bcm.addSeries(extubacoes);
-        bcm.addSeries(taxaFalha);
-        bcm.setAnimate(true);
-        bcm.setShowPointLabels(true);
-        bcm.setLegendPosition("ne");
-        bcm.setTitle(titulo);
-
-        return bcm;
-    }
+//    private BarChartModel createChartAux2(DataService service, String titulo) {
+//        BarChartModel bcm = new BarChartModel();
+//        String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
+//
+//        ChartSeries extubacoes = new ChartSeries();
+//        extubacoes.setLabel("Nº Extubações");
+//
+//        ChartSeries taxaFalha = new ChartSeries();
+//        taxaFalha.setLabel("Taxa de Falha");
+//
+//        for (int i = 0; i < meses.length; i++) {
+//            DadoMensal dm = service.getInfoData(i);
+//            extubacoes.set(meses[i], dm.getNumeroPaciente());
+//            taxaFalha.set(meses[i], dm.getTaxaFalha());
+//        }
+//
+//        bcm.addSeries(extubacoes);
+//        bcm.addSeries(taxaFalha);
+//        bcm.setAnimate(true);
+//        bcm.setShowPointLabels(true);
+//        bcm.setLegendPosition("ne");
+//        bcm.setTitle(titulo);
+//
+//        return bcm;
+//    }
 
 //    private void createfalhaExtubacaoArea() {
 //        falhaExtubacaoArea = new LineChartModel();
