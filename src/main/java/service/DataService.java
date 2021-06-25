@@ -56,20 +56,10 @@ public abstract class DataService implements Serializable, InfoData {
                         }
                     }
                 }
-
             }
 
             media = soma / contador;
             DadoMensal dm = new DadoMensal(contador, media);
-            double taxa;
-            
-            if (contador > 0) {
-                taxa = Math.round((contadorDeFalhas / contador) * 100);
-            } else {
-                taxa = 0;
-            }
-            
-            dm.setTaxaFalha(taxa);
             return dm;
         } catch (ArithmeticException e) {
             System.out.println("Erro tratado: " + e.getMessage());
@@ -84,12 +74,6 @@ public abstract class DataService implements Serializable, InfoData {
     }
 
     private long DiffData(Date data1, Date data2) {
-        return Math.abs(Days.daysBetween(new DateTime(data1), new DateTime(data2)).getDays());
+        return Days.daysBetween(new DateTime(data1), new DateTime(data2)).getDays();
     }
-
-    public double getTaxaFalha() {
-
-        return 0;
-    }
-
 }

@@ -12,38 +12,35 @@ import java.io.Serializable;
  * @author Gleywson
  */
 public class DadoMensal implements Serializable {
-    private int numeroPaciente;
-    private float mediaDias;
-    private double taxaFalha;
+    private int contador;
+    private double valor;
 
-    public DadoMensal(int numeroPaciente, float mediaDias) {
-        this.numeroPaciente = numeroPaciente;
-        this.mediaDias = mediaDias;
+    public DadoMensal(int contador, double valor) {
+        this.contador = contador;
+        this.valor = valor;
     }
 
-    public int getNumeroPaciente() {
-        return numeroPaciente;
+    public int getContador() {
+        return contador;
     }
 
-    public void setNumeroPaciente(int numeroPaciente) {
-        this.numeroPaciente = numeroPaciente;
+    public void setContador(int contador) {
+        this.contador = contador;
     }
 
-    public float getMediaDias() {
-        return mediaDias;
+    public double getValor() {
+        return valor;
     }
 
-    public void setMediaDias(float mediaDias) {
-        this.mediaDias = mediaDias;
+    public void setValor(double valor) {
+        this.valor = valor;
     }
 
-    public double getTaxaFalha() {
-        return taxaFalha;
+    @Override
+    public String toString() {
+        return "DadoMensal{" +
+                "contador=" + contador +
+                ", valor=" + valor +
+                '}';
     }
-
-    public void setTaxaFalha(double taxaFalha) {
-        this.taxaFalha = taxaFalha;
-    }
-    
-    
 }

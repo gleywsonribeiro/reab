@@ -5,13 +5,30 @@
  */
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.Atendimento;
+import model.DadoMensal;
+import org.primefaces.model.chart.BarChartModel;
 
 /**
  *
  * @author Gleywson
  */
 public class GraficoService {
-    private List<Atendimento> atendimentos;
+    private DataService service;
+
+    public GraficoService(DataService service) {
+        this.service = service;
+    }
+
+    public DadoMensal[] getDadosMensais() {
+        DadoMensal dados[] = new DadoMensal[12];
+        for (int i = 0; i < dados.length; i++) {
+            dados[i] = service.getInfoData(i);
+        }
+        return dados;
+    }
+
+
 }

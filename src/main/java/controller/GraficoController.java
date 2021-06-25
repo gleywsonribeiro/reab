@@ -20,14 +20,7 @@ import javax.faces.context.FacesContext;
 import model.Atendimento;
 import model.DadoMensal;
 import model.Setor;
-import service.AtendimentoService;
-import service.DataService;
-import service.InfoDataDeambulacao;
-import service.InfoDataExtubacao;
-import service.InfoDataIntubacao;
-import service.InfoDataOrtostase;
-import service.InfoDataSedestacao;
-import service.SetorService;
+import service.*;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
 
@@ -55,6 +48,8 @@ public class GraficoController implements Serializable {
     List<Atendimento> atendimentosExt = new ArrayList<>();
     AtendimentoService atendimentoService = new AtendimentoService();
 
+    private String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
+
     @PostConstruct
     private void init() {
         String chave = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("id");
@@ -67,10 +62,9 @@ public class GraficoController implements Serializable {
 
         }
 
-//        createSedestacao();
-//        createOrtostase();
-//        createDeambulacao();
-//        createIntubacao();
+        createSedestacao();
+        createOrtostase();
+        createDeambulacao();
 //        createExtubacao();
 //        createfalhaExtubacaoArea();
 //        createFalhaExtubacao();
@@ -100,25 +94,83 @@ public class GraficoController implements Serializable {
         return falhaExtubacao;
     }
 
+
 //    public LineChartModel getFalhaExtubacaoArea() {
 //        return falhaExtubacaoArea;
 //    }
 
-//    private void createSedestacao() {
-//        sedestacao = createChartAux(new InfoDataSedestacao(atendimentos), "1ª Sedestação");
-//    }
-//
-//    private void createOrtostase() {
-//        ortostase = createChartAux(new InfoDataOrtostase(atendimentos), "1ª Ortostase");
-//    }
-//
-//    private void createDeambulacao() {
-//        deambulacao = createChartAux(new InfoDataDeambulacao(atendimentos), "1ª Deambulação");
-//    }
-//
-//    private void createIntubacao() {
-//        intubacao = createChartAux(new InfoDataIntubacao(atendimentos), "Intubação");
-//    }
+    private void createSedestacao() {
+        sedestacao = new BarChartModel();
+        DataService data = new InfoDataSedestacao(atendimentos);
+        GraficoService service = new GraficoService(data);
+
+        ChartSeries quantidade = new ChartSeries();
+        quantidade.setLabel("Nº Sedestações");
+
+        ChartSeries media = new ChartSeries();
+        media.setLabel("Média");
+
+        for (int i = 0; i < meses.length; i++) {
+            quantidade.set(meses[i], service.getDadosMensais()[i].getContador());
+            media.set(meses[i], service.getDadosMensais()[i].getValor());
+        }
+
+        sedestacao.addSeries(quantidade);
+        sedestacao.addSeries(media);
+        sedestacao.setAnimate(true);
+        sedestacao.setShowPointLabels(true);
+        sedestacao.setLegendPosition("ne");
+        sedestacao.setTitle("1ª Sedestação");
+
+    }
+
+    private void createOrtostase() {
+        ortostase = new BarChartModel();
+        DataService data = new InfoDataOrtostase(atendimentos);
+        GraficoService service = new GraficoService(data);
+
+        ChartSeries quantidade = new ChartSeries();
+        quantidade.setLabel("Nº ocorrências");
+
+        ChartSeries media = new ChartSeries();
+        media.setLabel("Média");
+
+        for (int i = 0; i < meses.length; i++) {
+            quantidade.set(meses[i], service.getDadosMensais()[i].getContador());
+            media.set(meses[i], service.getDadosMensais()[i].getValor());
+        }
+
+        ortostase.addSeries(quantidade);
+        ortostase.addSeries(media);
+        ortostase.setAnimate(true);
+        ortostase.setShowPointLabels(true);
+        ortostase.setLegendPosition("ne");
+        ortostase.setTitle("1ª Ortostase");
+    }
+
+    private void createDeambulacao() {
+        deambulacao = new BarChartModel();
+        DataService data = new InfoDataDeambulacao(atendimentos);
+        GraficoService service = new GraficoService(data);
+
+        ChartSeries quantidade = new ChartSeries();
+        quantidade.setLabel("Nº ocorrências");
+
+        ChartSeries media = new ChartSeries();
+        media.setLabel("Média");
+
+        for (int i = 0; i < meses.length; i++) {
+            quantidade.set(meses[i], service.getDadosMensais()[i].getContador());
+            media.set(meses[i], service.getDadosMensais()[i].getValor());
+        }
+
+        deambulacao.addSeries(quantidade);
+        deambulacao.addSeries(media);
+        deambulacao.setAnimate(true);
+        deambulacao.setShowPointLabels(true);
+        deambulacao.setLegendPosition("ne");
+        deambulacao.setTitle("1ª Deambulação");
+    }
 
 //    private void createExtubacao() {
 //        extubacao = createChartAux2(new InfoDataExtubacao(atendimentos), "Extubação");
