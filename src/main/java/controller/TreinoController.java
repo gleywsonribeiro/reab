@@ -15,7 +15,7 @@ import model.Exercicio;
 import model.ItemExercicio;
 import model.Treino;
 import model.dao.ItemExercicioDao;
-import model.service.TreinoService;
+import service.TreinoService;
 import util.exception.DBException;
 import util.exception.NegocioException;
 import util.jsf.JsfUtil;

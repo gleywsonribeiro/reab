@@ -17,7 +17,7 @@ import model.Perfil;
 import model.Usuario;
 import model.dao.HospitalDao;
 import model.dao.UsuarioDao;
-import model.service.UsuarioService;
+import service.UsuarioService;
 import util.Seguranca;
 import util.exception.DBException;
 import util.jsf.JsfUtil;

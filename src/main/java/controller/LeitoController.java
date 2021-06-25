@@ -17,8 +17,8 @@ import model.Leito;
 import model.LeitoSexo;
 import model.Setor;
 import model.Usuario;
-import model.service.LeitoService;
-import model.service.SetorService;
+import service.LeitoService;
+import service.SetorService;
 import service.Sessao;
 import util.jsf.JsfUtil;
 

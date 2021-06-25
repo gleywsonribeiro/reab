@@ -18,7 +18,7 @@ import model.Setor;
 import model.Usuario;
 import model.dao.HospitalDao;
 import model.dao.SetorDao;
-import model.service.SetorService;
+import service.SetorService;
 import service.Sessao;
 import util.exception.DBException;
 import util.jsf.JsfUtil;

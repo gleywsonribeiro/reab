@@ -18,7 +18,7 @@ import model.Treinamento;
 import model.Treino;
 import model.Turno;
 import model.dao.TreinamentoDao;
-import model.service.AvaliacaoService;
+import service.AvaliacaoService;
 import util.exception.NegocioException;
 import util.jsf.JsfUtil;
 

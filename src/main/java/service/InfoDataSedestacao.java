@@ -3,25 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.service;
+package service;
 
 import java.util.Date;
 import java.util.List;
 import model.Atendimento;
+import model.DadoMensal;
 
 /**
  *
  * @author gleyw
  */
-public class InfoDataExtubacao extends DataService{
-
-    public InfoDataExtubacao(List<Atendimento> atendimentos) {
+public class InfoDataSedestacao extends DataService {
+    
+    public InfoDataSedestacao(List<Atendimento> atendimentos) {
         super(atendimentos);
     }
 
     @Override
     public Date getDateReferencia(Atendimento atendimento) {
-        return atendimento.getDataExtubacao();
+        return atendimento.getDataPrimeiraSedestacao();
     }
-    
 }

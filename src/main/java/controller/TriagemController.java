@@ -17,8 +17,8 @@ import model.Atendimento;
 import model.Opcao;
 
 import model.Avaliacao;
-import model.service.AtendimentoService;
-import model.service.AvaliacaoService;
+import service.AtendimentoService;
+import service.AvaliacaoService;
 import util.exception.NegocioException;
 import util.jsf.JsfUtil;
 

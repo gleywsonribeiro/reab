@@ -16,7 +16,7 @@ import javax.faces.context.FacesContext;
 import model.Hospital;
 import model.Paciente;
 import model.dao.PacienteDao;
-import model.service.PacienteService;
+import service.PacienteService;
 import org.hibernate.exception.ConstraintViolationException;
 import service.Sessao;
 import util.exception.DBException;
