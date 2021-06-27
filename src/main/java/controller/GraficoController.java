@@ -37,7 +37,7 @@ public class GraficoController implements Serializable {
     private BarChartModel sedestacao;
     private BarChartModel ortostase;
     private BarChartModel deambulacao;
-    private BarChartModel intubacao;
+//    private BarChartModel intubacao;
     private BarChartModel extubacao;
 
     private BarChartModel falhaExtubacao;
@@ -65,9 +65,9 @@ public class GraficoController implements Serializable {
         createSedestacao();
         createOrtostase();
         createDeambulacao();
-//        createExtubacao();
+        createExtubacao();
 //        createfalhaExtubacaoArea();
-//        createFalhaExtubacao();
+        createFalhaExtubacao();
     }
 
     public BarChartModel getSedestacao() {
@@ -82,9 +82,9 @@ public class GraficoController implements Serializable {
         return deambulacao;
     }
 
-    public BarChartModel getIntubacao() {
-        return intubacao;
-    }
+//    public BarChartModel getIntubacao() {
+//        return intubacao;
+//    }
 
     public BarChartModel getExtubacao() {
         return extubacao;
@@ -93,11 +93,6 @@ public class GraficoController implements Serializable {
     public BarChartModel getFalhaExtubacao() {
         return falhaExtubacao;
     }
-
-
-//    public LineChartModel getFalhaExtubacaoArea() {
-//        return falhaExtubacaoArea;
-//    }
 
     private void createSedestacao() {
         sedestacao = new BarChartModel();
@@ -172,31 +167,53 @@ public class GraficoController implements Serializable {
         deambulacao.setTitle("1ª Deambulação");
     }
 
-//    private void createExtubacao() {
-//        extubacao = createChartAux2(new InfoDataExtubacao(atendimentos), "Extubação");
-//    }
+    private void createExtubacao() {
+        extubacao = new BarChartModel();
+        DataService data = new InfoDataExtubacao(atendimentos);
+        GraficoService service = new GraficoService(data);
 
-//    private void createFalhaExtubacao() {
-//        falhaExtubacao = new BarChartModel();
-//
-//        String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
-//
-//        ChartSeries qtdFalhas = new ChartSeries();
-//        qtdFalhas.setLabel("Nº Falhas de Extubação");
-//
-//
-//        for (int i = 0; i < meses.length; i++) {
-//            qtdFalhas.set(meses[i], getFalhasExtubacao(i));
-//        }
-//
-//        falhaExtubacao.addSeries(qtdFalhas);
-//
-//        falhaExtubacao.setAnimate(true);
-//        falhaExtubacao.setShowPointLabels(true);
-//        falhaExtubacao.setLegendPosition("ne");
-//        falhaExtubacao.setTitle("Falência de Extubação");
-//
-//    }
+        ChartSeries quantidade = new ChartSeries();
+        quantidade.setLabel("Nº ocorrências");
+
+        ChartSeries taxa = new ChartSeries();
+        taxa.setLabel("Taxa de Falha");
+
+        for (int i = 0; i < meses.length; i++) {
+            quantidade.set(meses[i], service.getDadosMensais()[i].getContador());
+            taxa.set(meses[i], service.getDadosMensais()[i].getValor());
+        }
+
+        extubacao.addSeries(quantidade);
+        extubacao.addSeries(taxa);
+        extubacao.setAnimate(true);
+        extubacao.setShowPointLabels(true);
+        extubacao.setLegendPosition("ne");
+        extubacao.setTitle("Extubação");
+    }
+
+    private void createFalhaExtubacao() {
+        falhaExtubacao = new BarChartModel();
+
+        String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
+
+        DataService service = new InfoDataFalhaExtubacao(atendimentos);
+        GraficoService graficoService = new GraficoService(service);
+        ChartSeries qtdFalhas = new ChartSeries();
+        qtdFalhas.setLabel("Nº Falhas de Extubação");
+
+
+        for (int i = 0; i < meses.length; i++) {
+            qtdFalhas.set(meses[i], graficoService.getDadosMensais()[i].getContador());
+        }
+
+        falhaExtubacao.addSeries(qtdFalhas);
+
+        falhaExtubacao.setAnimate(true);
+        falhaExtubacao.setShowPointLabels(true);
+        falhaExtubacao.setLegendPosition("ne");
+        falhaExtubacao.setTitle("Falência de Extubação");
+
+    }
 
 //    private long getFalhasExtubacao(int mes) {
 //        int contador = 0;

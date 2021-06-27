@@ -5,43 +5,36 @@
  */
 package service;
 
-import java.io.Serializable;
-import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
 import model.Atendimento;
 import model.DadoMensal;
-import org.joda.time.DateTime;
-import org.joda.time.Days;
+
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
- * @author Gleywson
+ * @author gleyw
  */
-public abstract class DataService implements Serializable, InfoData {
+public class InfoDataFalhaExtubacao extends DataService {
 
-    private List<Atendimento> atendimentos;
+    public InfoDataFalhaExtubacao(List<Atendimento> atendimentos) {
+        super(atendimentos);
+    }
 
-    public DataService(List<Atendimento> atendimentos) {
-        this.atendimentos = atendimentos;
+    @Override
+    public Date getDateReferencia(Atendimento atendimento) {
+        return atendimento.getDataExtubacao();
     }
 
     public DadoMensal getInfoData(int mes) {
-
         try {
-            int soma = 0;
-            float media;
-            int contador = 0;
-            int contadorDeFalhas = 0; //apenas para falhas de extubacao
+            int contadorDeFalhas = 0;
+
             //extrai o ano corrente
             int ano = new Date().toInstant().atZone(ZoneId.systemDefault()).getYear();
             //filtra apenas os atendimentos do ano corrente
-            List<Atendimento> atendimentosDoAno = atendimentos.stream()
+            List<Atendimento> atendimentosDoAno = getAtendimentos().stream()
                     .filter(a -> ano == a.getDataAtendimento().toInstant().atZone(ZoneId.systemDefault()).getYear()).collect(Collectors.toList());
 
             for (Atendimento atendimento : atendimentosDoAno) {
@@ -49,17 +42,13 @@ public abstract class DataService implements Serializable, InfoData {
                 if (current != null) {
                     int month = toMonth(current);
                     if (month == mes) {
-                        soma += DiffData(atendimento.getDataAtendimento(), current);
-                        contador++;
                         if (atendimento.getSucessoExtubacao() != null && atendimento.getSucessoExtubacao() == false) {
                             contadorDeFalhas++;
                         }
                     }
                 }
             }
-
-            media = soma / contador;
-            DadoMensal dm = new DadoMensal(contador, media);
+            DadoMensal dm = new DadoMensal(contadorDeFalhas, 0);
             return dm;
         } catch (ArithmeticException e) {
             System.out.println("Erro tratado: " + e.getMessage());
@@ -67,17 +56,4 @@ public abstract class DataService implements Serializable, InfoData {
         }
     }
 
-    protected int toMonth(Date date) {
-        GregorianCalendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        return calendar.get(GregorianCalendar.MONTH);
-    }
-
-    protected long DiffData(Date data1, Date data2) {
-        return Days.daysBetween(new DateTime(data1), new DateTime(data2)).getDays();
-    }
-
-    protected List<Atendimento> getAtendimentos() {
-        return atendimentos;
-    }
 }

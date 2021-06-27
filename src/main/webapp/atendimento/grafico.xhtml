@@ -12,7 +12,7 @@
         <h:form id="form">
             <p:toolbar>
                 <f:facet name="left">
-                    <p:commandButton value="Voltar" icon="fa fa-arrow-left" 
+                    <p:commandButton value="Voltar" icon="fa fa-arrow-left"
                                      process="@this" action="unidades?faces-redirect=true"/>
                 </f:facet>
             </p:toolbar>
@@ -36,34 +36,39 @@
                 </div>
                 <div class="ui-g-12 ui-lg-12">
                     <div class="card timeline ui-fluid">
-                        
-                        <p:chart type="bar" model="#{graficoController.sedestacao}" style="height:300px; margin-top: 50px"
+
+                        <p:chart type="bar" model="#{graficoController.sedestacao}"
+                                 style="height:300px; margin-top: 50px"
                                  responsive="true"/>
                         <p:separator/>
 
-                        <p:chart type="bar" model="#{graficoController.ortostase}" style="height:300px; margin-top: 50px"
+                        <p:chart type="bar" model="#{graficoController.ortostase}"
+                                 style="height:300px; margin-top: 50px"
                                  responsive="true"/>
                         <p:separator/>
-                        <p:chart type="bar" model="#{graficoController.deambulacao}" style="height:300px; margin-top: 50px"
+                        <p:chart type="bar" model="#{graficoController.deambulacao}"
+                                 style="height:300px; margin-top: 50px"
                                  responsive="true"/>
 
-<!--                        <p:separator/>-->
-<!--                        <p:chart type="bar" model="{graficoController.extubacao}" style="height:300px; margin-top: 50px"-->
-<!--                                 responsive="true"/>-->
-                        
-<!--                        <p:separator/>
-                        <p:chart type="bar" model="{graficoController.falhaExtubacao}" style="height:300px; margin-top: 50px"
-                                 responsive="true"/>-->
+                        <p:separator/>
+                        <p:chart type="bar" model="#{graficoController.extubacao}"
+                                 style="height:300px; margin-top: 50px"
+                                 responsive="true"/>
 
-<!--                        <p:separator/>
-                        <p:chart type="line" model="{graficoController.falhaExtubacaoArea}" style="height:300px; margin-top: 50px"/>-->
+                        <p:separator/>
+                        <p:chart type="bar" model="#{graficoController.falhaExtubacao}"
+                                 style="height:300px; margin-top: 50px"
+                                 responsive="true"/>
+
+                        <!--                        <p:separator/>
+                                                <p:chart type="line" model="{graficoController.falhaExtubacaoArea}" style="height:300px; margin-top: 50px"/>-->
 
                     </div>
 
                 </div>
             </div>
 
-        </h:form>    
+        </h:form>
     </ui:define>
 
 </ui:composition>
