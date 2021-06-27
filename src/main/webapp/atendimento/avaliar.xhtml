@@ -128,26 +128,26 @@
 
                     <div class="card card-w-title">
                         <p style="font-weight: 900">Nível de Mobilidade - Pré-hospitalar </p>
-                        <h:panelGrid columns="1" style="margin-bottom: 10px">
-                            <p:inputText id="mob_pre" value="#{atendimentoController.atendimento.mobilidadePreHospitalar}" required="true"/>
-                            <p:slider for="mob_pre" minValue="1" maxValue="8"/>
-                        </h:panelGrid>
+                        <p:selectOneRadio layout="responsive" columns="8" required="true"
+                                          value="#{atendimentoController.atendimento.mobilidadePreHospitalar}">
+                            <f:selectItems value="#{atendimentoController.faixaMobilidades()}" var="op" itemValue="#{op}" itemLabel="#{op}"/>
+                        </p:selectOneRadio>
                     </div>
 
                     <div class="card card-w-title">
                         <p style="font-weight: 900">Nível de Mobilidade - Admissão </p>
-                        <h:panelGrid columns="1" style="margin-bottom: 10px">
-                            <p:inputText id="mob_adm" value="#{atendimentoController.atendimento.mobilidadeAdmissao}" required="true"/>
-                            <p:slider for="mob_adm" minValue="1" maxValue="8"/>
-                        </h:panelGrid>
+                        <p:selectOneRadio layout="responsive" columns="8" required="true"
+                                          value="#{atendimentoController.atendimento.mobilidadeAdmissao}">
+                            <f:selectItems value="#{atendimentoController.faixaMobilidades()}" var="op" itemValue="#{op}" itemLabel="#{op}"/>
+                        </p:selectOneRadio>
                     </div>
 
                     <div class="card card-w-title">
                         <p style="font-weight: 900">Nível de Mobilidade - Alta</p>
-                        <h:panelGrid columns="1" style="margin-bottom: 10px">
-                            <p:inputText id="mob_alta" value="#{atendimentoController.atendimento.mobilidadeAlta}" required="true" />
-                            <p:slider for="mob_alta" minValue="1" maxValue="8"/>
-                        </h:panelGrid>
+                        <p:selectOneRadio layout="responsive" columns="8" required="true"
+                                          value="#{atendimentoController.atendimento.mobilidadeAlta}">
+                            <f:selectItems value="#{atendimentoController.faixaMobilidades()}" var="op" itemValue="#{op}" itemLabel="#{op}"/>
+                        </p:selectOneRadio>
                     </div>
                 </div>
             </div>

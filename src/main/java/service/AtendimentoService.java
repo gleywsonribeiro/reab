@@ -21,7 +21,6 @@ import util.exception.DBException;
 import util.exception.NegocioException;
 
 /**
- *
  * @author gleyw
  */
 public class AtendimentoService implements Serializable {
@@ -30,7 +29,24 @@ public class AtendimentoService implements Serializable {
 
     public void salvar(Atendimento atendimento) {
         LeitoSexo sexo = atendimento.getLeito().getSexo();
-        if(!sexo.getDescricao().equals(atendimento.getPaciente().getSexo().getDescricao()) && sexo != LeitoSexo.AMBOS) {
+
+        if (atendimento.getDataAtendimento() != null) {
+            if ( atendimento.getDataPrimeiraDeambulacao() != null && atendimento.getDataAtendimento().after(atendimento.getDataPrimeiraDeambulacao())) {
+                throw new NegocioException("Deambulação não pode ocorrer antes da admissão!");
+            }
+            if (atendimento.getDataPrimeiraOrtostase() != null && atendimento.getDataAtendimento().after(atendimento.getDataPrimeiraOrtostase())) {
+                throw new NegocioException("Ortostase não pode ocorrer antes da admissão!");
+            }
+            if (atendimento.getDataPrimeiraSedestacao() != null && atendimento.getDataAtendimento().after(atendimento.getDataPrimeiraSedestacao())) {
+                throw new NegocioException("Sedestação não pode ocorrer antes da admissão!");
+            }
+
+            if (atendimento.getDataExtubacao() != null && atendimento.getDataAtendimento().after(atendimento.getDataExtubacao())) {
+                throw new NegocioException("Extubação não pode ocorrer antes da admissão!");
+            }
+        }
+
+        if (!sexo.getDescricao().equals(atendimento.getPaciente().getSexo().getDescricao()) && sexo != LeitoSexo.AMBOS) {
             throw new NegocioException("Leito incompatível com o paciente!");
         }
 
@@ -46,8 +62,20 @@ public class AtendimentoService implements Serializable {
     }
 
     public void edicao(Atendimento atendimento) {
-        if(atendimento.getDataExtubacao() != null && atendimento.getDataIntubacao() == null) {
-            throw new NegocioException("Não é possível extubar sem antes intubar!");
+        if (atendimento.getDataAtendimento() != null) {
+            if ( atendimento.getDataPrimeiraDeambulacao() != null && atendimento.getDataAtendimento().after(atendimento.getDataPrimeiraDeambulacao())) {
+                throw new NegocioException("Deambulação não pode ocorrer antes da admissão!");
+            }
+            if (atendimento.getDataPrimeiraOrtostase() != null && atendimento.getDataAtendimento().after(atendimento.getDataPrimeiraOrtostase())) {
+                throw new NegocioException("Ortostase não pode ocorrer antes da admissão!");
+            }
+            if (atendimento.getDataPrimeiraSedestacao() != null && atendimento.getDataAtendimento().after(atendimento.getDataPrimeiraSedestacao())) {
+                throw new NegocioException("Sedestação não pode ocorrer antes da admissão!");
+            }
+
+            if (atendimento.getDataExtubacao() != null && atendimento.getDataAtendimento().after(atendimento.getDataExtubacao())) {
+                throw new NegocioException("Extubação não pode ocorrer antes da admissão!");
+            }
         }
         dao.edit(atendimento);
     }
@@ -65,7 +93,7 @@ public class AtendimentoService implements Serializable {
         System.out.println(teste);
         return teste;
     }
-    
+
     public List<Atendimento> getAtendimentosPorUnidade(Setor setor) {
         return dao.getAtendimentosPorUnidade(setor);
     }
@@ -89,9 +117,9 @@ public class AtendimentoService implements Serializable {
     public List<Atendimento> getPacientesExtubados(Setor setor) {
         return dao.getPacientesExtubados(setor);
     }
-    
+
     public int getQtdExtubacoesMes(List<Atendimento> atendimentos, int i) {
-       int contador = 0;
+        int contador = 0;
 
         int ano = new Date().toInstant().atZone(ZoneId.systemDefault()).getYear();
         //filter the current year
@@ -101,9 +129,9 @@ public class AtendimentoService implements Serializable {
 
         GregorianCalendar calendar = new GregorianCalendar();
         int mes = calendar.get(GregorianCalendar.MONTH);
-        
+
         contador = atendimentosMesAno.stream().filter((_item) -> (mes == i)).map((_item) -> 1).reduce(contador, Integer::sum);
-        
+
         return contador;
     }
 

@@ -170,13 +170,18 @@ public class AtendimentoController implements Serializable {
         String id = atendimento.getLeito().getSetor().getId().toString();
         return "painel?id=" + id + "faces-redirect=true";
     }
-    
+
     public void atualizaMotivoExtubacao() {
-        if(atendimento.getDataExtubacao() == null) {
+        if (atendimento.getDataExtubacao() == null) {
             atendimento.setSucessoExtubacao(null);
             atendimento.setMotivoFalha("");
             atendimento.setExtMenor(null);
             atendimento.setMotivoExtMaior("");
         }
+    }
+
+    public int[] faixaMobilidades() {
+        int faixa[] = {1, 2, 3, 4, 5, 6, 7, 8};
+        return faixa;
     }
 }
