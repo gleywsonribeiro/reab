@@ -53,19 +53,30 @@
                                      style="margin: 20px 20px 50px 0px">
                             <h:panelGroup styleClass="md-inputfield">
                                 <p:calendar pattern="dd/MM/yyyy" mask="true" locale="pt"
-                                            value="#{atendimentoController.atendimento.dataPrimeiraSedestacao}"/>
+                                            value="#{atendimentoController.atendimento.dataPrimeiraSedestacao}">
+                                    <p:ajax event="change" listener="#{atendimentoController.listenerSalvar}" process="@this" update="@this"/>
+                                    <p:ajax event="dateSelect" listener="#{atendimentoController.listenerSalvar}" process="@this" update="@this"/>
+                                </p:calendar>
                                 <label>1ª Sedestação</label>
                             </h:panelGroup>
 
                             <h:panelGroup styleClass="md-inputfield">
                                 <p:calendar pattern="dd/MM/yyyy" mask="true" locale="pt"
-                                            value="#{atendimentoController.atendimento.dataPrimeiraOrtostase}"/>
+                                            value="#{atendimentoController.atendimento.dataPrimeiraOrtostase}">
+                                    <p:ajax event="change" listener="#{atendimentoController.listenerSalvar}" process="@this" update="@this"/>
+                                    <p:ajax event="dateSelect" listener="#{atendimentoController.listenerSalvar}" process="@this" update="@this"/>
+                                </p:calendar>
+
                                 <label>1ª Ortostase</label>
                             </h:panelGroup>
 
                             <h:panelGroup styleClass="md-inputfield">
                                 <p:calendar pattern="dd/MM/yyyy" mask="true" locale="pt"
-                                            value="#{atendimentoController.atendimento.dataPrimeiraDeambulacao}"/>
+                                            value="#{atendimentoController.atendimento.dataPrimeiraDeambulacao}">
+                                    <p:ajax event="change" listener="#{atendimentoController.listenerSalvar}" process="@this" update="@this"/>
+                                    <p:ajax event="dateSelect" listener="#{atendimentoController.listenerSalvar}" process="@this" update="@this"/>
+                                </p:calendar>
+
                                 <label>1ª Deambulação</label>
                             </h:panelGroup>
 

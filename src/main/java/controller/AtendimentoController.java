@@ -102,7 +102,6 @@ public class AtendimentoController implements Serializable {
             HttpSession httpSession = (HttpSession) fc.getExternalContext().getSession(false);
             Usuario usuario = (Usuario) httpSession.getAttribute("currentUser");
             atendimento.setAtendente(usuario);
-            atendimento.setDataAtendimento(new Date());
 
             Leito leito = atendimento.getLeito();
             leito.setOcupacao(Ocupacao.OCUPADO);
@@ -117,6 +116,10 @@ public class AtendimentoController implements Serializable {
         } catch (NegocioException negocio) {
             JsfUtil.addErrorMessage(negocio.getMessage());
         }
+    }
+
+    public void listenerSalvar() {
+        salvar();
     }
 
     public void editar() {
