@@ -6,19 +6,14 @@
 package controller;
 
 import java.io.Serializable;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import model.Atendimento;
-import model.DadoMensal;
 import model.Setor;
 import service.*;
 import org.primefaces.model.chart.BarChartModel;
@@ -40,7 +35,7 @@ public class GraficoController implements Serializable {
 //    private BarChartModel intubacao;
     private BarChartModel extubacao;
 
-    private BarChartModel falhaExtubacao;
+    private BarChartModel taxaDeFalhas;
 
 //    private LineChartModel falhaExtubacaoArea;
 
@@ -67,7 +62,7 @@ public class GraficoController implements Serializable {
         createDeambulacao();
         createExtubacao();
 //        createfalhaExtubacaoArea();
-        createFalhaExtubacao();
+        createTaxaFalha();
     }
 
     public BarChartModel getSedestacao() {
@@ -90,8 +85,8 @@ public class GraficoController implements Serializable {
         return extubacao;
     }
 
-    public BarChartModel getFalhaExtubacao() {
-        return falhaExtubacao;
+    public BarChartModel getTaxaDeFalhas() {
+        return taxaDeFalhas;
     }
 
     private void createSedestacao() {
@@ -173,45 +168,45 @@ public class GraficoController implements Serializable {
         GraficoService service = new GraficoService(data);
 
         ChartSeries quantidade = new ChartSeries();
-        quantidade.setLabel("Nº ocorrências");
+        quantidade.setLabel("Nº Extubações");
 
-        ChartSeries taxa = new ChartSeries();
-        taxa.setLabel("Taxa de Falha");
+        ChartSeries quantidadeFalhas = new ChartSeries();
+        quantidadeFalhas.setLabel("Nº de Falhas");
 
         for (int i = 0; i < meses.length; i++) {
             quantidade.set(meses[i], service.getDadosMensais()[i].getContador());
-            taxa.set(meses[i], service.getDadosMensais()[i].getValor());
+            quantidadeFalhas.set(meses[i], service.getDadosMensais()[i].getValor());
         }
 
         extubacao.addSeries(quantidade);
-        extubacao.addSeries(taxa);
+        extubacao.addSeries(quantidadeFalhas);
         extubacao.setAnimate(true);
         extubacao.setShowPointLabels(true);
         extubacao.setLegendPosition("ne");
         extubacao.setTitle("Extubação");
     }
 
-    private void createFalhaExtubacao() {
-        falhaExtubacao = new BarChartModel();
+    private void createTaxaFalha() {
+        taxaDeFalhas = new BarChartModel();
 
         String meses[] = {"Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"};
 
-        DataService service = new InfoDataFalhaExtubacao(atendimentos);
+        DataService service = new InfoDataTaxaFalha(atendimentos);
         GraficoService graficoService = new GraficoService(service);
-        ChartSeries qtdFalhas = new ChartSeries();
-        qtdFalhas.setLabel("Nº Falhas de Extubação");
+        ChartSeries taxa = new ChartSeries();
+        taxa.setLabel("Taxa de Falhas de Extubação (%)");
 
 
         for (int i = 0; i < meses.length; i++) {
-            qtdFalhas.set(meses[i], graficoService.getDadosMensais()[i].getContador());
+            taxa.set(meses[i], graficoService.getDadosMensais()[i].getValor());
         }
 
-        falhaExtubacao.addSeries(qtdFalhas);
+        taxaDeFalhas.addSeries(taxa);
 
-        falhaExtubacao.setAnimate(true);
-        falhaExtubacao.setShowPointLabels(true);
-        falhaExtubacao.setLegendPosition("ne");
-        falhaExtubacao.setTitle("Falência de Extubação");
+        taxaDeFalhas.setAnimate(true);
+        taxaDeFalhas.setShowPointLabels(true);
+        taxaDeFalhas.setLegendPosition("ne");
+        taxaDeFalhas.setTitle("Falência de Extubação");
 
     }
 

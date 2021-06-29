@@ -51,8 +51,8 @@ public class InfoDataExtubacao extends DataService {
                 }
             }
 
-            double taxa = (contadorDeFalhas / contador) * 100;
-            DadoMensal dm = new DadoMensal(contador, taxa);
+
+            DadoMensal dm = new DadoMensal(contador, contadorDeFalhas);
             return dm;
         } catch (ArithmeticException e) {
             System.out.println("Erro tratado: " + e.getMessage());

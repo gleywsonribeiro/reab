@@ -16,9 +16,9 @@ import java.util.stream.Collectors;
 /**
  * @author gleyw
  */
-public class InfoDataFalhaExtubacao extends DataService {
+public class InfoDataTaxaFalha extends DataService {
 
-    public InfoDataFalhaExtubacao(List<Atendimento> atendimentos) {
+    public InfoDataTaxaFalha(List<Atendimento> atendimentos) {
         super(atendimentos);
     }
 
@@ -30,6 +30,7 @@ public class InfoDataFalhaExtubacao extends DataService {
     public DadoMensal getInfoData(int mes) {
         try {
             int contadorDeFalhas = 0;
+            int contador = 0;
 
             //extrai o ano corrente
             int ano = new Date().toInstant().atZone(ZoneId.systemDefault()).getYear();
@@ -42,13 +43,16 @@ public class InfoDataFalhaExtubacao extends DataService {
                 if (current != null) {
                     int month = toMonth(current);
                     if (month == mes) {
+                        contador++;
                         if (atendimento.getSucessoExtubacao() != null && atendimento.getSucessoExtubacao() == false) {
                             contadorDeFalhas++;
                         }
                     }
                 }
             }
-            DadoMensal dm = new DadoMensal(contadorDeFalhas, 0);
+            double taxa = (double) contadorDeFalhas / contador;
+            taxa = Math.round(taxa * 100);
+            DadoMensal dm = new DadoMensal(0, taxa);
             return dm;
         } catch (ArithmeticException e) {
             System.out.println("Erro tratado: " + e.getMessage());
