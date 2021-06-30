@@ -16,5 +16,12 @@
       <jdbc-url>jdbc:mysql://localhost:3306/reabilitacao?serverTimezone=GMT-3</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="postgres@heroku" uuid="2df1768a-ed17-45be-adb0-f57900906b8f">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-52-23-45-36.compute-1.amazonaws.com:5432/da2rpejal9p6ak</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
