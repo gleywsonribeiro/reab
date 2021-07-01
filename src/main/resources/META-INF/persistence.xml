@@ -19,7 +19,7 @@
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <!--Configuração local-->
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://us-cdbr-east-04.cleardb.com:3306/heroku_965b3141dcfc95f?serverTimezone=GMT-3&amp;useSSL=false"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://us-cdbr-east-04.cleardb.com:3306/heroku_965b3141dcfc95f?serverTimezone=GMT-3&amp;useSSL=false&amp;autoReconnect=true"/>
             <property name="javax.persistence.jdbc.user" value="b433397f18a707"/>
             <property name="javax.persistence.jdbc.password" value="ef399fd9"/>
             <property name="hibernate.show_sql" value="true"/>
@@ -37,11 +37,11 @@
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
-<!--            <property name="hibernate.c3p0.min_size" value="5"/>-->
-<!--            <property name="hibernate.c3p0.max_size" value="20"/>-->
-<!--            <property name="hibernate.c3p0.timeout" value="300"/>-->
-<!--            <property name="hibernate.c3p0.validate" value="true"/>-->
-<!--            <property name="hibernate.c3p0.preferredTestQuery" value="select 1"/>-->
+            <property name="hibernate.c3p0.min_size" value="5"/>
+            <property name="hibernate.c3p0.max_size" value="20"/>
+            <property name="hibernate.c3p0.timeout" value="300"/>
+            <property name="hibernate.c3p0.validate" value="true"/>
+            <property name="hibernate.c3p0.preferredTestQuery" value="select 1"/>
         </properties>
     </persistence-unit>
 
