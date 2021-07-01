@@ -19,22 +19,22 @@
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <!--Configuração local-->
-<!--            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/reabilitacao"/>-->
-<!--            <property name="javax.persistence.jdbc.user" value="postgres"/>-->
-<!--            <property name="javax.persistence.jdbc.password" value="systemcall"/>-->
-<!--            <property name="hibernate.show_sql" value="true"/>-->
-<!--            <property name="hibernate.format_sql" value="true"/>-->
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/reabilitacao?serverTimezone=GMT-3"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="systemcall"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
             <!--==================================================================================================-->
             <!--Configuração da nuvem-->
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-52-23-45-36.compute-1.amazonaws.com:5432/da2rpejal9p6ak"/>
-            <property name="javax.persistence.jdbc.user" value="uvgcmhsfhkvrdf"/>
-            <property name="javax.persistence.jdbc.password" value="9c6574924b3e701e2d86bc56bb22f13cb60616a756474baca15b88d49fe49f5e"/>
-            <property name="hibernate.show_sql" value="false"/>
-            <property name="hibernate.format_sql" value="false"/>
+            <!--            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/iridavis_reab?serverTimezone=GMT-3"/>-->
+            <!--            <property name="javax.persistence.jdbc.user" value="iridavis_reab"/>-->
+            <!--            <property name="javax.persistence.jdbc.password" value="SystemC@ll1989"/>-->
+            <!--            <property name="hibernate.show_sql" value="false"/>-->
+            <!--            <property name="hibernate.format_sql" value="false"/>-->
             <!--=========================================================================================-->
-            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
             <property name="hibernate.cache.provider_class" value="org.hibernate.cache.CacheException"/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.c3p0.min_size" value="5"/>
             <property name="hibernate.c3p0.max_size" value="20"/>
