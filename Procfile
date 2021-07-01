@@ -1,2 +1,1 @@
-buildpacks:clear
-war:deploy target/reab-1.0.war
+web: java -jar target/reab-1.0.war
