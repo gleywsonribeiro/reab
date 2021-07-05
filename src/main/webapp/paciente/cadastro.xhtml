@@ -56,7 +56,7 @@
 
                                 <p:outputLabel for="nascimento" value="Data de Nascimento" />
                                 <p:calendar id="nascimento" mask="true" pattern="dd/MM/yyyy" required="true" requiredMessage="Informe a data de nascimento"
-                                            navigator="true" 
+                                            navigator="true" yearRange="c-100:c+100" maxdate="today"
                                             locale="pt" value="#{pacienteController.paciente.dataNascimento}"/>
                                 <p:message for="nascimento" display="icon"/>
                             </p:panelGrid>

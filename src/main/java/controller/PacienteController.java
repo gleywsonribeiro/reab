@@ -6,7 +6,10 @@
 package controller;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
@@ -111,5 +114,5 @@ public class PacienteController implements Serializable {
         Hospital hospital = Sessao.getUsuarioSessao().getHospitalLogado();
         pacientes = service.listarPorHospital(hospital);
     }
-    
+
 }
