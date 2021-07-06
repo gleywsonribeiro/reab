@@ -98,6 +98,10 @@ public class AtendimentoService implements Serializable {
         return dao.getAtendimentosPorUnidade(setor);
     }
 
+    public List<Atendimento> getAtendimentos(Setor setor) {
+        return dao.getAtendimentos(setor);
+    }
+
     public Long getPacientesInternados(Hospital hospital) {
         return dao.getPacientesInternados(hospital);
     }
