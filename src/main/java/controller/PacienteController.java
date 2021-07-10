@@ -110,6 +110,28 @@ public class PacienteController implements Serializable {
         return builder.toString();
     }
 
+    public String atender() {
+        try {
+            Hospital hospital = Sessao.getUsuarioSessao().getHospitalLogado();
+            paciente.setHospital(hospital);
+            service.salvar(paciente);
+            pacientes = null;
+
+            StringBuilder builder = new StringBuilder();
+            builder.append("atendimento?id=");
+            builder.append(paciente.getId());
+            builder.append("faces-redirect=true");
+            return builder.toString();
+
+        }  catch (DBException e) {
+            JsfUtil.addErrorMessage("Já existe paciente com essa matrícula: " + e.getMessage());
+            return "";
+        } catch (NegocioException e) {
+            JsfUtil.addErrorMessage(e.getMessage());
+            return "";
+        }
+    }
+
     private void atualizaListaPacientes() {
         Hospital hospital = Sessao.getUsuarioSessao().getHospitalLogado();
         pacientes = service.listarPorHospital(hospital);
