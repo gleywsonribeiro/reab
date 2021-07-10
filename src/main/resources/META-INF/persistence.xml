@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="EmpatiaPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>model.Hospital</class>
@@ -18,22 +20,25 @@
         <class>model.Leito</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
-            <!--Configuração local-->
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://us-cdbr-east-04.cleardb.com:3306/heroku_965b3141dcfc95f?serverTimezone=GMT-3&amp;useSSL=false&amp;autoReconnect=true"/>
-            <property name="javax.persistence.jdbc.user" value="b433397f18a707"/>
-            <property name="javax.persistence.jdbc.password" value="ef399fd9"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-<!--            <property name="javax.persistence.schema-generation.database.action" value="create"/>-->
+            <!--Configuração nuvem-->
+            <!--            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://us-cdbr-east-04.cleardb.com:3306/heroku_965b3141dcfc95f?serverTimezone=GMT-3&amp;useSSL=false&amp;autoReconnect=true"/>-->
+            <!--            <property name="javax.persistence.jdbc.user" value="b433397f18a707"/>-->
+            <!--            <property name="javax.persistence.jdbc.password" value="ef399fd9"/>-->
+            <!--            <property name="hibernate.show_sql" value="true"/>-->
+            <!--            <property name="hibernate.format_sql" value="true"/>-->
+
+
+            <!--            <property name="javax.persistence.schema-generation.database.action" value="create"/>-->
             <!--==================================================================================================-->
-            <!--Configuração da nuvem-->
-            <!--            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/iridavis_reab?serverTimezone=GMT-3"/>-->
-            <!--            <property name="javax.persistence.jdbc.user" value="iridavis_reab"/>-->
-            <!--            <property name="javax.persistence.jdbc.password" value="SystemC@ll1989"/>-->
-            <!--            <property name="hibernate.show_sql" value="false"/>-->
-            <!--            <property name="hibernate.format_sql" value="false"/>-->
+            <!--Configuração da local-->
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:mysql://localhost:3306/reabilitacao?serverTimezone=GMT-3"/>
+            <property name="javax.persistence.jdbc.user" value="root"/>
+            <property name="javax.persistence.jdbc.password" value="systemcall"/>
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="false"/>
             <!--=========================================================================================-->
-<!--            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.CacheException"/>-->
+            <!--            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.CacheException"/>-->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>

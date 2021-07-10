@@ -51,7 +51,10 @@ public class AtendeController implements Serializable {
 
     }
 
-   
+    public String voltarPaciente() {
+        String id = atendimento.getPaciente().getId().toString();
+        return "cadastro?id=" + id + "faces-redirect=true";
+    }
 
     public void darAlta() {
 //        try {

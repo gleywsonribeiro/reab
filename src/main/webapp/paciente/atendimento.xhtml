@@ -12,6 +12,8 @@
         <h:form id="form">
             <p:toolbar id="tb">
                 <f:facet name="left">
+                    <p:commandButton value="Voltar" icon="fa fa fa-arrow-left" process="@this"
+                                     action="#{atendeController.voltarPaciente}"/>
                     <span class="ui-separator">
                         <span class="ui-icon pi pi-ellipsis-v"/>
                     </span>
