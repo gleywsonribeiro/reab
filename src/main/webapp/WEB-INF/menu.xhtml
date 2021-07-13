@@ -56,12 +56,10 @@
                             <p:menuitem id="listaPaciente" value="Pesquisa de Pacientes" icon="	&#xe8b6;" outcome="/paciente/pesquisa"/>
                         </p:submenu>
                         <p:menuitem id="atender" value="Admissões" icon="&#xe862;" outcome="/atendimento/pesquisa"/>
-                        <p:submenu label="Gerenciamento" icon="&#xe065;">
-                            <p:menuitem value="Unidades" icon="&#xe7ee;" outcome="/atendimento/unidades"/>
-                        </p:submenu>
-                        <p:menuitem id="avaliacao" value="Avaliação" icon="&#xe636;" outcome="/avaliacao/triagem"/>
-                        <p:menuitem id="checagem" value="Checagem" icon="&#xe065;" outcome="/checagem/avaliacoes"/>
-                        <p:submenu label="Tabelas" icon="&#xe30d;">
+                        <p:menuitem value="Unidades" icon="&#xe7ee;" outcome="/atendimento/unidades"/>
+                        <p:menuitem id="avaliacao" value="Avaliação" icon="&#xe636;" outcome="/avaliacao/triagem" rendered="#{not loginController.usuario.user}"/>
+                        <p:menuitem id="checagem" value="Checagem" icon="&#xe065;" outcome="/checagem/avaliacoes" rendered="#{not loginController.usuario.user}"/>
+                        <p:submenu label="Tabelas" icon="&#xe30d;" rendered="#{not loginController.usuario.user}">
                             <p:menuitem id="hospital" value="Hospital" icon="&#xe548;" outcome="/tabelas/hospital/cadastro"/>
                             <p:menuitem id="leito" value="Leitos" icon="&#xe53a;" outcome="/tabelas/leito/pesquisa"/>
                             <p:menuitem id="motivo" value="Motivos da Internação" icon="&#xe14f;" outcome="/tabelas/motivo/cadastro"/>

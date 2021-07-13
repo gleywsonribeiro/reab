@@ -5,65 +5,82 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 
-    <h:head>
-        <f:facet name="first">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-            <meta name="apple-mobile-web-app-capable" content="yes" />
-        </f:facet>
-        <title>Login</title>
-        <h:outputScript name="js/ripple.js" library="ultima-layout" />
-        <h:outputScript name="js/layout.js" library="ultima-layout" />
-    </h:head>
+<h:head>
+    <f:facet name="first">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+    </f:facet>
+    <title>Login</title>
+    <h:outputScript name="js/ripple.js" library="ultima-layout"/>
+    <h:outputScript name="js/layout.js" library="ultima-layout"/>
+</h:head>
 
-    <h:body styleClass="login-body">
+<h:body styleClass="login-body">
 
-        <h:form>
+    <h:form>
 
-            <div class="card login-panel ui-fluid">
-                <div class="ui-g">
-                    <p:messages autoUpdate="true"/>
-                    <div class="ui-g-12">
-                        <p:graphicImage name="images/login/img.png" width="128" height="128" library="ultima-layout" />
-                    </div>
-                    <div class="ui-g-12">
-                        <h:panelGroup styleClass="md-inputfield">
-                            <p:inputText value="#{loginController.usuario.login}" required="true" requiredMessage="Informe o usuário" >
-                                <p:ajax event="change" listener="#{loginController.buscarUsuario()}" update="@form"/>
-                            </p:inputText>
-                            <label>Usuário</label>
-                        </h:panelGroup>
-                    </div>
-                    <div class="ui-g-12">
-                        <h:panelGroup styleClass="md-inputfield">
-                            <p:password value="#{loginController.usuario.senha}" required="true" requiredMessage="Informe uma senha"/>
-                            <label>Senha</label>
-                        </h:panelGroup>
-                    </div>
-                    <div class="ui-g-12" style="text-align: left">
+        <div class="card login-panel ui-fluid">
+            <div class="ui-g">
+                <p:messages autoUpdate="true"/>
+                <div class="ui-g-12">
+                    <p:graphicImage name="images/login/img.png" width="128" height="128" library="ultima-layout"/>
+                </div>
 
-                        <h:panelGrid columns="1">
-                            <h:outputText value="Hospital"  style="font-weight: 700; color: #3e464c; font-size: 13px"/>
-                            <p:selectOneMenu style="width: 200px; text-align: right"
-                                             value="#{loginController.hospitalID}" required="true" requiredMessage="Selecione o Hospital">
-                                <f:selectItems value="#{loginController.hospitais}" var="hospital"
-                                               itemLabel="#{hospital.nome}" itemValue="#{hospital.id}"/>
-                            </p:selectOneMenu>
-                        </h:panelGrid>
 
-                    </div>
-                    <div class="ui-g-12">
-                        <p:commandButton action="#{loginController.login()}" value="Entrar" icon="ui-icon-person" ajax="false"/>
-                    </div>
+                <div class="ui-g-12">
+                    <h:panelGroup styleClass="md-inputfield">
+                        <p:inputText value="#{loginController.usuario.login}" required="true"
+                                     requiredMessage="Informe o usuário">
+                            <p:ajax event="change" listener="#{loginController.buscarUsuario()}" update="@form"/>
+                        </p:inputText>
+                        <label>Usuário</label>
+                    </h:panelGroup>
+                </div>
+                <div class="ui-g-12">
+                    <h:panelGroup styleClass="md-inputfield">
+                        <p:password value="#{loginController.usuario.senha}" required="true"
+                                    requiredMessage="Informe uma senha"/>
+                        <label>Senha</label>
+                    </h:panelGroup>
+                </div>
+                <div class="ui-g-12" style="text-align: left">
+
+                    <h:panelGrid columns="1">
+                        <h:outputText value="Hospital" style="font-weight: 700; color: #3e464c; font-size: 13px"/>
+                        <p:selectOneMenu style="width: 200px; text-align: right"
+                                         value="#{loginController.hospitalID}" required="true"
+                                         requiredMessage="Selecione o Hospital">
+                            <f:selectItems value="#{loginController.hospitais}" var="hospital"
+                                           itemLabel="#{hospital.nome}" itemValue="#{hospital.id}"/>
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+
+                </div>
+                <div class="ui-g-12">
+                    <p:commandButton action="#{loginController.login()}" value="Entrar" icon="ui-icon-person"
+                                     ajax="false"/>
                 </div>
             </div>
-        </h:form>
+        </div>
+    </h:form>
 
-        <div class="login-footer"></div>
+    <div class="login-footer">
+        <p:ajaxStatus style="width:32px;height:32px;position:fixed;right:7px;bottom:7px">
+            <f:facet name="start">
+                <i class="fa fa-circle-o-notch fa-spin ajax-loader" aria-hidden="true"></i>
+            </f:facet>
 
-        <h:outputStylesheet name="css/ripple.css" library="ultima-layout" />
-        <h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css" library="ultima-layout" />
-    </h:body>
+            <f:facet name="complete">
+                <h:outputText value=""/>
+            </f:facet>
+        </p:ajaxStatus>
+    </div>
+
+
+    <h:outputStylesheet name="css/ripple.css" library="ultima-layout"/>
+    <h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css" library="ultima-layout"/>
+</h:body>
 
 </html>
