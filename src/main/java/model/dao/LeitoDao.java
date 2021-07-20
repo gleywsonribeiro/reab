@@ -45,4 +45,11 @@ public class LeitoDao extends Dao<Leito>{
         return query.getResultList();
     }
 
+    public List<Leito> getLeitosVagos(Setor setor) {
+        Query query = em.createQuery("SELECT l FROM Leito as l where l.ocupacao =: ocupacao and l.setor =:setor", Leito.class);
+        query.setParameter("ocupacao", Ocupacao.VAGO);
+        query.setParameter("setor", setor);
+        return query.getResultList();
+    }
+
 }

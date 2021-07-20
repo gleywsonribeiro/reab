@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Hospital</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <p:toolbar id="tb">
+                <f:facet name="left">
+                    <!--                    <p:commandButton value="Voltar" icon="fa fa fa-arrow-left" process="@this"-->
+                    <!--                                     action="#{atendimentoController.voltarUnidade()}"/>-->
+                    <span class="ui-separator">
+                        <span class="ui-icon pi pi-ellipsis-v"/>
+                    </span>
+                    <p:commandButton value="Transferir" icon="fa fa-bed" action="#{tranferenciaController.transferir()}"
+                                     update="@form"/>
+                </f:facet>
+            </p:toolbar>
+            <div class="ui-g ui-fluid">
+
+                <div class="ui-g-12 ui-lg-9">
+                    <!-- Left colum -->
+                    <div class="card card-w-title">
+
+                        <p:growl autoUpdate="true"/>
+
+                        <h1>Transferência de Leito</h1>
+                        <p:fieldset legend="Dados do Paciente">
+                            <h1>#{atendimentoController.atendimento.paciente.nome}</h1>
+
+                            <h:panelGrid columns="2">
+                                <h:outputText value="Matrícula: " style="font-weight: 900"/>
+                                <h:outputText value="#{tranferenciaController.atendimento.paciente.matricula}"/>
+
+                                <h:outputText value="Idade: " style="font-weight: 900"/>
+                                <h:outputText value="#{tranferenciaController.atendimento.paciente.idade} anos"/>
+
+                                <h:outputText value="Sexo: " style="font-weight: 900"/>
+                                <h:outputText value="#{tranferenciaController.atendimento.paciente.sexo.descricao}"/>
+
+                                <h:outputText value="Leito: " style="font-weight: 900"/>
+                                <h:outputText value="#{tranferenciaController.atendimento.leito.descricao}"/>
+
+                                <h:outputText value="Data: " style="font-weight: 900"/>
+
+                                <h:outputText value="#{tranferenciaController.atendimento.dataAtendimento}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+
+
+                            </h:panelGrid>
+
+                            <h:panelGrid columns="1" style="margin-top: 20px">
+                                <h:outputText value="Transferir para: " style="font-weight: 900; margin-bottom: 50px"/>
+                                <h:panelGroup>
+                                    <p:selectOneMenu value="#{tranferenciaController.idLeitoDestino}" required="true"
+                                                     requiredMessage="Escolha um leito"
+                                                     filter="true"
+                                                     filterMatchMode="contains">
+                                        <f:selectItem itemLabel="Selecione"/>
+                                        <f:selectItems value="#{tranferenciaController.leitosVagos}" var="leito"
+                                                       itemLabel="#{leito.descricao} - #{leito.setor.nome}"
+                                                       itemValue="#{leito.id}"/>
+                                    </p:selectOneMenu>
+                                </h:panelGroup>
+                            </h:panelGrid>
+
+                        </p:fieldset>
+
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Right colum -->
+<!--                    converter="leitoConverter"-->
+                </div>
+            </div>
+
+            <p:sticky target="tb" margin="75"/>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

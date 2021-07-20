@@ -62,7 +62,7 @@ public abstract class DataService implements Serializable, InfoData {
             DadoMensal dm = new DadoMensal(contador, media);
             return dm;
         } catch (ArithmeticException e) {
-            System.out.println("Erro tratado: " + e.getMessage());
+//            System.out.println("Erro tratado: " + e.getMessage());
             return new DadoMensal(0, 0);
         }
     }

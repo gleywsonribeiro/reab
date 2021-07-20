@@ -44,9 +44,16 @@ public class LeitoService implements Serializable {
         }
         
     }
+
+    public Leito getLeito(Long id) {
+        return dao.find(id);
+    }
     
     public List<Leito> getLeitosVagos(Hospital hospital) {
         return dao.getLeitosVagos(hospital);
     }
-    
+
+    public List<Leito> getLeitosVagos(Setor setor) {
+        return dao.getLeitosVagos(setor);
+    }
 }
