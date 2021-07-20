@@ -9,18 +9,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
+
 import org.joda.time.DateTime;
 import org.joda.time.Years;
 
@@ -29,6 +19,7 @@ import org.joda.time.Years;
  * @author gleyw
  */
 @Entity
+@Table(name = "paciente")
 public class Paciente implements Serializable {
 
     private static final long serialVersionUID = 1L;

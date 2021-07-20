@@ -102,6 +102,7 @@ public class UsuarioController implements Serializable {
             } else {
                 usuario.getHospitais().clear();
                 usuario.getHospitais().addAll(hospitaisSelecionados);
+                usuarioService.salvar(usuario);
             }
             activeIndex = 1;
             limpar();

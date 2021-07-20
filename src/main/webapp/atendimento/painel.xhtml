@@ -36,6 +36,7 @@
                 </div>
                 <div class="ui-g-12 ui-lg-12">
                     <p:dataTable value="#{painelController.atendimentos}" var="atendimento" reflow="true">
+
                         <p:column headerText="Leito" style="width: 20%">
                             <h:outputText value="#{atendimento.leito.descricao}"/>
                         </p:column>
@@ -64,7 +65,12 @@
                                     <f:param name="id" value="#{atendimento.id}"/>
                                     <p:tooltip for="avaliar" value="Avaliar"/>
                                 </h:outputLink>
-                                <p:commandButton icon="fa fa-random"/>
+
+                                <h:outputLink>
+                                    <p:button id="troca" icon="ui-icon-swap-horiz"/>
+<!--                                    <f:param name="id" value="#{atendimento.id}"/>-->
+                                    <p:tooltip for="troca" value="tranferência de leito"/>
+                                </h:outputLink>
 
                             </p:panelGrid>
                         </p:column>
