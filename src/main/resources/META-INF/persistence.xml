@@ -33,9 +33,9 @@
             <!--==================================================================================================-->
             <!--Configuração da local-->
                         <property name="javax.persistence.jdbc.url"
-                                  value="jdbc:mysql://localhost:3306/reabilitacao?serverTimezone=GMT-3"/>
-                        <property name="javax.persistence.jdbc.user" value="root"/>
-                        <property name="javax.persistence.jdbc.password" value="systemcall"/>
+                                  value="jdbc:mysql://reabvent.com:3306/z4reabve_reab?serverTimezone=GMT-3"/>
+                        <property name="javax.persistence.jdbc.user" value="z4reabve_admin"/>
+                        <property name="javax.persistence.jdbc.password" value="SystemC@ll1989"/>
                         <property name="hibernate.show_sql" value="false"/>
                         <property name="hibernate.format_sql" value="false"/>
             <!--=========================================================================================-->
