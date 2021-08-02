@@ -86,6 +86,11 @@ public class TranferenciaController implements Serializable {
         
     }
 
+    public String voltarUnidade() {
+        String id = atendimento.getLeito().getSetor().getId().toString();
+        return "painel?id=" + id + "faces-redirect=true";
+    }
+
     public Atendimento getAtendimento() {
         return atendimento;
     }
