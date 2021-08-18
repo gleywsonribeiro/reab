@@ -55,7 +55,7 @@
                                 <p:commandButton  id="bt" icon="fa fa-trash" action="#{atendimentoController.remover()}" styleClass="red-btn"
                                                   update="@form" process="@this">
                                     <f:setPropertyActionListener target="#{atendimentoController.atendimento}" value="#{atendimento}"/>
-                                    <p:confirm header="Alerta" message="Quer mesmo apagar este paciente?" icon="fa fa-exclamation-triangle" />
+                                    <p:confirm header="Alerta" message="Quer mesmo apagar este atendimento?" icon="fa fa-exclamation-triangle" />
                                 </p:commandButton>
 
                             </p:column>
