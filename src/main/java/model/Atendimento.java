@@ -74,6 +74,9 @@ public class Atendimento implements Serializable {
     
     @Column(name = "mot_ext_maior")
     private String motivoExtMaior;
+
+    @ManyToOne
+    private MotivoAlta motivoAlta;
     
     @ManyToOne(optional = false)
     private Usuario atendente;
@@ -91,8 +94,6 @@ public class Atendimento implements Serializable {
     public Atendimento() {
         this.dataAtendimento = new Date();
     }
-
-    
 
     public Long getId() {
         return id;
@@ -261,8 +262,14 @@ public class Atendimento implements Serializable {
     public void setMotivoExtMaior(String motivoExtMaior) {
         this.motivoExtMaior = motivoExtMaior;
     }
-    
-    
+
+    public MotivoAlta getMotivoAlta() {
+        return motivoAlta;
+    }
+
+    public void setMotivoAlta(MotivoAlta motivoAlta) {
+        this.motivoAlta = motivoAlta;
+    }
 
     @Override
     public int hashCode() {

@@ -50,14 +50,12 @@
                         </p:column>
                         <p:column>
                             <p:panelGrid columns="4" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
-                                <h:panelGroup>
-                                    <p:commandButton  id="alta" icon="fa fa-wheelchair" action="#{painelController.darAlta()}"
-                                                      update="@form" process="@this">
-                                        <f:setPropertyActionListener target="#{painelController.atendimento}" value="#{atendimento}"/>
-                                        <p:confirm header="Alerta" message="Confirma a alta de #{atendimento.paciente.nome} ?" icon="fa fa-exclamation-triangle" />
-                                    </p:commandButton>
-                                    <p:tooltip for="alta" value="Realizar alta"/>
-                                </h:panelGroup>
+
+                                <h:outputLink value="alta.xhtml">
+                                    <p:button id="alta" icon="fa fa-wheelchair"/>
+                                    <f:param name="id" value="#{atendimento.id}"/>
+                                    <p:tooltip for="alta" value="Alta de paciente"/>
+                                </h:outputLink>
                                 
                                 <p:commandButton icon="fa fa-calendar-check-o"/>
                                 <h:outputLink value="avaliar.xhtml">

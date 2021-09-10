@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Hospital</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <p:toolbar id="tb">
+                <f:facet name="left">
+                    <p:commandButton value="Voltar" icon="fa fa fa-arrow-left" process="@this"
+                                     action="#{altaController.voltarUnidade()}"/>
+                    <span class="ui-separator">
+                        <span class="ui-icon pi pi-ellipsis-v"/>
+                    </span>
+                    <p:commandButton value="Salvar" icon="fa fa-check" action="#{altaController.darAlta()}"
+                                     update="@form"/>
+                </f:facet>
+            </p:toolbar>
+
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12 ui-lg-9">
+                    <!-- Left colum -->
+                    <div class="card card-w-title">
+
+                        <p:growl autoUpdate="true"/>
+                        <h1>Alta do Paciente</h1>
+                        <p:fieldset legend="Identificação">
+
+                            <h:panelGrid columns="2">
+                                <h:outputText value="Matrícula: " style="font-weight: 900"/>
+                                <h:outputText value="#{altaController.atendimento.paciente.matricula}"/>
+
+                                <h:outputText value="Nome: " style="font-weight: 900"/>
+                                <h:outputText value="#{altaController.atendimento.paciente.nome}"/>
+
+                                <h:outputText value="Idade: " style="font-weight: 900"/>
+                                <h:outputText value="#{altaController.atendimento.paciente.idade} anos"/>
+
+                                <h:outputText value="Admissão: " style="font-weight: 900"/>
+                                <h:outputText value="#{altaController.atendimento.dataAtendimento}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                                </h:outputText>
+                            </h:panelGrid>
+                        </p:fieldset>
+
+                        <h:panelGrid columns="2" style="margin-top: 15px">
+                            <h:outputText value="Data da Alta: "/>
+                            <p:calendar pattern="dd/MM/yyyy" mask="true" locale="pt"
+                                        value="#{altaController.atendimento.dataAlta}">
+                            </p:calendar>
+
+                            <h:outputText value="Motivo da Alta: "/>
+                            <p:inputText value="Motivo da alta aqui"/>
+                        </h:panelGrid>
+                    </div>
+                </div>
+            </div>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>
