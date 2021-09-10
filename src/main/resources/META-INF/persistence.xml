@@ -20,23 +20,23 @@
         <class>model.Leito</class>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
-            <!--Configuração nuvem heroku-->
-            <property name="javax.persistence.jdbc.url"
-                      value="jdbc:mysql://mysql.reabvent.kinghost.net:3306/reabvent?serverTimezone=GMT-3"/>
-            <property name="javax.persistence.jdbc.user" value="reabvent"/>
-            <property name="javax.persistence.jdbc.password" value="systemcall1989"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
+            <!--Configuração nuvem-->
+<!--            <property name="javax.persistence.jdbc.url"-->
+<!--                      value="jdbc:mysql://mysql.reabvent.kinghost.net:3306/reabvent?serverTimezone=GMT-3"/>-->
+<!--            <property name="javax.persistence.jdbc.user" value="reabvent"/>-->
+<!--            <property name="javax.persistence.jdbc.password" value="systemcall1989"/>-->
+<!--            <property name="hibernate.show_sql" value="true"/>-->
+<!--            <property name="hibernate.format_sql" value="true"/>-->
 
 
             <!--==================================================================================================-->
             <!--Configuração da local-->
-<!--                        <property name="javax.persistence.jdbc.url"-->
-<!--                                  value="jdbc:mysql://reabvent.com:3306/z4reabve_reab?serverTimezone=GMT-3"/>-->
-<!--                        <property name="javax.persistence.jdbc.user" value="z4reabve_admin"/>-->
-<!--                        <property name="javax.persistence.jdbc.password" value="SystemC@ll1989"/>-->
-<!--                        <property name="hibernate.show_sql" value="false"/>-->
-<!--                        <property name="hibernate.format_sql" value="false"/>-->
+                        <property name="javax.persistence.jdbc.url"
+                                  value="jdbc:mysql://localhost:3306/reabilitacao?serverTimezone=GMT-3"/>
+                        <property name="javax.persistence.jdbc.user" value="root"/>
+                        <property name="javax.persistence.jdbc.password" value="systemcall"/>
+                        <property name="hibernate.show_sql" value="false"/>
+                        <property name="hibernate.format_sql" value="false"/>
             <!--=========================================================================================-->
             <!--            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.CacheException"/>-->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>

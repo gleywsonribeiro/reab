@@ -59,7 +59,6 @@ public class AltaController implements Serializable {
 
     public void darAlta() {
         try {
-            atendimento.setDataAlta(new Date());
             Leito leito = atendimento.getLeito();
             service.salvar(atendimento);
             leito.setOcupacao(Ocupacao.VAGO);

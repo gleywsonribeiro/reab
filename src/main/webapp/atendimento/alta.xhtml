@@ -49,14 +49,31 @@
                         </p:fieldset>
 
                         <h:panelGrid columns="2" style="margin-top: 15px">
-                            <h:outputText value="Data da Alta: "/>
-                            <p:calendar pattern="dd/MM/yyyy" mask="true" locale="pt"
+                            <h:outputText value="Data da Alta: " style="font-weight: 900"/>
+                            <p:calendar pattern="dd/MM/yyyy" mask="true" locale="pt" style="text-align: right"
                                         value="#{altaController.atendimento.dataAlta}">
                             </p:calendar>
 
-                            <h:outputText value="Motivo da Alta: "/>
-                            <p:inputText value="Motivo da alta aqui"/>
+
+                            <h:outputText value="Motivo da alta: " style="font-weight: 900"/>
+                            <p:selectOneMenu value="#{altaController.atendimento.motivoAlta}" required="true"
+                                             requiredMessage="Escolha o motivo da alta"
+                                             converter="motivoAltaConverter">
+                                <f:selectItem itemLabel="Selecione"/>
+                                <f:selectItems value="#{motivoAltaController.motivos}" var="motivo"
+                                               itemLabel="#{motivo.descricao}"
+                                               itemValue="#{motivo}"/>
+                            </p:selectOneMenu>
+
                         </h:panelGrid>
+                    </div>
+
+                    <div class="card card-w-title">
+                        <p style="font-weight: 900">Nível de Mobilidade - Alta</p>
+                        <p:selectOneRadio layout="responsive" columns="8" required="true" requiredMessage="Escolha o nível de mobilidade"
+                                          value="#{altaController.atendimento.mobilidadeAlta}">
+                            <f:selectItems value="#{atendimentoController.faixaMobilidades()}" var="op" itemValue="#{op}" itemLabel="#{op}"/>
+                        </p:selectOneRadio>
                     </div>
                 </div>
             </div>
