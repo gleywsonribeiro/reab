@@ -77,7 +77,7 @@ public class TranferenciaController implements Serializable {
             leitoService.salvar(destino);
 
             leitosVagos = leitoService.getLeitosVagos(atendimento.getLeito().getSetor());
-            JsfUtil.addMessage("Transferência salva com sucesso com sucesso!");
+            JsfUtil.addMessage("Transferência salva com sucesso!");
         } catch (DBException e) {
             JsfUtil.addErrorMessage("Erro ao transferir: " + e.getMessage());
         } catch (NegocioException negocio) {

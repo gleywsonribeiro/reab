@@ -50,6 +50,10 @@ public class AtendimentoService implements Serializable {
             throw new NegocioException("Leito incompatível com o paciente!");
         }
 
+        if(atendimento.getDataAtendimento().after(new Date())) {
+            throw new NegocioException("Não é possível atender para o futuro!");
+        }
+
         if (dao.isPacienteEmAtendimento(atendimento.getPaciente())) {
             if (atendimento.getId() != null) {
                 dao.edit(atendimento);
@@ -71,6 +75,10 @@ public class AtendimentoService implements Serializable {
             }
             if (atendimento.getDataPrimeiraSedestacao() != null && atendimento.getDataAtendimento().after(atendimento.getDataPrimeiraSedestacao())) {
                 throw new NegocioException("Sedestação não pode ocorrer antes da admissão!");
+            }
+
+            if(atendimento.getDataAtendimento().after(new Date())) {
+                throw new NegocioException("Não é possível atender para o futuro!");
             }
 
             if (atendimento.getDataExtubacao() != null && atendimento.getDataAtendimento().after(atendimento.getDataExtubacao())) {
