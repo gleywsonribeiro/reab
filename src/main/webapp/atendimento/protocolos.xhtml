@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Hospital</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:commandButton value="Voltar" icon="fa fa-arrow-left"
+                                     process="@this" action="#"/>
+                </f:facet>
+            </p:toolbar>
+            <div class="ui-g ui-fluid">
+                <p:growl autoUpdate="true"/>
+                <div class="ui-g-12 ui-lg-7">
+                    <!-- Left colum -->
+
+                    <div class="card card-w-title">
+
+                        <h1>Protocolos</h1>
+
+                    </div>
+
+                </div>
+                <div class="ui-g-12 ui-lg-12">
+
+                </div>
+            </div>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

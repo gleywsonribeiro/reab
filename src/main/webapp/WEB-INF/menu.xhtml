@@ -57,6 +57,10 @@
                         </p:submenu>
                         <p:menuitem id="atender" value="Admissões" icon="&#xe862;" outcome="/atendimento/pesquisa"/>
                         <p:menuitem value="Unidades" icon="&#xe7ee;" outcome="/atendimento/unidades"/>
+                        <p:menuitem value="Protocolos" icon="&#xe14f;" outcome="/atendimento/protocolos"/>
+                        <p:submenu label="Relatórios" icon="&#xe14f;">
+                            <p:menuitem value="Admissões" outcome="/relatorio/admissoes"/>
+                        </p:submenu>
                         <p:menuitem id="avaliacao" value="Avaliação" icon="&#xe636;" outcome="/avaliacao/triagem" rendered="#{not loginController.usuario.user}"/>
                         <p:menuitem id="checagem" value="Checagem" icon="&#xe065;" outcome="/checagem/avaliacoes" rendered="#{not loginController.usuario.user}"/>
                         <p:submenu label="Tabelas" icon="&#xe30d;" rendered="#{not loginController.usuario.user}">

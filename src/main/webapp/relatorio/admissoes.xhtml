@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Hospital</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <div class="ui-g ui-fluid">
+
+                <div class="ui-g-12 ui-lg-9">
+                    <!-- Left colum -->
+                    <div class="card card-w-title">
+
+                        <p:messages id="geral"/>
+                        <p:panel header="Filtros">
+                            <p:panelGrid id="cadastro" columns="1" layout="grid" styleClass="ui-panelgrid-blank grid-pad">
+                                <h:panelGroup styleClass="md-inputfield">
+                                    <p:inputText value="#{pacienteController.paciente.id}" disabled="true"/>
+                                    <label>Código</label>
+                                </h:panelGroup>
+
+                                <h:panelGroup styleClass="md-inputfield">
+                                    <p:inputText id="nome" value="#{pacienteController.paciente.nome}" required="true" requiredMessage="Nome é obrigatório"/>
+                                    <label>Nome completo</label>
+                                    <p:message for="nome" display="text"/>
+                                </h:panelGroup>
+
+                                <h:panelGroup styleClass="md-inputfield">
+                                    <p:inputText id="matricula" value="#{pacienteController.paciente.matricula}" required="true" requiredMessage="Matrícula é obrigatória"/>
+                                    <label>Matrícula</label>
+                                    <p:message for="matricula" display="text"/>
+                                </h:panelGroup>
+
+                                <p:outputLabel value="Sexo: "/>
+                                <p:selectOneRadio id="sexo" value="#{pacienteController.paciente.sexo}" layout="responsive" columns="6"
+                                                  required="true" requiredMessage="Escolha o sexo">
+                                    <f:selectItem itemLabel="Masculino" itemValue="M" />
+                                    <f:selectItem itemLabel="Feminino" itemValue="F" />
+                                </p:selectOneRadio>
+                                <p:message for="sexo" display="icon"/>
+
+                                <p:outputLabel for="nascimento" value="Data de Nascimento" />
+                                <p:calendar id="nascimento" mask="true" pattern="dd/MM/yyyy" required="true" requiredMessage="Informe a data de nascimento"
+                                            navigator="true" yearRange="c-100:c+100" maxdate="today"
+                                            locale="pt" value="#{pacienteController.paciente.dataNascimento}"/>
+                                <p:message for="nascimento" display="icon"/>
+                            </p:panelGrid>
+                        </p:panel>
+
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-lg-6">
+                    <!-- Right colum -->
+
+                </div>
+            </div>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>
